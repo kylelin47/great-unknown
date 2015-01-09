@@ -2,4 +2,4 @@
 Web App of unknown purpose
 
 
-Install Mean.js then clone this repository
+Clone this repository then install Mean.js in it
