@@ -2,4 +2,7 @@
 Web App of unknown purpose
 
 
-Clone this repository then install Mean.js in it
+Clone this repository then do:
+```
+npm install
+```
