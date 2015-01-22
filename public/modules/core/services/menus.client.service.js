@@ -162,6 +162,5 @@ angular.module('core').service('Menus', [
 
 		//Adding the different menus
 		this.addMenu('topbar');
-        this.addMenu('testMenu');
 	}
 ]);
