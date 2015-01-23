@@ -27,7 +27,18 @@ var fs = require('fs'),
 module.exports = function(db) {
 	// Initialize express app
 	var app = express();
-
+	// Initialize multer
+	var multer  = require('multer');
+	app.use(multer({
+	  dest: './uploads/',
+	  rename: function (fieldname, filename) {
+		return filename.replace(/\W+/g, '-').toLowerCase() + Date.now();
+	  }
+	}));
+	app.post('/upload/audio',function(req,res){
+		console.log('yo');
+		res.send(req.files);
+	});
 	// Globbing model files
 	config.getGlobbedFiles('./app/models/**/*.js').forEach(function(modelPath) {
 		require(path.resolve(modelPath));

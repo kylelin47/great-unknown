@@ -1,0 +1,19 @@
+<section data-ng-controller="PodcastsController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Your Podcasts</h1>
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="podcast in podcasts | filter:{user:{_id: authentication.user._id}}" data-ng-href="#!/podcasts/{{podcast._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="podcast.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="podcast.user.displayName"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="podcast.name"></h4>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!podcasts.$resolved || (podcasts | filter:{user:{_id: authentication.user._id}}).length">
+    	No Podcasts yet, why don't you <a href="/#!/podcasts/create">create one</a>?
+    </div>
+</section>

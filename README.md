@@ -1,5 +1,5 @@
 # great-unknown
-Web App of unknown purpose
+Podcast Manager Web App
 
 
 Clone this repository then do:
