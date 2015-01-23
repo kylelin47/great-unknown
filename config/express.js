@@ -36,8 +36,8 @@ module.exports = function(db) {
 	  }
 	}));
 	app.post('/upload/audio',function(req,res){
-		console.log('yo');
-		res.send(req.files);
+		console.log(req.body);
+		console.log(req.files);
 	});
 	// Globbing model files
 	config.getGlobbedFiles('./app/models/**/*.js').forEach(function(modelPath) {

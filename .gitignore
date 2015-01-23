@@ -51,5 +51,6 @@ local.properties
 *.tmp
 *.bak
 *.swp
+*.mp3
 logs/
 build/
