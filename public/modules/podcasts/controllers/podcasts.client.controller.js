@@ -4,12 +4,13 @@
 angular.module('podcasts').controller('PodcastsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Podcasts',
 	function($scope, $stateParams, $location, Authentication, Podcasts) {
 		$scope.authentication = Authentication;
-		$scope.counter = 0;
 		// Create new Podcast
 		$scope.create = function() {
 			// Create new Podcast object
 			var podcast = new Podcasts ({
-				name: this.name
+				name: this.name,
+				blog: this.blog,
+				audio: this.audio
 			});
 
 			// Redirect after save
@@ -18,6 +19,8 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 
 				// Clear form fields
 				$scope.name = '';
+				$scope.blog = '';
+				$scope.audio = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -66,7 +69,6 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 		$scope.audioSelected = function() {
 			var el = document.getElementById('what');
 			el.innerHTML = 'hi';
-			$scope.counter += 1;
 		};
 	}
 ]);

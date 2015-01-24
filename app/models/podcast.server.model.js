@@ -12,8 +12,12 @@ var mongoose = require('mongoose'),
 var PodcastSchema = new Schema({
 	name: {
 		type: String,
-		default: '',
 		required: 'Podcast requires a name',
+		trim: true
+	},
+	blog: {
+		type: String,
+		default: '',
 		trim: true
 	},
 	audio: {

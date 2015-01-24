@@ -10,9 +10,21 @@
                 <div class="form-group">
                     <label class="control-label" for="name">Name</label>
                     <div class="controls">
-                        <input type="text" data-ng-model="name" id="name" class="form-control" placeholder="Name" required />
+                        <input type="text" data-ng-model="name" name="name" id="name" class="form-control" placeholder="Name" required />
                     </div>
                 </div>
+				<div class="form-group">
+					<label class="control-label" for="blog">Blog</label>
+					<div class="controls">
+						<textarea name="content" data-ng-model="blog" name="blog" id="content" class="form-control" cols="30" rows="10" placeholder="Blog"></textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="audio">Audio File Name</label>
+					<div class="controls">
+						<input type="text" data-ng-model="audio" name="audio" id="audio" class="form-control" placeholder="Audio File Name" required />
+					</div>
+				</div>
                 <div class="form-group">
                     <input type="submit" class="btn btn-default">
                 </div>
