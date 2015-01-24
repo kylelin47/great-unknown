@@ -2,15 +2,16 @@
     <div class="page-header">
         <h1>Edit Podcast</h1></div>
     <div class="col-md-12">
-		<form class="form-horizontal" id="uploadForm" enctype="multipart/form-data" method="post" action="/upload/audio" target="_blank">
-			<fieldset>
-				<div class="form-group">
-					<input type="file" accept=".mp3, .ogg, .wav" name="audio" id="audio" />
-					<div style="padding-top:5px;">
-						<input type="submit" value="Upload Audio" name="submit" class="btn btn-default">
-					</div>
-				</div>
-			</fieldset>
+		<input type="file" 
+			   accept=".mp3, .ogg, .wav" 
+			   name="audio" 
+			   id="audio" 
+			   file-model="myFile" />
+		<div style="padding-top:5px;">
+			<button ng-click="uploadFile()" class="btn btn-default">Upload Audio</button>
+		</div>
+		<input type="text" ng-change="change()" ng-model="confirmed" />
+		<span data-ng-bind="counter"></span>
 		</form>
         <form class="form-horizontal" data-ng-submit="update()" novalidate>
             <fieldset>
