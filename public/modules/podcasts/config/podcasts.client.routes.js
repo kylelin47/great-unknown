@@ -5,6 +5,10 @@ angular.module('podcasts').config(['$stateProvider',
 	function($stateProvider) {
 		// Podcasts state routing
 		$stateProvider.
+		state('browsePodcast', {
+			url: '/podcasts/browse',
+			templateUrl: 'modules/podcasts/views/browse-podcast.client.view.html'
+		}).
 		state('listPodcasts', {
 			url: '/podcasts',
 			templateUrl: 'modules/podcasts/views/list-podcasts.client.view.html'

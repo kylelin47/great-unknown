@@ -114,7 +114,7 @@ describe('Podcast CRUD tests', function() {
 					.expect(400)
 					.end(function(podcastSaveErr, podcastSaveRes) {
 						// Set message assertion
-						(podcastSaveRes.body.message).should.match('Please fill Podcast name');
+						(podcastSaveRes.body.message).should.match('Podcast requires a name');
 						
 						// Handle Podcast save error
 						done(podcastSaveErr);
