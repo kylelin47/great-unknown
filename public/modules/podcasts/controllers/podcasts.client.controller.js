@@ -64,7 +64,6 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 				podcastId: $stateParams.podcastId
 			});
 		};
-		$scope.counter = 'hi';
 		$scope.uploadFile = function(){
 			var file = $scope.myFile;
 			var uploadUrl = '/upload/audio';
