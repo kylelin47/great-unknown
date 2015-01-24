@@ -30,7 +30,7 @@ module.exports = function(app) {
 	// Initialize multer
 	var multer  = require('multer');
 	var done = 0;
-	var valid_types = ['mp3'];
+	var valid_types = ['mp3', 'ogg', 'wav'];
 	var audioMulter = 
 	  multer({
 		  dest: './public/uploads/',
@@ -59,7 +59,7 @@ module.exports = function(app) {
 		console.log(req.body);
 		console.log(req.files);
 		if (done === 1) {
-			res.send('upload complete. file name: ' + req.files.audio.name);
+			res.send('upload complete. file name: ' + req.files.file.name);
 		}
 		if (done === 2) {
 			res.send('Invalid file type');
