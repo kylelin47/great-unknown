@@ -48,6 +48,9 @@ module.exports = function(app) {
 			console.log(file.fieldname + ' uploaded to  ' + file.path);
 			done=1;
 		  },
+		  onFileUploadData: function (file, data) {
+			console.log(data.length + ' of ' + file.fieldname + ' arrived');
+		  },
 		  limits: {
 			  fileSize: 1000000000
 		  }

@@ -1,8 +1,7 @@
 'use strict';
-
 // Podcasts controller
-angular.module('podcasts').controller('PodcastsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Podcasts',
-	function($scope, $stateParams, $location, Authentication, Podcasts) {
+angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUpload', '$stateParams', '$location', 'Authentication', 'Podcasts',
+	function($scope, fileUpload, $stateParams, $location, Authentication, Podcasts) {
 		$scope.authentication = Authentication;
 		// Create new Podcast
 		$scope.create = function() {
@@ -65,10 +64,11 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 				podcastId: $stateParams.podcastId
 			});
 		};
-		
-		$scope.audioSelected = function() {
-			var el = document.getElementById('what');
-			el.innerHTML = 'hi';
+		$scope.counter = 'hi';
+		$scope.uploadFile = function(){
+			var file = $scope.myFile;
+			var uploadUrl = '/upload/audio';
+			fileUpload.uploadFileToUrl(file, uploadUrl);
 		};
 	}
 ]);
