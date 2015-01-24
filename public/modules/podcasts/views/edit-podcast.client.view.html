@@ -1,8 +1,17 @@
 <section data-ng-controller="PodcastsController" data-ng-init="findOne()" data-ng-show="((authentication.user) && (authentication.user._id == podcast.user._id))">
     <div class="page-header">
-        <h1>Edit Podcast</h1>
-    </div>
+        <h1>Edit Podcast</h1></div>
     <div class="col-md-12">
+		<form class="form-horizontal" id="uploadForm" enctype="multipart/form-data" method="post" action="/upload/audio" target="_blank">
+			<fieldset>
+				<div class="form-group">
+					<input type="file" accept=".mp3, .ogg, .wav" name="audio" id="audio" />
+					<div style="padding-top:5px;">
+						<input type="submit" value="Upload Audio" name="submit" class="btn btn-default">
+					</div>
+				</div>
+			</fieldset>
+		</form>
         <form class="form-horizontal" data-ng-submit="update()" novalidate>
             <fieldset>
                 <div class="form-group">
@@ -12,15 +21,21 @@
                     </div>
                 </div>
 				<div class="form-group">
+                    <label class="control-label" for="name">Blurb</label>
+                    <div class="controls">
+                        <textarea data-ng-model="podcast.blurb" name="blurb"  id="blurb" class="form-control" cols="30" rows="4" placeholder="A short description"></textarea>
+                    </div>
+                </div>
+				<div class="form-group">
                     <label class="control-label" for="name">Blog</label>
                     <div class="controls">
-                        <textarea name="content" data-ng-model="podcast.blog" name="blog" id="blog" class="form-control" cols="30" rows="10" placeholder="Blog" required></textarea>
+                        <textarea data-ng-model="podcast.blog" name="blog"  id="blog" class="form-control" cols="30" rows="10" placeholder="Your blog"></textarea>
                     </div>
                 </div>
 				<div class="form-group">
                     <label class="control-label" for="name">File Name</label>
                     <div class="controls">
-                        <input type="text" data-ng-model="podcast.audio" name="audio" id="audio" class="form-control" placeholder="Name" required>
+                        <input type="text" data-ng-model="podcast.audio" name="audio" id="audio" class="form-control" placeholder="File Name" required>
                     </div>
                 </div>
                 <div class="form-group">
@@ -31,14 +46,5 @@
 				</div>
             </fieldset>
         </form>
-		<form class="form-horizontal" id="uploadForm" enctype="multipart/form-data" method="post" action="/upload/audio">
-			<fieldset>
-				<div class="form-group">
-					<input type="file" accept=".mp3, .ogg, .wav" name="audio" id="audio" />
-					<input type="submit" value="Upload Audio" name="submit" class="btn btn-default">
-				</div>
-			</fieldset>
-		</form>
-		<span data-ng-bind="podcast.audio"></span>
     </div>
 </section>

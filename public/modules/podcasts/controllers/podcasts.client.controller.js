@@ -10,17 +10,17 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 			var podcast = new Podcasts ({
 				name: this.name,
 				blog: this.blog,
-				audio: this.audio
+				blurb: this.blurb
 			});
 
 			// Redirect after save
 			podcast.$save(function(response) {
-				$location.path('podcasts/' + response._id);
+				$location.path('podcasts/' + response._id + '/edit');
 
 				// Clear form fields
 				$scope.name = '';
 				$scope.blog = '';
-				$scope.audio = '';
+				$scope.blurb = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});

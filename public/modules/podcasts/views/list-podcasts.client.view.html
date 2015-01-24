@@ -11,6 +11,7 @@
 				<span data-ng-bind="podcast.user.displayName"></span>
 			</small>
 			<h4 class="list-group-item-heading" data-ng-bind="podcast.name"></h4>
+			<p class="lead" data-ng-bind="podcast.blurb"></p>
         </a>
     </div>
     <div class="alert alert-warning text-center" data-ng-hide="!podcasts.$resolved || (podcasts | filter:{user:{_id: authentication.user._id}}).length">

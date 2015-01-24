@@ -1,6 +1,6 @@
 <section data-ng-controller="PodcastsController">
     <div class="page-header">
-        <h1>New Podcast</h1>
+        <h1>Create New Podcast</h1>
     </div>
     <div class="col-md-12">
 	<span data-ng-bind="counter"></span>
@@ -14,23 +14,23 @@
                     </div>
                 </div>
 				<div class="form-group">
-					<label class="control-label" for="blog">Blog</label>
+					<label class="control-label" for="blurb">Blurb</label>
 					<div class="controls">
-						<textarea name="content" data-ng-model="blog" name="blog" id="content" class="form-control" cols="30" rows="10" placeholder="Blog"></textarea>
+						<textarea data-ng-model="blurb" name="blurb" id="blurb" class="form-control" cols="30" rows="4" placeholder="A short description"></textarea>
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label" for="audio">Audio File Name</label>
+					<label class="control-label" for="blog">Blog</label>
 					<div class="controls">
-						<input type="text" data-ng-model="audio" name="audio" id="audio" class="form-control" placeholder="Audio File Name" required />
+						<textarea data-ng-model="blog" name="blog" id="blog" class="form-control" cols="30" rows="10" placeholder="Your blog"></textarea>
 					</div>
+				</div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
 				</div>
                 <div class="form-group">
                     <input type="submit" class="btn btn-default">
                 </div>
-				<div data-ng-show="error" class="text-danger">
-					<strong data-ng-bind="error"></strong>
-				</div>
             </fieldset>
         </form>
     </div>

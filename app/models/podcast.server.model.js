@@ -20,9 +20,14 @@ var PodcastSchema = new Schema({
 		default: '',
 		trim: true
 	},
+	blurb: {
+		type: String,
+		default: '',
+		trim: true
+	},
 	audio: {
 		type: String,
-		default: 'test'
+		default: 'default.mp3'
 	},
 	created: {
 		type: Date,
