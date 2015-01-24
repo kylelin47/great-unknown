@@ -54,3 +54,4 @@ local.properties
 *.mp3
 logs/
 build/
+public/uploads
