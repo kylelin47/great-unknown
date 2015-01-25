@@ -1,7 +1,7 @@
 'use strict';
 // Podcasts controller
-angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUpload', '$stateParams', '$location', 'Authentication', 'Podcasts',
-	function($scope, fileUpload, $stateParams, $location, Authentication, Podcasts) {
+angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUpload', '$stateParams', '$location', 'Authentication', 'Podcasts', '$sce',
+	function($scope, fileUpload, $stateParams, $location, Authentication, Podcasts, $sce) {
 		$scope.authentication = Authentication;
 		// Create new Podcast
 		$scope.create = function() {
@@ -66,10 +66,16 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 		$scope.uploadFile = function(){
 			var podcast = $scope.podcast;
 			var file = $scope.myFile;
-			var uploadUrl = '/upload/audio';
-			podcast.audio = 'default.mp3';
+			console.log(file);
+			var uploadUrl = '/uploads/audio/' + podcast._id;
+			var name = file.name;
+			var ext = file.name.substring(name.lastIndexOf('.'), name.length);
+			podcast.audio = file.name.replace(ext, '') + podcast._id + ext;
 			fileUpload.uploadFileToUrl(file, uploadUrl);
-			podcast.audio = fileUpload.fileName;
+		};
+		$scope.getAudioUrl = function() {
+			var podcast = $scope.podcast;
+			return $sce.trustAsResourceUrl('uploads/'+podcast.audio);
 		};
 	}
 ]);

@@ -35,7 +35,8 @@ module.exports = function(app) {
 	  multer({
 		  dest: './public/uploads/',
 		  rename: function (fieldname, filename) {
-			return filename.replace(/\W+/g, '-').toLowerCase() + Date.now();
+			return filename;
+			//return filename.replace(/\W+/g, '-').toLowerCase() + Date.now();
 		  },
 		  onFileUploadStart: function (file) {
 			if (!containsObject(file.extension, valid_types)) {
@@ -55,11 +56,21 @@ module.exports = function(app) {
 			  fileSize: 1000000000
 		  }
 	  });
-	app.post('/upload/audio', audioMulter, function(req,res){
+	var fs = require('fs');
+	app.post('/uploads/audio/:podcastId', audioMulter, function(req,res){
+		console.log(req.params.podcastId);
 		console.log(req.body);
+		var ext = '.' + req.files.file.extension;
+		var newName = req.files.file.path.replace(ext, '') + req.params.podcastId + ext;
+		fs.rename(req.files.file.path, newName, function(err) {
+			if ( err ) console.log('ERROR: ' + err);
+			fs.unlink(req.files.file.path, function (err) {
+			  if (err) console.log('Fixed ERROR: ' + err);
+			});
+		});
 		console.log(req.files);
 		if (done === 1) {
-			res.jsonp({name: req.files.file.name});
+			res.send(req.files.file.name);
 		}
 		if (done === 2) {
 			res.send('Invalid file type');

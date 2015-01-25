@@ -30,7 +30,7 @@
 						   file-model="myFile" />
 			    </div>
 				<div class="form-group">
-                    File Name: <span data-ng-bind="podcast.audio"></span>
+                    Current File Name: <span data-ng-bind="podcast.audio.replace(podcast._id, '')"></span>
                     <input type="hidden" data-ng-model="podcast.audio" name="audio" id="audio" />
                 </div>
                 <div class="form-group">

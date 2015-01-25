@@ -30,17 +30,19 @@ angular.module('podcasts').service('fileUpload', ['$http', function ($http) {
     this.uploadFileToUrl = function(file, uploadUrl){
         var fd = new FormData();
         fd.append('file', file);
-		this.fileName = 'testing';
         $http.post(uploadUrl, fd, {
             transformRequest: angular.identity,
             headers: {'Content-Type': undefined}
         })
         .success(function(data) {
-			this.fileName = 'wwoow';
+			/*
+			Podcasts.update( 
+				{ _id: id}, //Query
+				{ audio: data } //Set
+			);
+			*/
         })
         .error(function() {
-        })
-		.then(function(data) {
-		});
+        });
     };
 }]);

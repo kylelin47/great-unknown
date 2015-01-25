@@ -18,7 +18,10 @@
 			<span data-ng-bind="podcast.user.displayName"></span>
 		</em>
 	</small>
-	<img alt="MEAN.JS" class="img-responsive text-center" src="uploads/{{podcast.audio}}" />
+
+	<audio controls data-ng-src="{{getAudioUrl()}}"></audio>
+	</audio> 
 	<p class="lead" data-ng-bind="podcast.blog"></p>
 	<p class="lead" data-ng-bind="podcast.audio"></p>
+	<p>uploads/{{podcast.audio}}</p>
 </section>
