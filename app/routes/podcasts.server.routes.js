@@ -59,7 +59,7 @@ module.exports = function(app) {
 		console.log(req.body);
 		console.log(req.files);
 		if (done === 1) {
-			res.send('upload complete. file name: ' + req.files.file.name);
+			res.jsonp({name: req.files.file.name});
 		}
 		if (done === 2) {
 			res.send('Invalid file type');

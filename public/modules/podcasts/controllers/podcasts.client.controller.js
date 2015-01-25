@@ -45,7 +45,6 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 		// Update existing Podcast
 		$scope.update = function() {
 			var podcast = $scope.podcast;
-
 			podcast.$update(function() {
 				$location.path('podcasts/' + podcast._id);
 			}, function(errorResponse) {
@@ -65,9 +64,12 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 			});
 		};
 		$scope.uploadFile = function(){
+			var podcast = $scope.podcast;
 			var file = $scope.myFile;
 			var uploadUrl = '/upload/audio';
+			podcast.audio = 'default.mp3';
 			fileUpload.uploadFileToUrl(file, uploadUrl);
+			podcast.audio = fileUpload.fileName;
 		};
 	}
 ]);
