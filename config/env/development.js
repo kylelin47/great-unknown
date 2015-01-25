@@ -18,16 +18,16 @@ module.exports = {
 		}
 	},
 	app: {
-		title: 'MEAN.JS - Development Environment'
+		title: 'Podcast Manager - Development'
 	},
 	facebook: {
-		clientID: process.env.FACEBOOK_ID || 'APP_ID',
-		clientSecret: process.env.FACEBOOK_SECRET || 'APP_SECRET',
+		clientID: process.env.FACEBOOK_ID || '1544617902479843',
+		clientSecret: process.env.FACEBOOK_SECRET || 'f703763d3967d759dd4ca71bbd2714fe',
 		callbackURL: '/auth/facebook/callback'
 	},
 	twitter: {
-		clientID: process.env.TWITTER_KEY || 'CONSUMER_KEY',
-		clientSecret: process.env.TWITTER_SECRET || 'CONSUMER_SECRET',
+		clientID: process.env.TWITTER_KEY || 'w5u61kjvlIUBJtN4dwuGKaslf',
+		clientSecret: process.env.TWITTER_SECRET || 'ja5nLouqaTECAYJ7jYx5PlHkdIJOAr7EjZ9TlXKr21F2jhaDvr',
 		callbackURL: '/auth/twitter/callback'
 	},
 	google: {
