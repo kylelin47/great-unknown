@@ -30,7 +30,7 @@ module.exports = function(app) {
 	// Initialize multer
 	var multer  = require('multer');
 	var done = 0;
-	var valid_types = ['mp3', 'ogg', 'wav'];
+	var valid_audio_types = ['mp3', 'ogg', 'wav'];
 	var audioMulter = 
 	  multer({
 		  dest: './public/uploads/',
@@ -39,7 +39,7 @@ module.exports = function(app) {
 			//return filename.replace(/\W+/g, '-').toLowerCase() + Date.now();
 		  },
 		  onFileUploadStart: function (file) {
-			if (!containsObject(file.extension, valid_types)) {
+			if (!containsObject(file.extension, valid_audio_types)) {
 				done = 2;
 				return false;
 			}
@@ -61,12 +61,18 @@ module.exports = function(app) {
 		console.log(req.params.date);
 		console.log(req.body);
 		var ext = '.' + req.files.file.extension;
-		var newName = req.files.file.path.replace(ext, '') + req.params.date + ext;
-		fs.rename(req.files.file.path, newName, function(err) {
-			if ( err ) console.log('ERROR: ' + err);
-			fs.unlink(req.files.file.path, function (err) {
-			  if (err) console.log('Fixed ERROR: ' + err);
-			});
+		var newName = req.files.file.path.replace(ext, req.params.date + ext);
+		fs.exists(newName, function(exists) {
+			if (exists) {
+				fs.unlink(req.files.file.path, function (err) {
+				  if (err) console.log('No overwrite: ' + err);
+				});
+			}
+			else {
+				fs.rename(req.files.file.path, newName, function(err) {
+					if ( err ) console.log('ERROR: ' + err);
+				});
+			}
 		});
 		console.log(req.files);
 		if (done === 2) {

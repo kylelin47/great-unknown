@@ -68,14 +68,14 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 		$scope.uploadFile = function(){
 			var podcast = $scope.podcast;
 			var file = $scope.myFile;
-			console.log(file);
-			var uploadUrl = '/uploads/audio/' + Date.now();
 			var name = file.name;
 			var ext = name.substring(name.lastIndexOf('.'), name.length);
 			if (ext === '.mp3' || ext === '.ogg' && ext === '.wav')
 			{
+				var d = Date.now();
+				var uploadUrl = '/uploads/audio/' + d;
 				podcast.audioOriginal = name;
-				podcast.audio = name.replace(ext, '') + Date.now() + ext;
+				podcast.audio = name.replace(ext, d + ext);
 				fileUpload.uploadFileToUrl(file, uploadUrl);
 			}
 		};
