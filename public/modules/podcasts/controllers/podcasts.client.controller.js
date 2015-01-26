@@ -3,6 +3,7 @@
 angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUpload', '$stateParams', '$location', 'Authentication', 'Podcasts', '$sce',
 	function($scope, fileUpload, $stateParams, $location, Authentication, Podcasts, $sce) {
 		$scope.authentication = Authentication;
+		$scope.searchText = '';
 		// Create new Podcast
 		$scope.create = function() {
 			// Create new Podcast object
@@ -76,6 +77,11 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 		$scope.getAudioUrl = function() {
 			var podcast = $scope.podcast;
 			return $sce.trustAsResourceUrl('uploads/'+podcast.audio);
+		};
+		$scope.filterList = function(podcast) {
+			return podcast.user._id === $scope.authentication.user._id &&
+				   (podcast.name.indexOf($scope.searchText) !== -1 ||
+					$scope.searchText === '');
 		};
 	}
 ]);
