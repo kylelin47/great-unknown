@@ -19,12 +19,12 @@ angular.module('podcasts').directive('fileModel', ['$parse', function ($parse) {
             var modelSetter = model.assign;
             
             element.bind('change', function(){
-				var ext = this.value.match(/\.(.+)$/)[1];
+				var ext = this.value.substring(this.value.lastIndexOf('.'), this.value.length);
 				switch(ext)
 				{
-					case 'mp3':
-					case 'ogg':
-					case 'wav':
+					case '.mp3':
+					case '.ogg':
+					case '.wav':
 						break;
 					default:
 						alert('Invalid file extension');
