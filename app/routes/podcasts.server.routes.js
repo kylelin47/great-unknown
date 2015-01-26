@@ -57,11 +57,11 @@ module.exports = function(app) {
 		  }
 	  });
 	var fs = require('fs');
-	app.post('/uploads/audio/:podcastId', audioMulter, function(req,res){
-		console.log(req.params.podcastId);
+	app.post('/uploads/audio/:date', audioMulter, function(req,res){
+		console.log(req.params.date);
 		console.log(req.body);
 		var ext = '.' + req.files.file.extension;
-		var newName = req.files.file.path.replace(ext, '') + req.params.podcastId + ext;
+		var newName = req.files.file.path.replace(ext, '') + req.params.date + ext;
 		fs.rename(req.files.file.path, newName, function(err) {
 			if ( err ) console.log('ERROR: ' + err);
 			fs.unlink(req.files.file.path, function (err) {
@@ -69,9 +69,6 @@ module.exports = function(app) {
 			});
 		});
 		console.log(req.files);
-		if (done === 1) {
-			res.send(req.files.file.name);
-		}
 		if (done === 2) {
 			res.send('Invalid file type');
 		}

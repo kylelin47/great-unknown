@@ -29,6 +29,10 @@ var PodcastSchema = new Schema({
 		type: String,
 		default: 'default.mp3'
 	},
+	audioOriginal: {
+		type: String,
+		default: 'default.mp3'
+	},
 	created: {
 		type: Date,
 		default: Date.now

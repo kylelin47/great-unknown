@@ -19,6 +19,17 @@ angular.module('podcasts').directive('fileModel', ['$parse', function ($parse) {
             var modelSetter = model.assign;
             
             element.bind('change', function(){
+				var ext = this.value.match(/\.(.+)$/)[1];
+				switch(ext)
+				{
+					case 'mp3':
+					case 'ogg':
+					case 'wav':
+						break;
+					default:
+						alert('Invalid file extension');
+						this.value='';
+				}
                 scope.$apply(function(){
                     modelSetter(scope, element[0].files[0]);
                 });

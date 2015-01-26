@@ -64,20 +64,27 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 				podcastId: $stateParams.podcastId
 			});
 		};
+
 		$scope.uploadFile = function(){
 			var podcast = $scope.podcast;
 			var file = $scope.myFile;
 			console.log(file);
-			var uploadUrl = '/uploads/audio/' + podcast._id;
+			var uploadUrl = '/uploads/audio/' + Date.now();
 			var name = file.name;
-			var ext = file.name.substring(name.lastIndexOf('.'), name.length);
-			podcast.audio = file.name.replace(ext, '') + podcast._id + ext;
-			fileUpload.uploadFileToUrl(file, uploadUrl);
+			var ext = name.substring(name.lastIndexOf('.'), name.length);
+			if (ext === '.mp3' || ext === '.ogg' && ext === '.wav')
+			{
+				podcast.audioOriginal = name;
+				podcast.audio = name.replace(ext, '') + Date.now() + ext;
+				fileUpload.uploadFileToUrl(file, uploadUrl);
+			}
 		};
+
 		$scope.getAudioUrl = function() {
 			var podcast = $scope.podcast;
 			return $sce.trustAsResourceUrl('uploads/'+podcast.audio);
 		};
+
 		$scope.filterList = function(podcast) {
 			return podcast.user._id === $scope.authentication.user._id &&
 				   (podcast.name.indexOf($scope.searchText) !== -1 ||
