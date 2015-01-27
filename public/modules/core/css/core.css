@@ -18,3 +18,34 @@ body.ng-cloak
 {
 	display: block;
 }
+
+/*
+	Addtional CSS 
+*/
+
+
+.footer{
+    margin: auto 0 0 0;
+    width: 100%;
+    height: auto;
+    background-color: #EFEFEF;
+    padding-top: 5px;
+}
+
+.footer p{
+    float: right;
+    font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial;
+}
+
+.min{
+    min-height: 750px;
+}
+
+.img{
+    background: url("../img/brand/music.JPG");
+    background-size: 100% 100%;
+}
+
+.help{
+    height: 300px;
+}
