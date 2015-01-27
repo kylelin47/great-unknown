@@ -1,26 +1,25 @@
 <section data-ng-controller="PodcastsController" data-ng-init="findOne()">
 	<div class="page-header">
+		<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == podcast.user._id))">
+			<a class="btn btn-primary" href="/#!/podcasts/{{podcast._id}}/edit">
+				<i class="glyphicon glyphicon-edit"></i>
+			</a>
+			<a class="btn btn-primary" data-ng-click="remove();">
+				<i class="glyphicon glyphicon-trash"></i>
+			</a>
+		</div>
 		<h1 data-ng-bind="podcast.name"></h1>
+		<small>
+			<em class="text-muted">
+				Posted on
+				<span data-ng-bind="podcast.created | date:'mediumDate'"></span>
+				by
+				<span data-ng-bind="podcast.user.displayName"></span>
+			</em>
+		</small>
 	</div>
-	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == podcast.user._id))">
-		<a class="btn btn-primary" href="/#!/podcasts/{{podcast._id}}/edit">
-			<i class="glyphicon glyphicon-edit"></i>
-		</a>
-		<a class="btn btn-primary" data-ng-click="remove();">
-			<i class="glyphicon glyphicon-trash"></i>
-		</a>
+	<div class="podcast">
+		<audio controls data-ng-src="{{getAudioUrl()}}"></audio>
+		<p class="lead" data-ng-bind="podcast.blog"></p>
 	</div>
-	<small>
-		<em class="text-muted">
-			Posted on
-			<span data-ng-bind="podcast.created | date:'mediumDate'"></span>
-			by
-			<span data-ng-bind="podcast.user.displayName"></span>
-		</em>
-	</small>
-
-	<audio controls data-ng-src="{{getAudioUrl()}}"></audio>
-	<p class="lead" data-ng-bind="podcast.blog"></p>
-	<p class="lead" data-ng-bind="podcast.audio"></p>
-	<p>uploads/{{podcast.audio}}</p>
 </section>

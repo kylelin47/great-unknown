@@ -7,9 +7,14 @@
 			<span class="icon-bar"></span>
 		</button>
 		<!--Remove meanjs head with Podcast, serve as a link at the samw time-->
-		<a href="/#!/podcasts/brose" ui-route = "/podcasts/browse" ng-class = "{active: $uiRoute}" class="navbar-brand">Podcast</a>
+		<a href="/#!/" ui-route = "/#!/" ng-class = "{active: $uiRoute}" class="navbar-brand">Podcast Manager</a>
 	</div>
 	<nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
+		<ul class="nav navbar-nav">
+			<li ui-route="/podcasts/browse" ng-class="{active: $uiRoute}">
+				<a href="/#!/podcasts/browse">Browse</a>
+			</li>
+		</ul>
 		<ul class="nav navbar-nav navbar-right" data-ng-hide="authentication.user">
 			<li ui-route="/signup" ng-class="{active: $uiRoute}">
 				<a href="/#!/signup">Sign Up</a>
