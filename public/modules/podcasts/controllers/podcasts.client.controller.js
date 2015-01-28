@@ -4,6 +4,7 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 	function($scope, fileUpload, $stateParams, $location, Authentication, Podcasts, $sce) {
 		$scope.authentication = Authentication;
 		$scope.searchText = '';
+
 		// Create new Podcast
 		$scope.create = function() {
 			// Create new Podcast object

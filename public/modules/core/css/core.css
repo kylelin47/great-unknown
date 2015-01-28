@@ -49,3 +49,6 @@ body.ng-cloak
 .help{
     height: 300px;
 }
+.post {
+	padding-top: 25px;
+}
