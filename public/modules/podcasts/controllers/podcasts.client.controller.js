@@ -10,17 +10,33 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 			var podcast = new Podcasts ({
 				name: this.name,
 				blog: this.blog,
-				blurb: this.blurb
+				blurb: this.blurb,
+				audio: this.audio,
+				audioOriginal: this.audioOriginal
 			});
-
+			if (typeof $scope.myFile !== 'undefined') {
+				var file = $scope.myFile;
+				var name = file.name;
+				var ext = name.substring(name.lastIndexOf('.'), name.length);
+				if (ext === '.mp3' || ext === '.ogg' && ext === '.wav')
+				{
+					var d = Date.now();
+					var uploadUrl = '/uploads/audio/' + d;
+					podcast.audioOriginal = name;
+					podcast.audio = name.replace(ext, d + ext);
+					fileUpload.uploadFileToUrl(file, uploadUrl);
+				}
+			}
 			// Redirect after save
 			podcast.$save(function(response) {
-				$location.path('podcasts/' + response._id + '/edit');
+				$location.path('podcasts/' + response._id);
 
 				// Clear form fields
 				$scope.name = '';
 				$scope.blog = '';
 				$scope.blurb = '';
+				$scope.audio = '';
+				$scope.audioOriginal = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -46,6 +62,9 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 		// Update existing Podcast
 		$scope.update = function() {
 			var podcast = $scope.podcast;
+			if (typeof $scope.myFile !== 'undefined') {
+				$scope.uploadFile();
+			}
 			podcast.$update(function() {
 				$location.path('podcasts/' + podcast._id);
 			}, function(errorResponse) {
@@ -79,6 +98,7 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 				fileUpload.uploadFileToUrl(file, uploadUrl);
 			}
 		};
+
 
 		$scope.getAudioUrl = function() {
 			var podcast = $scope.podcast;

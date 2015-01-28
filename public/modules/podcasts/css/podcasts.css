@@ -1,3 +1,6 @@
 div.podcast {
+	padding-top:0px;
+}
+div.newline {
 	white-space: pre-wrap;
 }
