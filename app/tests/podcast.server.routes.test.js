@@ -243,6 +243,92 @@ describe('Podcast CRUD tests', function() {
 					});
 			});
 	});
+	it('should be able to limit size of Blurb', function(done) {
+		agent.post('/auth/signin')
+			.send(credentials)
+			.expect(200)
+			.end(function(signinErr, signinRes) {
+				// Handle signin error
+				if (signinErr) done(signinErr);
+
+				// Get the userId
+				var userId = user.id;
+				// Create blurb
+				var large_blurb = 'Lorem ipsum dolor sit amet, cibo dicant molestie mea id,' +
+								  'causae deseruisse ad eum. No sit diam discere, vivendo d' +
+						          'efinitiones mea te. Pro aliquam quaestio id, albucius pe' +
+						          'tentium cu mei. Et fugit sensibus constituto pro, at vide pertinax vix. Qui no probo harum regione.';
+				podcast.blurb = large_blurb;
+				// Save a new Podcast
+				agent.post('/podcasts')
+					.send(podcast)
+					.expect(200)
+					.end(function(podcastSaveErr, podcastSaveRes) {
+						// Handle Podcast save error
+						if (podcastSaveErr) done(podcastSaveErr);
+
+						// Get a list of Podcasts
+						agent.get('/podcasts')
+							.end(function(podcastsGetErr, podcastsGetRes) {
+								// Handle Podcast save error
+								if (podcastsGetErr) done(podcastsGetErr);
+
+								// Get Podcasts list
+								var podcasts = podcastsGetRes.body;
+
+								// Set assertions
+								(podcasts[0].user._id).should.equal(userId);
+								(podcasts[0].name).should.match('Podcast Name');
+								(podcasts[0].blurb).should.match(large_blurb.substring(0,120));
+
+								// Call the assertion callback
+								done();
+							});
+					});
+			});
+	});
+	it('should be able to limit size of Blurb on edit', function(done) {
+		agent.post('/auth/signin')
+			.send(credentials)
+			.expect(200)
+			.end(function(signinErr, signinRes) {
+				// Handle signin error
+				if (signinErr) done(signinErr);
+
+				// Get the userId
+				var userId = user.id;
+
+				// Save a new Podcast
+				agent.post('/podcasts')
+					.send(podcast)
+					.expect(200)
+					.end(function(podcastSaveErr, podcastSaveRes) {
+						// Handle Podcast save error
+						if (podcastSaveErr) done(podcastSaveErr);
+
+					var large_blurb = 'Lorem ipsum dolor sit amet, cibo dicant molestie mea id,' +
+									  'causae deseruisse ad eum. No sit diam discere, vivendo d' +
+									  'efinitiones mea te. Pro aliquam quaestio id, albucius pe' +
+									  'tentium cu mei. Et fugit sensibus constituto pro, at vide pertinax vix. Qui no probo harum regione.';
+					podcast.blurb = large_blurb;
+						// Update existing Podcast
+						agent.put('/podcasts/' + podcastSaveRes.body._id)
+							.send(podcast)
+							.expect(200)
+							.end(function(podcastUpdateErr, podcastUpdateRes) {
+								// Handle Podcast update error
+								if (podcastUpdateErr) done(podcastUpdateErr);
+
+								// Set assertions
+								(podcastUpdateRes.body._id).should.equal(podcastSaveRes.body._id);
+								(podcastUpdateRes.body.blurb).should.match(large_blurb.substring(0,120));
+
+								// Call the assertion callback
+								done();
+							});
+					});
+			});
+	});
 	it('should be able to get a list of Podcasts if not signed in', function(done) {
 		// Create new Podcast model instance
 		var podcastObj = new Podcast(podcast);

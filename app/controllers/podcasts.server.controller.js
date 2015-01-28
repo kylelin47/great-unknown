@@ -14,10 +14,11 @@ var mongoose = require('mongoose'),
 exports.create = function(req, res) {
 	var podcast = new Podcast(req.body);
 	podcast.user = req.user;
+	podcast.blurb = podcast.blurb.substring(0, 120);
 	if (podcast.blurb === '') {
 		//No need to check for out of bounds, js is cool
-		podcast.blurb = podcast.blog.substring(0, 40);
-		if (podcast.blog.length > 40) podcast.blurb += ' . . .';
+		podcast.blurb = podcast.blog.substring(0, 120);
+		if (podcast.blog.length > 120) podcast.blurb += ' . . .';
 	}
 
 	podcast.save(function(err) {
@@ -45,6 +46,7 @@ exports.update = function(req, res) {
 	var podcast = req.podcast ;
 
 	podcast = _.extend(podcast , req.body);
+	podcast.blurb = podcast.blurb.substring(0, 120);
 
 	podcast.save(function(err) {
 		if (err) {
