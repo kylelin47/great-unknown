@@ -4,7 +4,8 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 	function($scope, fileUpload, $stateParams, $location, Authentication, Podcasts, $sce) {
 		$scope.authentication = Authentication;
 		$scope.searchText = '';
-
+		$scope.currentPage = parseInt($stateParams.page, 10);
+		$scope.perPage = 10;
 		// Create new Podcast
 		$scope.create = function() {
 			// Create new Podcast object
@@ -110,6 +111,16 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 			return podcast.user._id === $scope.authentication.user._id &&
 				   (podcast.name.indexOf($scope.searchText) !== -1 ||
 					$scope.searchText === '');
+		};
+
+		$scope.nextPageBrowse = function() {
+			var x = $scope.currentPage + 1;
+			$location.path('podcasts/browse/' + x.toString());
+		};
+
+		$scope.prevPageBrowse = function() {
+			var x = $scope.currentPage - 1;
+			$location.path('podcasts/browse/' + x.toString());
 		};
 	}
 ]);

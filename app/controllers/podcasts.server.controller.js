@@ -20,7 +20,7 @@ exports.create = function(req, res) {
 		podcast.blurb = podcast.blog.substring(0, 120);
 		if (podcast.blog.length > 120) podcast.blurb += ' . . .';
 	}
-
+//podcast.normalized = podcast.name.toLowerCase();
 	podcast.save(function(err) {
 		if (err) {
 			return res.status(400).send({
@@ -47,6 +47,7 @@ exports.update = function(req, res) {
 
 	podcast = _.extend(podcast , req.body);
 	podcast.blurb = podcast.blurb.substring(0, 120);
+//podcast.normalized = podcast.name.toLowerCase();
 
 	podcast.save(function(err) {
 		if (err) {
@@ -79,7 +80,7 @@ exports.delete = function(req, res) {
 /**
  * List of Podcasts
  */
-exports.list = function(req, res) { 
+exports.list = function(req, res) {
 	Podcast.find().sort('-created').populate('user', 'displayName').exec(function(err, podcasts) {
 		if (err) {
 			return res.status(400).send({

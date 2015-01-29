@@ -14,7 +14,7 @@ var PodcastSchema = new Schema({
 		type: String,
 		required: 'Podcast requires a name',
 		trim: true
-	},
+	},/* possibly lower-case normalized name for sorting*/
 	blog: {
 		type: String,
 		default: '',

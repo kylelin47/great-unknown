@@ -19,10 +19,6 @@ module.exports = function(app) {
 		.get(podcasts.list)
 		.post(users.requiresLogin, podcasts.create);
 
-	app.route('/podcasts/browse')
-		.get(podcasts.list)
-		.post(users.requiresLogin, podcasts.create);
-
 	app.route('/podcasts/:podcastId')
 		.get(podcasts.read)
 		.put(users.requiresLogin, podcasts.hasAuthorization, podcasts.update)

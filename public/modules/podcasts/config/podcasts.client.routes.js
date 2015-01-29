@@ -6,7 +6,7 @@ angular.module('podcasts').config(['$stateProvider',
 		// Podcasts state routing
 		$stateProvider.
 		state('browsePodcast', {
-			url: '/podcasts/browse',
+			url: '/podcasts/browse/:page',
 			templateUrl: 'modules/podcasts/views/browse-podcast.client.view.html'
 		}).
 		state('listPodcasts', {
