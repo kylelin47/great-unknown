@@ -17,8 +17,18 @@
 			</a>
 		</div>
 		<div class="pull-right">
-			<button data-ng-click="prevPageBrowse()" data-ng-hide="currentPage <= 1" value="Prev Page" class="btn btn-default">Previous Page</button>
-			<button data-ng-click="nextPageBrowse()" data-ng-hide="podcasts.length <= currentPage*perPage" value="Next Page" class="btn btn-default">Next Page</button>
+			<ul class="pagination pagination-lg">
+				<li data-ng-hide="currentPage <= 1"><a href="/#!/podcasts/browse/{{currentPage-1}}">Prev</a>
+				<li data-ng-class="{true: 'active', false: ''}[currentPage === $index + 1]" ng-repeat="i in getNumber(podcasts.length/perPage) track by $index"><a href="/#!/podcasts/browse/{{$index+1}}">{{$index+1}}</a></li>
+				<li data-ng-hide="podcasts.length <= currentPage*perPage"><a href="/#!/podcasts/browse/{{currentPage+1}}">Next</a>
+				<!--
+			  <li><a href="#">1</a></li>
+			  <li class="active"><a href="#">2</a></li>
+			  <li><a href="#">3</a></li>
+			  <li><a href="#">4</a></li>
+			  <li><a href="#">5</a></li>
+			  -->
+			</ul>
 		</div>
 	</section>
     <div class="alert alert-warning text-center" data-ng-hide="!podcasts.$resolved || podcasts.length">

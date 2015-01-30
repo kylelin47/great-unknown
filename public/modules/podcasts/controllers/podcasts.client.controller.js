@@ -5,6 +5,10 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 		$scope.authentication = Authentication;
 		$scope.searchText = '';
 		$scope.currentPage = parseInt($stateParams.page, 10);
+		if ($location.path() === '/podcasts/browse/')
+		{
+			$scope.currentPage = 1;
+		}
 		$scope.perPage = 10;
 		// Create new Podcast
 		$scope.create = function() {
@@ -113,14 +117,8 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 					$scope.searchText === '');
 		};
 
-		$scope.nextPageBrowse = function() {
-			var x = $scope.currentPage + 1;
-			$location.path('podcasts/browse/' + x.toString());
-		};
-
-		$scope.prevPageBrowse = function() {
-			var x = $scope.currentPage - 1;
-			$location.path('podcasts/browse/' + x.toString());
+		$scope.getNumber = function(num) {
+			return new Array( Math.ceil( num ));
 		};
 	}
 ]);
