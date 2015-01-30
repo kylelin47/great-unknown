@@ -29,6 +29,16 @@
 						   id="audio"
 						   file-model="myFile" />
 			    </div>
+                <div class="form-group">
+                Podcast Category:
+					<select data-ng-model="podcast.category" name="category" class="form-control">
+                        <option value="Misc">Miscellaneous</option>
+                        <option value="Sports">Sports</option>
+                        <option value="Comedy">Comedy</option>
+                        <option value="Entertainment">Entertainment</option>
+                        <option value="News">News</option>
+                    </select>
+			    </div>
 				<div class="form-group">
                     Current File Name: <span data-ng-bind="podcast.audioOriginal"></span>
                 </div>

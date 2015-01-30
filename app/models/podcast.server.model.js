@@ -40,7 +40,11 @@ var PodcastSchema = new Schema({
 	user: {
 		type: Schema.ObjectId,
 		ref: 'User'
-	}
+	},
+    category: {
+        type: String,
+        default: 'Misc'
+    }
 });
 
 mongoose.model('Podcast', PodcastSchema);
