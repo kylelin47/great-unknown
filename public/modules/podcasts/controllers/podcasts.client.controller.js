@@ -18,7 +18,8 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 				blog: this.blog,
 				blurb: this.blurb,
 				audio: this.audio,
-				audioOriginal: this.audioOriginal
+				audioOriginal: this.audioOriginal,
+				category: this.category
 			});
 			if (typeof $scope.myFile !== 'undefined') {
 				var file = $scope.myFile;
@@ -43,6 +44,7 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 				$scope.blurb = '';
 				$scope.audio = '';
 				$scope.audioOriginal = '';
+				$scope.category = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});

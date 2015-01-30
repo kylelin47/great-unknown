@@ -14,7 +14,6 @@ var mongoose = require('mongoose'),
 exports.create = function(req, res) {
 	var podcast = new Podcast(req.body);
 	podcast.user = req.user;
-    podcast.category = req.category;
 	podcast.blurb = podcast.blurb.substring(0, 120);
 	if (podcast.blurb === '') {
 		//No need to check for out of bounds, js is cool
