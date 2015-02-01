@@ -13,6 +13,6 @@ angular.module('podcasts').run(['Menus', '$rootScope', '$anchorScroll', 'ezfb',
 		ezfb.init({
 			appId: '1544617902479843',
 			version: 'v2.0'
-		});  
+		});
 	}
 ]);
