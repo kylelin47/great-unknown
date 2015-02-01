@@ -122,5 +122,9 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 		$scope.getNumber = function(num) {
 			return new Array( Math.ceil( num ));
 		};
+
+		$scope.defined = function() {
+			$scope.podname = document.getElementById('pname');
+		};
 	}
 ]);

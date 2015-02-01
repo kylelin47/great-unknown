@@ -1,4 +1,5 @@
-<section data-ng-controller="PodcastsController" data-ng-init="findOne()">
+<section data-ng-controller="PodcastsController" data-ng-init="findOne(); defined()">
+<div data-ng-hide="podname.innerHTML === ''">
 	<div class="page-header">
 		<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == podcast.user._id))">
 			<a class="btn btn-primary" href="/#!/podcasts/{{podcast._id}}/edit">
@@ -8,7 +9,7 @@
 				<i class="glyphicon glyphicon-trash"></i>
 			</a>
 		</div>
-		<h1 data-ng-bind="podcast.name"></h1>
+		<h1 id="pname" data-ng-bind="podcast.name"></h1>
 		<em class="text-muted">
 			<span data-ng-bind="podcast.blurb"></span>
 		</em>
@@ -33,4 +34,8 @@
 	<a href="https://twitter.com/share" class="twitter-share-button" data-text="Check out this cool podcast" data-via="podcast_manager">Tweet</a>
 	<script type="text/javascript-lazy">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 	</div>
+</div>
+	<div class="alert alert-warning text-center errortop" data-ng-hide="!podcast.$resolved || podname.innerHTML !== ''">
+    	Not a valid podcast. Perhaps it's been deleted?
+    </div>
 </section>

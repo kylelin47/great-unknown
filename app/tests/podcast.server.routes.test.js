@@ -354,7 +354,7 @@ describe('Podcast CRUD tests', function() {
 		// Save the Podcast
 		podcastObj.save(function() {
 			// Request Podcasts
-			request(app).get('/podcasts/browse')
+			request(app).get('/podcasts/browse/1')
 				.end(function(req, res) {
 					// Set assertion
 					res.body.should.be.an.Array.with.lengthOf(1);
