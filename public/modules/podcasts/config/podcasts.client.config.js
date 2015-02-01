@@ -1,8 +1,8 @@
 'use strict';
 
 // Configuring the Podcasts module
-angular.module('podcasts').run(['Menus', '$rootScope', '$anchorScroll',
-	function(Menus, $rootScope, $anchorScroll) {
+angular.module('podcasts').run(['Menus', '$rootScope', '$anchorScroll', 'ezfb',
+	function(Menus, $rootScope, $anchorScroll, ezfb) {
 		// Set Your Podcasts menu items
 		Menus.addMenuItem('topbar', 'Your Podcasts', 'podcasts', 'dropdown', '/podcasts(/create)?');
 		Menus.addSubMenuItem('topbar', 'podcasts', 'Create New Podcast', 'podcasts/create');
@@ -10,5 +10,9 @@ angular.module('podcasts').run(['Menus', '$rootScope', '$anchorScroll',
 		$rootScope.$on('$locationChangeSuccess', function() {
                 $anchorScroll();
 		});
+		ezfb.init({
+			appId: '1544617902479843',
+			version: 'v2.0'
+		});  
 	}
 ]);

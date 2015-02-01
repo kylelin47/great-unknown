@@ -33,7 +33,6 @@
 
 	<!-- Fav Icon -->
 	<link href="/modules/core/img/brand/favicon.ico" rel="shortcut icon" type="image/x-icon">
-
 	<!--Application CSS Files-->
 	{% for cssFile in cssFiles %}<link rel="stylesheet" href="{{cssFile}}">{% endfor %}
 
@@ -63,6 +62,7 @@
 	<!--Livereload script rendered -->
 	<script type="text/javascript" src="http://{{request.hostname}}:35729/livereload.js"></script>
 	{% endif %}
+	<script src="http://pc035860.github.io/angular-easyfb/angular-easyfb.min.js"></script>
 
 	<!--[if lt IE 9]>
 	<section class="browsehappy jumbotron hide">
