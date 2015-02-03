@@ -14,7 +14,6 @@ module.exports = function(app) {
 	var users = require('../../app/controllers/users.server.controller');
 	var podcasts = require('../../app/controllers/podcasts.server.controller');
 
-	// Podcasts Routes
 	app.route('/podcasts')
 		.get(podcasts.list)
 		.post(users.requiresLogin, podcasts.create);

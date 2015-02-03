@@ -59,7 +59,6 @@ exports.update = function(req, res) {
 		}
 	});
 };
-
 /**
  * Delete a Podcast
  */

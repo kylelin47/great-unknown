@@ -25,7 +25,7 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 				var file = $scope.myFile;
 				var name = file.name;
 				var ext = name.substring(name.lastIndexOf('.'), name.length);
-				if (ext === '.mp3' || ext === '.ogg' && ext === '.wav')
+				if (ext === '.mp3' || ext === '.ogg' || ext === '.wav')
 				{
 					var d = Date.now();
 					var uploadUrl = '/uploads/audio/' + d;
@@ -97,7 +97,7 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 			var file = $scope.myFile;
 			var name = file.name;
 			var ext = name.substring(name.lastIndexOf('.'), name.length);
-			if (ext === '.mp3' || ext === '.ogg' && ext === '.wav')
+			if (ext === '.mp3' || ext === '.ogg' || ext === '.wav')
 			{
 				var d = Date.now();
 				var uploadUrl = '/uploads/audio/' + d;

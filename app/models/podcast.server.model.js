@@ -27,11 +27,11 @@ var PodcastSchema = new Schema({
 	},
 	audio: {
 		type: String,
-		default: 'default.mp3'
+		default: 'No file selected'
 	},
 	audioOriginal: {
 		type: String,
-		default: 'default.mp3'
+		default: 'No file selected'
 	},
 	created: {
 		type: Date,
@@ -46,5 +46,4 @@ var PodcastSchema = new Schema({
         default: 'Misc'
     }
 });
-
 mongoose.model('Podcast', PodcastSchema);
