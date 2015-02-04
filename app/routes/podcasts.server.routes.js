@@ -19,8 +19,7 @@ module.exports = function(app) {
 		.post(users.requiresLogin, podcasts.create);
 
 	app.route('/podcasts/browse/:page')
-		.get(podcasts.list)
-		.post(users.requiresLogin, podcasts.create);
+		.get(podcasts.list);
 
 	app.route('/podcasts/:podcastId')
 		.get(podcasts.read)

@@ -7,5 +7,5 @@ module.exports = function(app) {
 	// Abouts Routes
 	app.route('/about')
 		.get(abouts.list)
-		.post(users.requiresLogin, abouts.create);
+		.post(users.requiresLogin, abouts.hasAuthorization, abouts.create);
 };
