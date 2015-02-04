@@ -1,21 +1,23 @@
-<section data-ng-controller="AboutsController">
+<section data-ng-controller="AboutsController" data-ng-init="findOne()">
     <div class="page-header">
         <h1>Edit About Me</h1>
     </div>
     <div class="col-md-12">
 	<span id="what"></span>
-        <form class="form-horizontal" data-ng-submit="create()" novalidate>
+        <form class="form-horizontal" data-ng-submit="create()" data-ng-repeat="about in abouts" novalidate>
             <fieldset>
                 <div class="form-group">
                     <label class="control-label" for="name">Name</label>
                     <div class="controls">
-                        <input type="text" data-ng-model="name" name="name" id="name" class="form-control" placeholder="Name" required />
+                        <input type="text" data-ng-model="name" name="name" id="name" class="form-control" data-ng-init="name=about.name"
+						       placeholder="Name" required />
                     </div>
                 </div>
 				<div class="form-group">
 					<label class="control-label" for="about">About Me</label>
 					<div class="controls">
-						<textarea data-ng-model="about" name="about" id="about" class="form-control" cols="30" rows="10" placeholder="A short description"></textarea>
+						<textarea data-ng-model="about" name="about" id="about" class="form-control" cols="30" rows="10" data-ng-init="about=about.about" 
+						          placeholder="About Me"></textarea>
 					</div>
 				</div>
 				<div data-ng-show="error" class="text-danger">

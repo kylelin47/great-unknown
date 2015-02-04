@@ -4,7 +4,6 @@
 angular.module('abouts').controller('AboutsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Abouts', 'Podcasts',
 	function($scope, $stateParams, $location, Authentication, Abouts, Podcasts) {
 		$scope.authentication = Authentication;
-
 		// Create new About
 		$scope.create = function() {
 			// Create new About object
@@ -28,6 +27,10 @@ angular.module('abouts').controller('AboutsController', ['$scope', '$stateParams
 		$scope.find = function() {
 			$scope.abouts = Abouts.query();
 			$scope.podcasts = Podcasts.query();
+		};
+		// Get just the About Me
+		$scope.findOne = function() {
+			$scope.abouts = Abouts.query();
 		};
 
 	}

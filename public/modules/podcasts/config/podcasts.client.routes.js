@@ -17,6 +17,10 @@ angular.module('podcasts').config(['$stateProvider',
 			url: '/podcasts/create',
 			templateUrl: 'modules/podcasts/views/create-podcast.client.view.html'
 		}).
+		state('createBlog', {
+			url: '/podcasts/create/blog',
+			templateUrl: 'modules/podcasts/views/create-blog.client.view.html'
+		}).
 		state('viewPodcast', {
 			url: '/podcasts/:podcastId',
 			templateUrl: 'modules/podcasts/views/view-podcast.client.view.html'

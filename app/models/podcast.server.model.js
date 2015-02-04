@@ -12,7 +12,7 @@ var mongoose = require('mongoose'),
 var PodcastSchema = new Schema({
 	name: {
 		type: String,
-		required: 'Podcast requires a name',
+		required: 'Name is a required field',
 		trim: true
 	},/* possibly lower-case normalized name for sorting*/
 	blog: {
