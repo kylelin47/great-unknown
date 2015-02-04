@@ -1,6 +1,8 @@
-<section data-ng-controller="PodcastsController" data-ng-init="findOne()" data-ng-show="((authentication.user) && (authentication.user._id == podcast.user._id))">
+<section data-ng-controller="PodcastsController" data-ng-init="findOne()">
+	<div data-ng-show="((authentication.user) && (authentication.user._id == podcast.user._id))">
     <div class="page-header">
-        <h1>Edit Podcast</h1></div>
+        <h1>Edit Podcast</h1>
+	</div>
     <div class="col-md-12">
         <form class="form-horizontal" data-ng-submit="update()">
             <fieldset>
@@ -29,6 +31,9 @@
 						   id="audio"
 						   file-model="myFile" />
 			    </div>
+				<div class="form-group">
+                    Current File Name: <span data-ng-bind="podcast.audioOriginal"></span>
+                </div>
                 <div class="form-group">
                 Podcast Category:
 					<select data-ng-model="podcast.category" name="category" class="form-control">
@@ -39,9 +44,6 @@
                         <option value="News">News</option>
                     </select>
 			    </div>
-				<div class="form-group">
-                    Current File Name: <span data-ng-bind="podcast.audioOriginal"></span>
-                </div>
                 <div class="form-group">
                     <input type="submit" value="Update" class="btn btn-default">
                 </div>
@@ -52,4 +54,13 @@
             </fieldset>
         </form>
     </div>
+	</div>
+	<div data-ng-hide="!podcast.$resolved ||((authentication.user) && (authentication.user._id == podcast.user._id))">
+	    <div class="page-header">
+			<h1>Edit Podcast</h1>
+		</div>
+		<div class="alert alert-warning text-center">
+		You're not authorized to access this page. Perhaps you need to <a href="/#!/signin">sign in?</a>
+		</div>
+	</div>
 </section>

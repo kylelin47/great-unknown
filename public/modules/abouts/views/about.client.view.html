@@ -20,28 +20,28 @@
 	<div class="post row">
 	<div class ="container">
 	<div class="col-md-6">
-	<a data-ng-repeat="podcast in podcasts.slice(0,3)" data-ng-href="#!/podcasts/{{podcast._id}}" class="list-group-item">
-		<small class="list-group-item-text">
-			Posted on
-			<span data-ng-bind="podcast.created | date:'medium'"></span>
-			by
-			<span data-ng-bind="podcast.user.displayName"></span>
-		</small>
-		<h4 class="list-group-item-heading" data-ng-bind="podcast.name"></h4>
-		<p class="lead" data-ng-bind="podcast.blurb"></p>
-	</a>
+		<a data-ng-repeat="podcast in podcasts.slice(0,3)" data-ng-href="#!/podcasts/{{podcast._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="podcast.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="podcast.user.displayName"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="podcast.name"></h4>
+			<p class="lead" data-ng-bind="podcast.blurb"></p>
+		</a>
 	</div>
 	<div class="col-md-6">
-	<a data-ng-repeat="podcast in podcasts.slice(3,6)" data-ng-href="#!/podcasts/{{podcast._id}}" class="list-group-item">
-		<small class="list-group-item-text">
-			Posted on
-			<span data-ng-bind="podcast.created | date:'medium'"></span>
-			by
-			<span data-ng-bind="podcast.user.displayName"></span>
-		</small>
-		<h4 class="list-group-item-heading" data-ng-bind="podcast.name"></h4>
-		<p class="lead" data-ng-bind="podcast.blurb"></p>
-	</a>
+		<a data-ng-repeat="podcast in podcasts.slice(3,6)" data-ng-href="#!/podcasts/{{podcast._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="podcast.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="podcast.user.displayName"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="podcast.name"></h4>
+			<p class="lead" data-ng-bind="podcast.blurb"></p>
+		</a>
 	</div>
 	</div>
 	</div>
