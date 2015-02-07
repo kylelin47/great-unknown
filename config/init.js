@@ -6,17 +6,6 @@
 var glob = require('glob'),
 	chalk = require('chalk');
 /**
- * Set up admin account
- */
-var admin = {
-	firstName: 'admin',
-	lastName: 'the admin',
-	displayName: 'administrator',
-	email: 'kylelin47@ufl.edu',
-	username: 'admin',
-	password: 'lol'
-};
-/**
  * Module init function.
  */
 module.exports = function() {

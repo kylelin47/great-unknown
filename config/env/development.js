@@ -18,7 +18,8 @@ module.exports = {
 		}
 	},
 	app: {
-		title: 'Podcast Manager - Development'
+		title: 'Podcast Manager - Development',
+		admin_username: 'admin'
 	},
 	facebook: {
 		clientID: process.env.FACEBOOK_ID || '1544617902479843',

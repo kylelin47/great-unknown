@@ -23,6 +23,10 @@ var AboutSchema = new Schema({
 	about: {
 		type: String,
 		trim: true
+	},
+	showLast: {
+		type: Boolean,
+		default: false
 	}
 });
 

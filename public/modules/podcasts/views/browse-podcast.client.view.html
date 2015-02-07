@@ -27,7 +27,7 @@
     <div class="alert alert-warning text-center" data-ng-hide="!podcasts.$resolved || podcasts.length">
     	No Podcasts yet, why don't you <a href="/#!/podcasts/create">create one</a>?
     </div>
-	<div class="alert alert-warning text-center" data-ng-hide="!podcasts.$resolved || ((currentPage > 0) && (currentPage*perPage - perPage < podcasts.length))">
+	<div class="alert alert-warning text-center" data-ng-hide="!podcasts.$resolved || ((currentPage > 0) && (currentPage*perPage - perPage < podcasts.length)) || podcasts.length === 0">
     	Nothing seems to be here.
     </div>
 </section>

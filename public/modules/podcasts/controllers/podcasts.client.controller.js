@@ -107,7 +107,6 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 			}
 		};
 
-
 		$scope.getAudioUrl = function() {
 			var podcast = $scope.podcast;
 			return $sce.trustAsResourceUrl('uploads/'+podcast.audio);

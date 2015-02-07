@@ -2,8 +2,8 @@
     <div class="page-header">
         <h1>Create New Blog</h1>
     </div>
+	<div data-ng-show="((authentication.user) && (authentication.user.username == 'admin'))">
     <div class="col-md-12">
-	<span id="what"></span>
         <form class="form-horizontal" data-ng-submit="create()" novalidate>
             <fieldset>
                 <div class="form-group">
@@ -33,4 +33,10 @@
             </fieldset>
         </form>
     </div>
+	</div>
+	<div data-ng-hide="((authentication.user) && (authentication.user.username == 'admin'))">
+		<div class="alert alert-warning text-center">
+		You're not authorized to access this page. Perhaps you need to <a href="/#!/signin">sign in?</a>
+		</div>
+	</div>
 </section>

@@ -2,9 +2,10 @@
 
 module.exports = {
 	app: {
-		title: 'MEAN.JS',
-		description: 'Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js',
-		keywords: 'mongodb, express, angularjs, node.js, mongoose, passport'
+		title: 'Podcast Manager',
+		description: 'Full-Stack JavaScript Podcast Manager with MongoDB, Express, AngularJS, and Node.js',
+		keywords: 'mongodb, express, angularjs, node.js, mongoose, passport, podcasts, manager',
+		admin_username: 'admin'
 	},
 	port: process.env.PORT || 3000,
 	templateEngine: 'swig',

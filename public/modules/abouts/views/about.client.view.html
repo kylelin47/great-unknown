@@ -1,49 +1,45 @@
 <section data-ng-controller="AboutsController" data-ng-init="find()">
     <div class="page-header">
-		<div class="pull-right"  data-ng-show="((authentication.user) && (authentication.user.username == 'admin'))">
-			<a class="btn btn-primary" href="/#!/about/edit">
+        <h1>About Me
+			<a data-ng-show="((authentication.user) && (authentication.user.username == 'admin'))" class="btn btn-primary" href="/#!/about/edit">
 				<i class="glyphicon glyphicon-edit"></i>
 			</a>
-		</div>
-        <h1>About Me</h1>
+		</h1>
 		<small class="list-group-item-text">
 			Last updated: 
 			<span data-ng-bind="abouts[0].created | date:'medium'"></span>
 		</small>
     </div>
-	<div class="list-group">
 <!-- Look into orderBy AND filter in same query -->
-
-	<h1 class="list-group-item-heading" data-ng-bind="abouts[0].name"></h4>
-	<p class="lead" data-ng-bind="abouts[0].about"></p>
-	<h2 class="list-group-item-heading">Last 6 Podcasts</h2>
-	<div class="post row">
-	<div class ="container">
-	<div class="col-md-6">
-		<a data-ng-repeat="podcast in podcasts.slice(0,3)" data-ng-href="#!/podcasts/{{podcast._id}}" class="list-group-item">
-			<small class="list-group-item-text">
-				Posted on
-				<span data-ng-bind="podcast.created | date:'medium'"></span>
-				by
-				<span data-ng-bind="podcast.user.displayName"></span>
-			</small>
-			<h4 class="list-group-item-heading" data-ng-bind="podcast.name"></h4>
-			<p class="lead" data-ng-bind="podcast.blurb"></p>
-		</a>
-	</div>
-	<div class="col-md-6">
-		<a data-ng-repeat="podcast in podcasts.slice(3,6)" data-ng-href="#!/podcasts/{{podcast._id}}" class="list-group-item">
-			<small class="list-group-item-text">
-				Posted on
-				<span data-ng-bind="podcast.created | date:'medium'"></span>
-				by
-				<span data-ng-bind="podcast.user.displayName"></span>
-			</small>
-			<h4 class="list-group-item-heading" data-ng-bind="podcast.name"></h4>
-			<p class="lead" data-ng-bind="podcast.blurb"></p>
-		</a>
-	</div>
-	</div>
+	<h1 class="list-group-item-heading" data-ng-bind="abouts[0].name"></h1>
+	<div class="newline"><p class="lead" data-ng-bind="abouts[0].about"></p></div>
+	<h2 class="list-group-item-heading" data-ng-hide="!abouts[0].showLast">Most Recent Podcasts</h2>
+	<div data-ng-hide="!abouts[0].showLast">
+	<div class="row">
+		<div class="col-md-6">
+			<a data-ng-repeat="podcast in podcasts.slice(0,3)" data-ng-href="#!/podcasts/{{podcast._id}}" class="list-group-item">
+				<small class="list-group-item-text">
+					Posted on
+					<span data-ng-bind="podcast.created | date:'medium'"></span>
+					by
+					<span data-ng-bind="podcast.user.displayName"></span>
+				</small>
+				<h4 class="list-group-item-heading" data-ng-bind="podcast.name"></h4>
+				<p class="lead" data-ng-bind="podcast.blurb"></p>
+			</a>
+		</div>
+		<div class="col-md-6">
+			<a data-ng-repeat="podcast in podcasts.slice(3,6)" data-ng-href="#!/podcasts/{{podcast._id}}" class="list-group-item">
+				<small class="list-group-item-text">
+					Posted on
+					<span data-ng-bind="podcast.created | date:'medium'"></span>
+					by
+					<span data-ng-bind="podcast.user.displayName"></span>
+				</small>
+				<h4 class="list-group-item-heading" data-ng-bind="podcast.name"></h4>
+				<p class="lead" data-ng-bind="podcast.blurb"></p>
+			</a>
+		</div>
 	</div>
 	</div>
 

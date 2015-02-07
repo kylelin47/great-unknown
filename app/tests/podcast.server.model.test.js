@@ -23,7 +23,7 @@ describe('Podcast Model Unit Tests:', function() {
 			lastName: 'Name',
 			displayName: 'Full Name',
 			email: 'test@test.com',
-			username: 'username',
+			username: 'admin',
 			password: 'password'
 		});
 

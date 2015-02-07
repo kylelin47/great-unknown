@@ -9,7 +9,8 @@ angular.module('abouts').controller('AboutsController', ['$scope', '$stateParams
 			// Create new About object
 			var about = new Abouts ({
 				name: this.name,
-				about: this.about
+				about: this.about,
+				showLast: this.showLast
 			});
 
 			// Redirect after save
@@ -19,6 +20,7 @@ angular.module('abouts').controller('AboutsController', ['$scope', '$stateParams
 				// Clear form fields
 				$scope.name = '';
 				$scope.about = '';
+				$scope.showLast = false;
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});

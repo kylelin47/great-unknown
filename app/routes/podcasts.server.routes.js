@@ -16,7 +16,7 @@ module.exports = function(app) {
 
 	app.route('/podcasts')
 		.get(podcasts.list)
-		.post(users.requiresLogin, podcasts.create);
+		.post(users.requiresLogin, podcasts.hasAuthorization, podcasts.create);
 
 	app.route('/podcasts/browse/:page')
 		.get(podcasts.list);
@@ -27,7 +27,6 @@ module.exports = function(app) {
 		.delete(users.requiresLogin, podcasts.hasAuthorization, podcasts.delete);
 	// Initialize multer
 	var multer  = require('multer');
-	var done = 0;
 	var valid_audio_types = ['mp3', 'ogg', 'wav'];
 	var audioMulter = 
 	  multer({
@@ -38,14 +37,12 @@ module.exports = function(app) {
 		  },
 		  onFileUploadStart: function (file) {
 			if (!containsObject(file.extension, valid_audio_types)) {
-				done = 2;
 				return false;
 			}
 			console.log(file.originalname + ' is starting ...');
 		  },
 		  onFileUploadComplete: function (file) {
 			console.log(file.fieldname + ' uploaded to  ' + file.path);
-			done=1;
 		  },
 		  onFileUploadData: function (file, data) {
 			console.log(data.length + ' of ' + file.fieldname + ' arrived');
@@ -73,9 +70,6 @@ module.exports = function(app) {
 			}
 		});
 		console.log(req.files);
-		if (done === 2) {
-			res.send('Invalid file type');
-		}
 	});
 	// Finish by binding the Podcast middleware
 	app.param('podcastId', podcasts.podcastByID);

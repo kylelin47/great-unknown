@@ -20,7 +20,7 @@ describe('Podcast CRUD tests', function() {
 	beforeEach(function(done) {
 		// Create user credentials
 		credentials = {
-			username: 'username',
+			username: 'admin',
 			password: 'password'
 		};
 
