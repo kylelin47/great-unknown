@@ -11,3 +11,5 @@ To add new packages and have it added to package.json:
 ```
 npm install <pkg> --save
 ```
+
+We're using tabs, not spaces
