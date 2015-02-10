@@ -20,8 +20,15 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 				audio: this.audio,
 				audioOriginal: this.audioOriginal,
 				category: this.category,
-				isBlog: this.isBlog
+				isBlog: this.isBlog,
+				podIcon: this.podIcon
 			});
+
+			//if empty icon field, use our default
+			if ( podcast.podIcon === '' ) {
+				podcast.podIcon = 'http://i.imgur.com/LUsrAfg.gif';
+			}
+
 			if (typeof $scope.myFile !== 'undefined') {
 				var file = $scope.myFile;
 				var name = file.name;
@@ -82,6 +89,11 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
+
+			//if empty icon field, use our default
+			if ( podcast.podIcon === '' ) {
+				podcast.podIcon = 'http://i.imgur.com/LUsrAfg.gif';
+			}
 		};
 
 		// Find a list of Podcasts

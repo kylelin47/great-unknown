@@ -12,13 +12,17 @@
 		<h1 id="pname" data-ng-bind="podcast.name"></h1>
 		<small>
 			<em class="text-muted">
-				Posted on
-				<span data-ng-bind="podcast.created | date:'mediumDate'"></span>
-				by
-				<span data-ng-bind="podcast.user.displayName"></span>
-                <br />
-                <strong>Category:
-                <span data-ng-bind="podcast.category"></span></strong>
+				<div class="pull-left">
+					Posted on
+					<span data-ng-bind="podcast.created | date:'mediumDate'"></span>
+					by
+					<span data-ng-bind="podcast.user.displayName"></span>
+	                <br />
+	                <strong>Category:
+	                <span data-ng-bind="podcast.category"></span></strong>
+            	</div>
+                <img data-ng-hide="podcast.podIcon === ''" src={{podcast.podIcon}} alt="Icon" style="width:80px;height:80px" class="view-pod-img">
+                <div style="clear: both;"></div>
 			</em>
 		</small>
 	</div>

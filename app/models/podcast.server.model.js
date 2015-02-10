@@ -48,6 +48,11 @@ var PodcastSchema = new Schema({
 	isBlog: {
 		type: Boolean,
 		default: false
+	},
+	podIcon: {
+		type: String,
+		//we can pick better default if we want
+		default: 'http://i.imgur.com/LUsrAfg.gif'
 	}
 });
 mongoose.model('Podcast', PodcastSchema);

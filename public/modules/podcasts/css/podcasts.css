@@ -70,3 +70,19 @@ div.errortop {
 	line-height: 1;
 	border-radius: 3px;
 }
+
+.create-pod-iconlink-bar {
+	float: left;
+	height: 30px;
+	width: 25%;
+	margin: 6px 10px;
+	padding: 3px 5px;
+	font-size: 14px;
+	line-height: 1;
+	border-radius: 3px;
+}
+
+
+.view-pod-img {
+	float: right;
+}
