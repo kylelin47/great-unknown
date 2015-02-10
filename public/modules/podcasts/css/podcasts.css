@@ -86,3 +86,15 @@ div.errortop {
 .view-pod-img {
 	float: right;
 }
+
+.bottom-buffer {
+	margin-bottom: 10px;
+}
+
+.top-buffer {
+	margin-bottom: 50px;
+}
+
+textarea[name="comText"] {
+	resize: vertical;
+}

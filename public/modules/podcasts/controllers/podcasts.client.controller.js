@@ -21,7 +21,8 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 				audioOriginal: this.audioOriginal,
 				category: this.category,
 				isBlog: this.isBlog,
-				podIcon: this.podIcon
+				podIcon: this.podIcon,
+				comments: {}
 			});
 
 			//if empty icon field, use our default
@@ -141,6 +142,16 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 		$scope.defined = function() {
 			$scope.podname = document.getElementById('pname');
 		};
+
+		$scope.createComment = function() {
+			var podcast = $scope.podcast;
+			var newComment = new Array();
+			newComment[0] = $scope.comAuthor;
+			newComment[1] = Date.now;
+			newComment[2] = $scope.comText;
+			podcast.comments.push( newComment );
+			$scope.podcast = podcast;
+		}
 
 	}
 ]);

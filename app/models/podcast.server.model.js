@@ -53,6 +53,11 @@ var PodcastSchema = new Schema({
 		type: String,
 		//we can pick better default if we want
 		default: 'http://i.imgur.com/LUsrAfg.gif'
-	}
+	},
+	comments: [{
+		comAuthor: String,
+		comTime: Date,
+		comText: String
+	}]
 });
 mongoose.model('Podcast', PodcastSchema);
