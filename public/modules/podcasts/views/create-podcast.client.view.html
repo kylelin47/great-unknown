@@ -33,8 +33,8 @@
 			    </div>
                 <div class="form-group">
                 <h4 class="browse-pod-left">Podcast Category: </h4>
-					<select data-ng-model="category" name="category" class="create-pod-dropdown">
-                        <option value="Misc" selected>Miscellaneous</option>
+					<select data-ng-model="category" name="category" class="create-pod-dropdown" ng-init="category = 'Misc'">
+                        <option value="Misc">Miscellaneous</option>
                         <option value="Sports">Sports</option>
                         <option value="Comedy">Comedy</option>
                         <option value="Entertainment">Entertainment</option>
