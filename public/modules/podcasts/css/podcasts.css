@@ -60,3 +60,13 @@ div.errortop {
 	   -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 	      transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
+
+.browse-pod-search-bar {
+	float: right;
+	height: 30px;
+	margin: 20px 10px;
+	padding: 3px 10px;
+	font-size: 14px;
+	line-height: 1;
+	border-radius: 3px;
+}
