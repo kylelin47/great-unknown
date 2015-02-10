@@ -10,3 +10,11 @@ div.errortop {
 .product-social-links {
     line-height: 10px;
 }
+
+.browse-pod-left {
+	float: left;
+}
+
+.browse-pod-right {
+	float: right;
+}
