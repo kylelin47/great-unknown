@@ -52,18 +52,23 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 
 		// Remove existing Podcast
 		$scope.remove = function(podcast) {
-			if ( podcast ) { 
-				podcast.$remove();
+			var r = confirm("Are you sure you want to delete this podcast? Deletion is permanent.");
+			if ( r == true ) {
+				if ( podcast ) { 
+					podcast.$remove();
 
-				for (var i in $scope.podcasts) {
-					if ($scope.podcasts [i] === podcast) {
-						$scope.podcasts.splice(i, 1);
+					for (var i in $scope.podcasts) {
+						if ($scope.podcasts [i] === podcast) {
+							$scope.podcasts.splice(i, 1);
+						}
 					}
+				} else {
+					$scope.podcast.$remove(function() {
+						$location.path('podcasts');
+					});
 				}
 			} else {
-				$scope.podcast.$remove(function() {
-					$location.path('podcasts');
-				});
+				//not removed
 			}
 		};
 
@@ -125,6 +130,6 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 		$scope.defined = function() {
 			$scope.podname = document.getElementById('pname');
 		};
-		
+
 	}
 ]);
