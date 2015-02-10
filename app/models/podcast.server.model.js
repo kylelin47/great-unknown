@@ -14,7 +14,7 @@ var PodcastSchema = new Schema({
 		type: String,
 		required: 'Name is a required field',
 		trim: true
-	},/* possibly lower-case normalized name for sorting*/
+	},/* possibly lower-case normalized name for sorting with dashes replacing spaces*/
 	blog: {
 		type: String,
 		default: '',
@@ -44,6 +44,10 @@ var PodcastSchema = new Schema({
     category: {
         type: String,
         default: 'Misc'
-    }
+    },
+	isBlog: {
+		type: Boolean,
+		default: false
+	}
 });
 mongoose.model('Podcast', PodcastSchema);

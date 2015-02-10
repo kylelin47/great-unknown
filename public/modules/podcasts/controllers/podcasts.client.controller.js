@@ -19,7 +19,8 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 				blurb: this.blurb,
 				audio: this.audio,
 				audioOriginal: this.audioOriginal,
-				category: this.category
+				category: this.category,
+				isBlog: this.isBlog
 			});
 			if (typeof $scope.myFile !== 'undefined') {
 				var file = $scope.myFile;
