@@ -52,8 +52,8 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 
 		// Remove existing Podcast
 		$scope.remove = function(podcast) {
-			var r = confirm("Are you sure you want to delete this podcast? Deletion is permanent.");
-			if ( r == true ) {
+			var r = confirm('Are you sure you want to delete this podcast? Deletion is permanent.');
+			if ( r === true ) {
 				if ( podcast ) { 
 					podcast.$remove();
 
@@ -67,8 +67,6 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 						$location.path('podcasts');
 					});
 				}
-			} else {
-				//not removed
 			}
 		};
 
