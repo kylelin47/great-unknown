@@ -1,8 +1,8 @@
 <section data-ng-controller="PodcastsController" data-ng-init="find()">
     <div class="page-header">
         <h1 class="browse-pod-left">Podcasts</h1>
-		<select data-ng-model="category" name="category" class="browse-pod-dropdown" ng-init="category = 'All'" >
-			<option value="All" selected>All</option>
+		<select data-ng-model="search.category" name="category" class="browse-pod-dropdown" ng-init="category = 'All'" >
+			<option value="" selected>All</option>
             <option value="Misc">Miscellaneous</option>
             <option value="Sports">Sports</option>
             <option value="Comedy">Comedy</option>
@@ -16,8 +16,7 @@
 	<section data-ng-hide="currentPage <= 0 || currentPage*perPage - perPage >= podcasts.length">
 		<div class="list-group">
 		<!-- Look into orderBy AND filter in same query -->
-			<a data-ng-repeat="podcast in podcasts.slice((currentPage-1)*perPage,currentPage*perPage)" data-ng-href="#!/podcasts/{{podcast._id}}" class="list-group-item">
-				<div ng-if="podcast.category === category || category === 'All'">
+			<a data-ng-repeat="podcast in podcasts.slice((currentPage-1)*perPage,currentPage*perPage) | filter:search" data-ng-href="#!/podcasts/{{podcast._id}}" class="list-group-item">
 				<small class="list-group-item-text">
 					<p class="browse-pod-left">
 					Posted on
@@ -29,7 +28,6 @@
 				<div style="clear: both;"></div>
 				<h3 class="list-group-item-heading" data-ng-bind="podcast.name"></h3>
 				<p class="lead" data-ng-bind="podcast.blurb"></p>
-			</div>
 			</a>
 		</div>
 		<div class="pull-right">
