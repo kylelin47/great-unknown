@@ -44,6 +44,7 @@
 			    <div class="form-group">
 	                <h4 class="browse-pod-left">Podcast Icon: </h4>
 					<input data-ng-model="podIcon" placeholder="Link to desired icon (80x80p)" class="create-pod-iconlink-bar"/>
+					<img data-ng-hide="podcast.podIcon === ''" src={{podIcon}} alt="Icon" style="width:80px;height:80px">
 			    </div>
 				<div data-ng-show="error" class="text-danger">
 					<strong data-ng-bind="error"></strong>
