@@ -13,10 +13,10 @@
     </div>
     <div style="clear: both;"></div>
     <br>
-	<section data-ng-hide="currentPage <= 0 || currentPage*perPage - perPage >= podcasts.length">
+	<section data-ng-hide="currentPage <= 0 || currentPage*perPage - perPage >= podcastsf=(podcasts | filter:search).length">
 		<div class="list-group">
 		<!-- Look into orderBy AND filter in same query -->
-			<a data-ng-repeat="podcast in podcasts.slice((currentPage-1)*perPage,currentPage*perPage) | filter:search" data-ng-href="#!/podcasts/{{podcast._id}}" class="list-group-item">
+			<a data-ng-repeat="podcast in podcastsf=(podcasts | filter:search).slice((currentPage-1)*perPage,currentPage*perPage)" data-ng-href="#!/podcasts/{{podcast._id}}" class="list-group-item">
 				<small class="list-group-item-text">
 					<p class="browse-pod-left">
 					Posted on
@@ -33,8 +33,8 @@
 		<div class="pull-right">
 			<ul class="pagination pagination-lg">
 				<li data-ng-hide="currentPage <= 1"><a href="/#!/podcasts/browse/{{currentPage-1}}">Prev</a>
-				<li data-ng-class="{true: 'active', false: ''}[currentPage === $index + 1]" ng-repeat="i in getNumber(podcasts.length/perPage) track by $index"><a href="/#!/podcasts/browse/{{$index+1}}">{{$index+1}}</a></li>
-				<li data-ng-hide="podcasts.length <= currentPage*perPage"><a href="/#!/podcasts/browse/{{currentPage+1}}">Next</a>
+				<li data-ng-class="{true: 'active', false: ''}[currentPage === $index + 1]" ng-repeat="i in getNumber(podcastsf=(podcasts | filter:search).length/perPage) track by $index"><a href="/#!/podcasts/browse/{{$index+1}}">{{$index+1}}</a></li>
+				<li data-ng-hide="podcastsf=(podcasts | filter:search).length <= currentPage*perPage"><a href="/#!/podcasts/browse/{{currentPage+1}}">Next</a>
 			</ul>
 		</div>
 	</section>
