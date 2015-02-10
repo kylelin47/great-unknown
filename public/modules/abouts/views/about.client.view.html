@@ -19,25 +19,37 @@
 		<div class="col-md-6">
 			<a data-ng-repeat="podcast in podcasts.slice(0,3)" data-ng-href="#!/podcasts/{{podcast._id}}" class="list-group-item">
 				<small class="list-group-item-text">
+					<p class="browse-pod-left">
 					Posted on
 					<span data-ng-bind="podcast.created | date:'medium'"></span>
 					by
-					<span data-ng-bind="podcast.user.displayName"></span>
+					<span data-ng-bind="podcast.user.displayName"></span></p>
+					<strong class="browse-pod-right" data-ng-bind="podcast.category"></strong>
 				</small>
-				<h4 class="list-group-item-heading" data-ng-bind="podcast.name"></h4>
-				<p class="lead" data-ng-bind="podcast.blurb"></p>
+				<div style="clear: both;"></div>
+				<div class="pull-left">
+				<h3 class="list-group-item-heading" data-ng-bind="podcast.name"></h3>
+				<p class="lead" data-ng-bind="podcast.blurb"></p></div>
+				<img data-ng-hide="podcast.podIcon === ''" src={{podcast.podIcon}} alt="Icon" style="width:80px;height:80px" class="pull-right">
+				<div style="clear: both;"></div>
 			</a>
 		</div>
 		<div class="col-md-6">
 			<a data-ng-repeat="podcast in podcasts.slice(3,6)" data-ng-href="#!/podcasts/{{podcast._id}}" class="list-group-item">
 				<small class="list-group-item-text">
+					<p class="browse-pod-left">
 					Posted on
 					<span data-ng-bind="podcast.created | date:'medium'"></span>
 					by
-					<span data-ng-bind="podcast.user.displayName"></span>
+					<span data-ng-bind="podcast.user.displayName"></span></p>
+					<strong class="browse-pod-right" data-ng-bind="podcast.category"></strong>
 				</small>
-				<h4 class="list-group-item-heading" data-ng-bind="podcast.name"></h4>
-				<p class="lead" data-ng-bind="podcast.blurb"></p>
+				<div style="clear: both;"></div>
+				<div class="pull-left">
+				<h3 class="list-group-item-heading" data-ng-bind="podcast.name"></h3>
+				<p class="lead" data-ng-bind="podcast.blurb"></p></div>
+				<img data-ng-hide="podcast.podIcon === ''" src={{podcast.podIcon}} alt="Icon" style="width:80px;height:80px" class="pull-right">
+				<div style="clear: both;"></div>
 			</a>
 		</div>
 	</div>
