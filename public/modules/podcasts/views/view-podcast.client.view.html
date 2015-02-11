@@ -67,14 +67,20 @@
 				</fieldset>
 			</form>
 		</div>
-		<div class="list-group">
+		<div class="list-group" data-ng-model="podcast.comments.length">
 			<a data-ng-repeat="n in [] | range:podcast.comments.length" class="list-group-item col-md-7 bottom-buffer">
 				<span data-ng-bind="c = podcast.comments[podcast.comments.length - n - 1].split('|~!')" data-ng-hide=true></span>
-				<p class="list-group-item-text">
+				<p class="list-group-item-text" ng-hide="n >= podcast.comments.length">
 					<p class="pull-left"><strong>{{c[0]}}</strong> posted:</p>
 					<h6 class="pull-right">{{c[1] | date:'mediumDate'}}</h6>
 					<br><h4 class="col-xs-push-3">{{c[2]}}</h4>
+					<div data-ng-show="((authentication.user) && (authentication.user._id == podcast.user._id))">
+						<p title="Delete Comment" class="btn btn-sm pull-right" data-ng-click="deleteComment(podcast.comments.length - n - 1);">
+							<i class="glyphicon glyphicon-trash"></i>
+						</p>
+					</div>
 				</p>
+				<div style="clear: both;"></div>
 			</a>
 		</div>
 	</div>

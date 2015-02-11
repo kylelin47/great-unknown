@@ -156,5 +156,15 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 			});
 		};
 
+		$scope.deleteComment = function(n) {
+			var podcast = $scope.podcast;
+			podcast.comments.splice(n, 1);
+			podcast.$update(function() {
+				$location.path('podcasts/' + podcast._id);
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
+
 	}
 ]);
