@@ -57,7 +57,10 @@ module.exports = {
 				'public/lib/angular-ui-utils/ui-utils.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
 				'public/lib/angular-easyfb/angular-easyfb.js',
-				'public/lib/bootstrap-markdown/js/bootstrap-markdown.js'
+				'public/lib/codemwnci/Markdown.Converter.js',
+				'public/lib/codemwnci/Markdown.Sanitizer.js',
+				'public/lib/codemwnci/bootstrap-markdown.js',
+				'public/lib/codemwnci/markdown-editpreview-ng.js'
 			]
 		},
 		css: [

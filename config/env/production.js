@@ -33,7 +33,10 @@ module.exports = {
 				'public/lib/angular-ui-utils/ui-utils.min.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.min.js',
 				'public/lib/angular-easyfb/angular-easyfb.min.js',
-				'public/lib/bootstrap-markdown/js/bootstrap-markdown.js'
+				'public/lib/codemwnci/Markdown.Converter.js',
+				'public/lib/codemwnci/Markdown.Sanitizer.js',
+				'public/lib/codemwnci/bootstrap-markdown.js',
+				'public/lib/codemwnci/markdown-editpreview-ng.js'
 			]
 		},
 		css: 'public/dist/application.min.css',

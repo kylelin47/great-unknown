@@ -10,9 +10,9 @@
 	<div class="row">
 		<div class="col-md-8"  data-ng-hide="!showPreview">
 			<h1 data-ng-bind="name"></h1>
-			<div class="newline"><p class="lead" data-ng-bind="about"></p></div>
-			<h2 data-ng-hide="!showLast">Most Recent Podcasts</h2>
-			<p class="small" data-ng-hide="!showLast">podcasts would be displayed here</p>
+			<div class="lead"><markdown bind-from="about"></markdown></div>
+			<h2 data-ng-hide="!showLast">Most Recent Posts</h2>
+			<p class="small" data-ng-hide="!showLast">posts would be displayed here</p>
 		</div>
 		<div data-ng-class="{'col-md-4': showPreview, 'col-md-12': !showPreview}">
 			<fieldset>
@@ -27,7 +27,7 @@
 					<label class="control-label" for="about">About Me</label>
 					<div class="controls">
 						<textarea data-ng-model="about" name="about" id="about" class="form-control" cols="30" rows="10" data-ng-init="about=about.about" 
-						          placeholder="About Me" data-provide="markdown"></textarea>
+						          placeholder="About Me" markdownedit></textarea>
 					</div>
 				</div>
 				<div class="form-group">
@@ -56,9 +56,9 @@
 		<div class="row">
 			<div class="col-md-8"  data-ng-hide="!showPreview">
 				<h1 data-ng-bind="name"></h1>
-				<div class="newline"><p class="lead" data-ng-bind="about"></p></div>
-				<h2 data-ng-hide="!showLast">Most Recent Podcasts</h2>
-				<p class="small" data-ng-hide="!showLast">podcasts would be displayed here</p>
+				<div class="lead"><markdown bind-from="about"></markdown></div>
+				<h2 data-ng-hide="!showLast">Most Recent Posts</h2>
+				<p class="small" data-ng-hide="!showLast">posts would be displayed here</p>
 			</div>
 			<div data-ng-class="{'col-md-4': showPreview, 'col-md-12': !showPreview}">
 				<fieldset>
@@ -73,7 +73,7 @@
 						<label class="control-label" for="about">About Me</label>
 						<div class="controls">
 							<textarea data-ng-model="about" name="about" id="about" class="form-control" cols="30" rows="10" 
-									  placeholder="About Me" data-provide="markdown"></textarea>
+									  placeholder="About Me" markdownedit markdown-hidden-buttons="cmdQuote"></textarea>
 						</div>
 					</div>
 					<div class="form-group">
