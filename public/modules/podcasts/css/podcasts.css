@@ -98,3 +98,10 @@ div.errortop {
 textarea[name="comText"] {
 	resize: vertical;
 }
+
+.pod-blog {
+  margin-bottom: 20px;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.3;
+}

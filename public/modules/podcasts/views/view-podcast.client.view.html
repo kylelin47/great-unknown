@@ -27,11 +27,14 @@
 		</small>
 	</div>
 	<div class="podcast">
-		<audio controls data-ng-src="{{getAudioUrl()}}"></audio>
+		<audio class="col-xs-12" controls data-ng-src="{{getAudioUrl()}}"></audio>
 		<div class="newline">
-			<p class="lead" data-ng-bind="podcast.blog"></p>
+			<br>
+			<p class="pod-blog col-xs-push-2 col-xs-8" data-ng-bind="podcast.blog"></p>
 		</div>
 	</div>
+	<div style="clear: both;"></div>
+	<div class="newline"></div>
 	<div class="product-social-links">
 		<a href="https://twitter.com/share" class="twitter-share-button" data-text="Check out this cool podcast" data-via="podcast_manager">Tweet</a>
 		<script type="text/javascript-lazy">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
