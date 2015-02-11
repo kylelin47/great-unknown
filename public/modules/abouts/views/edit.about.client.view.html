@@ -5,51 +5,7 @@
 	<div data-ng-show="((authentication.user) && (authentication.user.username == 'admin'))">
 	<button class="btn btn-default" data-ng-hide="!showPreview" data-ng-click="showPreview = false">Hide Preview</button>
 	<button class="btn btn-default" data-ng-hide="showPreview" data-ng-click="showPreview = true">Show Preview</button>
-	<div data-ng-hide="!abouts.$resolved || abouts.length">
-		<form data-ng-submit="create()" novalidate>
-		<div class="row">
-			<div class="col-md-8"  data-ng-hide="!showPreview">
-				<h1 data-ng-bind="name"></h1>
-				<div class="newline"><p class="lead" data-ng-bind="about"></p></div>
-				<h2 data-ng-hide="!showLast">Most Recent Podcasts</h2>
-				<p class="small" data-ng-hide="!showLast">podcasts would be displayed here</p>
-			</div>
-			<div data-ng-class="{'col-md-4': showPreview, 'col-md-12': !showPreview}">
-				<fieldset>
-					<div class="form-group">
-						<label class="control-label" for="name">Name</label>
-						<div class="controls">
-							<input type="text" data-ng-model="name" name="name" id="name" class="form-control"
-								   placeholder="Name" required />
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label" for="about">About Me</label>
-						<div class="controls">
-							<textarea data-ng-model="about" name="about" id="about" class="form-control" cols="30" rows="10" 
-									  placeholder="About Me"></textarea>
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="checkbox">
-							<label>
-							  <input type="checkbox" data-ng-model="showLast"
-									 name="showLast" id="showLast"> Show Most Recent Posts
-							</label>
-						</div>
-					</div>
-
-					<div data-ng-show="error" class="text-danger">
-						<strong data-ng-bind="error"></strong>
-					</div>
-					<div class="form-group">
-						<input type="submit" value="Update About Me" class="btn btn-primary">
-					</div>
-				</fieldset>
-			</div>
-		</div>
-		</form>
-	</div>
+<!-- Updating About Me -->
 	<form data-ng-submit="create()" data-ng-repeat="about in abouts" novalidate>
 	<div class="row">
 		<div class="col-md-8"  data-ng-hide="!showPreview">
@@ -71,7 +27,7 @@
 					<label class="control-label" for="about">About Me</label>
 					<div class="controls">
 						<textarea data-ng-model="about" name="about" id="about" class="form-control" cols="30" rows="10" data-ng-init="about=about.about" 
-						          placeholder="About Me"></textarea>
+						          placeholder="About Me" data-provide="markdown"></textarea>
 					</div>
 				</div>
 				<div class="form-group">
@@ -94,6 +50,52 @@
 		</div>
 	</div>
 	</form>
+<!-- Creating New About Me -->
+	<div data-ng-hide="!abouts.$resolved || abouts.length">
+		<form data-ng-submit="create()" novalidate>
+		<div class="row">
+			<div class="col-md-8"  data-ng-hide="!showPreview">
+				<h1 data-ng-bind="name"></h1>
+				<div class="newline"><p class="lead" data-ng-bind="about"></p></div>
+				<h2 data-ng-hide="!showLast">Most Recent Podcasts</h2>
+				<p class="small" data-ng-hide="!showLast">podcasts would be displayed here</p>
+			</div>
+			<div data-ng-class="{'col-md-4': showPreview, 'col-md-12': !showPreview}">
+				<fieldset>
+					<div class="form-group">
+						<label class="control-label" for="name">Name</label>
+						<div class="controls">
+							<input type="text" data-ng-model="name" name="name" id="name" class="form-control"
+								   placeholder="Name" required />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label" for="about">About Me</label>
+						<div class="controls">
+							<textarea data-ng-model="about" name="about" id="about" class="form-control" cols="30" rows="10" 
+									  placeholder="About Me" data-provide="markdown"></textarea>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="checkbox">
+							<label>
+							  <input type="checkbox" data-ng-model="showLast"
+									 name="showLast" id="showLast"> Show Most Recent Posts
+							</label>
+						</div>
+					</div>
+
+					<div data-ng-show="error" class="text-danger">
+						<strong data-ng-bind="error"></strong>
+					</div>
+					<div class="form-group">
+						<input type="submit" value="Update About Me" class="btn btn-primary">
+					</div>
+				</fieldset>
+			</div>
+		</div>
+		</form>
+	</div>
 	</div>
 	<div data-ng-hide="!abouts.$resolved ||((authentication.user) && (authentication.user.username == 'admin'))">
 		<div class="alert alert-warning text-center">

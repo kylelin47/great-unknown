@@ -68,11 +68,12 @@
 			</form>
 		</div>
 		<div class="list-group">
-			<a data-ng-repeat="comment in podcast.comments" class="list-group-item col-md-7 bottom-buffer">
+			<a data-ng-repeat="n in [] | range:podcast.comments.length" class="list-group-item col-md-7 bottom-buffer">
+				<span data-ng-bind="c = podcast.comments[podcast.comments.length - n - 1].split('|~!')" data-ng-hide=true></span>
 				<p class="list-group-item-text">
-					<p class="pull-left"><strong>{{comment[0]}}</strong> posted:</p>
-					<h6 class="pull-right">{{comment[1] | date:'mediumDate'}}</h6>
-					<br><h4 class="col-xs-push-3">{{comment[2]}}</h4>
+					<p class="pull-left"><strong>{{c[0]}}</strong> posted:</p>
+					<h6 class="pull-right">{{c[1] | date:'mediumDate'}}</h6>
+					<br><h4 class="col-xs-push-3">{{c[2]}}</h4>
 				</p>
 			</a>
 		</div>

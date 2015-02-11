@@ -145,13 +145,16 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 
 		$scope.createComment = function() {
 			var podcast = $scope.podcast;
-			var newComment = new Array();
-			newComment[0] = $scope.comAuthor;
-			newComment[1] = Date.now;
-			newComment[2] = $scope.comText;
+			var newComment = '';
+			var d = Date.now();
+			newComment += $scope.comAuthor + '|~!' + d + '|~!' + $scope.comText; 
 			podcast.comments.push( newComment );
-			$scope.podcast = podcast;
-		}
+			podcast.$update(function() {
+				$location.path('podcasts/' + podcast._id);
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
 
 	}
 ]);
