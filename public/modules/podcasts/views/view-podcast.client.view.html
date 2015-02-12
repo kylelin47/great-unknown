@@ -50,11 +50,6 @@
 		<div class="row">
 			<form class="form-horizontal" data-ng-submit="createComment()" novalidate>
 				<fieldset>
-					<div class="form-group-sm col-md-3">
-	                    <div class="controls">
-	                        <input type="text" data-ng-model="comAuthor" name="comAuthor" id="comAuthor" class="form-control" placeholder="Name"/>
-	                    </div>
-	                </div>
 					<div class="form-group-sm col-md-5">
 						<div class="controls">
 							<textarea data-ng-model="comText" name="comText" id="comText" class="form-control" cols="30" rows="100" maxlength="500" max-width="30" max-height="10" placeholder="Thoughts on the podcast?"></textarea>
@@ -72,6 +67,7 @@
 				<p class="list-group-item-text">
 					<p class="pull-left"><strong>{{c[0]}}</strong> posted:</p>
 					<h6 class="pull-right">{{c[1] | date:'mediumDate'}}</h6>
+					<h6 class="pull-right"><span class = "glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(n)"></span>{{c[3]}} &nbsp &nbsp &nbsp </h6>
 					<br><h4 class="col-xs-push-3">{{c[2]}}</h4>
 				</p>
 			</a>
@@ -79,6 +75,12 @@
 	</div>
 -->
 </div>
+
+
+
+
+
+
 	<div class="alert alert-warning text-center errortop" data-ng-hide="!podcast.$resolved || podname.innerHTML !== ''">
     	Not a valid podcast. Perhaps it's been deleted?
     </div>
