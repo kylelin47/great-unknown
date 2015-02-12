@@ -56,7 +56,7 @@
     	Nothing seems to be here.
     </div>
     <br>
-    <div class="alert alert-warning text-center" data-ng-show="(podcastsf=(podcastsS=(podcasts | filter:search) | filter:filter)).length === 0">
+    <div class="alert alert-warning text-center" data-ng-show="podcasts.$resolved && (podcastsf=(podcastsS=(podcasts | filter:search) | filter:filter)).length === 0">
     	Your search yielded no results.
     </div>
 </section>
