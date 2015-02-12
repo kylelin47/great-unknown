@@ -11,7 +11,7 @@
 	            <option value="News">News</option>
 	        </select>
 	        <span><h3 class="browse-pod-right">Filter:</h3>
-	        <input data-ng-model="search.name" placeholder="Search by name" class="browse-pod-search-bar"/>
+	        <div class="col-xs-3 pull-right top-buffer"><input type="search" data-ng-model="search.name" placeholder="Search by name" class="form-control"/></div>
 	    </div>
     </div>
     <div style="clear: both;"></div>
@@ -30,14 +30,14 @@
 				</small>
 				<div style="clear: both;"></div>
 				<div class="pull-left">
-				<h3 class="list-group-item-heading" data-ng-bind="podcast.name"></h3>
+				<h3 class="list-group-item-heading"><strong>{{podcast.name}}</strong></h3>
 				<p class="lead" data-ng-bind="podcast.blurb"></p></div>
 				<img data-ng-hide="podcast.podIcon === ''" src={{podcast.podIcon}} alt="Icon" style="width:80px;height:80px" class="pull-right">
 				<div style="clear: both;"></div>
 			</a>
 		</div>
 		<div class="pull-right">
-			<ul class="pagination pagination-lg">
+			<ul class="pagination pagination-md">
 				<li data-ng-hide="currentPage <= 1"><a href="/#!/podcasts/browse/{{currentPage-1}}">Prev</a>
 				<li data-ng-class="{true: 'active', false: ''}[currentPage === $index + 1]" ng-repeat="i in getNumber(podcastsf=(podcastsS=(podcasts | filter:search) | filter:filter).length/perPage) track by $index"><a href="/#!/podcasts/browse/{{$index+1}}">{{$index+1}}</a></li>
 				<li data-ng-hide="podcastsf=(podcastsS=(podcasts | filter:search) | filter:filter).length <= currentPage*perPage"><a href="/#!/podcasts/browse/{{currentPage+1}}">Next</a>

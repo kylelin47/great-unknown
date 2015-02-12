@@ -1,6 +1,3 @@
-div.podcast {
-	padding-top: 1px;
-}
 div.newline {
 	white-space: pre-wrap;
 }
@@ -92,7 +89,7 @@ div.errortop {
 }
 
 .top-buffer {
-	margin-bottom: 50px;
+	margin-top: 13px;
 }
 
 textarea[name="comText"] {

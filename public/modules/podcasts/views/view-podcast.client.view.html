@@ -26,12 +26,10 @@
 			</em>
 		</small>
 	</div>
-	<div class="podcast">
-		<audio class="col-xs-12" controls data-ng-src="{{getAudioUrl()}}"></audio>
-		<div class="newline">
-			<br>
-			<p class="pod-blog col-xs-push-2 col-xs-8" data-ng-bind="podcast.blog"></p>
-		</div>
+	<audio class="col-xs-12" controls data-ng-src="{{getAudioUrl()}}"></audio>
+	<div class="pod-blog col-xs-push-2 col-xs-8">
+		<br><br>
+		<markdown bind-from="podcast.blog"></markdown>
 	</div>
 	<div style="clear: both;"></div>
 	<div class="newline"></div>
@@ -46,6 +44,9 @@
 		  data-share="true"></div>
 		  <!-- data-href="https://lbcqrcfwju.localtunnel.me/#!/podcasts/{{podcast._id}}" -->
 	</div>
+	<br>
+<div class="fb-comments col-xs-push-3" data-href="https://lbcqrcfwju.localtunnel.me/#!/podcasts/{{podcast._id}}" data-numposts="5" data-colorscheme="light"></div>
+<!-- Old Commenting System
 	<div>
 		<h2>Comments:</h2>
 		<div class="row">
@@ -80,6 +81,7 @@
 			</a>
 		</div>
 	</div>
+-->
 </div>
 
 

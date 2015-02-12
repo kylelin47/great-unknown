@@ -1,8 +1,8 @@
 'use strict';
 
 // Abouts controller
-angular.module('abouts').controller('AboutsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Abouts', 'Podcasts',
-	function($scope, $stateParams, $location, Authentication, Abouts, Podcasts) {
+angular.module('abouts').controller('AboutsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Abouts', 'Podcasts', '$sce',
+	function($scope, $stateParams, $location, Authentication, Abouts, Podcasts, $sce) {
 		$scope.authentication = Authentication;
 		// Create new About
 		$scope.create = function() {
@@ -34,6 +34,9 @@ angular.module('abouts').controller('AboutsController', ['$scope', '$stateParams
 		$scope.findOne = function() {
 			$scope.abouts = Abouts.query();
 		};
-
+		$scope.renderHtml = function(html_code)
+		{
+			return $sce.trustAsHtml(html_code);
+		};
 	}
 ]);
