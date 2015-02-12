@@ -22,7 +22,8 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 				category: this.category,
 				isBlog: this.isBlog,
 				podIcon: this.podIcon,
-				comments: {}
+				comments: {},
+				posts: {}
 			});
 
 			//if empty icon field, use our default
@@ -142,13 +143,27 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 		$scope.defined = function() {
 			$scope.podname = document.getElementById('pname');
 		};
+		
+		
+		
+		
+		
+
+		$scope.incrementUpvotes = function(i) {
+
+			var comment = $scope.comments[i];
+			var splitted = comment.split('|~!');
+			var number = parseInt(splitted[3]) + 1;
+			var toReplaceComment = splitted[0] + '|~!' + splitted[1] + '|~!' + splitted[2] + '|~!' + number;
+			$scope.podcast.comments[i] = toReplaceComment;
+		};
 
 		$scope.createComment = function() {
 			var podcast = $scope.podcast;
 			var newComment = '';
 			var d = Date.now();
-			newComment += $scope.comAuthor + '|~!' + d + '|~!' + $scope.comText; 
-			podcast.comments.push( newComment );
+			newComment += $scope.authentication.user.displayName + '|~!' + d + '|~!' + $scope.comText + '|~!' + 0; 
+			podcast.comments.push(newComment);
 			podcast.$update(function() {
 				$location.path('podcasts/' + podcast._id);
 			}, function(errorResponse) {
