@@ -52,7 +52,7 @@ var PodcastSchema = new Schema({
 	podIcon: {
 		type: String,
 		//we can pick better default if we want
-		default: 'http://i.imgur.com/LUsrAfg.gif'
+		default: 'http://i.imgur.com/f7oBepl.png?1'
 	},
 	comments: [String]
 });

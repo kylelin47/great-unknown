@@ -21,9 +21,10 @@
 				</div>
 			</div>
 			<h1>About My Podcasts</h1>
-			<markdown bind-from="aboutPodcasts"></markdown>
+			<div class="pod-blog"><markdown bind-from="aboutPodcasts"></markdown></div>
 			<h2 data-ng-hide="!showLast">Most Recent Posts</h2>
-			<p class="small" data-ng-hide="!showLast">A list of your most recent posts would be displayed here</p>
+			<p class="text-muted" data-ng-hide="!showLast">A list of your most recent posts would be displayed here</p>
+			<br />
 		</div>
 		<div data-ng-class="{'col-md-4': showPreview, 'col-md-12': !showPreview}">
 			<fieldset>

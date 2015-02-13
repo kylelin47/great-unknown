@@ -86,7 +86,7 @@ textarea[name="comText"] {
 
 .pod-blog {
   margin-bottom: 20px;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 300;
   line-height: 1.3;
 }
@@ -111,3 +111,11 @@ textarea[name="comText"] {
 /* add padding  */
 .left-addon input  { padding-left:  30px; }
 .right-addon input { padding-right: 30px; }
+
+.big-text-pod {
+	font-size: 4em;
+}
+
+.big-text-pod-welcome {
+	font-size: 6em;
+}
