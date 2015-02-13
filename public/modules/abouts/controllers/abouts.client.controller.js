@@ -11,7 +11,7 @@ angular.module('abouts').controller('AboutsController', ['$scope', '$stateParams
 				name: this.name,
 				email: this.email,
 				picture: this.picture,
-				about: this.about,
+				about: this.aboutMe,
 				aboutPodcasts: this.aboutPodcasts,
 				showLast: this.showLast
 			});
