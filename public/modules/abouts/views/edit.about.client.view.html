@@ -9,10 +9,21 @@
 	<form data-ng-submit="create()" data-ng-repeat="about in abouts" novalidate>
 	<div class="row">
 		<div class="col-md-8"  data-ng-hide="!showPreview">
-			<h1 data-ng-bind="name"></h1>
-			<div class="lead"><markdown bind-from="about"></markdown></div>
+			<div class="row">
+				<div class="col-sm-4">
+					<img data-ng-show="picture === ''" src="http://static.guim.co.uk/static/b6c135ec8e49127c7c87055af29b2d52c4011fc0/politics/images/defaultPoliticalPerson.gif" alt="My Avatar" height="100%" width="100%" />
+					<img data-ng-hide="picture === ''" src={{picture}} alt="My Avatar" height="100%" width="100%" />
+					<p data-ng-bind="name"></p>
+					<p data-ng-bind="email"></p>
+				</div>
+				<div class="col-sm-8">
+					<markdown bind-from="about"></markdown>
+				</div>
+			</div>
+			<h1>About My Podcasts</h1>
+			<markdown bind-from="aboutPodcasts"></markdown>
 			<h2 data-ng-hide="!showLast">Most Recent Posts</h2>
-			<p class="small" data-ng-hide="!showLast">posts would be displayed here</p>
+			<p class="small" data-ng-hide="!showLast">A list of your most recent posts would be displayed here</p>
 		</div>
 		<div data-ng-class="{'col-md-4': showPreview, 'col-md-12': !showPreview}">
 			<fieldset>
@@ -20,14 +31,35 @@
 					<label class="control-label" for="name">Name</label>
 					<div class="controls">
 						<input type="text" data-ng-model="name" name="name" id="name" class="form-control" data-ng-init="name=about.name"
-						       placeholder="Name" required />
+						       placeholder="Name" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="email">Email</label>
+					<div class="controls">
+						<input type="text" data-ng-model="email" name="email" id="email" class="form-control" data-ng-init="email=about.email"
+						       placeholder="Email" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="picture">Picture</label>
+					<div class="controls">
+						<input type="text" data-ng-model="picture" id="picture" class="form-control" data-ng-init="picture=about.picture"
+						       placeholder="A link to your picture" />
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label" for="about">About Me</label>
 					<div class="controls">
-						<textarea data-ng-model="about" name="about" id="about" class="form-control" cols="30" rows="10" data-ng-init="about=about.about" 
+						<textarea data-ng-model="about" name="about" id="about" class="form-control" cols="30" rows="5" data-ng-init="about=about.about" 
 						          placeholder="About Me" markdownedit></textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="aboutPodcasts">About My Podcasts</label>
+					<div class="controls">
+						<textarea data-ng-model="aboutPodcasts" name="aboutPodcasts" id="aboutPodcasts" class="form-control" cols="30" rows="10" data-ng-init="about=about.aboutPodcasts" 
+						          placeholder="About My Podcasts" markdownedit></textarea>
 					</div>
 				</div>
 				<div class="form-group">
@@ -55,44 +87,77 @@
 		<form data-ng-submit="create()" novalidate>
 		<div class="row">
 			<div class="col-md-8"  data-ng-hide="!showPreview">
-				<h1 data-ng-bind="name"></h1>
-				<div class="lead"><markdown bind-from="about"></markdown></div>
-				<h2 data-ng-hide="!showLast">Most Recent Posts</h2>
-				<p class="small" data-ng-hide="!showLast">posts would be displayed here</p>
+			<div class="row">
+				<div class="col-sm-4">
+					<img data-ng-show="picture === ''" src="http://static.guim.co.uk/static/b6c135ec8e49127c7c87055af29b2d52c4011fc0/politics/images/defaultPoliticalPerson.gif" alt="My Avatar" height="100%" width="100%" />
+					<img data-ng-hide="picture === ''" src={{picture}} alt="My Avatar" height="100%" width="100%" />
+					<p data-ng-bind="name"></p>
+					<p data-ng-bind="email"></p>
+				</div>
+				<div class="col-sm-8">
+					<markdown bind-from="about"></markdown>
+				</div>
 			</div>
-			<div data-ng-class="{'col-md-4': showPreview, 'col-md-12': !showPreview}">
-				<fieldset>
-					<div class="form-group">
-						<label class="control-label" for="name">Name</label>
-						<div class="controls">
-							<input type="text" data-ng-model="name" name="name" id="name" class="form-control"
-								   placeholder="Name" required />
-						</div>
+			<h1>About My Podcasts</h1>
+			<markdown bind-from="aboutPodcasts"></markdown>
+			<h2 data-ng-hide="!showLast">Most Recent Posts</h2>
+			<p class="small" data-ng-hide="!showLast">A list of your most recent posts would be displayed here</p>
+		</div>
+		<div data-ng-class="{'col-md-4': showPreview, 'col-md-12': !showPreview}">
+			<fieldset>
+				<div class="form-group">
+					<label class="control-label" for="name">Name</label>
+					<div class="controls">
+						<input type="text" data-ng-model="name" name="name" id="name" class="form-control" data-ng-init="name=authentication.user.displayName"
+						       placeholder="Name" />
 					</div>
-					<div class="form-group">
-						<label class="control-label" for="about">About Me</label>
-						<div class="controls">
-							<textarea data-ng-model="about" name="about" id="about" class="form-control" cols="30" rows="10" 
-									  placeholder="About Me" markdownedit markdown-hidden-buttons="cmdQuote"></textarea>
-						</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="email">Email</label>
+					<div class="controls">
+						<input type="text" data-ng-model="email" name="email" id="email" class="form-control" data-ng-init="email=authentication.user.email"
+						       placeholder="Email" />
 					</div>
-					<div class="form-group">
-						<div class="checkbox">
-							<label>
-							  <input type="checkbox" data-ng-model="showLast"
-									 name="showLast" id="showLast"> Show Most Recent Posts
-							</label>
-						</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="picture">Picture</label>
+					<div class="controls">
+						<input type="text" data-ng-model="picture" id="picture" class="form-control" data-ng-init="picture=''"
+						       placeholder="A link to your picture" />
 					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="about">About Me</label>
+					<div class="controls">
+						<textarea data-ng-model="about" name="about" id="about" class="form-control" cols="30" rows="5" data-ng-init="about=about.about" 
+						          placeholder="About Me" markdownedit></textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="aboutPodcasts">About My Podcasts</label>
+					<div class="controls">
+						<textarea data-ng-model="aboutPodcasts" name="aboutPodcasts" id="aboutPodcasts" class="form-control" cols="30" rows="10" data-ng-init="about=about.aboutPodcasts" 
+						          placeholder="About My Podcasts" markdownedit></textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="checkbox">
+						<label>
+						  <input type="checkbox" data-ng-model="showLast"
+						         data-ng-init="showLast=abouts[0].showLast"
+						         name="showLast" id="showLast"> Show Most Recent Posts
+						</label>
+					</div>
+				</div>
 
-					<div data-ng-show="error" class="text-danger">
-						<strong data-ng-bind="error"></strong>
-					</div>
-					<div class="form-group">
-						<input type="submit" value="Update About Me" class="btn btn-primary">
-					</div>
-				</fieldset>
-			</div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+				<div class="form-group">
+					<input type="submit" value="Update About Me" class="btn btn-primary">
+				</div>
+			</fieldset>
+		</div>
 		</div>
 		</form>
 	</div>

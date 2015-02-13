@@ -9,7 +9,10 @@ angular.module('abouts').controller('AboutsController', ['$scope', '$stateParams
 			// Create new About object
 			var about = new Abouts ({
 				name: this.name,
+				email: this.email,
+				picture: this.picture,
 				about: this.about,
+				aboutPodcasts: this.aboutPodcasts,
 				showLast: this.showLast
 			});
 
@@ -19,7 +22,10 @@ angular.module('abouts').controller('AboutsController', ['$scope', '$stateParams
 
 				// Clear form fields
 				$scope.name = '';
+				$scope.email = '';
+				$scope.picture = '';
 				$scope.about = '';
+				$scope.aboutPodcasts = '';
 				$scope.showLast = false;
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
@@ -34,6 +40,7 @@ angular.module('abouts').controller('AboutsController', ['$scope', '$stateParams
 		$scope.findOne = function() {
 			$scope.abouts = Abouts.query();
 		};
+
 		$scope.renderHtml = function(html_code)
 		{
 			return $sce.trustAsHtml(html_code);

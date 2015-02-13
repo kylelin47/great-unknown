@@ -11,9 +11,19 @@
 			<span data-ng-bind="abouts[0].created | date:'medium'"></span>
 		</small>
     </div>
-<!-- Look into orderBy AND filter in same query -->
-	<h1 class="list-group-item-heading" data-ng-bind="abouts[0].name"></h1>
-	<div class="lead"><markdown bind-from="abouts[0].about"></markdown></div>
+	<div class="row">
+		<div class="col-sm-4">
+			<img data-ng-show="abouts[0].picture === ''" src="http://static.guim.co.uk/static/b6c135ec8e49127c7c87055af29b2d52c4011fc0/politics/images/defaultPoliticalPerson.gif" alt="My Avatar" height="100%" width="100%" />
+			<img data-ng-hide="abouts[0].picture === ''" src={{abouts[0].picture}} alt="My Avatar" height="100%" width="100%" />
+			<p data-ng-bind="abouts[0].name"></p>
+			<p data-ng-bind="abouts[0].email"></p>
+		</div>
+		<div class="col-sm-8">
+			<markdown bind-from="abouts[0].about"></markdown>
+		</div>
+	</div>
+	<h1>About My Podcasts</h1>
+	<markdown bind-from="abouts[0].aboutPodcasts"></markdown>
 	<h2 class="list-group-item-heading" data-ng-hide="!abouts[0].showLast">Most Recent Posts</h2>
 	<div data-ng-hide="!abouts[0].showLast">
 	<div class="row">

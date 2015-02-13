@@ -143,14 +143,8 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 		$scope.defined = function() {
 			$scope.podname = document.getElementById('pname');
 		};
-		
-		
-		
-		
-		
 
 		$scope.incrementUpvotes = function(i) {
-
 			var comment = $scope.comments[i];
 			var splitted = comment.split('|~!');
 			var number = parseInt(splitted[3]) + 1;
