@@ -10,9 +10,10 @@
 	<div class="row">
 		<div class="col-md-8"  data-ng-hide="!showPreview">
 			<h1 data-ng-bind="name"></h1>
-			<div class="lead"><markdown bind-from="about"></markdown></div>
+			<div class="pod-blog"><markdown bind-from="about"></markdown></div>
 			<h2 data-ng-hide="!showLast">Most Recent Posts</h2>
-			<p class="small" data-ng-hide="!showLast">posts would be displayed here</p>
+			<p class="text-muted" data-ng-hide="!showLast">Posts will be displayed here</p>
+			<br>
 		</div>
 		<div data-ng-class="{'col-md-4': showPreview, 'col-md-12': !showPreview}">
 			<fieldset>

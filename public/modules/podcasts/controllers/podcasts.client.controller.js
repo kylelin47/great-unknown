@@ -28,7 +28,7 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 
 			//if empty icon field, use our default
 			if ( podcast.podIcon === '' ) {
-				podcast.podIcon = 'http://i.imgur.com/LUsrAfg.gif';
+				podcast.podIcon = 'http://i.imgur.com/f7oBepl.png?1';
 			}
 
 			if (typeof $scope.myFile !== 'undefined') {
@@ -94,7 +94,7 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 
 			//if empty icon field, use our default
 			if ( podcast.podIcon === '' ) {
-				podcast.podIcon = 'http://i.imgur.com/LUsrAfg.gif';
+				podcast.podIcon = 'http://i.imgur.com/f7oBepl.png?1';
 			}
 		};
 
