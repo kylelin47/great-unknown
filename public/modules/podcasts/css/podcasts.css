@@ -119,3 +119,7 @@ textarea[name="comText"] {
 .big-text-pod-welcome {
 	font-size: 6em;
 }
+
+.white, .white a {
+	color: #fff;
+}

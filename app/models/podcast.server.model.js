@@ -54,6 +54,10 @@ var PodcastSchema = new Schema({
 		//we can pick better default if we want
 		default: 'http://i.imgur.com/f7oBepl.png?1'
 	},
+	series: {
+		type: String,
+		default: ''
+	},
 	comments: [String]
 });
 mongoose.model('Podcast', PodcastSchema);

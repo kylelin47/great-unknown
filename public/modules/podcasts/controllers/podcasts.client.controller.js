@@ -1,10 +1,12 @@
 'use strict';
 // Podcasts controller
+
 angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUpload', '$stateParams', '$location', 'Authentication', 'Podcasts', '$sce',
 	function($scope, fileUpload, $stateParams, $location, Authentication, Podcasts, $sce) {
 		$scope.authentication = Authentication;
 		$scope.searchText = '';
 		$scope.currentPage = parseInt($stateParams.page, 10);
+
 		if ($location.path() === '/podcasts/browse/')
 		{
 			$scope.currentPage = 1;
@@ -22,6 +24,7 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 				category: this.category,
 				isBlog: this.isBlog,
 				podIcon: this.podIcon,
+				series: this.series,
 				comments: {},
 				posts: {}
 			});
@@ -173,6 +176,17 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
+		};
+
+		$scope.getSeriesArr = function(podcasts) {
+			var series_arr = [];
+			for (var i = 0; i < podcasts.length; i++) {
+				if ( series_arr.indexOf(podcasts[i].series) === -1 && podcasts[i].series!=='' ) {
+					series_arr.push(podcasts[i].series);
+					//if series doesnt exist in array, put it in
+				}
+			}
+			return series_arr;
 		};
 
 	}

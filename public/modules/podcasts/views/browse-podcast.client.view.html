@@ -2,7 +2,7 @@
     <div class="page-header">
         <b class="browse-pod-left big-text-pod">Podcasts</b>
         <br><br>
-        <div ng-hide="currentPage != 1">
+    <div ng-hide="currentPage != 1">
 			<select data-ng-model="filter.category" name="category" class="browse-pod-dropdown" ng-init="category = 'All'" >
 				<option value="" selected>All</option>
 	            <option value="Misc">Miscellaneous</option>
@@ -21,7 +21,13 @@
     </div>
     <div style="clear: both;"></div>
 	<section data-ng-hide="currentPage <= 0 || currentPage*perPage - perPage >= (podcastsf=(podcastsS=(podcasts | filter:search) | filter:filter)).length">
-		<div class="list-group">
+		<div class="form-group pull-left">
+			<input type="toggle" value="All Series" class="btn btn-lg btn-primary col-md-12">
+			<div ng-repeat="series_name in getSeriesArr(podcasts)">
+				<input type="toggle" value="{{series_name}}" class="btn btn-primary btn-lg col-md-12">
+			</div>
+		</div>
+		<div class="list-group col-md-9 pull-right">
 		<!-- Look into orderBy AND filter in same query -->
 			<a data-ng-repeat="podcast in podcastsf=(podcastsS=(podcasts | filter:search) | filter:filter).slice((currentPage-1)*perPage,currentPage*perPage)" data-ng-href="#!/podcasts/{{podcast._id}}" class="list-group-item">
 				<small class="list-group-item-text">
@@ -35,7 +41,8 @@
 				<div style="clear: both;"></div>
 				<div class="pull-left">
 				<h3 class="list-group-item-heading"><strong>{{podcast.name}}</strong></h3>
-				<p class="lead" data-ng-bind="podcast.blurb"></p></div>
+				<p class="lead" data-ng-bind="podcast.blurb"></p>
+				<p data-ng-hide="podcast.series === ''" class="text-muted">Series: <b>{{podcast.series}}</b></p></div>
 				<img data-ng-hide="podcast.podIcon === ''" src={{podcast.podIcon}} alt="Icon" style="width:80px;height:80px" class="pull-right">
 				<div style="clear: both;"></div>
 			</a>
