@@ -20,16 +20,16 @@
 	    </div>
     </div>
     <div style="clear: both;"></div>
+    <div ng-hide="currentPage != 1" class="pull-left btn-group-vertical col-xs-3">
+		<!-- Series Tab -->
+		<label name="series" ng-init="$parent.seriesRadio.series = ''" class="btn btn-primary btn-md" data-ng-model="$parent.seriesRadio.series" btn-radio="'{{series_name}}'" data-ng-repeat="series_name in getSeriesArr(podcasts)">
+			<t ng-hide="series_name === ''" class="pull-left series-radio-txt">{{series_name}}</t>
+			<t ng-show="series_name === ''" class="pull-left series-radio-txt">All Series</t>
+			<i class="pull-right series-radio-txt glyphicon glyphicon-chevron-right"></i>
+			<div style="clear: both;"></div>
+		</label>
+	</div>
 	<section data-ng-hide="currentPage <= 0 || currentPage*perPage - perPage >= (podcastsf=(podcastsS=(podcastsR=(podcasts | filter:seriesRadio) | filter:search) | filter:filter)).length">
-		<div ng-hide="currentPage != 1" class="pull-left btn-group-vertical col-xs-3">
-			<!-- Series Tab -->
-			<label name="series" ng-init="$parent.seriesRadio.series = ''" class="btn btn-primary btn-md" data-ng-model="$parent.seriesRadio.series" btn-radio="'{{series_name}}'" data-ng-repeat="series_name in getSeriesArr(podcasts)">
-				<t ng-hide="series_name === ''" class="pull-left series-radio-txt">{{series_name}}</t>
-				<t ng-show="series_name === ''" class="pull-left series-radio-txt">All Series</t>
-				<i class="pull-right series-radio-txt glyphicon glyphicon-chevron-right"></i>
-				<div style="clear: both;"></div>
-			</label>
-		</div>
 		<div ng-show="currentPage != 1" class="text-muted pull-left col-xs-3 series-radio-txt">Return to page one to filter results.</div>
 		<div class="list-group col-md-9 pull-right">
 		<!-- Look into orderBy AND filter in same query -->
@@ -60,14 +60,14 @@
 			</ul>
 		</div>
 	</section>
-    <div class="alert alert-warning text-center" data-ng-hide="!podcasts.$resolved || podcasts.length">
+    <div class="alert alert-warning text-center col-md-9 pull-right" data-ng-hide="!podcasts.$resolved || podcasts.length">
     	No Podcasts yet, why don't you <a href="/#!/podcasts/create">create one</a>?
     </div>
-	<div class="alert alert-warning text-center" data-ng-hide="!podcasts.$resolved || ((currentPage > 0) && (currentPage*perPage - perPage < podcasts.length)) || podcasts.length === 0">
+	<div class="alert alert-warning text-center col-md-9 pull-right" data-ng-hide="!podcasts.$resolved || ((currentPage > 0) && (currentPage*perPage - perPage < podcasts.length)) || podcasts.length === 0">
     	Nothing seems to be here.
     </div>
     <br>
-    <div class="alert alert-warning text-center" data-ng-show="podcasts.$resolved && (podcastsf=(podcastsS=(podcasts | filter:search) | filter:filter)).length === 0">
+    <div class="alert alert-warning text-center col-md-9 pull-right" data-ng-show="podcasts.$resolved && (podcastsf=(podcastsS=(podcastsR=(podcasts | filter:seriesRadio) | filter:search) | filter:filter)).length === 0">
     	Your search yielded no results.
     </div>
 </section>
