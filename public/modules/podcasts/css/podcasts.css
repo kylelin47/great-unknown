@@ -126,6 +126,8 @@ textarea[name="comText"] {
 
 .no-outline :focus {
 	outline: none;
+	box-shadow:none !important;
+	border:1px solid #ccc !important; 
 }
 
 .series-radio-txt {

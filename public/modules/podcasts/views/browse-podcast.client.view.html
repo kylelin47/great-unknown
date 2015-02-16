@@ -23,7 +23,7 @@
 	<section data-ng-hide="currentPage <= 0 || currentPage*perPage - perPage >= (podcastsf=(podcastsS=(podcastsR=(podcasts | filter:seriesRadio) | filter:search) | filter:filter)).length">
 		<div ng-hide="currentPage != 1" class="pull-left btn-group-vertical col-xs-3">
 			<!-- Series Tab -->
-			<label name="series" ng-init="$parent.seriesRadio.series = ''" class="btn btn-primary btn-md no-outline" data-ng-model="$parent.seriesRadio.series" btn-radio="'{{series_name}}'" data-ng-repeat="series_name in getSeriesArr(podcasts)">
+			<label name="series" ng-init="$parent.seriesRadio.series = ''" class="btn btn-primary btn-md" data-ng-model="$parent.seriesRadio.series" btn-radio="'{{series_name}}'" data-ng-repeat="series_name in getSeriesArr(podcasts)">
 				<t ng-hide="series_name === ''" class="pull-left series-radio-txt">{{series_name}}</t>
 				<t ng-show="series_name === ''" class="pull-left series-radio-txt">All Series</t>
 				<i class="pull-right series-radio-txt glyphicon glyphicon-chevron-right"></i>
