@@ -30,7 +30,7 @@
 		</label>
 	</div>
 	<section data-ng-hide="currentPage <= 0 || currentPage*perPage - perPage >= (podcastsf=(podcastsS=(podcastsR=(podcasts | filter:seriesRadio) | filter:search) | filter:filter)).length">
-		<div ng-show="currentPage != 1" class="text-muted pull-left col-xs-3 series-radio-txt">Return to page one to filter results.</div>
+		<a ng-show="currentPage != 1" class="text-muted pull-left col-xs-3 series-radio-txt" href="/#!/podcasts/browse/1">Return to page one to filter results.</a>	
 		<div class="list-group col-md-9 pull-right">
 		<!-- Look into orderBy AND filter in same query -->
 			<a data-ng-repeat="podcast in podcastsf=(podcastsS=(podcastsR=(podcasts | filter:seriesRadio) | filter:search) | filter:filter).slice((currentPage-1)*perPage,currentPage*perPage)" data-ng-href="#!/podcasts/{{podcast._id}}" class="list-group-item">
@@ -44,9 +44,15 @@
 				</small>
 				<div style="clear: both;"></div>
 				<div class="pull-left">
-				<h3 class="list-group-item-heading"><strong>{{podcast.name}}</strong></h3>
-				<p class="lead" data-ng-bind="podcast.blurb"></p>
-				<p data-ng-hide="podcast.series === ''" class="text-muted">Series: <b>{{podcast.series}}</b></p></div>
+					<h3 class="list-group-item-heading"><strong>{{podcast.name}}</strong></h3>
+					<p class="lead" data-ng-bind="podcast.blurb"></p>
+					<p data-ng-hide="podcast.series === ''" class="text-muted">Series: 
+						<b>{{podcast.series}}
+							<t data-ng-hide="seriesRadio.series === ''">#{{podcastsf.length - podcastsf.indexOf(podcast)}}
+							</t>
+						</b>
+					</p>
+				</div>
 				<img data-ng-hide="podcast.podIcon === ''" src={{podcast.podIcon}} alt="Icon" style="width:80px;height:80px" class="pull-right">
 				<div style="clear: both;"></div>
 			</a>
@@ -66,7 +72,6 @@
 	<div class="alert alert-warning text-center col-md-9 pull-right" data-ng-hide="!podcasts.$resolved || ((currentPage > 0) && (currentPage*perPage - perPage < podcasts.length)) || podcasts.length === 0">
     	Nothing seems to be here.
     </div>
-    <br>
     <div class="alert alert-warning text-center col-md-9 pull-right" data-ng-show="podcasts.$resolved && (podcastsf=(podcastsS=(podcastsR=(podcasts | filter:seriesRadio) | filter:search) | filter:filter)).length === 0">
     	Your search yielded no results.
     </div>
