@@ -180,6 +180,7 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 
 		$scope.getSeriesArr = function(podcasts) {
 			var series_arr = [];
+			series_arr.push('');
 			for (var i = 0; i < podcasts.length; i++) {
 				if ( series_arr.indexOf(podcasts[i].series) === -1 && podcasts[i].series!=='' ) {
 					series_arr.push(podcasts[i].series);

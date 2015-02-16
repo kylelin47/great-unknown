@@ -123,3 +123,15 @@ textarea[name="comText"] {
 .white, .white a {
 	color: #fff;
 }
+
+.no-outline :focus {
+	outline: none;
+}
+
+.series-radio-txt {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.5;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}

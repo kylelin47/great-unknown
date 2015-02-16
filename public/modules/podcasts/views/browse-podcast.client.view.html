@@ -20,16 +20,20 @@
 	    </div>
     </div>
     <div style="clear: both;"></div>
-	<section data-ng-hide="currentPage <= 0 || currentPage*perPage - perPage >= (podcastsf=(podcastsS=(podcasts | filter:search) | filter:filter)).length">
-		<div class="form-group pull-left">
-			<input type="toggle" value="All Series" class="btn btn-lg btn-primary col-md-12">
-			<div ng-repeat="series_name in getSeriesArr(podcasts)">
-				<input type="toggle" value="{{series_name}}" class="btn btn-primary btn-lg col-md-12">
-			</div>
+	<section data-ng-hide="currentPage <= 0 || currentPage*perPage - perPage >= (podcastsf=(podcastsS=(podcastsR=(podcasts | filter:seriesRadio) | filter:search) | filter:filter)).length">
+		<div ng-hide="currentPage != 1" class="pull-left btn-group-vertical col-xs-3">
+			<!-- Series Tab -->
+			<label name="series" ng-init="$parent.seriesRadio.series = ''" class="btn btn-primary btn-md no-outline" data-ng-model="$parent.seriesRadio.series" btn-radio="'{{series_name}}'" data-ng-repeat="series_name in getSeriesArr(podcasts)">
+				<t ng-hide="series_name === ''" class="pull-left series-radio-txt">{{series_name}}</t>
+				<t ng-show="series_name === ''" class="pull-left series-radio-txt">All Series</t>
+				<i class="pull-right series-radio-txt glyphicon glyphicon-chevron-right"></i>
+				<div style="clear: both;"></div>
+			</label>
 		</div>
+		<div ng-show="currentPage != 1" class="text-muted pull-left col-xs-3 series-radio-txt">Return to page one to filter results.</div>
 		<div class="list-group col-md-9 pull-right">
 		<!-- Look into orderBy AND filter in same query -->
-			<a data-ng-repeat="podcast in podcastsf=(podcastsS=(podcasts | filter:search) | filter:filter).slice((currentPage-1)*perPage,currentPage*perPage)" data-ng-href="#!/podcasts/{{podcast._id}}" class="list-group-item">
+			<a data-ng-repeat="podcast in podcastsf=(podcastsS=(podcastsR=(podcasts | filter:seriesRadio) | filter:search) | filter:filter).slice((currentPage-1)*perPage,currentPage*perPage)" data-ng-href="#!/podcasts/{{podcast._id}}" class="list-group-item">
 				<small class="list-group-item-text">
 					<p class="browse-pod-left">
 					Posted on
@@ -51,8 +55,8 @@
 		<div class="pull-right">
 			<ul class="pagination pagination-md">
 				<li data-ng-hide="currentPage <= 1"><a href="/#!/podcasts/browse/{{currentPage-1}}">Prev</a>
-				<li data-ng-class="{true: 'active', false: ''}[currentPage === $index + 1]" ng-repeat="i in getNumber(podcastsf=(podcastsS=(podcasts | filter:search) | filter:filter).length/perPage) track by $index"><a href="/#!/podcasts/browse/{{$index+1}}">{{$index+1}}</a></li>
-				<li data-ng-hide="podcastsf=(podcastsS=(podcasts | filter:search) | filter:filter).length <= currentPage*perPage"><a href="/#!/podcasts/browse/{{currentPage+1}}">Next</a>
+				<li data-ng-class="{true: 'active', false: ''}[currentPage === $index + 1]" ng-repeat="i in getNumber(podcastsf=(podcastsS=(podcastsR=(podcasts | filter:seriesRadio) | filter:search) | filter:filter).length/perPage) track by $index"><a href="/#!/podcasts/browse/{{$index+1}}">{{$index+1}}</a></li>
+				<li data-ng-hide="podcastsf=(podcastsS=(podcastsR=(podcasts | filter:seriesRadio) | filter:search) | filter:filter).length <= currentPage*perPage"><a href="/#!/podcasts/browse/{{currentPage+1}}">Next</a>
 			</ul>
 		</div>
 	</section>
