@@ -4,7 +4,6 @@
 angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUpload', '$stateParams', '$location', 'Authentication', 'Podcasts', '$sce',
 	function($scope, fileUpload, $stateParams, $location, Authentication, Podcasts, $sce) {
 		$scope.authentication = Authentication;
-		$scope.searchText = '';
 		$scope.currentPage = parseInt($stateParams.page, 10);
 
 		if ($location.path() === '/podcasts/browse/')
@@ -71,7 +70,7 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 					podcast.$remove();
 
 					for (var i in $scope.podcasts) {
-						if ($scope.podcasts [i] === podcast) {
+						if ($scope.podcasts[i]._id === podcast._id) {
 							$scope.podcasts.splice(i, 1);
 						}
 					}
@@ -84,6 +83,13 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 					});
 				}
 			}
+		};
+		
+		$scope.removeByID = function(ID) {
+			var tempPodcast = new Podcasts({
+				_id: ID
+			});
+			$scope.remove(tempPodcast);
 		};
 
 		// Update existing Podcast

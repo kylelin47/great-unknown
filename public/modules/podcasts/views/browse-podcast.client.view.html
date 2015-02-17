@@ -1,9 +1,10 @@
 <section data-ng-controller="PodcastsController" data-ng-init="find()">
     <div class="page-header">
         <b class="browse-pod-left big-text-pod">Podcasts</b>
-        <br><br>
+        <br /><br />
+	
     <div ng-hide="currentPage != 1">
-			<select data-ng-model="filter.category" name="category" class="browse-pod-dropdown" ng-init="category = 'All'" >
+			<select data-ng-model="filter.category" name="category" id="category" class="browse-pod-dropdown" ng-init="category = 'All'" >
 				<option value="" selected>All</option>
 	            <option value="Misc">Miscellaneous</option>
 	            <option value="Sports">Sports</option>
@@ -11,7 +12,7 @@
 	            <option value="Entertainment">Entertainment</option>
 	            <option value="News">News</option>
 	        </select>
-	        <span><h3 class="browse-pod-right">Filter:</h3>
+	        <h3 class="browse-pod-right">Filter:</h3>
 	        <div class="col-xs-3 pull-right top-buffer">
 	        	<div class="inner-addon left-addon">
 	        		<i class="glyphicon glyphicon-search"></i>
@@ -23,12 +24,13 @@
     <div ng-hide="currentPage != 1" class="pull-left btn-group-vertical col-xs-3">
 		<!-- Series Tab -->
 		<label name="series" ng-init="$parent.seriesRadio.series = ''" class="btn btn-primary btn-md" data-ng-model="$parent.seriesRadio.series" btn-radio="'{{series_name}}'" data-ng-repeat="series_name in getSeriesArr(podcasts)">
-			<t ng-hide="series_name === ''" class="pull-left series-radio-txt">{{series_name}}</t>
-			<t ng-show="series_name === ''" class="pull-left series-radio-txt">All Series</t>
+			<span ng-hide="series_name === ''" class="pull-left series-radio-txt">{{series_name}}</span>
+			<span ng-show="series_name === ''" class="pull-left series-radio-txt">All Series</span>
 			<i class="pull-right series-radio-txt glyphicon glyphicon-chevron-right"></i>
 			<div style="clear: both;"></div>
 		</label>
 	</div>
+	
 	<section data-ng-hide="currentPage <= 0 || currentPage*perPage - perPage >= (podcastsf=(podcastsS=(podcastsR=(podcasts | filter:seriesRadio) | filter:search) | filter:filter)).length">
 		<a ng-show="currentPage != 1" class="text-muted pull-left col-xs-3 series-radio-txt" href="/#!/podcasts/browse/1">Return to page one to filter results.</a>
 		<div class="list-group col-md-9 pull-right">
@@ -48,18 +50,15 @@
 					<p class="lead" data-ng-bind="podcast.blurb"></p>
 					<p data-ng-hide="podcast.series === ''" class="text-muted">Series: 
 						<b>{{podcast.series}}
-							<t data-ng-hide="seriesRadio.series === ''">#{{podcastsf.length - podcastsf.indexOf(podcast)}}
-							</t>
+							<span data-ng-hide="seriesRadio.series === ''">#{{podcastsf.length - podcastsf.indexOf(podcast)}}
+							</span>
 						</b>
 					</p>
 				</div>
 				<img data-ng-hide="podcast.podIcon === ''" src={{podcast.podIcon}} alt="Icon" style="width:80px;height:80px" class="pull-right">
 				<div style="clear: both;"></div>
 			</a>
-		</div>
-		<div style="clear: both;"></div>
-		<div class="pull-right">
-			<ul class="pagination pagination-md">
+			<ul class="pagination pagination-md pull-right">
 				<li data-ng-hide="currentPage <= 1"><a href="/#!/podcasts/browse/{{currentPage-1}}">Prev</a>
 				<li data-ng-class="{true: 'active', false: ''}[currentPage === $index + 1]" ng-repeat="i in getNumber(podcastsf=(podcastsS=(podcastsR=(podcasts | filter:seriesRadio) | filter:search) | filter:filter).length/perPage) track by $index"><a href="/#!/podcasts/browse/{{$index+1}}">{{$index+1}}</a></li>
 				<li data-ng-hide="podcastsf=(podcastsS=(podcastsR=(podcasts | filter:seriesRadio) | filter:search) | filter:filter).length <= currentPage*perPage"><a href="/#!/podcasts/browse/{{currentPage+1}}">Next</a>
@@ -75,4 +74,5 @@
     <div class="alert alert-warning text-center col-md-9 pull-right" data-ng-show="podcasts.$resolved && (podcastsf=(podcastsS=(podcastsR=(podcasts | filter:seriesRadio) | filter:search) | filter:filter)).length === 0">
     	Your search yielded no results.
     </div>
+	</div>
 </section>

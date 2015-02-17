@@ -1,7 +1,3 @@
-<head>
-<script src="../controllers/podcasts.client.controller.js"></script>
-</head>
-
 <section id="myDiv" data-ng-controller="PodcastsController" data-ng-init="findOne(); defined()">
 
 <div data-ng-hide="podname.innerHTML === ''">
@@ -39,7 +35,7 @@
 	<audio class="col-xs-12" id="audio" controls data-ng-src="{{getAudioUrl()}}"></audio>
 	
 
-	<script type="text/javascript">
+	<script type="text/javascript-lazy">
 		var timer;
 	
 		function start() {
