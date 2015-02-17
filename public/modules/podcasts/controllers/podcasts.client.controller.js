@@ -1,15 +1,17 @@
 'use strict';
 // Podcasts controller
+
 angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUpload', '$stateParams', '$location', 'Authentication', 'Podcasts', '$sce',
 	function($scope, fileUpload, $stateParams, $location, Authentication, Podcasts, $sce) {
 		$scope.authentication = Authentication;
 		$scope.searchText = '';
 		$scope.currentPage = parseInt($stateParams.page, 10);
+
 		if ($location.path() === '/podcasts/browse/')
 		{
 			$scope.currentPage = 1;
 		}
-		$scope.perPage = 10;
+		$scope.perPage = 6;
 		// Create new Podcast
 		$scope.create = function() {
 			// Create new Podcast object
@@ -22,12 +24,14 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 				category: this.category,
 				isBlog: this.isBlog,
 				podIcon: this.podIcon,
-				comments: {}
+				series: this.series,
+				comments: {},
+				posts: {}
 			});
 
 			//if empty icon field, use our default
 			if ( podcast.podIcon === '' ) {
-				podcast.podIcon = 'http://i.imgur.com/LUsrAfg.gif';
+				podcast.podIcon = 'http://i.imgur.com/f7oBepl.png?1';
 			}
 
 			if (typeof $scope.myFile !== 'undefined') {
@@ -73,7 +77,10 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 					}
 				} else {
 					$scope.podcast.$remove(function() {
-						$location.path('podcasts');
+						if ($location.path().substring(0,10)  === '/podcasts/')
+							$location.path('/podcasts/browse/');
+						else
+							$location.path('podcasts');
 					});
 				}
 			}
@@ -93,7 +100,7 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 
 			//if empty icon field, use our default
 			if ( podcast.podIcon === '' ) {
-				podcast.podIcon = 'http://i.imgur.com/LUsrAfg.gif';
+				podcast.podIcon = 'http://i.imgur.com/f7oBepl.png?1';
 			}
 		};
 
@@ -104,9 +111,16 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 
 		// Find existing Podcast
 		$scope.findOne = function() {
-			$scope.podcast = Podcasts.get({ 
-				podcastId: $stateParams.podcastId
-			});
+			if ($location.path() === '/podcasts/browse')
+			{
+				$location.path('/podcasts/browse/1');
+			}
+			else
+			{
+				$scope.podcast = Podcasts.get({ 
+					podcastId: $stateParams.podcastId
+				});
+			}
 		};
 
 		$scope.uploadFile = function(){
@@ -170,14 +184,8 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 		$scope.defined = function() {
 			$scope.podname = document.getElementById('pname');
 		};
-		
-		
-		
-		
-		
 
 		$scope.incrementUpvotes = function(i) {
-
 			var comment = $scope.comments[i];
 			var splitted = comment.split('|~!');
 			var number = parseInt(splitted[3]) + 1;
@@ -196,6 +204,28 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
+		};
+
+		$scope.deleteComment = function(n) {
+			var podcast = $scope.podcast;
+			podcast.comments.splice(n, 1);
+			podcast.$update(function() {
+				$location.path('podcasts/' + podcast._id);
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
+
+		$scope.getSeriesArr = function(podcasts) {
+			var series_arr = [];
+			series_arr.push('');
+			for (var i = 0; i < podcasts.length; i++) {
+				if ( series_arr.indexOf(podcasts[i].series) === -1 && podcasts[i].series!=='' ) {
+					series_arr.push(podcasts[i].series);
+					//if series doesnt exist in array, put it in
+				}
+			}
+			return series_arr;
 		};
 
 	}

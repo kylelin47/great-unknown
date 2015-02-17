@@ -1,6 +1,16 @@
 <section data-ng-controller="HomeController">
 <!--initial idea of the new lay out-->
-	<div class="post row">
+	<br><br>
+	<div class="jumbotron">
+		<div class="big-text-pod-welcome pull-left">Hello!</div><i class="big-text-pod-welcome pull-right glyphicon glyphicon-home"></i>
+		<div style="clear: both;"></div>
+		<p>Welcome to my Podcast Manager website. Here, you can browse my podcasts and learn more about me. If you are an admin, make sure to sign in!</p>
+		<br/>
+		<p><a class="btn btn-primary btn-lg" href="/#!/about" role="button">Learn more about me</a></t>
+		<a class="btn btn-primary btn-lg" href="/#!/podcasts/browse/1" role="button">Browse my podcasts and blogs</a>
+		<a  data-ng-show="!(authentication.user)" class="btn btn-success btn-lg pull-right" href="/#!/signin" role="button">Sign In</a></p>
+	</div>
+	<!-- <div class="post row">
             <div class ="container">
 				<div class="col-md-8 help img">
 				</div>
@@ -8,11 +18,11 @@
 						<p>
 						<strong>Progress Update</strong>:
 						<br/>
-						<span class ="text-muted">1/26/2015</spam><br/>
+						<span class ="text-muted">1/26/2015</span><br/>
 						As this moment, a new look from the MeanJs is introduced.<br/>
 						We can update the new feature, what we changed, and what we need to take care.
 						</p>
 				</div>
 			</div>
-	</div>
+	</div> -->
 </section>

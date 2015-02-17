@@ -1,10 +1,10 @@
-<section data-ng-controller="PodcastsController" data-ng-init="findOne()">
+<section data-ng-controller="PodcastsController" data-ng-init="findOne(); showPreview= false;">
 	<div data-ng-show="((authentication.user) && (authentication.user._id == podcast.user._id))">
     <div class="page-header">
         <h1>Edit Podcast</h1>
 	</div>
     <div class="col-md-12">
-        <form class="form-horizontal" data-ng-submit="update()">
+        <form class="form-horizontal">
             <fieldset>
                 <div class="form-group">
                     <label class="control-label" for="name">Name</label>
@@ -15,14 +15,27 @@
 				<div class="form-group">
                     <label class="control-label" for="blurb">Abstract (120 character limit)</label>
                     <div class="controls">
-                        <textarea data-ng-model="podcast.blurb" name="blurb"  id="blurb" class="form-control" cols="30" rows="1" maxlength="120" placeholder="A short description"></textarea>
+                        <input type="text" data-ng-model="podcast.blurb" name="blurb"  id="blurb" class="form-control" maxlength="120" placeholder="A short description"></textarea>
                     </div>
                 </div>
 				<div class="form-group">
                     <label class="control-label" for="name">Blog</label>
+					<ul class="nav nav-tabs">
+					  <li role="presentation" data-ng-class="{active: !showPreview}"><a data-ng-click="showPreview = false" href="">Edit</a></li>
+					  <li role="presentation" data-ng-class="{active: showPreview}"><a data-ng-click="showPreview = true" href="">Preview</a></li>
+					</ul>
                     <div class="controls">
-                        <textarea data-ng-model="podcast.blog" markdownedit name="blog"  id="blog" class="form-control" cols="30" rows="10" placeholder="Your blog"></textarea>
-                    </div>
+                        <div data-ng-hide="showPreview == true">
+							<textarea data-ng-model="podcast.blog" markdownedit name="blog"  id="blog" class="form-control" cols="30" rows="10" placeholder="Your blog"></textarea>
+						</div>
+						<div data-ng-hide="!showPreview" class="panel panel-default">
+							<div class="panel-body fixed-panel">
+								<markdown bind-from="podcast.blog"></markdown>
+							</div>
+						</div>
+					</div>
+					
+
                 </div>
 				<div class="form-group">
 					<input type="file" 
@@ -45,17 +58,20 @@
                     </select>
 			    </div>
                 <div class="form-group">
+                    <h4 class="browse-pod-left">Series: </h4>
+                    <input data-ng-model="podcast.series" placeholder="Series this podcast is a part of" class="create-pod-iconlink-bar"/>
+                </div>
+                <div class="form-group">
                     <h4 class="browse-pod-left">Podcast Icon: </h4>
                     <input data-ng-model="podcast.podIcon" placeholder="Link to desired icon (80x80p)" class="create-pod-iconlink-bar"/>
                     <img data-ng-hide="podcast.podIcon === ''" src={{podcast.podIcon}} alt="Icon" style="width:80px;height:80px">
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Update" class="btn btn-default">
+                    <input type="submit" value="Update" class="btn btn-default" data-ng-click="update()">
                 </div>
 				<div data-ng-show="error" class="text-danger">
 					<strong data-ng-bind="error"></strong>
 				</div>
-				<span data-ng-bind="searchText"></span>
             </fieldset>
         </form>
     </div>

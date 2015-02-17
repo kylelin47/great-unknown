@@ -18,11 +18,10 @@ div.errortop {
 
 .browse-pod-dropdown {
 	float: right;
-	display: inline-block;
 	width: 15%;
-	height: 30px;
+	height: 42px;
 	padding: 5px 5px;
-	margin: 20px 10px;
+	margin: 13px 10px;
 	font-size: 14px;
 	line-height: 1.42857143;
 	color: #555;
@@ -30,16 +29,10 @@ div.errortop {
 	background-image: none;
 	border: 1px solid #ccc;
 	border-radius: 4px;
-	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-	      box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-	-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
-	   -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-	      transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
 
 .create-pod-dropdown {
 	float: left;
-	display: inline-block;
 	width: 15%;
 	height: 30px;
 	padding: 5px 5px;
@@ -51,11 +44,6 @@ div.errortop {
 	background-image: none;
 	border: 1px solid #ccc;
 	border-radius: 4px;
-	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-	      box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-	-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
-	   -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-	      transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
 
 .browse-pod-search-bar {
@@ -98,7 +86,59 @@ textarea[name="comText"] {
 
 .pod-blog {
   margin-bottom: 20px;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 300;
   line-height: 1.3;
+}
+
+/* enable absolute positioning */
+.inner-addon { 
+    position: relative; 
+}
+
+/* style icon */
+.inner-addon .glyphicon {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+  margin-top: 4px;
+}
+
+/* align icon */
+.left-addon .glyphicon  { left:  0;}
+.right-addon .glyphicon { right: 0;}
+
+/* add padding  */
+.left-addon input  { padding-left:  30px; }
+.right-addon input { padding-right: 30px; }
+
+.big-text-pod {
+	font-size: 4em;
+}
+
+.big-text-pod-welcome {
+	font-size: 6em;
+}
+
+.white, .white a {
+	color: #fff;
+}
+
+.no-outline :focus {
+	outline: none;
+	box-shadow:none !important;
+	border:1px solid #ccc !important; 
+}
+
+.series-radio-txt {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.5;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.fixed-panel {
+  height: 400px;
+  overflow-y: scroll;
 }

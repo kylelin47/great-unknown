@@ -12,8 +12,17 @@ var mongoose = require('mongoose'),
 var AboutSchema = new Schema({
 	name: {
 		type: String,
+		default: 'Unknown Name',
+		trim: true
+	},
+	email: {
+		type: String,
+		default: 'Unknown Email',
+		trim: true
+	},
+	picture: {
+		type: String,
 		default: '',
-		required: 'Please fill About name',
 		trim: true
 	},
 	created: {
@@ -21,6 +30,10 @@ var AboutSchema = new Schema({
 		default: Date.now
 	},
 	about: {
+		type: String,
+		trim: true
+	},
+	aboutPodcasts: {
 		type: String,
 		trim: true
 	},

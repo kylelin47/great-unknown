@@ -5,16 +5,34 @@
 				<i class="glyphicon glyphicon-edit"></i>
 			</a>
 		</div>
-		<h1>About Me</h1>
+		<h1><b>About Me</b></h1>
 		<small class="list-group-item-text">
 			Last updated: 
 			<span data-ng-bind="abouts[0].created | date:'medium'"></span>
 		</small>
     </div>
-<!-- Look into orderBy AND filter in same query -->
-	<h1 class="list-group-item-heading" data-ng-bind="abouts[0].name"></h1>
-	<div class="lead"><markdown bind-from="abouts[0].about"></markdown></div>
-	<h2 class="list-group-item-heading" data-ng-hide="!abouts[0].showLast">Most Recent Posts</h2>
+	<div class="row">
+		<div class="col-sm-4">
+			<img data-ng-show="abouts[0].picture === ''" src="http://static.guim.co.uk/static/b6c135ec8e49127c7c87055af29b2d52c4011fc0/politics/images/defaultPoliticalPerson.gif" alt="My Avatar" height="100%" width="100%" />
+			<img data-ng-hide="abouts[0].picture === ''" src={{abouts[0].picture}} alt="My Avatar" height="100%" width="100%" />
+		</div>
+		<div class="col-sm-8 pod-blog">
+			<p><a class="text-muted">Name: </a><b>{{abouts[0].name}}</b></p>
+			<p><a class="text-muted">Email: </a><b>{{abouts[0].email}}</b></p>
+			<markdown bind-from="abouts[0].about"></markdown>
+		</div>
+		<div class="col-sm-8 col-xs-push-2">
+			<h2>About My Podcasts</h2>
+			<div class="pod-blog">
+				<markdown bind-from="abouts[0].aboutPodcasts"></markdown>
+			</div>
+		</div>
+	</div>
+	<br />
+	<div style="clear: both;"></div>
+	<br>
+	<h2 class="list-group-item-heading" data-ng-hide="!abouts[0].showLast"><b>Most Recent Posts</b></h2>
+	<br />
 	<div data-ng-hide="!abouts[0].showLast">
 	<div class="row">
 		<div class="col-md-6">
@@ -29,7 +47,7 @@
 				</small>
 				<div style="clear: both;"></div>
 				<div class="pull-left">
-				<h3 class="list-group-item-heading" data-ng-bind="podcast.name"></h3>
+				<h3 class="list-group-item-heading"><strong>{{podcast.name}}</strong></h3>
 				<p class="lead" data-ng-bind="podcast.blurb"></p></div>
 				<img data-ng-hide="podcast.podIcon === ''" src={{podcast.podIcon}} alt="Icon" style="width:80px;height:80px" class="pull-right">
 				<div style="clear: both;"></div>
@@ -47,7 +65,7 @@
 				</small>
 				<div style="clear: both;"></div>
 				<div class="pull-left">
-				<h3 class="list-group-item-heading" data-ng-bind="podcast.name"></h3>
+				<h3 class="list-group-item-heading"><strong>{{podcast.name}}</strong></h3>
 				<p class="lead" data-ng-bind="podcast.blurb"></p></div>
 				<img data-ng-hide="podcast.podIcon === ''" src={{podcast.podIcon}} alt="Icon" style="width:80px;height:80px" class="pull-right">
 				<div style="clear: both;"></div>
@@ -55,5 +73,6 @@
 		</div>
 	</div>
 	</div>
+	<br /><br />
 
 </section>

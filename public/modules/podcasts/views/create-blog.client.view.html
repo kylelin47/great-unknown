@@ -15,14 +15,26 @@
 				<div class="form-group">
 					<label class="control-label" for="blurb">Abstract (120 character limit)</label>
 					<div class="controls">
-						<textarea data-ng-model="blurb" name="blurb" id="blurb" class="form-control" cols="30" rows="1" maxlength="120" placeholder="A short description"></textarea>
+						<input type="text" data-ng-model="blurb" name="blurb" id="blurb" class="form-control" maxlength="120" placeholder="A short description"></textarea>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label" for="blog">Blog</label>
+					<ul class="nav nav-tabs">
+					  <li role="presentation" data-ng-class="{active: !showPreview}"><a data-ng-click="showPreview = false" href="">Edit</a></li>
+					  <li role="presentation" data-ng-class="{active: showPreview}"><a data-ng-click="showPreview = true" href="">Preview</a></li>
+					</ul>
 					<div class="controls">
-						<textarea data-ng-model="blog" name="blog" markdownedit id="blog" class="form-control" cols="30" rows="10" placeholder="Your blog"></textarea>
+						<div data-ng-hide="showPreview">
+							<textarea data-ng-model="blog" name="blog" markdownedit id="blog" class="form-control" cols="30" rows="10" placeholder="Your blog"></textarea>
+						</div>
+						<div data-ng-hide="!showPreview" class="panel panel-default">
+							<div class="panel-body fixed-panel">
+								<markdown bind-from="blog"></markdown>
+							</div>
+						</div>
 					</div>
+
 				</div>
 				<input type="hidden" data-ng-model="isBlog" name="isBlog" id="isBlog" value=true />
 				<div data-ng-show="error" class="text-danger">
