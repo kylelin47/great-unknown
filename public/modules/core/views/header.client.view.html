@@ -6,7 +6,7 @@
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 		</button>
-		<!--Remove meanjs head with Podcast, serve as a link at the samw time-->
+		<!--Remove meanjs head with Podcast, serve as a link at the same time-->
 		<a href="/#!/" ui-route = "/#!/" ng-class = "{active: $uiRoute}" class="navbar-brand"><i class="glyphicon glyphicon-headphones"></i>  Podcast Manager</a>
 	</div>
 	<nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
@@ -14,7 +14,7 @@
 			<li ui-route="/about" ng-class="{active: $uiRoute}">
 				<a href="/#!/about">About</a>
 			</li>
-			<li ui-route="/podcasts/browse/1" ng-class="{active: $uiRoute}">
+			<li ui-route="/podcasts/browse/" ng-class="{active: isRoute('/podcasts/browse/')}">
 				<a href="/#!/podcasts/browse/1">Browse</a>
 			</li>
 		</ul>
@@ -49,9 +49,9 @@
 				</ul>
 			</li>
 		</ul>
-		<!-- Your Podcasts Menu -->
+		<!-- Manage Podcasts Menu -->
 		<ul class="nav navbar-nav navbar-right" data-ng-if="menu.shouldRender(authentication.user.username === 'admin');">
-			<li data-ng-repeat="item in menu.items | orderBy: 'position'" data-ng-if="item.shouldRender(authentication.user);" ng-switch="item.menuItemType" ui-route="{{item.uiRoute}}" class="{{item.menuItemClass}}" ng-class="{active: ($uiRoute)}" dropdown="item.menuItemType === 'dropdown'">
+			<li data-ng-repeat="item in menu.items | orderBy: 'position'" data-ng-if="item.shouldRender(authentication.user);" ng-switch="item.menuItemType" ui-route="{{item.uiRoute}}" class="{{item.menuItemClass}}" ng-class="{active: ($uiRoute || isPath('/podcasts'))}" dropdown="item.menuItemType === 'dropdown'">
 				<a ng-switch-when="dropdown" class="dropdown-toggle" dropdown-toggle>
 					<span data-ng-bind="item.title"></span>
 					<b class="caret"></b>

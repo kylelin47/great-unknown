@@ -11,7 +11,7 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 		{
 			$scope.currentPage = 1;
 		}
-		$scope.perPage = 10;
+		$scope.perPage = 6;
 		// Create new Podcast
 		$scope.create = function() {
 			// Create new Podcast object
@@ -77,7 +77,10 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 					}
 				} else {
 					$scope.podcast.$remove(function() {
-						$location.path('podcasts');
+						if ($location.path().substring(0,10)  === '/podcasts/')
+							$location.path('/podcasts/browse/');
+						else
+							$location.path('podcasts');
 					});
 				}
 			}
@@ -108,9 +111,16 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 
 		// Find existing Podcast
 		$scope.findOne = function() {
-			$scope.podcast = Podcasts.get({ 
-				podcastId: $stateParams.podcastId
-			});
+			if ($location.path() === '/podcasts/browse')
+			{
+				$location.path('/podcasts/browse/1');
+			}
+			else
+			{
+				$scope.podcast = Podcasts.get({ 
+					podcastId: $stateParams.podcastId
+				});
+			}
 		};
 
 		$scope.uploadFile = function(){

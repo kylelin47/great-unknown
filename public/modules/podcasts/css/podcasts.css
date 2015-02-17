@@ -137,3 +137,8 @@ textarea[name="comText"] {
   margin-bottom: 5px;
   margin-top: 5px;
 }
+
+.fixed-panel {
+  height: 400px;
+  overflow-y: scroll;
+}

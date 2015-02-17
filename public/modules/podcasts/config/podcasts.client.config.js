@@ -8,7 +8,7 @@ angular.module('podcasts').run(['Menus', '$rootScope', '$anchorScroll', 'ezfb',
 		Menus.addSubMenuItem('topbar', 'podcasts', 'Create New Podcast', 'podcasts/create');
 		Menus.addSubMenuItem('topbar', 'podcasts', 'Create New Blog', 'podcasts/create/blog');
 		Menus.addSubMenuItem('topbar', 'podcasts', 'Create New Series', 'podcasts/create/series');
-		Menus.addSubMenuItem('topbar', 'podcasts', 'List Your Podcasts', 'podcasts');
+		Menus.addSubMenuItem('topbar', 'podcasts', 'List and Edit Podcasts', 'podcasts');
 		$rootScope.$on('$locationChangeSuccess', function() {
                 $anchorScroll();
 		});

@@ -24,7 +24,7 @@ angular.module('abouts').controller('AboutsController', ['$scope', '$stateParams
 				$scope.name = '';
 				$scope.email = '';
 				$scope.picture = '';
-				$scope.about = '';
+				$scope.aboutMe = '';
 				$scope.aboutPodcasts = '';
 				$scope.showLast = false;
 			}, function(errorResponse) {
