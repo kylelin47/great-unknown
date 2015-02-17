@@ -1,4 +1,9 @@
-<section data-ng-controller="PodcastsController" data-ng-init="findOne(); defined()">
+<head>
+<script src="../controllers/podcasts.client.controller.js"></script>
+</head>
+
+<section id="myDiv" data-ng-controller="PodcastsController" data-ng-init="findOne(); defined()">
+
 <div data-ng-hide="podname.innerHTML === ''">
 	<div class="page-header">
 		<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == podcast.user._id))">
@@ -20,17 +25,53 @@
 	                <br />
 	                <strong>Category:
 	                <span data-ng-bind="podcast.category"></span></strong>
+					<br>
+					Total views: <span id="totalViews">{{getListen()}}</span>
+					<br>
+					Average Listen: <span id="avgListen">{{getAvgSeconds()}}</span>
+					seconds
             	</div>
                 <img data-ng-hide="podcast.podIcon === ''" src={{podcast.podIcon}} alt="Icon" style="width:80px;height:80px" class="view-pod-img">
                 <div style="clear: both;"></div>
 			</em>
 		</small>
 	</div>
-	<audio class="col-xs-12" controls data-ng-src="{{getAudioUrl()}}"></audio>
+	<audio class="col-xs-12" id="audio" controls data-ng-src="{{getAudioUrl()}}"></audio>
+	
+
+	<script type="text/javascript">
+		var timer;
+	
+		function start() {
+		var number = angular.element($('#myDiv')).scope().incrementTotalSeconds();
+		document.getElementById("avgListen").innerHTML = angular.element($('#myDiv')).scope().getAvgSeconds();
+		}
+		
+		function play() {
+		increment();
+		timer = setInterval(start, 1000);
+		}
+		
+		function increment() {
+		angular.element($('#myDiv')).scope().updateListens();
+		document.getElementById("totalViews").innerHTML = angular.element($('#myDiv')).scope().getListen();
+		}
+	
+   		audio.addEventListener('play', play);
+		audio.addEventListener('pause', function() { clearInterval(timer)} );
+		audio.addEventListener('ended', function() { clearInterval(timer)} );
+		
+	</script>
+	
+	
 	<div class="pod-blog col-xs-push-2 col-xs-8">
 		<br><br>
 		<markdown bind-from="podcast.blog"></markdown>
 	</div>
+
+	
+	
+	
 	<div style="clear: both;"></div>
 	<div class="newline"></div>
 	<div class="product-social-links">
@@ -83,6 +124,9 @@
 	</div>
 -->
 </div>
+	<div ng-repeat="number in playbackLength">
+		{{number}}
+	</div>
 	<div class="alert alert-warning text-center errortop" data-ng-hide="!podcast.$resolved || podname.innerHTML !== ''">
     	Not a valid podcast. Perhaps it's been deleted?
     </div>

@@ -137,10 +137,38 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 				fileUpload.uploadFileToUrl(file, uploadUrl);
 			}
 		};
+			
 
 		$scope.getAudioUrl = function() {
 			var podcast = $scope.podcast;
 			return $sce.trustAsResourceUrl('uploads/'+podcast.audio);
+		};
+		
+		$scope.incrementTotalSeconds = function() {
+			$scope.podcast.totalSecondsListened++;
+			$scope.update();
+			return $scope.podcast.totalSecondsListened;
+		};
+		
+		$scope.getAvgSeconds = function(){
+			if($scope.podcast.listens === 0){
+				return 0;
+			}
+			return Math.floor($scope.podcast.totalSecondsListened / $scope.podcast.listens);
+		};
+		
+		$scope.tmpListen = true;
+		
+		$scope.updateListens = function() {
+			if($scope.tmpListen){
+				$scope.podcast.listens++;
+				$scope.update();
+				$scope.tmpListen = false;
+			}
+		};
+		
+		$scope.getListen = function(){
+			return $scope.podcast.listens;
 		};
 
 		$scope.filterList = function(podcast) {
