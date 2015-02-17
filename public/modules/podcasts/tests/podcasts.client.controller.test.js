@@ -48,6 +48,11 @@
 			PodcastsController = $controller('PodcastsController', {
 				$scope: scope
 			});
+			//Say Yes to all Windows
+			spyOn(window, 'confirm').and.callFake(function () {// jshint ignore:line
+				 return true;
+			});
+
 		}));
 
 		it('$scope.find() should create an array with at least one Podcast object fetched from XHR', inject(function(Podcasts) {
@@ -93,13 +98,17 @@
 		it('$scope.create() with valid form data should send a POST request with the form input values and then locate to new object URL', inject(function(Podcasts) {
 			// Create a sample Podcast object
 			var samplePodcastPostData = new Podcasts({
-				name: 'New Podcast'
+				name: 'New Podcast',
+				comments: {},
+				posts: {}
 			});
 
 			// Create a sample Podcast response
 			var samplePodcastResponse = new Podcasts({
 				_id: '525cf20451979dea2c000001',
-				name: 'New Podcast'
+				name: 'New Podcast',
+				comments: {},
+				posts: {}
 			});
 
 			// Fixture mock form input values
