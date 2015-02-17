@@ -30,7 +30,7 @@
 		</label>
 	</div>
 	<section data-ng-hide="currentPage <= 0 || currentPage*perPage - perPage >= (podcastsf=(podcastsS=(podcastsR=(podcasts | filter:seriesRadio) | filter:search) | filter:filter)).length">
-		<a ng-show="currentPage != 1" class="text-muted pull-left col-xs-3 series-radio-txt" href="/#!/podcasts/browse/1">Return to page one to filter results.</a>	
+		<a ng-show="currentPage != 1" class="text-muted pull-left col-xs-3 series-radio-txt" href="/#!/podcasts/browse/1">Return to page one to filter results.</a>
 		<div class="list-group col-md-9 pull-right">
 		<!-- Look into orderBy AND filter in same query -->
 			<a data-ng-repeat="podcast in podcastsf=(podcastsS=(podcastsR=(podcasts | filter:seriesRadio) | filter:search) | filter:filter).slice((currentPage-1)*perPage,currentPage*perPage)" data-ng-href="#!/podcasts/{{podcast._id}}" class="list-group-item">
