@@ -46,7 +46,7 @@ describe('Podcast CRUD tests', function() {
 		});
 	});
 
-	it('should be able to save Podcast instance if logged in', function(done) {
+	it('should be able to save Podcast instance if logged in as admin', function(done) {
 		agent.post('/auth/signin')
 			.send(credentials)
 			.expect(200)
@@ -123,7 +123,7 @@ describe('Podcast CRUD tests', function() {
 			});
 	});
 
-	it('should be able to update Podcast instance if signed in', function(done) {
+	it('should be able to update Podcast instance if signed in as admin', function(done) {
 		agent.post('/auth/signin')
 			.send(credentials)
 			.expect(200)
@@ -384,7 +384,7 @@ describe('Podcast CRUD tests', function() {
 		});
 	});
 
-	it('should be able to delete Podcast instance if signed in', function(done) {
+	it('should be able to delete Podcast instance if signed in as admin', function(done) {
 		agent.post('/auth/signin')
 			.send(credentials)
 			.expect(200)

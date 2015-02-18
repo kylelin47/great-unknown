@@ -3,8 +3,8 @@
 		<h1>Edit About Me</h1>
 	</div>
 	<div data-ng-show="((authentication.user) && (authentication.user.username == 'admin'))">
-	<button class="btn btn-default" data-ng-hide="!showPreview" data-ng-click="showPreview = false">Hide Preview</button>
-	<button class="btn btn-default" data-ng-hide="showPreview" data-ng-click="showPreview = true">Show Preview</button>
+	<button class="btn btn-default" type="button" data-ng-hide="!showPreview" data-ng-click="showPreview = false">Hide Preview</button>
+	<button class="btn btn-default" type="button" data-ng-hide="showPreview" data-ng-click="showPreview = true">Show Preview</button>
 <!-- Updating About Me -->
 	<form data-ng-submit="create()" data-ng-repeat="about in abouts" novalidate>
 		<br/>
@@ -184,7 +184,7 @@
 	</div>
 	<div data-ng-hide="!abouts.$resolved ||((authentication.user) && (authentication.user.username == 'admin'))">
 		<div class="alert alert-warning text-center">
-		You're not authorized to access this page. Perhaps you need to <a href="/#!/signin">sign in?</a>
+		You're not authorized to access this page. Perhaps you need to <a href="/#!/signin" class="text-primary">sign in?</a>
 		</div>
 	</div>
 </section>
