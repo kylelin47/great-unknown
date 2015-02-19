@@ -1,0 +1,16 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<rss version = "2.0">
+    <channel data-ng-controller = "RssController" data-ng-init = "find()">
+        <item ng-repeat = "podcast in podcasts">
+        <title>{{podcast.name}}</title>
+        <description>{{podcast.blurb}}</description>
+        <language>en-us</language>
+        <image>
+            <title>{{podcast.category}}</title>
+            <src>{{podcast.podIcon}}</src>
+            <width>40</width>
+            <height>40</height>
+        </image>
+        </item>
+    </channel>
+</rss>
