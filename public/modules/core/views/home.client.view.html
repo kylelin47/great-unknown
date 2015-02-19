@@ -10,6 +10,14 @@
 		<a class="btn btn-primary btn-lg" href="/#!/podcasts/browse/1" role="button">Browse my podcasts and blogs</a>
 		<a  data-ng-show="!(authentication.user)" class="btn btn-success btn-lg pull-right" href="/#!/signin" role="button">Sign In</a></p>
 	</div>
+
+
+
+    <div ng-controller = "RssController">
+        <!--Settring up Modal-->
+        <button class="btn btn-info" type="button" data-ng-click = "open('lg')">Open Feed</button>
+    </div>
+
 	<!-- <div class="post row">
             <div class ="container">
 				<div class="col-md-8 help img">
