@@ -12,11 +12,27 @@
 	</div>
 
 
-
-    <div ng-controller = "RssController">
+    <div>
         <!--Settring up Modal-->
-        <button class="btn btn-info" type="button" data-ng-click = "open('lg')">Open Feed</button>
+        <button class="btn btn-info" type="button" data-ng-click = "modalOpen('lg')">Open Feed</button>
     </div>
+
+        <script type="text/ng-template" id = "test.html">
+            <div class="modal-header">
+                <h3 class="modal-title">I'm a modal!</h3>
+            </div>
+            <div class="modal-body">
+                <ul>
+                    <li ng-repeat="item in items">
+                        <a ng-click="selected.item = item">{{ item }}</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-warning" ng-click="cancel()">Back</button>
+            </div>
+        </script>
+
 
 	<!-- <div class="post row">
             <div class ="container">
