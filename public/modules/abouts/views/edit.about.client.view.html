@@ -2,7 +2,7 @@
 	<div class="page-header">
 		<h1>Edit About Me</h1>
 	</div>
-	<div data-ng-show="((authentication.user) && (authentication.user.username == 'admin'))">
+	<div data-ng-if="((authentication.user) && (authentication.user.username == 'admin'))">
 	<button class="btn btn-default" type="button" data-ng-hide="!showPreview" data-ng-click="showPreview = false">Hide Preview</button>
 	<button class="btn btn-default" type="button" data-ng-hide="showPreview" data-ng-click="showPreview = true">Show Preview</button>
 <!-- Updating About Me -->

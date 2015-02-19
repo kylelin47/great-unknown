@@ -21,9 +21,9 @@
 	                <br />
 	                <strong>Category:
 	                <span data-ng-bind="podcast.category"></span></strong>
-					<br>
+					<br />
 					Total views: <span id="totalViews">{{getListen()}}</span>
-					<br>
+					<br />
 					Average Listen: <span id="avgListen">{{getAvgSeconds()}}</span>
 					seconds
             	</div>
@@ -32,7 +32,9 @@
 			</em>
 		</small>
 	</div>
-	<audio class="col-xs-12" id="audio" controls data-ng-src="{{getAudioUrl()}}"></audio>
+	<span data-ng-if="!podcast.isBlog">
+		<audio class="col-xs-12" id="audio" controls data-ng-src="{{getAudioUrl()}}"></audio>
+	</span>
 	
 <!--
 	<script type="text/javascript-lazy">
@@ -66,9 +68,6 @@
 		<markdown bind-from="podcast.blog"></markdown>
 	</div>
 
-	
-	
-	
 	<div style="clear: both;"></div>
 	<div class="newline"></div>
 	<div class="product-social-links">
@@ -83,8 +82,8 @@
 		  <!-- data-href="https://lbcqrcfwju.localtunnel.me/#!/podcasts/{{podcast._id}}" -->
 		  <!-- data-href="https://developers.facebook.com/docs/plugins/"  -->
 	</div>
-	<br>
-<div class="fb-comments col-xs-push-3" data-href="https://lbcqrcfwju.localtunnel.me/#!/podcasts/{{podcast._id}}" data-numposts="5" data-colorscheme="light"></div>
+	<br />
+	<div class="fb-comments col-xs-push-3" data-href="https://lbcqrcfwju.localtunnel.me/#!/podcasts/{{podcast._id}}" data-numposts="5" data-colorscheme="light"></div>
 <!-- Old Commenting System
 	<div>
 		<h2>Comments:</h2>

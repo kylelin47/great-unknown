@@ -13,6 +13,7 @@ var mongoose = require('mongoose'),
  */
 exports.create = function(req, res) {
 	var about = new About(req.body);
+	//About.remove().exec(); //to clear abouts
 	about.save(function(err) {
 		if (err) {
 			return res.status(400).send({
