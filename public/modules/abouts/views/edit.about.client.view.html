@@ -93,7 +93,7 @@
 	</div>
 	</form>
 <!-- Creating New About Me -->
-	<div data-ng-hide="!abouts.$resolved || abouts.length">
+	<div data-ng-if="abouts.$resolved && !abouts.length">
 		<form data-ng-submit="create()" novalidate>
 		<div class="row">
 		<div class="col-md-8"  data-ng-hide="!showPreview">
