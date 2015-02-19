@@ -5,7 +5,8 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 	function($scope, fileUpload, $stateParams, $location, Authentication, Podcasts, $sce) {
 		$scope.authentication = Authentication;
 		$scope.currentPage = parseInt($stateParams.page, 10);
-
+		$scope.defaultPodIcon = 'http://i.imgur.com/f7oBepl.png?1';
+		$scope.defaultBlogIcon = 'http://upload.wikimedia.org/wikipedia/commons/6/61/Book-icon-orange.png';
 		if ($location.path() === '/podcasts/browse/')
 		{
 			$scope.currentPage = 1;
@@ -30,7 +31,7 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 
 			//if empty icon field, use our default
 			if ( podcast.podIcon === '' || typeof podcast.podIcon === 'undefined' ) {
-				podcast.podIcon = 'http://i.imgur.com/f7oBepl.png?1';
+				podcast.podIcon = $scope.defaultPodIcon;
 			}
 
 			if (typeof $scope.myFile !== 'undefined') {
@@ -76,7 +77,7 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 
 			//if empty icon field, use our default
 			if ( podcast.podIcon === '' || typeof podcast.podIcon === 'undefined' ) {
-				podcast.podIcon = 'http://upload.wikimedia.org/wikipedia/commons/6/61/Book-icon-orange.png';
+				podcast.podIcon = $scope.defaultBlogIcon;
 			}
 			// Redirect after save
 			podcast.$save(function(response) {
@@ -126,8 +127,8 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 		$scope.update = function() {
 			var podcast = $scope.podcast;
 			if ( podcast.podIcon === '' || typeof podcast.podIcon === 'undefined' ) {
-				if ( podcast.isBlog ) podcast.podIcon = 'http://upload.wikimedia.org/wikipedia/commons/6/61/Book-icon-orange.png';
-				else podcast.podIcon = 'http://i.imgur.com/f7oBepl.png?1';
+				if ( podcast.isBlog ) podcast.podIcon = $scope.defaultBlogIcon;
+				else podcast.podIcon =  $scope.defaultPodIcon;
 			}
 			if (typeof $scope.myFile !== 'undefined') {
 				$scope.uploadFile();

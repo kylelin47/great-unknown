@@ -43,13 +43,26 @@
 					<span data-ng-bind="podcast.created | date:'medium'"></span>
 					by
 					<span data-ng-bind="podcast.user.displayName"></span></p>
-					<strong class="browse-pod-right" data-ng-bind="podcast.category"></strong>
+					<strong class="browse-pod-right">
+						{{podcast.category}}, 
+						<span data-ng-hide="podcast.isBlog">Podcast</span>
+						<span data-ng-hide="!podcast.isBlog">Blog</span>
+					</strong>
 				</small>
 				<div style="clear: both;"></div>
 				<div class="pull-left">
-				<h3 class="list-group-item-heading"><strong>{{podcast.name}}</strong></h3>
-				<p class="lead" data-ng-bind="podcast.blurb"></p></div>
-				<img data-ng-hide="podcast.podIcon === ''" src={{podcast.podIcon}} alt="Icon" style="width:80px;height:80px" class="pull-right">
+					<h3 class="list-group-item-heading"><strong>{{podcast.name}}</strong></h3>
+					<p class="lead" data-ng-bind="podcast.blurb"></p>
+					<p data-ng-hide="podcast.series === ''" class="text-muted">Series: 
+						<b>{{podcast.series}}
+							<span data-ng-hide="seriesRadio.series === ''">#{{podcastsf.length - podcastsf.indexOf(podcast)}}
+							</span>
+						</b>
+					</p>
+				</div>
+				<div class="pull-right">
+					<img data-ng-hide="podcast.podIcon === ''" src={{podcast.podIcon}} alt="Icon" style="width:80px;height:80px">
+				</div>
 				<div style="clear: both;"></div>
 			</a>
 		</div>
@@ -61,13 +74,26 @@
 					<span data-ng-bind="podcast.created | date:'medium'"></span>
 					by
 					<span data-ng-bind="podcast.user.displayName"></span></p>
-					<strong class="browse-pod-right" data-ng-bind="podcast.category"></strong>
+					<strong class="browse-pod-right">
+						{{podcast.category}}, 
+						<span data-ng-hide="podcast.isBlog">Podcast</span>
+						<span data-ng-hide="!podcast.isBlog">Blog</span>
+					</strong>
 				</small>
 				<div style="clear: both;"></div>
 				<div class="pull-left">
-				<h3 class="list-group-item-heading"><strong>{{podcast.name}}</strong></h3>
-				<p class="lead" data-ng-bind="podcast.blurb"></p></div>
-				<img data-ng-hide="podcast.podIcon === ''" src={{podcast.podIcon}} alt="Icon" style="width:80px;height:80px" class="pull-right">
+					<h3 class="list-group-item-heading"><strong>{{podcast.name}}</strong></h3>
+					<p class="lead" data-ng-bind="podcast.blurb"></p>
+					<p data-ng-hide="podcast.series === ''" class="text-muted">Series: 
+						<b>{{podcast.series}}
+							<span data-ng-hide="seriesRadio.series === ''">#{{podcastsf.length - podcastsf.indexOf(podcast)}}
+							</span>
+						</b>
+					</p>
+				</div>
+				<div class="pull-right">
+					<img data-ng-hide="podcast.podIcon === ''" src={{podcast.podIcon}} alt="Icon" style="width:80px;height:80px">
+				</div>
 				<div style="clear: both;"></div>
 			</a>
 		</div>
