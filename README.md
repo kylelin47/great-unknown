@@ -19,4 +19,11 @@ To use a new Bootstrap Theme:
 - http://bootswatch.com/flatly/bootstrap.css
 - Then delete bootstrap-theme.css from that same folder
 - Now it should look cool
-- 
+
+Non-NPM Available Libraries Used:
+
+https://github.com/codemwnci/markdown-editpreview-ng.js
+
+User Stories:
+
+https://trello.com/b/zHEzMTHa/great-unknown-cen3031
