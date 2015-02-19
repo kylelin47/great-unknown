@@ -26,7 +26,7 @@ angular.module('core').controller('RssController', ['$scope', 'Authentication','
         $scope.open = function (size) {
 
             $scope.modalInstance = $modal.open({
-                templateUrl: '',
+                templateUrl: 'modules/core/view/feed.client.view.html',
                 controller: 'RssController',
                 size: size,
                 resolve: {
