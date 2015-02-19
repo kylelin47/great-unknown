@@ -6,7 +6,7 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 		$scope.authentication = Authentication;
 		$scope.currentPage = parseInt($stateParams.page, 10);
 		$scope.defaultPodIcon = 'http://i.imgur.com/f7oBepl.png?1';
-		$scope.defaultBlogIcon = 'http://upload.wikimedia.org/wikipedia/commons/6/61/Book-icon-orange.png';
+		$scope.defaultBlogIcon = 'http://i.imgur.com/rKe21My.png?1';
 		if ($location.path() === '/podcasts/browse/')
 		{
 			$scope.currentPage = 1;
