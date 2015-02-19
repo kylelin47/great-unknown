@@ -14,7 +14,7 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 		})
 		.state('feed',{
 			url:'/feed',
-			templateUrl: 'modules/core/view/feed.client.view.html'
+			templateUrl: 'modules/core/views/feed.client.view.html'
 		});
 
 	}

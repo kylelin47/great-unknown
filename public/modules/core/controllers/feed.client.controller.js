@@ -11,7 +11,6 @@ angular.module('core').controller('RssController', ['$scope', 'Authentication','
         };
 
 
-        $scope.feedSrc = $stateParams.Feed;
 
         $scope.loadFeed=function(e){
             FeedService.parseFeed($scope.feedSrc).then(function(res){
@@ -21,28 +20,10 @@ angular.module('core').controller('RssController', ['$scope', 'Authentication','
 
 
         //***************************Modal window for Rss feed********************************//
-        this.items = $scope.feeds;
+        $scope.items = ['item1', 'item2', 'item3'];
 
-        $scope.open = function (size) {
-
-            $scope.modalInstance = $modal.open({
-                templateUrl: 'modules/core/view/feed.client.view.html',
-                controller: 'RssController',
-                size: size,
-                resolve: {
-                    items: function () {
-                        return $scope.items;
-                    }
-                }
-            });
-
-            $scope.modalInstance.result.then(function (selectedItem) {
-                $scope.selected = selectedItem;
-            }, function () {
-                $log.info('Modal dismissed at: ' + new Date());
-            });
-        };
         //***************************Modal window for Rss feed********************************//
+
     }
 
 
