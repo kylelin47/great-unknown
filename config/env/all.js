@@ -45,7 +45,7 @@ module.exports = {
 		lib: {
 			css: [
 				'public/lib/bootstrap/dist/css/bootstrap.css',
-				'public/lib/bootstrap-markdown/css/bootstrap-markdown.min.css',
+				'public/lib/codemwnci/bootstrap-markdown.min.css',
 			],
 			js: [
 				'public/lib/jquery/dist/jquery.js',
