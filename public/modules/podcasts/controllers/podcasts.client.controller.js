@@ -21,7 +21,7 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 				audio: this.audio,
 				audioOriginal: this.audioOriginal,
 				category: this.category,
-				isBlog: this.isBlog,
+				isBlog: false,
 				podIcon: this.podIcon,
 				series: this.series,
 				comments: {},
@@ -29,7 +29,7 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 			});
 
 			//if empty icon field, use our default
-			if ( podcast.podIcon === '' ) {
+			if ( podcast.podIcon === '' || typeof podcast.podIcon === 'undefined' ) {
 				podcast.podIcon = 'http://i.imgur.com/f7oBepl.png?1';
 			}
 
@@ -57,11 +57,41 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 				$scope.audio = '';
 				$scope.audioOriginal = '';
 				$scope.category = '';
+				$scope.series = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
 		};
+		$scope.createBlog = function() {
+			// Create new Podcast object
+			var podcast = new Podcasts ({
+				name: this.name,
+				blog: this.blog,
+				blurb: this.blurb,
+				category: this.category,
+				isBlog: true,
+				podIcon: this.podIcon,
+				series: this.series
+			});
 
+			//if empty icon field, use our default
+			if ( podcast.podIcon === '' || typeof podcast.podIcon === 'undefined' ) {
+				podcast.podIcon = 'http://upload.wikimedia.org/wikipedia/commons/6/61/Book-icon-orange.png';
+			}
+			// Redirect after save
+			podcast.$save(function(response) {
+				$location.path('podcasts/' + response._id);
+
+				// Clear form fields
+				$scope.name = '';
+				$scope.blog = '';
+				$scope.blurb = '';
+				$scope.category = '';
+				$scope.series = '';
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
 		// Remove existing Podcast
 		$scope.remove = function(podcast) {
 			var r = confirm('Are you sure you want to delete this podcast? Deletion is permanent.');
@@ -95,6 +125,10 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 		// Update existing Podcast
 		$scope.update = function() {
 			var podcast = $scope.podcast;
+			if ( podcast.podIcon === '' || typeof podcast.podIcon === 'undefined' ) {
+				if ( podcast.isBlog ) podcast.podIcon = 'http://upload.wikimedia.org/wikipedia/commons/6/61/Book-icon-orange.png';
+				else podcast.podIcon = 'http://i.imgur.com/f7oBepl.png?1';
+			}
 			if (typeof $scope.myFile !== 'undefined') {
 				$scope.uploadFile();
 			}
@@ -103,11 +137,6 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
-
-			//if empty icon field, use our default
-			if ( podcast.podIcon === '' ) {
-				podcast.podIcon = 'http://i.imgur.com/f7oBepl.png?1';
-			}
 		};
 
 		// Find a list of Podcasts

@@ -1,7 +1,8 @@
 <section data-ng-controller="PodcastsController" data-ng-init="findOne(); showPreview= false;">
 	<div data-ng-show="((authentication.user) && (authentication.user._id == podcast.user._id))">
     <div class="page-header">
-        <h1>Edit Podcast</h1>
+        <h1 data-ng-show="!podcast.isBlog">Edit Podcast</h1>
+        <h1 data-ng-show="podcast.isBlog">Edit Blog</h1>
 	</div>
     <div class="col-md-12">
         <form class="form-horizontal" data-ng-submit="update()">
@@ -34,37 +35,41 @@
 							</div>
 						</div>
 					</div>
-					
-
                 </div>
-				<div class="form-group">
+				<div class="form-group" data-ng-hide="podcast.isBlog">
 					<input type="file" 
 						   accept=".mp3, .ogg, .wav" 
 						   name="audio"
 						   id="audio"
 						   file-model="myFile" />
-			    </div>
-				<div class="form-group">
-                    Current File Name: <span data-ng-bind="podcast.audioOriginal"></span>
-                </div>
-                <div class="form-group">
-                <h4 class="browse-pod-left">Podcast Category: </h4>
-					<select data-ng-model="podcast.category" name="category" class="create-pod-dropdown">
-                        <option value="Misc">Miscellaneous</option>
-                        <option value="Sports">Sports</option>
-                        <option value="Comedy">Comedy</option>
-                        <option value="Entertainment">Entertainment</option>
-                        <option value="News">News</option>
-                    </select>
+				   Current File Name: <span data-ng-bind="podcast.audioOriginal"></span>
 			    </div>
                 <div class="form-group">
-                    <h4 class="browse-pod-left">Series: </h4>
-                    <input data-ng-model="podcast.series" placeholder="Series this podcast is a part of" class="create-pod-iconlink-bar"/>
+					<label class="col-sm-2 control-label" for="category">Category</label>
+					<div class="col-sm-4">
+						<select data-ng-model="podcast.category" id="category" name="category" class="form-control">
+							<option value="Misc">Miscellaneous</option>
+							<option value="Sports">Sports</option>
+							<option value="Comedy">Comedy</option>
+							<option value="Entertainment">Entertainment</option>
+							<option value="News">News</option>
+						</select>
+					</div>
+			    </div>
+                <div class="form-group">
+                    <label for="series" class="col-sm-2 control-label">Series</label>
+					<div class="col-sm-4">
+						<input type="text" id="series" data-ng-model="podcast.series" placeholder="Series this podcast is a part of" class="form-control" />
+					</div>
                 </div>
                 <div class="form-group">
-                    <h4 class="browse-pod-left">Podcast Icon: </h4>
-                    <input data-ng-model="podcast.podIcon" placeholder="Link to desired icon (80x80p)" class="create-pod-iconlink-bar"/>
-                    <img data-ng-hide="podcast.podIcon === ''" src={{podcast.podIcon}} alt="Icon" style="width:80px;height:80px">
+                    <label class="col-sm-2 control-label" for="icon">Icon</label>
+					<div class="col-sm-4">
+						<input id="icon" data-ng-model="podcast.podIcon" placeholder="Link to desired icon (80x80p)" class="form-control"/>
+					</div>
+					<div class="col-sm-6">
+						<img data-ng-hide="podcast.podIcon === ''" src={{podcast.podIcon}} alt="Icon" style="width:80px;height:80px">
+					</div>
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Update" class="btn btn-default">
@@ -76,6 +81,7 @@
         </form>
     </div>
 	</div>
+	
 	<div data-ng-hide="!podcast.$resolved ||((authentication.user) && (authentication.user._id == podcast.user._id))">
 	    <div class="page-header">
 			<h1>Edit Podcast</h1>

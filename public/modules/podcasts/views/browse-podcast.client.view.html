@@ -42,7 +42,11 @@
 					<span data-ng-bind="podcast.created | date:'medium'"></span>
 					by
 					<span data-ng-bind="podcast.user.displayName"></span></p>
-					<strong class="browse-pod-right" data-ng-bind="podcast.category"></strong>
+					<strong class="browse-pod-right">
+						{{podcast.category}}, 
+						<span data-ng-hide="podcast.isBlog">Podcast</span>
+						<span data-ng-hide="!podcast.isBlog">Blog</span>
+					</strong>
 				</small>
 				<div style="clear: both;"></div>
 				<div class="pull-left">
@@ -55,7 +59,9 @@
 						</b>
 					</p>
 				</div>
-				<img data-ng-hide="podcast.podIcon === ''" src={{podcast.podIcon}} alt="Icon" style="width:80px;height:80px" class="pull-right">
+				<div class="pull-right">
+					<img data-ng-hide="podcast.podIcon === ''" src={{podcast.podIcon}} alt="Icon" style="width:80px;height:80px">
+				</div>
 				<div style="clear: both;"></div>
 			</a>
 			<ul class="pagination pagination-md pull-right">

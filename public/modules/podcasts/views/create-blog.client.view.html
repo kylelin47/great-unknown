@@ -4,7 +4,7 @@
     </div>
 	<div data-ng-show="((authentication.user) && (authentication.user.username == 'admin'))">
     <div class="col-md-12">
-        <form class="form-horizontal" data-ng-submit="create()" novalidate>
+        <form class="form-horizontal" data-ng-submit="createBlog()" novalidate>
             <fieldset>
                 <div class="form-group">
                     <label class="control-label" for="name">Name</label>
@@ -36,7 +36,11 @@
 					</div>
 
 				</div>
-				<input type="hidden" data-ng-model="isBlog" name="isBlog" id="isBlog" value=true />
+				<div class="form-group">
+	                <h4 class="browse-pod-left">Icon: </h4>
+					<input data-ng-model="podIcon" placeholder="Link to desired icon (80x80p)" class="create-pod-iconlink-bar"/>
+					<img data-ng-hide="podcast.podIcon === ''" src={{podIcon}} alt="Icon" style="width:80px;height:80px">
+			    </div>
 				<div data-ng-show="error" class="text-danger">
 					<strong data-ng-bind="error"></strong>
 				</div>
