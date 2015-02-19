@@ -2,19 +2,16 @@
 
 <!--Feed Page-->
 
-<?xml version = "1.0" encoding = "utf-8"?>
-<rss version = "2.0">
-    <channel data-ng-controller = "RssController" data-ng-init = "find()">
-        <item ng-repeat = "podcast in podcasts">
-            <title>{{podcast.name}}</title>
-            <description>{{podcast.blurb}}</description>
-            <language>en-us</language>
-            <image>
-                <title>{{podcast.category}}</title>
-                <src>{{podcast.podIcon}}</src>
-                <width>40</width>
-                <height>40</height>
-            </image>
-        </item>
-    </channel>
-</rss>
+    </div ng-controller = "RssController">
+        <div class="row-fluid">
+            <ul class="unstyled">
+                <span class="badge badge-warning" ng-show="feeds.length > 0">{{(feeds | filter:filterText).length}} Items</span>
+                <li ng-repeat="feed in feeds | filter:filterText">
+                    {{feed.length}}
+                    <h5><a href="{{feed.link}}">{{feed.title}}</a></h5>
+                    <p class="text-left">{{feed.contentSnippet}}</p>
+                    <span class="small">{{feed.publishedDate}}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
