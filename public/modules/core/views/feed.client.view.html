@@ -1,12 +1,21 @@
-<section data-ng-controller = "RssController">
+<section data-ng-controller = "RssController" ng-init = "loadFeed($event)">
 
         <div class="modal-header">
-            <h3 class="modal-title">I'm a modal!</h3>
+            <h3 class="modal-title">Rss_feed</h3>
         </div>
-        <div class="modal-body">
+        <div class="modal-body"><!--
             <ul>
                 <li ng-repeat="item in items">
                     <a ng-click="selected.item = item">{{ item }}</a>
+                </li>
+            </ul>-->
+
+            <ul class="unstyled">
+                <span class="badge badge-warning" ng-show="feeds.length > 0">{{(feeds | filter:filterText).length}} Items</span>
+                <li ng-repeat="feed in feeds | filter:filterText">
+                    <h5><a href="{{feed.link}}">{{feed.title}}</a></h5>
+                    <p class="text-left">{{feed.contentSnippet}}</p>
+                    <span class="small">{{feed.publishedDate}}</span>
                 </li>
             </ul>
         </div>
