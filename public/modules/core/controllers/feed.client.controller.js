@@ -11,6 +11,7 @@ angular.module('core').controller('RssController', ['$scope', 'Authentication','
         };
 
 
+        $scope.feedSrc='http://feeds.feedburner.com/TechCrunch';
 
         $scope.loadFeed=function(e){
             FeedService.parseFeed($scope.feedSrc).then(function(res){
