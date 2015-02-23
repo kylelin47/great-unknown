@@ -27,3 +27,7 @@ https://github.com/codemwnci/markdown-editpreview-ng.js
 User Stories:
 
 https://trello.com/b/zHEzMTHa/great-unknown-cen3031
+
+Amazon S3 Upload Guide:
+
+http://www.cheynewallace.com/uploading-to-s3-with-angularjs/
