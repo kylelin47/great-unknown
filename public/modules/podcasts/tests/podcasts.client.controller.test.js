@@ -99,6 +99,8 @@
 			// Create a sample Podcast object
 			var samplePodcastPostData = new Podcasts({
 				name: 'New Podcast',
+				isBlog: false,
+				podIcon: 'http://i.imgur.com/f7oBepl.png?1',
 				comments: {},
 				posts: {}
 			});
@@ -107,6 +109,8 @@
 			var samplePodcastResponse = new Podcasts({
 				_id: '525cf20451979dea2c000001',
 				name: 'New Podcast',
+				isBlog: false,
+				podIcon: 'http://i.imgur.com/f7oBepl.png?1',
 				comments: {},
 				posts: {}
 			});

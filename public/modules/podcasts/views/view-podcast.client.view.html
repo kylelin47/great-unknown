@@ -21,11 +21,12 @@
 	                <br />
 	                <strong>Category:
 	                <span data-ng-bind="podcast.category"></span></strong>
-					<br />
-					Total views: <span id="totalViews">{{getListen()}}</span>
-					<br />
-					Average Listen: <span id="avgListen">{{getAvgSeconds()}}</span>
-					seconds
+					<div data-ng-if="!podcast.isBlog">
+						Total views: <span id="totalViews">{{getListen()}}</span>
+						<br />
+						Average Listen: <span id="avgListen">{{getAvgSeconds()}}</span>
+						seconds
+					</div>
             	</div>
                 <img data-ng-hide="podcast.podIcon === ''" src={{podcast.podIcon}} alt="Icon" style="width:80px;height:80px" class="view-pod-img">
                 <div style="clear: both;"></div>
