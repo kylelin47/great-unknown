@@ -1,8 +1,8 @@
 'use strict';
 // Podcasts controller
 
-angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUpload', '$stateParams', '$location', 'Authentication', 'Podcasts', '$sce',
-	function($scope, fileUpload, $stateParams, $location, Authentication, Podcasts, $sce) {
+angular.module('podcasts').controller('PodcastsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Podcasts', '$sce',
+	function($scope, $stateParams, $location, Authentication, Podcasts, $sce) {
 		$scope.authentication = Authentication;
 		$scope.currentPage = parseInt($stateParams.page, 10);
 		$scope.defaultPodIcon = 'http://i.imgur.com/f7oBepl.png?1';
@@ -32,20 +32,6 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 			//if empty icon field, use our default
 			if ( podcast.podIcon === '' || typeof podcast.podIcon === 'undefined' ) {
 				podcast.podIcon = $scope.defaultPodIcon;
-			}
-
-			if (typeof $scope.myFile !== 'undefined') {
-				var file = $scope.myFile;
-				var name = file.name;
-				var ext = name.substring(name.lastIndexOf('.'), name.length);
-				if (ext === '.mp3' || ext === '.ogg' || ext === '.wav')
-				{
-					var d = Date.now();
-					var uploadUrl = '/uploads/audio/' + d;
-					podcast.audioOriginal = name;
-					podcast.audio = name.replace(ext, d + ext);
-					fileUpload.uploadFileToUrl(file, uploadUrl);
-				}
 			}
 			// Redirect after save
 			podcast.$save(function(response) {
@@ -130,9 +116,6 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 				if ( podcast.isBlog ) podcast.podIcon = $scope.defaultBlogIcon;
 				else podcast.podIcon =  $scope.defaultPodIcon;
 			}
-			if (typeof $scope.myFile !== 'undefined') {
-				$scope.uploadFile();
-			}
 			podcast.$update(function() {
 				$location.path('podcasts/' + podcast._id);
 			}, function(errorResponse) {
@@ -160,24 +143,12 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 		};
 
 		$scope.uploadFile = function(){
-			var podcast = $scope.podcast;
-			var file = $scope.myFile;
-			var name = file.name;
-			var ext = name.substring(name.lastIndexOf('.'), name.length);
-			if (ext === '.mp3' || ext === '.ogg' || ext === '.wav')
-			{
-				var d = Date.now();
-				var uploadUrl = '/uploads/audio/' + d;
-				podcast.audioOriginal = name;
-				podcast.audio = name.replace(ext, d + ext);
-				fileUpload.uploadFileToUrl(file, uploadUrl);
-			}
 		};
 			
 
 		$scope.getAudioUrl = function() {
 			var podcast = $scope.podcast;
-			return $sce.trustAsResourceUrl('uploads/'+podcast.audio);
+			return $sce.trustAsResourceUrl('uploads/' + podcast.audio);
 		};
 		
 		$scope.incrementTotalSeconds = function() {
@@ -219,37 +190,6 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', 'fileUplo
 
 		$scope.defined = function() {
 			$scope.podname = document.getElementById('pname');
-		};
-
-		$scope.incrementUpvotes = function(i) {
-			var comment = $scope.comments[i];
-			var splitted = comment.split('|~!');
-			var number = parseInt(splitted[3]) + 1;
-			var toReplaceComment = splitted[0] + '|~!' + splitted[1] + '|~!' + splitted[2] + '|~!' + number;
-			$scope.podcast.comments[i] = toReplaceComment;
-		};
-
-		$scope.createComment = function() {
-			var podcast = $scope.podcast;
-			var newComment = '';
-			var d = Date.now();
-			newComment += $scope.authentication.user.displayName + '|~!' + d + '|~!' + $scope.comText + '|~!' + 0; 
-			podcast.comments.push(newComment);
-			podcast.$update(function() {
-				$location.path('podcasts/' + podcast._id);
-			}, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
-			});
-		};
-
-		$scope.deleteComment = function(n) {
-			var podcast = $scope.podcast;
-			podcast.comments.splice(n, 1);
-			podcast.$update(function() {
-				$location.path('podcasts/' + podcast._id);
-			}, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
-			});
 		};
 
 		$scope.getSeriesArr = function(podcasts) {
