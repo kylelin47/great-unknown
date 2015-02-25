@@ -1,7 +1,21 @@
 # great-unknown
 Podcast Manager Web App
+======================
 
+Home Page & Team Member Information
+--------------------
+![Home Page](http://i.imgur.com/bjOJIQp.png)
 
+**Members**|**Username**
+-----------|-------------
+Kyle Lin   | kylelin47
+Joachim Jones|jonesguy14
+Qian Wang|qianwang1013
+Matthew Tschiggfrie|mtschiggfrie
+Jinchi Liu|jliu8023
+
+Helpful Information
+-----------------------
 Clone this repository then do:
 ```
 npm install
