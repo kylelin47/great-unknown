@@ -1,20 +1,20 @@
 <section data-ng-controller="PodcastsController" data-ng-init="findOne(); showPreview= false;">
 	<div data-ng-show="((authentication.user) && (authentication.user._id == podcast.user._id))">
-    <div class="page-header">
-        <h1 data-ng-if="!podcast.isBlog">Edit Podcast</h1>
-        <h1 data-ng-if="podcast.isBlog">Edit Blog</h1>
+	<div class="page-header">
+		<h1 data-ng-if="!podcast.isBlog">Edit Podcast</h1>
+		<h1 data-ng-if="podcast.isBlog">Edit Blog</h1>
 	</div>
 <!-- Edit Podcast -->
 	<div data-ng-if="!podcast.isBlog">
-    <div class="col-md-12">
-        <form class="form-horizontal" data-ng-submit="update()">
-            <fieldset>
-                <div class="form-group">
-                    <label class="control-label" for="name">Name</label>
-                    <div class="controls">
-                        <input type="text" data-ng-model="podcast.name" name="name" id="name" class="form-control" placeholder="Name" required>
-                    </div>
-                </div>
+	<div class="col-md-12">
+		<form class="form-horizontal" data-ng-submit="update()">
+			<fieldset>
+				<div class="form-group">
+					<label class="control-label" for="name">Name</label>
+					<div class="controls">
+						<input type="text" data-ng-model="podcast.name" name="name" id="name" class="form-control" placeholder="Name" required>
+					</div>
+				</div>
 				<div class="form-group">
 					<label class="control-label" for="audio">Audio</label>
 					<input type="file" 
@@ -22,22 +22,22 @@
 						   name="audio"
 						   id="audio"
 						   file-model="myFile" />
-				    Current File Name: <span data-ng-bind="podcast.audioOriginal"></span>
-			    </div>
+					Current File Name: <span data-ng-bind="podcast.audioOriginal"></span>
+				</div>
 				<div class="form-group">
-                    <label class="control-label" for="blurb">Abstract (120 character limit)</label>
-                    <div class="controls">
-                        <input type="text" data-ng-model="podcast.blurb" name="blurb"  id="blurb" class="form-control" maxlength="120" placeholder="A short description"></textarea>
-                    </div>
-                </div>
+					<label class="control-label" for="blurb">Abstract (120 character limit)</label>
+					<div class="controls">
+						<input type="text" data-ng-model="podcast.blurb" name="blurb"  id="blurb" class="form-control" maxlength="120" placeholder="A short description"></textarea>
+					</div>
+				</div>
 				<div class="form-group">
-                    <label class="control-label" for="name">Blog</label>
+					<label class="control-label" for="name">Blog</label>
 					<ul class="nav nav-tabs">
 					  <li role="presentation" data-ng-class="{active: !showPreview}"><a data-ng-click="showPreview = false" href="">Edit</a></li>
 					  <li role="presentation" data-ng-class="{active: showPreview}"><a data-ng-click="showPreview = true" href="">Preview</a></li>
 					</ul>
-                    <div class="controls">
-                        <div data-ng-hide="showPreview == true">
+					<div class="controls">
+						<div data-ng-hide="showPreview == true">
 							<textarea data-ng-model="podcast.blog" markdownedit name="blog"  id="blog" class="form-control" cols="30" rows="10" placeholder="Your blog"></textarea>
 						</div>
 						<div data-ng-hide="!showPreview" class="panel panel-default">
@@ -46,8 +46,8 @@
 							</div>
 						</div>
 					</div>
-                </div>
-                <div class="form-group">
+				</div>
+				<div class="form-group">
 					<label class="col-sm-1 control-label" for="category">Category</label>
 					<div class="col-sm-4">
 						<select data-ng-model="podcast.category" id="category" name="category" class="form-control">
@@ -58,15 +58,15 @@
 							<option value="News">News</option>
 						</select>
 					</div>
-			    </div>
-                <div class="form-group">
-                    <label for="series" class="col-sm-1 control-label">Series</label>
+				</div>
+				<div class="form-group">
+					<label for="series" class="col-sm-1 control-label">Series</label>
 					<div class="col-sm-4">
 						<input type="text" id="series" data-ng-model="podcast.series" placeholder="Series this podcast is a part of" class="form-control" />
 					</div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-1 control-label" for="icon">Icon</label>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-1 control-label" for="icon">Icon</label>
 					<div class="col-sm-4">
 						<input type="text" id="icon" data-ng-model="podcast.podIcon" placeholder="Link to desired icon (80x80p)" class="form-control"/>
 					</div>
@@ -76,43 +76,43 @@
 							<img src="{{defaultPodIcon}}" alt="Default Icon" style="width:80px;height:80px" />
 						</span>
 					</div>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Update Podcast" class="btn btn-default">
-                </div>
+				</div>
+				<div class="form-group">
+					<input type="submit" value="Update Podcast" class="btn btn-default">
+				</div>
 				<div data-ng-show="error" class="text-danger">
 					<strong data-ng-bind="error"></strong>
 				</div>
-            </fieldset>
-        </form>
-    </div>
+			</fieldset>
+		</form>
+	</div>
 	</div>
 <!-- Done Edit Podcast -->
 <!-- Edit Blog -->
 	<div data-ng-if="podcast.isBlog">
-    <div class="col-md-12">
-        <form class="form-horizontal" data-ng-submit="update()">
-            <fieldset>
-                <div class="form-group">
-                    <label class="control-label" for="name">Name</label>
-                    <div class="controls">
-                        <input type="text" data-ng-model="podcast.name" name="name" id="name" class="form-control" placeholder="Name" required>
-                    </div>
-                </div>
+	<div class="col-md-12">
+		<form class="form-horizontal" data-ng-submit="update()">
+			<fieldset>
 				<div class="form-group">
-                    <label class="control-label" for="blurb">Abstract (120 character limit)</label>
-                    <div class="controls">
-                        <input type="text" data-ng-model="podcast.blurb" name="blurb"  id="blurb" class="form-control" maxlength="120" placeholder="A short description"></textarea>
-                    </div>
-                </div>
+					<label class="control-label" for="name">Name</label>
+					<div class="controls">
+						<input type="text" data-ng-model="podcast.name" name="name" id="name" class="form-control" placeholder="Name" required>
+					</div>
+				</div>
 				<div class="form-group">
-                    <label class="control-label" for="name">Blog</label>
+					<label class="control-label" for="blurb">Abstract (120 character limit)</label>
+					<div class="controls">
+						<input type="text" data-ng-model="podcast.blurb" name="blurb"  id="blurb" class="form-control" maxlength="120" placeholder="A short description"></textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="name">Blog</label>
 					<ul class="nav nav-tabs">
 					  <li role="presentation" data-ng-class="{active: !showPreview}"><a data-ng-click="showPreview = false" href="">Edit</a></li>
 					  <li role="presentation" data-ng-class="{active: showPreview}"><a data-ng-click="showPreview = true" href="">Preview</a></li>
 					</ul>
-                    <div class="controls">
-                        <div data-ng-hide="showPreview == true">
+					<div class="controls">
+						<div data-ng-hide="showPreview == true">
 							<textarea data-ng-model="podcast.blog" markdownedit name="blog"  id="blog" class="form-control" cols="30" rows="10" placeholder="Your blog"></textarea>
 						</div>
 						<div data-ng-hide="!showPreview" class="panel panel-default">
@@ -121,8 +121,8 @@
 							</div>
 						</div>
 					</div>
-                </div>
-                <div class="form-group">
+				</div>
+				<div class="form-group">
 					<label class="col-sm-1 control-label" for="category">Category</label>
 					<div class="col-sm-4">
 						<select data-ng-model="podcast.category" id="category" name="category" class="form-control">
@@ -133,15 +133,15 @@
 							<option value="News">News</option>
 						</select>
 					</div>
-			    </div>
-                <div class="form-group">
-                    <label for="series" class="col-sm-1 control-label">Series</label>
+				</div>
+				<div class="form-group">
+					<label for="series" class="col-sm-1 control-label">Series</label>
 					<div class="col-sm-4">
 						<input type="text" id="series" data-ng-model="podcast.series" placeholder="Series this blog is a part of" class="form-control" />
 					</div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-1 control-label" for="icon">Icon</label>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-1 control-label" for="icon">Icon</label>
 					<div class="col-sm-4">
 						<input type="text" id="icon" data-ng-model="podcast.podIcon" placeholder="Link to desired icon (80x80p)" class="form-control"/>
 					</div>
@@ -151,22 +151,22 @@
 							<img src="{{defaultBlogIcon}}" alt="Default Icon" style="width:80px;height:80px" />
 						</span>
 					</div>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Update Blog" class="btn btn-default">
-                </div>
+				</div>
+				<div class="form-group">
+					<input type="submit" value="Update Blog" class="btn btn-default">
+				</div>
 				<div data-ng-show="error" class="text-danger">
 					<strong data-ng-bind="error"></strong>
 				</div>
-            </fieldset>
-        </form>
-    </div>
+			</fieldset>
+		</form>
+	</div>
 	</div>
 <!-- Done Edit Blog -->
 	</div>
 	
 	<div data-ng-hide="!podcast.$resolved ||((authentication.user) && (authentication.user._id == podcast.user._id))">
-	    <div class="page-header">
+		<div class="page-header">
 			<h1>Edit Podcast</h1>
 		</div>
 		<div class="alert alert-warning text-center">

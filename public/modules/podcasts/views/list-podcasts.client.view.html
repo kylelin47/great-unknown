@@ -2,9 +2,9 @@
 		<!-- <a data-ng-repeat="podcast in podcasts | filter: filterList"
 		   data-ng-href="#!/podcasts/{{podcast._id}}"
 		   class="list-group-item"> -->
-    <div class="page-header">
-        <b class="browse-pod-left big-text-pod">Your Podcasts</b>
-        <br /><br />
+	<div class="page-header">
+		<b class="browse-pod-left big-text-pod">Your Podcasts</b>
+		<br /><br />
 <div data-ng-show="((authentication.user) && (authentication.user.username == 'admin'))">
 
 		<select data-ng-model="filter.category" name="category" id="category" class="browse-pod-dropdown" ng-init="category = 'All'" >
@@ -22,8 +22,8 @@
 				<input type="search" data-ng-model="search.name" placeholder="Search by name" class="form-control"></input>
 		</div>
 	</div>
-    <div style="clear: both;"></div>
-    <div class="pull-left btn-group-vertical col-xs-3">
+	<div style="clear: both;"></div>
+	<div class="pull-left btn-group-vertical col-xs-3">
 		<!-- Series Tab -->
 		<label name="series" ng-init="$parent.seriesRadio.series = ''" class="btn btn-primary btn-md" data-ng-model="$parent.seriesRadio.series" btn-radio="'{{series_name}}'" data-ng-repeat="series_name in getSeriesArr(podcasts)">
 			<span ng-hide="series_name === ''" class="pull-left series-radio-txt">{{series_name}}</span>
@@ -74,12 +74,12 @@
 				<div style="clear: both;"></div>
 		</div>
 	</section>
-    <div class="alert alert-warning text-center col-md-9 pull-right" data-ng-hide="!podcasts.$resolved || podcasts.length">
-    	No Podcasts yet, why don't you <a href="/#!/podcasts/create">create one</a>?
-    </div>
-    <div class="alert alert-warning text-center col-md-9 pull-right" data-ng-show="podcasts.$resolved && (podcastsf=(podcastsS=(podcastsR=(podcasts | filter:seriesRadio) | filter:search) | filter:filter)).length === 0">
-    	Your search yielded no results.
-    </div>
+	<div class="alert alert-warning text-center col-md-9 pull-right" data-ng-hide="!podcasts.$resolved || podcasts.length">
+		No Podcasts yet, why don't you <a href="/#!/podcasts/create">create one</a>?
+	</div>
+	<div class="alert alert-warning text-center col-md-9 pull-right" data-ng-show="podcasts.$resolved && (podcastsf=(podcastsS=(podcastsR=(podcasts | filter:seriesRadio) | filter:search) | filter:filter)).length === 0">
+		Your search yielded no results.
+	</div>
 </div>
 	</div>
 <div data-ng-hide="((authentication.user) && (authentication.user.username == 'admin'))">
