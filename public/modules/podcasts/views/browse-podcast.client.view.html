@@ -49,18 +49,21 @@
 					</strong>
 				</small>
 				<div style="clear: both;"></div>
-				<div class="pull-left">
-					<h3 class="list-group-item-heading"><strong>{{podcast.name}}</strong></h3>
-					<p class="lead" data-ng-bind="podcast.blurb"></p>
-					<p data-ng-hide="podcast.series === ''" class="text-muted">Series: 
-						<b>{{podcast.series}}
-							<span data-ng-hide="seriesRadio.series === ''">#{{podcastsf.length - podcastsf.indexOf(podcast)}}
-							</span>
-						</b>
-					</p>
-				</div>
-				<div class="pull-right">
-					<img data-ng-hide="podcast.podIcon === ''" src={{podcast.podIcon}} alt="Icon" style="width:80px;height:80px">
+				<div class="row">
+					<div class="pull-left col-md-10">
+						<h3 class="list-group-item-heading"><strong>{{podcast.name}}</strong></h3>
+						<p class="lead" data-ng-bind="podcast.blurb"></p>
+						<p data-ng-hide="podcast.series === ''" class="text-muted">Series: 
+							<b>
+								{{podcast.series}}
+								<span data-ng-hide="seriesRadio.series === ''">#{{podcastsf.length - podcastsf.indexOf(podcast)}}
+								</span>
+							</b>
+						</p>
+					</div>
+					<div class="pull-right">
+						<img data-ng-hide="podcast.podIcon === ''" src={{podcast.podIcon}} alt="Icon" style="width:80px;height:80px;margin-right:15px;">
+					</div>
 				</div>
 				<div style="clear: both;"></div>
 			</a>

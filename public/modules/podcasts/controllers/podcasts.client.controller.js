@@ -93,10 +93,7 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 					}
 				} else {
 					$scope.podcast.$remove(function() {
-						if ($location.path().substring(0,10)  === '/podcasts/')
-							$location.path('/podcasts/browse/');
-						else
-							$location.path('podcasts');
+						$location.path('/podcasts/browse/1');
 					});
 				}
 			}
