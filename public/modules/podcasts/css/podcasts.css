@@ -1,87 +1,87 @@
 div.newline {
-	white-space: pre-wrap;
+  white-space: pre-wrap;
 }
 div.errortop {
-	margin-top: 200px;
+  margin-top: 200px;
 }
 .product-social-links {
-    line-height: 10px;
+  line-height: 10px;
 }
 
 .browse-pod-left {
-	float: left;
+  float: left;
 }
 
 .browse-pod-right {
-	float: right;
+  float: right;
 }
 
 .browse-pod-dropdown {
-	float: right;
-	width: 15%;
-	height: 42px;
-	padding: 5px 5px;
-	margin: 13px 10px;
-	font-size: 14px;
-	line-height: 1.42857143;
-	color: #555;
-	background-color: #fff;
-	background-image: none;
-	border: 1px solid #ccc;
-	border-radius: 4px;
+  float: right;
+  width: 15%;
+  height: 42px;
+  padding: 5px 5px;
+  margin: 13px 10px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 .create-pod-dropdown {
-	float: left;
-	width: 15%;
-	height: 30px;
-	padding: 5px 5px;
-	margin: 6px 10px;
-	font-size: 14px;
-	line-height: 1.42857143;
-	color: #555;
-	background-color: #fff;
-	background-image: none;
-	border: 1px solid #ccc;
-	border-radius: 4px;
+  float: left;
+  width: 15%;
+  height: 30px;
+  padding: 5px 5px;
+  margin: 6px 10px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 .browse-pod-search-bar {
-	float: right;
-	height: 30px;
-	margin: 20px 10px;
-	padding: 3px 10px;
-	font-size: 14px;
-	line-height: 1;
-	border-radius: 3px;
+  float: right;
+  height: 30px;
+  margin: 20px 10px;
+  padding: 3px 10px;
+  font-size: 14px;
+  line-height: 1;
+  border-radius: 3px;
 }
 
 .create-pod-iconlink-bar {
-	float: left;
-	height: 30px;
-	width: 25%;
-	margin: 6px 10px;
-	padding: 3px 5px;
-	font-size: 14px;
-	line-height: 1;
-	border-radius: 3px;
+  float: left;
+  height: 30px;
+  width: 25%;
+  margin: 6px 10px;
+  padding: 3px 5px;
+  font-size: 14px;
+  line-height: 1;
+  border-radius: 3px;
 }
 
 
 .view-pod-img {
-	float: right;
+  float: right;
 }
 
 .bottom-buffer {
-	margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .top-buffer {
-	margin-top: 13px;
+  margin-top: 13px;
 }
 
 textarea[name="comText"] {
-	resize: vertical;
+  resize: vertical;
 }
 
 .pod-blog {
@@ -93,7 +93,7 @@ textarea[name="comText"] {
 
 /* enable absolute positioning */
 .inner-addon { 
-    position: relative; 
+  position: relative;
 }
 
 /* style icon */
@@ -113,21 +113,21 @@ textarea[name="comText"] {
 .right-addon input { padding-right: 30px; }
 
 .big-text-pod {
-	font-size: 4em;
+  font-size: 4em;
 }
 
 .big-text-pod-welcome {
-	font-size: 6em;
+  font-size: 6em;
 }
 
 .white, .white a {
-	color: #fff;
+  color: #fff;
 }
 
 .no-outline :focus {
-	outline: none;
-	box-shadow:none !important;
-	border:1px solid #ccc !important; 
+  outline: none;
+  box-shadow:none !important;
+  border:1px solid #ccc !important;
 }
 
 .series-radio-txt {

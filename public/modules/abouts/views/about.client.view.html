@@ -1,5 +1,5 @@
 <section data-ng-controller="AboutsController" data-ng-init="find()">
-    <div class="page-header">
+	<div class="page-header">
 		<div class="pull-right">
 			<a data-ng-show="((authentication.user) && (authentication.user.username == 'admin'))" class="btn btn-primary" href="/#!/about/edit">
 				<i class="glyphicon glyphicon-edit"></i>
@@ -10,11 +10,11 @@
 			Last updated: 
 			<span data-ng-bind="abouts[0].created | date:'medium'"></span>
 		</small>
-    </div>
+	</div>
 	<div class="row">
 		<div class="col-sm-4">
 			<img data-ng-show="abouts[0].picture === ''" src="http://static.guim.co.uk/static/b6c135ec8e49127c7c87055af29b2d52c4011fc0/politics/images/defaultPoliticalPerson.gif" alt="My Avatar" height="100%" width="100%" />
-			<img data-ng-hide="abouts[0].picture === ''" src={{abouts[0].picture}} alt="My Avatar" height="100%" width="100%" />
+			<img data-ng-hide="abouts[0].picture === ''" src={{abouts[0].picture}} alt="Avatar" height="100%" width="100%" />
 		</div>
 		<div class="col-sm-8 pod-blog">
 			<p><span class="text-muted">Name: </span><b>{{abouts[0].name}}</b></p>

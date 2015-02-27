@@ -1,17 +1,17 @@
 <section data-ng-controller="PodcastsController">
-    <div class="page-header">
-        <h1>Create New Podcast</h1>
-    </div>
+	<div class="page-header">
+		<h1>Create New Podcast</h1>
+	</div>
 	<div data-ng-if="((authentication.user) && (authentication.user.username == 'admin'))">	
-    <div class="col-md-12">
-        <form class="form-horizontal" data-ng-submit="create()" novalidate>
-            <fieldset>
-                <div class="form-group">
-                    <label class="control-label" for="name">Name</label>
-                    <div class="controls">
-                        <input type="text" data-ng-model="name" name="name" id="name" class="form-control" placeholder="Name" required />
-                    </div>
-                </div>
+	<div class="col-md-12">
+		<form class="form-horizontal" data-ng-submit="create()" novalidate>
+			<fieldset>
+				<div class="form-group">
+					<label class="control-label" for="name">Name</label>
+					<div class="controls">
+						<input type="text" data-ng-model="name" name="name" id="name" class="form-control" placeholder="Name" required />
+					</div>
+				</div>
 				<div class="form-group">
 					<label class="control-label" for="audio">Audio</label>
 					<input type="file" 
@@ -19,7 +19,7 @@
 						   name="audio"
 						   id="audio"
 						   file-model="myFile" />
-			    </div>
+				</div>
 				<div class="form-group">
 					<label class="control-label" for="blurb">Abstract (120 character limit)</label>
 					<div class="controls">
@@ -43,36 +43,36 @@
 						</div>
 					</div>
 				</div>
-                <div class="form-group">
-                <h4 class="browse-pod-left">Podcast Category: </h4>
+				<div class="form-group">
+				<h4 class="browse-pod-left">Podcast Category: </h4>
 					<select data-ng-model="category" name="category" class="create-pod-dropdown" ng-init="category = 'Misc'">
-                        <option value="Misc">Miscellaneous</option>
-                        <option value="Sports">Sports</option>
-                        <option value="Comedy">Comedy</option>
-                        <option value="Entertainment">Entertainment</option>
-                        <option value="News">News</option>
-                    </select>
-			    </div>
-			    <div class="form-group">
-	                <h4 class="browse-pod-left">Series: </h4>
+						<option value="Misc">Miscellaneous</option>
+						<option value="Sports">Sports</option>
+						<option value="Comedy">Comedy</option>
+						<option value="Entertainment">Entertainment</option>
+						<option value="News">News</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<h4 class="browse-pod-left">Series: </h4>
 					<input data-ng-model="series" placeholder="Series this podcast is a part of" class="create-pod-iconlink-bar"/>
-			    </div>
-			    <div class="form-group">
-	                <h4 class="browse-pod-left">Podcast Icon: </h4>
+				</div>
+				<div class="form-group">
+					<h4 class="browse-pod-left">Podcast Icon: </h4>
 					<input data-ng-model="podIcon" data-ng-init="podIcon = ''" placeholder="Link to desired icon (80x80p)" class="create-pod-iconlink-bar"/>
 					<img data-ng-hide="podIcon === ''" src={{podIcon}} alt="Icon" style="width:80px;height:80px">
 					<img data-ng-show="podIcon === ''" 
 					 src="{{defaultPodIcon}}" alt="Default Icon" style="width:80px;height:80px"
-			    </div>
+				</div>
 				<div data-ng-show="error" class="text-danger">
 					<strong data-ng-bind="error"></strong>
 				</div>
-                <div class="form-group">
-                    <input type="submit" value="Create Podcast" class="btn btn-default">
-                </div>
-            </fieldset>
-        </form>
-    </div>
+				<div class="form-group">
+					<input type="submit" value="Create Podcast" class="btn btn-default">
+				</div>
+			</fieldset>
+		</form>
+	</div>
 	</div>
 	<div data-ng-hide="((authentication.user) && (authentication.user.username === 'admin' ))">
 		<div class="alert alert-warning text-center">
