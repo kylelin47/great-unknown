@@ -24,9 +24,7 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 				category: this.category,
 				isBlog: false,
 				podIcon: this.podIcon,
-				series: this.series,
-				comments: {},
-				posts: {}
+				series: this.series
 			});
 
 			//if empty icon field, use our default
@@ -144,44 +142,10 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 
 		$scope.uploadFile = function(){
 		};
-			
 
 		$scope.getAudioUrl = function() {
 			var podcast = $scope.podcast;
 			return $sce.trustAsResourceUrl('uploads/' + podcast.audio);
-		};
-		
-		$scope.incrementTotalSeconds = function() {
-			$scope.podcast.totalSecondsListened++;
-			$scope.update();
-			return $scope.podcast.totalSecondsListened;
-		};
-		
-		$scope.getAvgSeconds = function(){
-			if($scope.podcast.listens === 0){
-				return 0;
-			}
-			return Math.floor($scope.podcast.totalSecondsListened / $scope.podcast.listens);
-		};
-		
-		$scope.tmpListen = true;
-		
-		$scope.updateListens = function() {
-			if($scope.tmpListen){
-				$scope.podcast.listens++;
-				$scope.update();
-				$scope.tmpListen = false;
-			}
-		};
-		
-		$scope.getListen = function(){
-			return $scope.podcast.listens;
-		};
-
-		$scope.filterList = function(podcast) {
-			return podcast.user._id === $scope.authentication.user._id &&
-				   (podcast.name.indexOf($scope.searchText) !== -1 ||
-					$scope.searchText === '');
 		};
 
 		$scope.getNumber = function(num) {

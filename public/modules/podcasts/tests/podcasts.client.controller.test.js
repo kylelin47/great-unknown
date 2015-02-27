@@ -100,9 +100,7 @@
 			var samplePodcastPostData = new Podcasts({
 				name: 'New Podcast',
 				isBlog: false,
-				podIcon: 'http://i.imgur.com/f7oBepl.png?1',
-				comments: {},
-				posts: {}
+				podIcon: 'http://i.imgur.com/f7oBepl.png?1'
 			});
 
 			// Create a sample Podcast response
@@ -110,9 +108,7 @@
 				_id: '525cf20451979dea2c000001',
 				name: 'New Podcast',
 				isBlog: false,
-				podIcon: 'http://i.imgur.com/f7oBepl.png?1',
-				comments: {},
-				posts: {}
+				podIcon: 'http://i.imgur.com/f7oBepl.png?1'
 			});
 
 			// Fixture mock form input values
