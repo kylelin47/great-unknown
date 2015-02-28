@@ -57,18 +57,6 @@ var PodcastSchema = new Schema({
 	series: {
 		type: String,
 		default: ''
-	},
-	comments: [String],
-
-	listens: {
-		type: Number,
-		default: 0
-	},
-	
-	totalSecondsListened: {
-		type: Number,
-		default: 0
 	}
-
 });
 mongoose.model('Podcast', PodcastSchema);

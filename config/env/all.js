@@ -46,6 +46,7 @@ module.exports = {
 			css: [
 				'public/lib/bootstrap/dist/css/bootstrap.css',
 				'public/lib/codemwnci/bootstrap-markdown.min.css',
+				'public/lib/toastr/toastr.css',
 			],
 			js: [
 				'public/lib/jquery/dist/jquery.js',
@@ -59,7 +60,9 @@ module.exports = {
 				'public/lib/codemwnci/Markdown.Converter.js',
 				'public/lib/codemwnci/Markdown.Sanitizer.js',
 				'public/lib/codemwnci/bootstrap-markdown.js',
-				'public/lib/codemwnci/markdown-editpreview-ng.js'
+				'public/lib/codemwnci/markdown-editpreview-ng.js',
+				'public/lib/aws-sdk-js/dist/aws-sdk.js',
+				'public/lib/toastr/toastr.js'
 			]
 		},
 		css: [

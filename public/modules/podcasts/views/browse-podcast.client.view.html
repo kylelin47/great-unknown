@@ -4,7 +4,8 @@
 		<br /><br />
 	
 	<div ng-hide="currentPage != 1">
-			<select data-ng-model="filter.category" name="category" id="category" class="browse-pod-dropdown" ng-init="category = 'All'" >
+			<select data-ng-model="filter.category" name="category" id="category" class="browse-pod-dropdown"
+			 data-ng-init="category = 'All'" >
 				<option value="" selected>All</option>
 				<option value="Misc">Miscellaneous</option>
 				<option value="Sports">Sports</option>
@@ -16,9 +17,9 @@
 			<div class="col-xs-3 pull-right top-buffer">
 				<div class="inner-addon left-addon">
 					<i class="glyphicon glyphicon-search"></i>
-					<input type="search" data-ng-model="search.name" placeholder="Search by name" class="form-control"></input>
+					<input type="search" data-ng-model="search.name" placeholder="Search by name" class="form-control" />
+				</div>
 			</div>
-		</div>
 	</div>
 	<div style="clear: both;"></div>
 	<div ng-hide="currentPage != 1" class="pull-left btn-group-vertical col-xs-3">

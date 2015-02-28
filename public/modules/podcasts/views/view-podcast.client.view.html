@@ -36,36 +36,8 @@
 	<span data-ng-if="!podcast.isBlog">
 		<audio class="col-xs-12" id="audio" controls data-ng-src="{{getAudioUrl()}}"></audio>
 	</span>
-	
-<!--
-	<script type="text/javascript-lazy">
-		var timer;
-	
-		function start() {
-		var number = angular.element($('#myDiv')).scope().incrementTotalSeconds();
-		document.getElementById("avgListen").innerHTML = angular.element($('#myDiv')).scope().getAvgSeconds();
-		}
-		
-		function play() {
-		increment();
-		timer = setInterval(start, 1000);
-		}
-		
-		function increment() {
-		angular.element($('#myDiv')).scope().updateListens();
-		document.getElementById("totalViews").innerHTML = angular.element($('#myDiv')).scope().getListen();
-		}
-	
-   		audio.addEventListener('play', play);
-		audio.addEventListener('pause', function() { clearInterval(timer)} );
-		audio.addEventListener('ended', function() { clearInterval(timer)} );
-		
-	</script>
--->
-	
-	
 	<div class="pod-blog col-xs-push-2 col-xs-8">
-		<br><br>
+		<br /><br />
 		<markdown bind-from="podcast.blog"></markdown>
 	</div>
 
@@ -86,9 +58,6 @@
 	<br />
 	<div class="fb-comments col-xs-push-3" data-href="https://lbcqrcfwju.localtunnel.me/#!/podcasts/{{podcast._id}}" data-numposts="5" data-colorscheme="light"></div>
 </div>
-	<div ng-repeat="number in playbackLength">
-		{{number}}
-	</div>
 	<div class="alert alert-warning text-center errortop" data-ng-hide="!podcast.$resolved || podname.innerHTML !== ''">
     	Not a valid podcast. Perhaps it's been deleted?
     </div>
