@@ -26,7 +26,13 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 				podIcon: this.podIcon,
 				series: this.series
 			});
-
+			if ($scope.file && podcast.name)
+			{
+				var d = Date.now();
+				podcast.audioOriginal = $scope.file.name;
+				podcast.audio = d + $scope.file.name;
+				$scope.upload(d + $scope.file.name);
+			}
 			//if empty icon field, use our default
 			if ( podcast.podIcon === '' || typeof podcast.podIcon === 'undefined' ) {
 				podcast.podIcon = $scope.defaultPodIcon;
@@ -111,6 +117,13 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 				if ( podcast.isBlog ) podcast.podIcon = $scope.defaultBlogIcon;
 				else podcast.podIcon =  $scope.defaultPodIcon;
 			}
+			if ($scope.file && podcast.name)
+			{
+				var d = Date.now();
+				podcast.audioOriginal = $scope.file.name;
+				podcast.audio = d + $scope.file.name;
+				$scope.upload(d + $scope.file.name);
+			}
 			podcast.$update(function() {
 				$location.path('podcasts/' + podcast._id);
 			}, function(errorResponse) {
@@ -136,8 +149,58 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 				});
 			}
 		};
+		$scope.sizeLimit      = 10585760; // 10MB in Bytes
+		$scope.uploadProgress = 0;
+		$scope.creds = {
+				  bucket: 'podcast-manager',
+				  access_key: 'AKIAJ6DZHPG5QODTOICQ',
+				  secret_key: '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'
+			   };
+		$scope.upload = function(filename) {
+			AWS.config.update({ accessKeyId: $scope.creds.access_key, secretAccessKey: $scope.creds.secret_key });
+			AWS.config.region = 'us-east-1';
+			var bucket = new AWS.S3({ params: { Bucket: $scope.creds.bucket } });
 
-		$scope.uploadFile = function(){
+			if ($scope.file)
+			{
+				// Perform File Size Check First
+				var fileSize = Math.round(parseInt($scope.file.size));
+				if (fileSize > $scope.sizeLimit) {
+				  toastr.error('Sorry, your attachment is too big. <br/> Maximum 10 MB','File Too Large');
+				  return false;
+				}
+				// Prepend Unique String To Prevent Overwrites
+				var uniqueFileName = filename;
+
+				var params = { Key: uniqueFileName, ContentType: $scope.file.type, Body: $scope.file, ServerSideEncryption: 'AES256' };
+
+				bucket.putObject(params, function(err, data) {
+				  toastr.info('A success message will show on completion', 'Attempting File Upload')
+				  if(err) {
+					toastr.error(err.message,err.code);
+					return false;
+				  }
+				  else {
+					// Upload Successfully Finished
+					toastr.success('File Uploaded Successfully', 'Done');
+
+					// Reset The Progress Bar
+					setTimeout(function() {
+					  $scope.uploadProgress = 0;
+					  $scope.$digest();
+					}, 4000);
+				  }
+				})
+				.on('httpUploadProgress',function(progress) {
+				  $scope.uploadProgress = Math.round(progress.loaded / progress.total * 100);
+				  $scope.$digest();
+				});
+			}
+			else
+			{
+				// No File Selected
+				toastr.error('Please select a file to upload');
+			}
 		};
 
 		$scope.getAudioUrl = function() {

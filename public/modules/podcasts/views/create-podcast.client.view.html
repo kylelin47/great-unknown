@@ -2,7 +2,7 @@
 	<div class="page-header">
 		<h1>Create New Podcast</h1>
 	</div>
-	<div data-ng-if="((authentication.user) && (authentication.user.username == 'admin'))">	
+	<div data-ng-show="((authentication.user) && (authentication.user.username == 'admin'))">	
 	<div class="col-md-12">
 		<form class="form-horizontal" data-ng-submit="create()" novalidate>
 			<fieldset>
@@ -15,10 +15,9 @@
 				<div class="form-group">
 					<label class="control-label" for="audio">Audio</label>
 					<input type="file" 
-						   accept=".mp3, .ogg, .wav" 
 						   name="audio"
 						   id="audio"
-						   file-model="myFile" />
+						   file />
 				</div>
 				<div class="form-group">
 					<label class="control-label" for="blurb">Abstract (120 character limit)</label>
@@ -63,7 +62,7 @@
 					<input data-ng-model="podIcon" data-ng-init="podIcon = ''" placeholder="Link to desired icon (80x80p)" class="create-pod-iconlink-bar"/>
 					<img data-ng-hide="podIcon === ''" src={{podIcon}} alt="Icon" style="width:80px;height:80px">
 					<img data-ng-show="podIcon === ''" 
-					 src="{{defaultPodIcon}}" alt="Default Icon" style="width:80px;height:80px"
+					 src="{{defaultPodIcon}}" alt="Default Icon" style="width:80px;height:80px">
 				</div>
 				<div data-ng-show="error" class="text-danger">
 					<strong data-ng-bind="error"></strong>
