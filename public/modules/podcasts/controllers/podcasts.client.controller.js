@@ -151,12 +151,8 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 		};
 		$scope.sizeLimit      = 10585760; // 10MB in Bytes
 		$scope.uploadProgress = 0;
-		$scope.creds = {
-				  bucket: 'podcast-manager',
-				  access_key: 'AKIAJ6DZHPG5QODTOICQ',
-				  secret_key: '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'
-			   };
 		$scope.upload = function(filename) {
+			$scope.creds = amazon_credentials;
 			AWS.config.update({ accessKeyId: $scope.creds.access_key, secretAccessKey: $scope.creds.secret_key });
 			AWS.config.region = 'us-east-1';
 			var bucket = new AWS.S3({ params: { Bucket: $scope.creds.bucket } });
@@ -181,7 +177,7 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 				  }
 				  else {
 					// Upload Successfully Finished
-					toastr.success('File Uploaded Successfully. Refresh Page To Listen.', 'Done');
+					toastr.success('File Uploaded Successfully.<br />Refresh Page To Listen.', 'Done');
 
 					// Reset The Progress Bar
 					setTimeout(function() {
