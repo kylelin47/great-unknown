@@ -173,16 +173,15 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 				var uniqueFileName = filename;
 
 				var params = { Key: uniqueFileName, ContentType: $scope.file.type, Body: $scope.file, ServerSideEncryption: 'AES256' };
-
+				toastr.info('A success message will show on completion', 'Attempting File Upload');
 				bucket.putObject(params, function(err, data) {
-				  toastr.info('A success message will show on completion', 'Attempting File Upload')
 				  if(err) {
 					toastr.error(err.message,err.code);
 					return false;
 				  }
 				  else {
 					// Upload Successfully Finished
-					toastr.success('File Uploaded Successfully', 'Done');
+					toastr.success('File Uploaded Successfully. Refresh Page To Listen.', 'Done');
 
 					// Reset The Progress Bar
 					setTimeout(function() {
@@ -205,7 +204,7 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 
 		$scope.getAudioUrl = function() {
 			var podcast = $scope.podcast;
-			return $sce.trustAsResourceUrl('uploads/' + podcast.audio);
+			return $sce.trustAsResourceUrl('https://s3.amazonaws.com/podcast-manager/' + podcast.audio);
 		};
 
 		$scope.getNumber = function(num) {
