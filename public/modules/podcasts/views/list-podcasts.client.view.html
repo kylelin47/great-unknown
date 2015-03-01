@@ -2,8 +2,7 @@
 	<div class="page-header">
 		<b class="browse-pod-left big-text-pod">Your Podcasts</b>
 		<br /><br />
-<div data-ng-if+="((authentication.user) && (authentication.user.username == 'admin'))">
-
+<div data-ng-if="((authentication.user) && (authentication.user.username == 'admin'))">
 		<select data-ng-model="filter.category" name="category" id="category" class="browse-pod-dropdown" ng-init="category = 'All'" >
 			<option value="" selected>All</option>
 			<option value="Misc">Miscellaneous</option>
@@ -17,8 +16,8 @@
 			<div class="inner-addon left-addon">
 				<i class="glyphicon glyphicon-search"></i>
 				<input type="search" data-ng-model="search.name" placeholder="Search by name" class="form-control"></input>
+			</div>
 		</div>
-	</div>
 	<div style="clear: both;"></div>
 	<div class="pull-left btn-group-vertical col-xs-3">
 		<!-- Series Tab -->
@@ -86,6 +85,7 @@
 					</a>
 				</span>
 				<div style="clear: both;"></div>
+            </span>
 		</div>
 	</section>
 	<div class="alert alert-warning text-center col-md-9 pull-right" data-ng-hide="!podcasts.$resolved || podcasts.length">
