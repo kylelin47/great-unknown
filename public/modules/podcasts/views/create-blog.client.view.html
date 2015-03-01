@@ -37,12 +37,35 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<h4 class="browse-pod-left">Icon: </h4>
-					<input data-ng-model="podIcon" data-ng-init="podIcon = ''" placeholder="Link to desired icon (80x80p)"
-					 class="create-pod-iconlink-bar" />
-					<img data-ng-hide="podIcon === ''" src={{podIcon}} alt="Icon" style="width:80px;height:80px">
-					<img data-ng-show="podIcon === ''" 
-					 src="{{defaultBlogIcon}}" alt="Default Icon" style="width:80px;height:80px"
+					<label class="col-sm-1 control-label" for="category">Category</label>
+					<div class="col-sm-4">
+						<select data-ng-model="category" id="category" name="category" class="form-control"
+						        data-ng-init="category='Misc'">
+							<option value="Misc">Miscellaneous</option>
+							<option value="Sports">Sports</option>
+							<option value="Comedy">Comedy</option>
+							<option value="Entertainment">Entertainment</option>
+							<option value="News">News</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="series" class="col-sm-1 control-label">Series</label>
+					<div class="col-sm-4">
+						<input type="text" id="series" data-ng-model="series" placeholder="Series this blog is a part of" class="form-control" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-1 control-label" for="icon">Icon</label>
+					<div class="col-sm-4">
+						<input type="text" id="icon" data-ng-model="podIcon" placeholder="Link to desired icon (80x80p)" class="form-control" data-ng-init="podIcon = ''" />
+					</div>
+					<div class="col-sm-6">
+						<img data-ng-hide="podIcon === ''" src={{podIcon}} alt="Icon" class="pod-icon" />
+						<span data-ng-show="podIcon === ''">
+							<img src="{{defaultBlogIcon}}" alt="Default Icon" class="pod-icon" />
+						</span>
+					</div>
 				</div>
 				<div data-ng-show="error" class="text-danger">
 					<strong data-ng-bind="error"></strong>

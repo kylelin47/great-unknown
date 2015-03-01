@@ -131,6 +131,14 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 			});
 		};
 
+		$scope.saveByRef = function(podcast) {
+			podcast.$update(function() {
+				//maybe do something
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
+
 		// Find a list of Podcasts
 		$scope.find = function() {
 			$scope.podcasts = Podcasts.query();

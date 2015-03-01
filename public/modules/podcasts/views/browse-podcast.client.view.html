@@ -2,7 +2,7 @@
 	<div class="page-header">
 		<b class="browse-pod-left big-text-pod">Podcasts</b>
 		<br /><br />
-	
+
 	<div ng-hide="currentPage != 1">
 			<select data-ng-model="filter.category" name="category" id="category" class="browse-pod-dropdown"
 			 data-ng-init="category = 'All'" >
@@ -31,7 +31,7 @@
 			<div style="clear: both;"></div>
 		</label>
 	</div>
-	
+
 	<section data-ng-hide="currentPage <= 0 || currentPage*perPage - perPage >= (podcastsf=(podcastsS=(podcastsR=(podcasts | filter:seriesRadio) | filter:search) | filter:filter)).length">
 		<a ng-show="currentPage != 1" class="text-muted pull-left col-xs-3 series-radio-txt" href="/#!/podcasts/browse/1">Return to page one to filter results.</a>
 		<div class="list-group col-md-9 pull-right">
@@ -63,7 +63,7 @@
 						</p>
 					</div>
 					<div class="pull-right">
-						<img data-ng-hide="podcast.podIcon === ''" src={{podcast.podIcon}} alt="Icon" style="width:80px;height:80px;margin-right:15px;">
+						<img data-ng-hide="podcast.podIcon === ''" src={{podcast.podIcon}} alt="Icon" class="pod-icon pod-icon-right" />
 					</div>
 				</div>
 				<div style="clear: both;"></div>

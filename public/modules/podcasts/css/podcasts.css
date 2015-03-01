@@ -142,3 +142,12 @@ textarea[name="comText"] {
   height: 400px;
   overflow-y: scroll;
 }
+
+img.pod-icon {
+  width: 80px;
+  height: 80px;
+}
+
+img.pod-icon-right {
+  margin-right: 15px;
+}
