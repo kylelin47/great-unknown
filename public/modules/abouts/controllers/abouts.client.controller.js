@@ -1,8 +1,8 @@
 'use strict';
 
 // Abouts controller
-angular.module('abouts').controller('AboutsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Abouts', 'Podcasts', '$sce',
-	function($scope, $stateParams, $location, Authentication, Abouts, Podcasts, $sce) {
+angular.module('abouts').controller('AboutsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Abouts', 'Podcasts', '$sce', '$window',
+	function($scope, $stateParams, $location, Authentication, Abouts, Podcasts, $sce, $window) {
 		$scope.authentication = Authentication;
 		// Create new About
 		$scope.create = function() {

@@ -1,17 +1,22 @@
 'use strict';
 // Podcasts controller
 
-angular.module('podcasts').controller('PodcastsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Podcasts', '$sce',
-	function($scope, $stateParams, $location, Authentication, Podcasts, $sce) {
+angular.module('podcasts').controller('PodcastsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Podcasts', '$sce', '$window',
+	function($scope, $stateParams, $location, Authentication, Podcasts, $sce, $window) {
 		$scope.authentication = Authentication;
 		$scope.currentPage = parseInt($stateParams.page, 10);
 		$scope.defaultPodIcon = 'http://i.imgur.com/f7oBepl.png?1';
 		$scope.defaultBlogIcon = 'http://i.imgur.com/rKe21My.png?1';
-		if ($location.path() === '/podcasts/browse/')
+		var path = $location.path();
+		if (path === '/podcasts/browse/')
 		{
 			$scope.currentPage = 1;
 		}
 		$scope.perPage = 6;
+		if (path.substr(0, 17) === '/podcasts/browse/') $window.document.title = $window.document.title.substr(0,30) + ' - Browse Podcasts';
+		else if (path === '/podcasts/create') $window.document.title = $window.document.title.substr(0,30) + ' - Create Podcast';
+		else if (path === '/podcasts/create/blog') $window.document.title = $window.document.title.substr(0,30) + ' - Create Blog';
+
 		// Create new Podcast
 		$scope.create = function() {
 			// Create new Podcast object
