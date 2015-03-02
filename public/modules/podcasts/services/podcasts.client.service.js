@@ -11,6 +11,7 @@ angular.module('podcasts').factory('Podcasts', ['$resource',
 		});
 	}
 ]);
+
 // From endorama @ https://gist.github.com/endorama/7369006
 angular.module('podcasts').directive('script', function() {
     return {
@@ -26,6 +27,25 @@ angular.module('podcasts').directive('script', function() {
 	  }
 	};
 });
+
+angular.module('podcasts').directive('file', function() {
+  return {
+    restrict: 'AE',
+    scope: {
+      file: '@'
+    },
+    link: function(scope, el, attrs){
+      el.bind('change', function(event){
+        var files = event.target.files;
+        var file = files[0];
+        scope.file = file;
+        scope.$parent.file = file;
+        scope.$apply();
+      });
+    }
+  };
+});
+
 angular.module('podcasts').filter('range', function() {
   return function(input, total) {
     total = parseInt(total);

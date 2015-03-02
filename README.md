@@ -16,10 +16,22 @@ Jinchi Liu|jliu8023
 
 Helpful Information
 -----------------------
-Clone this repository then do:
+**Setup**
+
+1. git clone https://github.com/kylelin47/great-unknown.git
+2. cd great-unknown
+3. npm install
+4. Download the folder 'codemwnci' from https://github.com/codemwnci/markdown-editpreview-ng.js/tree/master/lib/codemwnci and place it in public/lib
+5. Create a file called 'secretkey.js' in public containing your amazon credentials in this format:
 ```
-npm install
+var amazon_credentials = 
+		{
+		  bucket: 'my-bucket',
+		  access_key: 'my-access-key',
+		  secret_key: 'my-secret-key'
+      };
 ```
+Start mongodb, then 'grunt' starts the server, 'grunt test' runs tests, view at localhost:3000
 
 To add new packages and have it added to package.json:
 ```
@@ -34,14 +46,7 @@ To use a new Bootstrap Theme:
 - Then delete bootstrap-theme.css from that same folder
 - Now it should look cool
 
-Non-NPM Available Libraries Used:
-
-https://github.com/codemwnci/markdown-editpreview-ng.js
-
 User Stories:
 
 https://trello.com/b/zHEzMTHa/great-unknown-cen3031
 
-Amazon S3 Upload Guide:
-
-http://www.cheynewallace.com/uploading-to-s3-with-angularjs/
