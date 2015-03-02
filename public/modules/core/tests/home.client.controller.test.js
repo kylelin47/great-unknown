@@ -20,8 +20,6 @@
 
 		}));
 
-
-
 		it('should expose the authentication service', function() {
 			expect(scope.authentication).toBeTruthy();
 		});
@@ -29,6 +27,6 @@
         it('should pass parameter into RSScontroller', function(){
             scope.modalOpen('lg');
             expect().tohaveBeenCalled();
-        })
+        });
 	});
 })();

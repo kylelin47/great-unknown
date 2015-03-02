@@ -60,7 +60,7 @@
 							<p class="lead" data-ng-bind="podcast.blurb" data-ng-click="showEditAb=true" 
 							   data-ng-show="!showEditAb"></p>
 						    <form data-ng-show="showEditAb" data-ng-submit="saveByRef(podcast); showEditAb=false">
-								<input type="text" class="form-control lead" data-ng-model="podcast.blurb" />
+								<input type="text" class="form-control" data-ng-model="podcast.blurb" />
 							</form>
 						</span>
 						<p data-ng-hide="podcast.series === ''" class="text-muted">Series: 

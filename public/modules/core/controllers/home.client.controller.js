@@ -8,8 +8,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 
         $scope.data = {
             feedSrc:''
-        }
-
+        };
 
         //***************************Modal window for Rss feed********************************//
 
@@ -21,8 +20,6 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 
 
             var modalInstance = $modal.open({
-
-
                 templateUrl: 'modules/core/views/feed.client.view.html',
                 controller: function($scope, $modalInstance,items){
                     $scope.items = items;

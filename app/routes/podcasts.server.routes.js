@@ -26,26 +26,6 @@ module.exports = function(app) {
 		.put(users.requiresLogin, podcasts.hasAuthorization, podcasts.update)
 		.delete(users.requiresLogin, podcasts.hasAuthorization, podcasts.delete);
 
-	var fs = require('fs');
-	app.post('/uploads/audio/:date', function(req,res){
-		console.log(req.params.date);
-		console.log(req.body);
-		var ext = '.' + req.files.file.extension;
-		var newName = req.files.file.path.replace(ext, req.params.date + ext);
-		fs.exists(newName, function(exists) {
-			if (exists) {
-				fs.unlink(req.files.file.path, function (err) {
-				  if (err) console.log('No overwrite: ' + err);
-				});
-			}
-			else {
-				fs.rename(req.files.file.path, newName, function(err) {
-					if ( err ) console.log('ERROR: ' + err);
-				});
-			}
-		});
-		console.log(req.files);
-	});
 	// Finish by binding the Podcast middleware
 	app.param('podcastId', podcasts.podcastByID);
 };
