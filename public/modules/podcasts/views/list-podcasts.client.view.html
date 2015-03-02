@@ -53,14 +53,14 @@
 								<strong>{{podcast.name}}</strong>
 							</h3>
 							<form data-ng-show="showEdit" data-ng-submit="saveByRef(podcast); showEdit=false">
-								<input type="text" class="form-control" data-ng-model="podcast.name" required />
+								<input type="text" class="form-control edit-name" data-ng-model="podcast.name" required />
 							</form>
 						</span>
 						<span data-ng-init="showEditAb = false">
 							<p class="lead" data-ng-bind="podcast.blurb" data-ng-click="showEditAb=true" 
 							   data-ng-show="!showEditAb"></p>
 						    <form data-ng-show="showEditAb" data-ng-submit="saveByRef(podcast); showEditAb=false">
-								<input type="text" class="form-control" data-ng-model="podcast.blurb" />
+								<input type="text" class="form-control lead" data-ng-model="podcast.blurb" />
 							</form>
 						</span>
 						<p data-ng-hide="podcast.series === ''" class="text-muted">Series: 

@@ -151,3 +151,7 @@ img.pod-icon {
 img.pod-icon-right {
   margin-right: 15px;
 }
+
+.edit-name {
+  font-size: 25px;
+}
