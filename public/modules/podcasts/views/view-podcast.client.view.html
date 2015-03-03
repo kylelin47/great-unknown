@@ -27,7 +27,7 @@
 						Average Listen: <span id="avgListen">{{getAvgSeconds()}}</span>
 						seconds
 						<br />
-						<a href="https://s3.amazonaws.com/podcast-manager/{{podcast.audio}}" download>Download Audio</a>
+						<a data-ng-show="podcast.audio != 'No file selected'" href="https://s3.amazonaws.com/podcast-manager/{{podcast.audio}}" download>Download Audio</a>
 					</div>
             	</div>
                 <img data-ng-hide="podcast.podIcon === ''" src={{podcast.podIcon}} alt="Icon" style="width:80px;height:80px" class="view-pod-img">

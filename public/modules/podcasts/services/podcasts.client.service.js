@@ -36,6 +36,17 @@ angular.module('podcasts').directive('file', function() {
     },
     link: function(scope, el, attrs){
       el.bind('change', function(event){
+        var ext = this.value.substring(this.value.lastIndexOf('.'), this.value.length);
+        switch(ext)
+        {
+         case '.mp3':
+         case '.ogg':
+         case '.wav':
+           break;
+         default:
+           alert('Invalid file extension. Accepted are .mp3, .ogg, and .wav');
+           this.value='';
+        }
         var files = event.target.files;
         var file = files[0];
         scope.file = file;
