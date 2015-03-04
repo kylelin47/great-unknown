@@ -38,16 +38,18 @@
 		<!-- Look into orderBy AND filter in same query -->
 			<a data-ng-repeat="podcast in podcastsf=(podcastsS=(podcastsR=(podcasts | filter:seriesRadio) | filter:search) | filter:filter).slice((currentPage-1)*perPage,currentPage*perPage)" data-ng-href="#!/podcasts/{{podcast._id}}" class="list-group-item">
 				<small class="list-group-item-text">
-					<p class="browse-pod-left">
-					Posted on
-					<span data-ng-bind="podcast.created | date:'medium'"></span>
-					by
-					<span data-ng-bind="podcast.user.displayName"></span></p>
-					<strong class="browse-pod-right">
-						{{podcast.category}}, 
-						<span data-ng-hide="podcast.isBlog">Podcast</span>
-						<span data-ng-hide="!podcast.isBlog">Blog</span>
-					</strong>
+					<div class="row">
+						<p class="col-md-6 text-left">
+						Posted on
+						<span data-ng-bind="podcast.created | date:'medium'"></span>
+						by
+						<span data-ng-bind="podcast.user.displayName"></span></p>
+						<strong class="col-md-6 text-right">
+							{{podcast.category}}, 
+							<span data-ng-hide="podcast.isBlog">Podcast</span>
+							<span data-ng-hide="!podcast.isBlog">Blog</span>
+						</strong>
+					</div>
 				</small>
 				<div style="clear: both;"></div>
 				<div class="row">
