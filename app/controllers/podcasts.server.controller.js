@@ -4,10 +4,44 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
+	fs = require('fs'),
 	errorHandler = require('./errors.server.controller'),
 	Podcast = mongoose.model('Podcast'),
+	path = require('path'),
 	_ = require('lodash');
 
+function updateFeed() {
+	var path_to_feed = path.join(__dirname, '../..', 'public', 'feed.xml');
+	var xml_text = '<?xml version = "1.0" encoding = "utf-8"?>\n' +
+				   '<rss version = "2.0">\n' +
+				   '\t<channel>\n';
+   Podcast.find().sort('-created').populate('user', 'displayName').exec(function(err, podcasts) {
+		if (err) {
+			console.log('Error');
+		} else {
+			for (var index in podcasts) {
+				var podcast = podcasts[index];
+				xml_text +=
+					'\t\t<item>\n' +
+			        '\t\t<title>' + podcast.name + ', ' + podcast.category + '</title>\n' +
+			        '\t\t<description>' + podcast.blurb + '</description>\n' +
+			        '\t\t<language>en-us</language>\n' +
+			        '\t\t<image>\n' +
+			            '\t\t\t<title>My Icon</title>\n' +
+			            '\t\t\t<src>' + podcast.podIcon + '</src>\n' +
+			            '\t\t\t<width>40</width>\n' +
+			            '\t\t\t<height>40</height>\n' +
+			        '\t\t</image>\n' +
+			        '\t\t</item>\n';
+			}
+			xml_text += '\t</channel>\n</rss>';
+			fs.writeFile(path_to_feed, xml_text, function (err) {
+			  if (err) throw err;
+			  console.log('It\'s saved!');
+			});
+		}
+	});
+}
 /**
  * Create a Podcast
  */
@@ -27,6 +61,7 @@ exports.create = function(req, res) {
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
+			updateFeed();
 			res.jsonp(podcast);
 		}
 	});
@@ -55,6 +90,7 @@ exports.update = function(req, res) {
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
+			updateFeed();
 			res.jsonp(podcast);
 		}
 	});
@@ -71,6 +107,7 @@ exports.delete = function(req, res) {
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
+			updateFeed();
 			res.jsonp(podcast);
 		}
 	});

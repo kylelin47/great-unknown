@@ -56,3 +56,4 @@ logs/
 build/
 public/uploads
 secretkey.js
+feed.xml
