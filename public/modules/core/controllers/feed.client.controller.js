@@ -19,13 +19,10 @@ angular.module('core').controller('RssController', ['$scope', 'Authentication','
             });
         };
 
-
         //***************************Modal window for Rss feed********************************//
         $scope.items = ['item1', 'item2', 'item3'];
 
         //***************************Modal window for Rss feed********************************//
 
     }
-
-
 ]);

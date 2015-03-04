@@ -7,8 +7,7 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 		$scope.currentPage = parseInt($stateParams.page, 10);
 		$scope.defaultPodIcon = 'http://i.imgur.com/f7oBepl.png?1';
 		$scope.defaultBlogIcon = 'http://i.imgur.com/rKe21My.png?1';
-		if ($location.path() === '/podcasts/browse/')
-		{
+		if ($location.path() === '/podcasts/browse/') {
 			$scope.currentPage = 1;
 		}
 		$scope.perPage = 6;
@@ -26,8 +25,7 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 				podIcon: this.podIcon,
 				series: this.series
 			});
-			if ($scope.file && podcast.name)
-			{
+			if ($scope.file && podcast.name) {
 				var d = Date.now();
 				podcast.audioOriginal = $scope.file.name;
 				podcast.audio = d + $scope.file.name;
@@ -117,8 +115,7 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 				if ( podcast.isBlog ) podcast.podIcon = $scope.defaultBlogIcon;
 				else podcast.podIcon =  $scope.defaultPodIcon;
 			}
-			if ($scope.file && podcast.name)
-			{
+			if ($scope.file && podcast.name) {
 				var d = Date.now();
 				podcast.audioOriginal = $scope.file.name;
 				podcast.audio = d + $scope.file.name;
@@ -146,12 +143,9 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 
 		// Find existing Podcast
 		$scope.findOne = function() {
-			if ($location.path() === '/podcasts/browse')
-			{
+			if ($location.path() === '/podcasts/browse') {
 				$location.path('/podcasts/browse/1');
-			}
-			else
-			{
+			} else {
 				$scope.podcast = Podcasts.get({ 
 					podcastId: $stateParams.podcastId
 				});
@@ -165,8 +159,7 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 			AWS.config.region = 'us-east-1';
 			var bucket = new AWS.S3({ params: { Bucket: $scope.creds.bucket } });
 
-			if ($scope.file)
-			{
+			if ($scope.file) {
 				// Perform File Size Check First
 				var fileSize = Math.round(parseInt($scope.file.size));
 				if (fileSize > $scope.sizeLimit) {
@@ -198,9 +191,7 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 				  $scope.uploadProgress = Math.round(progress.loaded / progress.total * 100);
 				  $scope.$digest();
 				});
-			}
-			else
-			{
+			} else {
 				// No File Selected
 				toastr.error('Please select a file to upload');
 			}
