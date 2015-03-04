@@ -15,7 +15,7 @@ function updateFeed() {
 	var xml_text = '<?xml version = "1.0" encoding = "utf-8"?>\n' +
 				   '<rss version = "2.0">\n' +
 				   '\t<channel>\n';
-   Podcast.find().sort('-created').populate('user', 'displayName').exec(function(err, podcasts) {
+	Podcast.find().sort('-created').populate('user', 'displayName').exec(function(err, podcasts) {
 		if (err) {
 			console.log('Error');
 		} else {
@@ -26,6 +26,7 @@ function updateFeed() {
 			        '\t\t<title>' + podcast.name + ', ' + podcast.category + '</title>\n' +
 			        '\t\t<description>' + podcast.blurb + '</description>\n' +
 			        '\t\t<language>en-us</language>\n' +
+			        '\t\t<link>' + 'https://lbcqrcfwju.localtunnel.me/#!/podcasts/' + podcast._id + '</link>\n' +
 			        '\t\t<image>\n' +
 			            '\t\t\t<title>My Icon</title>\n' +
 			            '\t\t\t<src>' + podcast.podIcon + '</src>\n' +
@@ -37,7 +38,7 @@ function updateFeed() {
 			xml_text += '\t</channel>\n</rss>';
 			fs.writeFile(path_to_feed, xml_text, function (err) {
 			  if (err) throw err;
-			  console.log('It\'s saved!');
+			  console.log('Feed updated');
 			});
 		}
 	});
@@ -54,7 +55,7 @@ exports.create = function(req, res) {
 		podcast.blurb = podcast.blog.substring(0, 120);
 		if (podcast.blog.length > 120) podcast.blurb += ' . . .';
 	}
-//podcast.normalized = podcast.name.toLowerCase();
+	//podcast.normalized = podcast.name.toLowerCase();
 	podcast.save(function(err) {
 		if (err) {
 			return res.status(400).send({
