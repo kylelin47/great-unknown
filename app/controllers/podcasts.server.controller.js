@@ -37,8 +37,8 @@ function updateFeed() {
 			}
 			xml_text += '\t</channel>\n</rss>';
 			fs.writeFile(path_to_feed, xml_text, function (err) {
-			  if (err) throw err;
-			  console.log('Feed updated');
+				if (err) throw err;
+				console.log('Feed updated');
 			});
 		}
 	});
@@ -83,7 +83,7 @@ exports.update = function(req, res) {
 
 	podcast = _.extend(podcast , req.body);
 	podcast.blurb = podcast.blurb.substring(0, 120);
-//podcast.normalized = podcast.name.toLowerCase();
+	//podcast.normalized = podcast.name.toLowerCase();
 
 	podcast.save(function(err) {
 		if (err) {
