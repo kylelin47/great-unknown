@@ -19,6 +19,7 @@ module.exports = {
 	},
 	app: {
 		title: 'Podcast Manager - Development',
+		description: 'Full-Stack JavaScript Podcast Manager with MongoDB, Express, AngularJS, and Node.js',
 		admin_username: 'admin'
 	},
 	facebook: {

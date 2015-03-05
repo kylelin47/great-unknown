@@ -7,6 +7,7 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 		$scope.currentPage = parseInt($stateParams.page, 10);
 		$scope.defaultPodIcon = 'http://i.imgur.com/f7oBepl.png?1';
 		$scope.defaultBlogIcon = 'http://i.imgur.com/rKe21My.png?1';
+		$scope.tunnel = 'https://npnghegnjd.localtunnel.me';
 		if ($location.path() === '/podcasts/browse/') {
 			$scope.currentPage = 1;
 		}
