@@ -200,6 +200,9 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 
 		$scope.getAudioUrl = function() {
 			var podcast = $scope.podcast;
+			if (podcast.audio === 'No file selected') {
+				return 'No audio';
+			}
 			return $sce.trustAsResourceUrl('https://s3.amazonaws.com/podcast-manager/' + podcast.audio);
 		};
 
@@ -222,6 +225,5 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 			}
 			return series_arr;
 		};
-
 	}
 ]);

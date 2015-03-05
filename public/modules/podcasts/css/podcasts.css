@@ -70,6 +70,8 @@ div.errortop {
 
 .view-pod-img {
   float: right;
+  width: 80px;
+  height: 80px;
 }
 
 .bottom-buffer {
