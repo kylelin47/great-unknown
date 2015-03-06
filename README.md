@@ -29,13 +29,21 @@ var amazon_credentials =
 		  bucket: 'my-bucket',
 		  access_key: 'my-access-key',
 		  secret_key: 'my-secret-key'
-      };
+		};
 ```
 Start mongodb, then 'grunt' starts the server, 'grunt test' runs tests, view at localhost:3000
+
+To emulate a website for things like Facebook sharing:
+
+http://localtunnel.me/
 
 To add new packages and have it added to package.json:
 ```
 npm install <pkg> --save
+```
+or
+```
+bower install <pkg> --save
 ```
 
 We're using tabs, not spaces
@@ -49,4 +57,3 @@ To use a new Bootstrap Theme:
 User Stories:
 
 https://trello.com/b/zHEzMTHa/great-unknown-cen3031
-

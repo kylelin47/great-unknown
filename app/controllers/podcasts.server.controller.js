@@ -17,7 +17,7 @@ function updateFeed() {
 				   '\t<channel>\n';
 	Podcast.find().sort('-created').populate('user', 'displayName').exec(function(err, podcasts) {
 		if (err) {
-			console.log('Error');
+			throw err;
 		} else {
 			for (var index in podcasts) {
 				var podcast = podcasts[index];
@@ -38,7 +38,6 @@ function updateFeed() {
 			xml_text += '\t</channel>\n</rss>';
 			fs.writeFile(path_to_feed, xml_text, function (err) {
 				if (err) throw err;
-				console.log('Feed updated');
 			});
 		}
 	});
