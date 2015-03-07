@@ -9,7 +9,10 @@ var mongoose = require('mongoose'),
 	Podcast = mongoose.model('Podcast'),
 	path = require('path'),
 	_ = require('lodash');
-
+/*
+ * Feed control variables
+ */
+var rss_max_entries = 50;
 function updateFeed(podcasts) {
 	var path_to_feed = path.join(__dirname, '../..', 'public', 'feed.xml');
 	var xml_text = '<?xml version = "1.0" encoding = "utf-8"?>\n' +
@@ -55,7 +58,7 @@ exports.create = function(req, res) {
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			Podcast.find().sort('-created').populate('user', 'displayName').exec(function(err, podcasts) {
+			Podcast.find().sort('-created').limit(rss_max_entries).exec(function(err, podcasts) {
 				if (err) {
 					return res.status(400).send({
 						message: errorHandler.getErrorMessage(err)
@@ -92,7 +95,7 @@ exports.update = function(req, res) {
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			Podcast.find().sort('-created').populate('user', 'displayName').exec(function(err, podcasts) {
+			Podcast.find().sort('-created').limit(rss_max_entries).exec(function(err, podcasts) {
 				if (err) {
 					return res.status(400).send({
 						message: errorHandler.getErrorMessage(err)
@@ -117,7 +120,7 @@ exports.delete = function(req, res) {
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			Podcast.find().sort('-created').populate('user', 'displayName').exec(function(err, podcasts) {
+			Podcast.find().sort('-created').limit(rss_max_entries).exec(function(err, podcasts) {
 				if (err) {
 					return res.status(400).send({
 						message: errorHandler.getErrorMessage(err)
