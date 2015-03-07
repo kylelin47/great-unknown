@@ -62,7 +62,7 @@ exports.create = function(req, res) {
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			Podcast.find().sort('-created').limit(rss_max_entries).populate('user', 'displayName').exec(function(err, podcasts) {
+			Podcast.find().sort('-created').limit(rss_max_entries).exec(function(err, podcasts) {
 				if (err) {
 					return res.status(400).send({
 						message: errorHandler.getErrorMessage(err)
@@ -99,7 +99,7 @@ exports.update = function(req, res) {
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			Podcast.find().sort('-created').limit(rss_max_entries).populate('user', 'displayName').exec(function(err, podcasts) {
+			Podcast.find().sort('-created').limit(rss_max_entries).exec(function(err, podcasts) {
 				if (err) {
 					return res.status(400).send({
 						message: errorHandler.getErrorMessage(err)
@@ -124,7 +124,7 @@ exports.delete = function(req, res) {
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			Podcast.find().sort('-created').limit(rss_max_entries).populate('user', 'displayName').exec(function(err, podcasts) {
+			Podcast.find().sort('-created').limit(rss_max_entries).exec(function(err, podcasts) {
 				if (err) {
 					return res.status(400).send({
 						message: errorHandler.getErrorMessage(err)

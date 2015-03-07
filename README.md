@@ -33,6 +33,8 @@ var amazon_credentials =
 ```
 Start mongodb, then 'grunt' starts the server, 'grunt test' runs tests, view at localhost:3000
 
+**Development Information**
+
 To emulate a website for things like Facebook sharing:
 
 http://localtunnel.me/
@@ -54,6 +56,6 @@ To use a new Bootstrap Theme:
 - Then delete bootstrap-theme.css from that same folder
 - Now it should look cool
 
-User Stories:
+**User Stories**
 
 https://trello.com/b/zHEzMTHa/great-unknown-cen3031
