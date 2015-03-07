@@ -13,12 +13,12 @@ var mongoose = require('mongoose'),
  * Feed control variables
  */
 var rss_max_entries = 50;
-function updateFeed(podcasts) {
+function updateFeed(podcasts, user) {
 	var path_to_feed = path.join(__dirname, '../..', 'public', 'feed.xml');
 	var xml_text = '<?xml version = "1.0" encoding = "utf-8"?>\n' +
 				   '<rss version = "2.0">\n' +
 				   '\t<channel>\n' + 
-				   '\t\t<title>Podcasts and Blogs of ' + podcasts[0].user.displayName + '</title>\n' +
+				   '\t\t<title>Podcasts and Blogs of ' + user.displayName + '</title>\n' +
 				   '\t\t<description>Podcasts and blogs</description>\n' +
 				   '\t\t<link>http://localhost:3000</link>\n';
 	for (var index in podcasts) {
@@ -68,7 +68,7 @@ exports.create = function(req, res) {
 						message: errorHandler.getErrorMessage(err)
 					});
 				} else {
-					updateFeed(podcasts);
+					updateFeed(podcasts, req.user);
 				}
 			});
 			res.jsonp(podcast);
@@ -105,7 +105,7 @@ exports.update = function(req, res) {
 						message: errorHandler.getErrorMessage(err)
 					});
 				} else {
-					updateFeed(podcasts);
+					updateFeed(podcasts, req.user);
 				}
 			});
 			res.jsonp(podcast);
@@ -130,7 +130,7 @@ exports.delete = function(req, res) {
 						message: errorHandler.getErrorMessage(err)
 					});
 				} else {
-					updateFeed(podcasts);
+					updateFeed(podcasts, req.user);
 				}
 			});
 			res.jsonp(podcast);
