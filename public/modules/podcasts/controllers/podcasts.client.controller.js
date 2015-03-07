@@ -155,10 +155,14 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 		$scope.sizeLimit      = 10585760; // 10MB in Bytes
 		$scope.uploadProgress = 0;
 		$scope.upload = function(filename) {
-			$scope.creds = amazon_credentials;
-			AWS.config.update({ accessKeyId: $scope.creds.access_key, secretAccessKey: $scope.creds.secret_key });
-			AWS.config.region = 'us-east-1';
-			var bucket = new AWS.S3({ params: { Bucket: $scope.creds.bucket } });
+			/* jshint ignore:start */
+			AWS.config.update({ accessKeyId: amazon_credentials.access_key, secretAccessKey: amazon_credentials.secret_key });
+			if (amazon_credentials.region) {
+				AWS.config.region = amazon_credentials.region;
+			} else {
+				AWS.config.region = 'us-east-1';
+			}
+			var bucket = new AWS.S3({ params: { Bucket: amazon_credentials.bucket } });
 
 			if ($scope.file) {
 				// Perform File Size Check First
@@ -196,6 +200,7 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 				// No File Selected
 				toastr.error('Please select a file to upload');
 			}
+			/* jshint ignore:end */
 		};
 
 		$scope.getAudioUrl = function() {

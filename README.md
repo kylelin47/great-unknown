@@ -28,9 +28,12 @@ var amazon_credentials =
 		{
 		  bucket: 'my-bucket',
 		  access_key: 'my-access-key',
-		  secret_key: 'my-secret-key'
+		  secret_key: 'my-secret-key',
+		  region: 'my-region-1'
 		};
 ```
+If region is not provided, it will assume us-east-1, which is the default in Amazon S3 if you have not configured it.
+
 Start mongodb, then 'grunt' starts the server, 'grunt test' runs tests, view at localhost:3000
 
 **Development Information**
