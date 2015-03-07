@@ -17,21 +17,25 @@ function updateFeed(podcasts) {
 	var path_to_feed = path.join(__dirname, '../..', 'public', 'feed.xml');
 	var xml_text = '<?xml version = "1.0" encoding = "utf-8"?>\n' +
 				   '<rss version = "2.0">\n' +
-				   '\t<channel>\n';
+				   '\t<channel>\n' + 
+				   '\t\t<title>Podcasts and Blogs of ' + podcasts[0].user.displayName + '</title>\n' +
+				   '\t\t<description>Podcasts and blogs</description>\n' +
+				   '\t\t<link>http://localhost:3000</link>\n';
 	for (var index in podcasts) {
 		var podcast = podcasts[index];
 		xml_text +=
 			'\t\t<item>\n' +
-	        '\t\t<title>' + podcast.name + ', ' + podcast.category + '</title>\n' +
-	        '\t\t<description>' + podcast.blurb + '</description>\n' +
-	        '\t\t<language>en-us</language>\n' +
-	        '\t\t<link>' + 'http://localhost:3000/#!/podcasts/' + podcast._id + '</link>\n' +
-	        '\t\t<image>\n' +
-	            '\t\t\t<title>My Icon</title>\n' +
-	            '\t\t\t<src>' + podcast.podIcon + '</src>\n' +
-	            '\t\t\t<width>40</width>\n' +
-	            '\t\t\t<height>40</height>\n' +
-	        '\t\t</image>\n' +
+		        '\t\t\t<title>' + podcast.name + ', ' + podcast.category + '</title>\n' +
+		        '\t\t\t<description>' + podcast.blurb + '</description>\n' +
+		        '\t\t\t<language>en-us</language>\n' +
+		        '\t\t\t<link>' + 'http://localhost:3000/#!/podcasts/' + podcast._id + '</link>\n' +
+		        '\t\t\t<pubDate>' + podcast.created.toUTCString() + '</pubDate>\n' +
+		        '\t\t\t<image>\n' +
+		            '\t\t\t\t<title>My Icon</title>\n' +
+		            '\t\t\t\t<src>' + podcast.podIcon + '</src>\n' +
+		            '\t\t\t\t<width>40</width>\n' +
+		            '\t\t\t\t<height>40</height>\n' +
+		        '\t\t\t</image>\n' +
 	        '\t\t</item>\n';
 	}
 	xml_text += '\t</channel>\n</rss>';
@@ -58,7 +62,7 @@ exports.create = function(req, res) {
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			Podcast.find().sort('-created').limit(rss_max_entries).exec(function(err, podcasts) {
+			Podcast.find().sort('-created').limit(rss_max_entries).populate('user', 'displayName').exec(function(err, podcasts) {
 				if (err) {
 					return res.status(400).send({
 						message: errorHandler.getErrorMessage(err)
@@ -95,7 +99,7 @@ exports.update = function(req, res) {
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			Podcast.find().sort('-created').limit(rss_max_entries).exec(function(err, podcasts) {
+			Podcast.find().sort('-created').limit(rss_max_entries).populate('user', 'displayName').exec(function(err, podcasts) {
 				if (err) {
 					return res.status(400).send({
 						message: errorHandler.getErrorMessage(err)
@@ -120,7 +124,7 @@ exports.delete = function(req, res) {
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			Podcast.find().sort('-created').limit(rss_max_entries).exec(function(err, podcasts) {
+			Podcast.find().sort('-created').limit(rss_max_entries).populate('user', 'displayName').exec(function(err, podcasts) {
 				if (err) {
 					return res.status(400).send({
 						message: errorHandler.getErrorMessage(err)
