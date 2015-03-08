@@ -22,7 +22,8 @@ Helpful Information
 2. cd great-unknown
 3. npm install
 4. Download the folder 'codemwnci' from https://github.com/codemwnci/markdown-editpreview-ng.js/tree/master/lib/codemwnci and place it in public/lib
-5. Create a file called 'secretkey.js' in public\modules\podcasts\controllers containing your Amazon credentials for a properly configured IAM user in this format:
+5. Set relevant environment variables: FACEBOOK_ID, FACEBOOK_SECRET, TWITTER_KEY, TWITTER_SECRET, NODE_ENV
+6. Create a file called 'secretkey.js' in public\modules\podcasts\controllers containing your Amazon credentials for a properly configured IAM user in this format:
 ```
 var amazon_credentials = 
 		{
