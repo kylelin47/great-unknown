@@ -141,13 +141,13 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 		};
 		// Find a list of Podcasts
 		$scope.findPage = function() {
-            $http.get('/podcasts/browse/' + $scope.currentPage).
-            success(function (data, status) {
-                $scope.podcasts = data;
-            }).
-            error(function (data, status) {
-                $scope.err = data;
-            });
+			$http.get('/podcasts/browse/' + $scope.currentPage).
+			success(function (data, status) {
+				$scope.podcasts = data;
+			}).
+			error(function (data, status) {
+				$scope.err = data;
+			});
 		};
 
 		// Find existing Podcast
