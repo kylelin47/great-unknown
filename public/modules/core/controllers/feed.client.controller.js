@@ -13,8 +13,11 @@ angular.module('core').controller('RssController', ['$scope', 'Authentication','
 
         $scope.feedSrc = FeedService.setFeed().feedSrc;
 
+        $scope.loadButonText="Rss_read";
+
         $scope.loadFeed=function(e){
             FeedService.parseFeed($scope.feedSrc).then(function(res){
+                $scope.loadButonText= res.data.responseData.feed.title;
                 $scope.feeds= res.data.responseData.feed.entries;
             });
         };
@@ -26,3 +29,5 @@ angular.module('core').controller('RssController', ['$scope', 'Authentication','
 
     }
 ]);
+
+

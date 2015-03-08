@@ -17,6 +17,7 @@ function updateFeed(podcasts, user) {
 	var path_to_feed = path.join(__dirname, '../..', 'public', 'feed.xml');
 	var xml_text = '<?xml version = "1.0" encoding = "utf-8"?>\n' +
 				   '<rss version = "2.0">\n' +
+<<<<<<< Updated upstream
 				   '\t<channel>\n' + 
 				   '\t\t<title>Podcasts and Blogs of ' + user.displayName + '</title>\n' +
 				   '\t\t<description>Podcasts and blogs</description>\n' +
@@ -41,6 +42,37 @@ function updateFeed(podcasts, user) {
 	xml_text += '\t</channel>\n</rss>';
 	fs.writeFile(path_to_feed, xml_text, function (err) {
 		if (err) throw err;
+=======
+				   '\t<channel>\n'+
+                    '\t\t<title>' + 'Great-Unknown Podcast' + '</title>\n';
+
+	Podcast.find().sort('-created').populate('user', 'displayName').exec(function(err, podcasts) {
+		if (err) {
+			console.log('Error');
+		} else {
+			for (var index in podcasts) {
+				var podcast = podcasts[index];
+				xml_text +=
+                    '\t\t<item>\n' +
+			        '\t\t<title>' + podcast.name + ', ' + podcast.category + '</title>\n' +
+			        '\t\t<description>' + podcast.blurb + '</description>\n' +
+			        '\t\t<language>en-us</language>\n' +
+			        '\t\t<link>' + 'https://lbcqrcfwju.localtunnel.me/#!/podcasts/' + podcast._id + '</link>\n' +
+			        '\t\t<image>\n' +
+			            '\t\t\t<title>My Icon</title>\n' +
+			            '\t\t\t<src>' + podcast.podIcon + '</src>\n' +
+			            '\t\t\t<width>40</width>\n' +
+			            '\t\t\t<height>40</height>\n' +
+			        '\t\t</image>\n' +
+			        '\t\t</item>\n';
+			}
+			xml_text += '\t</channel>\n</rss>';
+			fs.writeFile(path_to_feed, xml_text, function (err) {
+				if (err) throw err;
+				console.log('Feed updated');
+			});
+		}
+>>>>>>> Stashed changes
 	});
 }
 /**
