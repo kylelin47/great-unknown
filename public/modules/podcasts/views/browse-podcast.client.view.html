@@ -79,12 +79,12 @@
 		</div>
 	</section>
 	<div class="alert alert-warning text-center col-md-9 pull-right" data-ng-hide="!podcasts.$resolved || podcasts.length">
-		No Podcasts yet, why don't you <a href="/#!/podcasts/create">create one</a>?
+		No Podcasts yet, why don't you <a href="/#!/podcasts/create" class="text-primary">create one?</a>
 	</div>
 	<div class="alert alert-warning text-center col-md-9 pull-right" data-ng-hide="!podcasts.$resolved || ((currentPage > 0) && (currentPage*perPage - perPage < podcasts.length)) || podcasts.length === 0">
 		Nothing seems to be here.
 	</div>
-	<div class="alert alert-warning text-center col-md-9 pull-right" data-ng-show="podcasts.$resolved && (podcastsf=(podcastsS=(podcastsR=(podcasts | filter:seriesRadio) | filter:search) | filter:filter)).length === 0">
+	<div class="alert alert-warning text-center col-md-9 pull-right" data-ng-show="podcasts.$resolved && (podcastsf=(podcastsS=(podcastsR=(podcasts | filter:seriesRadio) | filter:search) | filter:filter)).length === 0 && podcasts.length > 0">
 		Your search yielded no results.
 	</div>
 </section>

@@ -223,7 +223,7 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 			var series_arr = [];
 			series_arr.push('');
 			for (var i = 0; i < podcasts.length; i++) {
-				if ( series_arr.indexOf(podcasts[i].series) === -1 && podcasts[i].series!=='' ) {
+				if ( series_arr.indexOf(podcasts[i].series) === -1 && podcasts[i].series!== '' ) {
 					series_arr.push(podcasts[i].series);
 					//if series doesnt exist in array, put it in
 				}
