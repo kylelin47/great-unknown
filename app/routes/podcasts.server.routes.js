@@ -9,7 +9,7 @@ module.exports = function(app) {
 		.post(users.requiresLogin, podcasts.hasAuthorization, podcasts.create);
 
 	app.route('/podcasts/browse/:page')
-		.get(podcasts.list);
+		.get(podcasts.getPage);
 
 	app.route('/podcasts/:podcastId')
 		.get(podcasts.read)
@@ -18,4 +18,5 @@ module.exports = function(app) {
 
 	// Finish by binding the Podcast middleware
 	app.param('podcastId', podcasts.podcastByID);
+	app.param('page', podcasts.paginate);
 };

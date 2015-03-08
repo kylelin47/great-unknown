@@ -154,6 +154,9 @@ exports.list = function(req, res) {
 	});
 };
 
+exports.getPage = function(req, res) {
+	res.jsonp(req.podcasts);
+};
 /**
  * Podcast middleware
  */
@@ -162,6 +165,16 @@ exports.podcastByID = function(req, res, next, id) {
 		if (err) return next(err);
 		if (! podcast) return next(new Error('Failed to load Podcast ' + id));
 		req.podcast = podcast ;
+		next();
+	});
+};
+
+exports.paginate = function(req, res, next, page) { 
+	console.log(page);
+	Podcast.find().limit(6).skip((page-1)*6).populate('user', 'displayName').exec(function(err, podcasts) {
+		if (err) return next(err);
+		if (! podcasts) return next(new Error('Failed to load Podcasts'));
+		req.podcasts = podcasts ;
 		next();
 	});
 };

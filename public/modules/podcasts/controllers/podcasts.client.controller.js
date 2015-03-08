@@ -1,8 +1,8 @@
 'use strict';
 // Podcasts controller
 
-angular.module('podcasts').controller('PodcastsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Podcasts', '$sce',
-	function($scope, $stateParams, $location, Authentication, Podcasts, $sce) {
+angular.module('podcasts').controller('PodcastsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Podcasts', '$sce', '$http',
+	function($scope, $stateParams, $location, Authentication, Podcasts, $sce, $http) {
 		$scope.authentication = Authentication;
 		$scope.currentPage = parseInt($stateParams.page, 10);
 		$scope.defaultPodIcon = 'http://i.imgur.com/f7oBepl.png?1';
@@ -136,10 +136,18 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 				$scope.error = errorResponse.data.message;
 			});
 		};
-
-		// Find a list of Podcasts
 		$scope.find = function() {
 			$scope.podcasts = Podcasts.query();
+		};
+		// Find a list of Podcasts
+		$scope.findPage = function() {
+            $http.get('/podcasts/browse/' + $scope.currentPage).
+            success(function (data, status) {
+                $scope.podcasts = data;
+            }).
+            error(function (data, status) {
+                $scope.err = data;
+            });
 		};
 
 		// Find existing Podcast
