@@ -66,7 +66,7 @@ describe('angularjs homepage', function() {
   });
   
     it('log out', function() {
-	 element(by.linkText('Billy Donovan')).click();
+	 element(by.id('userNameLink')).click();
 	 element(by.linkText('Signout')).click();
 	 expect(browser.getCurrentUrl()).toEqual('http://localhost:3000/#!/');
   });
@@ -99,7 +99,7 @@ describe('angularjs homepage', function() {
   
   //log out of the new account and into admin
    it('log out of new account', function() {
-	 element(by.linkText('Billy Donovan')).click();
+	 element(by.id('userNameLink')).click();
 	 element(by.linkText('Signout')).click();
 	 expect(browser.getCurrentUrl()).toEqual('http://localhost:3000/#!/');
   });
@@ -178,7 +178,7 @@ describe('angularjs homepage', function() {
   var firstName2, lastName2;
   
   it('change name with edit profile to nothing', function() {
-	element(by.linkText('Matthew Tschiggfrie')).click();
+	element(by.id('userNameLink')).click();
 	element(by.linkText('Edit Profile')).click();
 	firstName2 = element(by.id('firstName')).getAttribute('value');
 	lastName2 = element(by.id('lastName')).getAttribute('value');
@@ -196,7 +196,7 @@ describe('angularjs homepage', function() {
   });
   
   it('change password to nothing', function() {
-	element(by.linkText('Matthew Tschiggfrie')).click();
+	element(by.id('userNameLink')).click();
 	element(by.linkText('Change Password')).click();
 	element(by.id('currentPassword')).sendKeys('admin123');
 	element(by.id('submitNewPass')).click();
@@ -214,7 +214,7 @@ describe('angularjs homepage', function() {
   
   it('test to see if password really changed', function() {
 	//log out
-	 element(by.linkText('Matthew Tschiggfrie')).click();
+	 element(by.id('userNameLink')).click();
 	 element(by.linkText('Signout')).click();
 	 
 	//log in with new password
@@ -226,7 +226,7 @@ describe('angularjs homepage', function() {
   });
   
   it('try to change password by entering an incorrect pass', function() {
-	element(by.linkText('Matthew Tschiggfrie')).click();
+	element(by.id('userNameLink')).click();
 	element(by.linkText('Change Password')).click();
 	element(by.id('currentPassword')).sendKeys('admin123');
 	element(by.id('newPassword')).sendKeys('admin1234');
