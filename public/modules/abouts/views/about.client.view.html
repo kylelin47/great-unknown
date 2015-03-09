@@ -1,7 +1,7 @@
 <section data-ng-controller="AboutsController" data-ng-init="find()">
 	<div class="page-header">
 		<div class="pull-right">
-			<a data-ng-show="((authentication.user) && (authentication.user.username == 'admin'))" class="btn btn-primary" href="/#!/about/edit">
+			<a data-ng-show="((authentication.user) && (authentication.user.username == 'admin'))" id="editbutton" class="btn btn-primary" href="/#!/about/edit">
 				<i class="glyphicon glyphicon-edit"></i>
 			</a>
 		</div>
@@ -17,14 +17,14 @@
 			<img data-ng-hide="abouts[0].picture === ''" src={{abouts[0].picture}} alt="Avatar" height="100%" width="100%" />
 		</div>
 		<div class="col-sm-8 pod-blog">
-			<p><span class="text-muted">Name: </span><b>{{abouts[0].name}}</b></p>
-			<p><span class="text-muted">Email: </span><b>{{abouts[0].email}}</b></p>
-			<markdown bind-from="abouts[0].about"></markdown>
+			<p><span id = "name" class="text-muted">Name: </span><b>{{abouts[0].name}}</b></p>
+			<p><span id = "email" class="text-muted">Email: </span><b>{{abouts[0].email}}</b></p>
+			<markdown id = "about" bind-from="abouts[0].about"></markdown>
 		</div>
 		<div class="col-sm-8 col-xs-push-2">
 			<h2>About My Podcasts</h2>
 			<div class="pod-blog">
-				<markdown bind-from="abouts[0].aboutPodcasts"></markdown>
+				<markdown id = "aboutPodcasts" bind-from="abouts[0].aboutPodcasts"></markdown>
 			</div>
 		</div>
 	</div>
