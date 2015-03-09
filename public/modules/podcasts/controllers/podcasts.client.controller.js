@@ -168,14 +168,13 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 				// Perform File Size Check First
 				var fileSize = Math.round(parseInt($scope.file.size));
 				if (fileSize > $scope.sizeLimit) {
-				  toastr.error('Sorry, your attachment is too big. <br/> Maximum 10 MB','File Too Large');
+				  toastr.error('Sorry, your attachment is too big. <br /> Maximum 10 MB','File Too Large');
 				  return false;
 				}
 				// Prepend Unique String To Prevent Overwrites
 				var uniqueFileName = filename;
-
-				var params = { Key: uniqueFileName, ContentType: $scope.file.type, Body: $scope.file, ServerSideEncryption: 'AES256' };
-				toastr.info('A success message will show on completion', 'Attempting File Upload');
+				var params = { Key: uniqueFileName, ContentDisposition: 'attachment; filename="' + $scope.file.name + '"', ContentType: $scope.file.type, Body: $scope.file, ServerSideEncryption: 'AES256' };
+				toastr.info('A success message will show on completion', 'Attempting File Upload of ' + $scope.file.name);
 				bucket.putObject(params, function(err, data) {
 				  if(err) {
 					toastr.error(err.message,err.code);
