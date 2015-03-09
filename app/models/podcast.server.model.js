@@ -26,10 +26,16 @@ var PodcastSchema = new Schema({
 		trim: true
 	},
 	audio: {
+		type: String
+	},
+	audioOriginal: {
 		type: String,
 		default: 'No file selected'
 	},
-	audioOriginal: {
+	video: {
+		type: String
+	},
+	videoOriginal: {
 		type: String,
 		default: 'No file selected'
 	},

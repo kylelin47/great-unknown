@@ -57,6 +57,35 @@ angular.module('podcasts').directive('file', function() {
   };
 });
 
+angular.module('podcasts').directive('videoFile', function() {
+  return {
+    restrict: 'AE',
+    scope: {
+      file: '@'
+    },
+    link: function(scope, el, attrs){
+      el.bind('change', function(event){
+        var ext = this.value.substring(this.value.lastIndexOf('.'), this.value.length);
+        switch(ext)
+        {
+         case '.mp4':
+         case '.ogg':
+         case '.webm':
+           break;
+         default:
+           alert('Invalid file extension. Accepted are .mp4, .ogg, and .webm');
+           this.value='';
+        }
+        var files = event.target.files;
+        var file = files[0];
+        scope.videoFile = file;
+        scope.$parent.videoFile = file;
+        scope.$apply();
+      });
+    }
+  };
+});
+
 angular.module('podcasts').filter('range', function() {
   return function(input, total) {
     total = parseInt(total);

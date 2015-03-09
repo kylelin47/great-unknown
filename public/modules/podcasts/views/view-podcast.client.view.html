@@ -26,7 +26,7 @@
 						Average Listen: <span id="avgListen">{{getAvgSeconds()}}</span>
 						seconds
 						<br />
-						<a data-ng-show="podcast.audio != 'No file selected'" href="https://s3.amazonaws.com/podcast-manager/{{podcast.audio}}" download>Download Audio</a>
+						<a data-ng-show="podcast.audio" href="https://s3.amazonaws.com/podcast-manager/{{podcast.audio}}" download>Download Audio</a>
 					</div>
             	</div>
                 <img data-ng-hide="podcast.podIcon === ''" src={{podcast.podIcon}} alt="Icon" class="view-pod-img">
@@ -35,7 +35,14 @@
 		</small>
 	</div>
 	<span data-ng-if="!podcast.isBlog">
-		<audio class="col-xs-12" id="audio" controls data-ng-src="{{getAudioUrl()}}"></audio>
+		<div class="row" data-ng-show="podcast.audio">
+			<audio class="col-xs-12" id="audio" controls data-ng-src="{{getAudioUrl()}}"></audio>
+		</div>
+		<div class="row" data-ng-show="podcast.video">
+			<video class="col-xs-12" id="video" controls>
+				<source data-ng-if="podcast.video" data-ng-src="{{getVideoUrl()}}" />
+			</video>
+		</div>
 	</span>
 	<div class="pod-blog col-xs-push-2 col-xs-8">
 		<br /><br />
