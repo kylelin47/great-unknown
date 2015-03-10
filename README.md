@@ -65,6 +65,8 @@ To use a new Bootstrap Theme:
 https://trello.com/b/zHEzMTHa/great-unknown-cen3031
 
 **Protractor Testing**
--in new cmd prompt enter "webdriver-manager start"
--in new cmd prompt cd to Protractor folder in great-unknown
--enter "protractor conf.js"
+- start grunt
+- may need 'npm install -g protractor'
+- in new cmd prompt enter "webdriver-manager start"
+- in new cmd prompt cd to Protractor folder in great-unknown
+- enter "protractor conf.js"
