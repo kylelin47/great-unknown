@@ -26,12 +26,6 @@ exports.create = function(req, res) {
 };
 
 /**
- * Show the current About
- */
-exports.read = function(req, res) {
-	res.jsonp(req.about);
-};
-/**
  * List of Abouts
  */
 exports.list = function(req, res) { 
@@ -43,17 +37,6 @@ exports.list = function(req, res) {
 		} else {
 			res.jsonp(abouts);
 		}
-	});
-};
-/**
- * About middleware
- */
-exports.aboutByID = function(req, res, next, id) { 
-	About.findById(id).populate('user', 'displayName').exec(function(err, about) {
-		if (err) return next(err);
-		if (! about) return next(new Error('Failed to load About ' + id));
-		req.about = about ;
-		next();
 	});
 };
 
