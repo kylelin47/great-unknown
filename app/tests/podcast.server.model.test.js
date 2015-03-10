@@ -11,7 +11,7 @@ var should = require('should'),
 /**
  * Globals
  */
-var user, podcast;
+var user, podcast, podcast2;
 
 /**
  * Unit tests
@@ -32,7 +32,10 @@ describe('Podcast Model Unit Tests:', function() {
 				name: 'Podcast Name',
 				user: user
 			});
-
+			podcast2 = new Podcast({
+				name: 'Second Podcast Name',
+				user: user
+			});
 			done();
 		});
 	});
@@ -43,6 +46,28 @@ describe('Podcast Model Unit Tests:', function() {
 				should.not.exist(err);
 				done();
 			});
+		});
+
+		it('should be able to save multiple without problems', function(done) {
+			podcast.save();
+			return podcast2.save(function(err) {
+				should.not.exist(err);
+				done();
+			});
+		});
+
+		it('should be able to save multiple of the same name without problems', function(done) {
+			podcast.save();
+			podcast2.name = 'Podcast Name';
+			return podcast2.save(function(err) {
+				should.not.exist(err);
+				done();
+			});
+		});
+
+		it('should be able to associate users with podcasts', function(done) {
+			should.exist(podcast.user);
+			return done();
 		});
 
 		it('should be able to show an error when try to save without name', function(done) { 
