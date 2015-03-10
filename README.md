@@ -70,3 +70,4 @@ https://trello.com/b/zHEzMTHa/great-unknown-cen3031
 - in new cmd prompt enter "webdriver-manager start"
 - in new cmd prompt cd to Protractor folder in great-unknown
 - enter "protractor conf.js"
+- protractor assumes your admin password is 'admin123' (no quotes)

@@ -155,7 +155,7 @@
 			$httpBackend.flush();
 		}));
 
-	it('$scope.create() should set ignore user-set isBlog values and supply a default podcast icon', inject(function(Podcasts) {
+		it('$scope.create() should set ignore user-set isBlog values and supply a default podcast icon', inject(function(Podcasts) {
 			// Create a sample Podcast object
 			var samplePodcastPostData = new Podcasts({
 				name: 'New Podcast',
