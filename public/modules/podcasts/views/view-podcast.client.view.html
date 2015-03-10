@@ -52,7 +52,8 @@
 	<div style="clear: both;"></div>
 	<div class="newline"></div>
 	<div class="product-social-links">
-		<a href="https://twitter.com/share" class="twitter-share-button" data-text="Check out this cool podcast" data-via="podcast_manager">Tweet</a>
+		<a href="https://twitter.com/share" data-ng-if="!podcast.isBlog" class="twitter-share-button" data-text="Check out this podcast" data-via="podcast_manager">Tweet</a>
+		<a href="https://twitter.com/share" data-ng-if="podcast.isBlog" class="twitter-share-button" data-text="Check out this blog" data-via="podcast_manager">Tweet</a>
 		<script type="text/javascript-lazy">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 		<div class="fb-like"
 		  data-href="{{tunnel}}/#!/podcasts/{{podcast._id}}"
