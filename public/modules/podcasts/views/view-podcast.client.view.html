@@ -35,12 +35,12 @@
 		</small>
 	</div>
 	<span data-ng-if="!podcast.isBlog">
-		<div class="row" data-ng-show="podcast.audio">
+		<div class="row" data-ng-if="podcast.audio">
 			<audio class="col-xs-12" id="audio" controls data-ng-src="{{getAudioUrl()}}"></audio>
 		</div>
-		<div class="row" data-ng-show="podcast.video">
+		<div class="row" data-ng-if="podcast.video">
 			<video class="col-xs-12" id="video" controls>
-				<source data-ng-if="podcast.video" data-ng-src="{{getVideoUrl()}}" />
+				<source data-ng-src="{{getVideoUrl()}}" />
 			</video>
 		</div>
 	</span>
