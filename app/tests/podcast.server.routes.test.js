@@ -347,25 +347,6 @@ describe('Podcast CRUD tests', function() {
 
 		});
 	});
-	it('should be able to browse Podcasts if not signed in', function(done) {
-		// Create new Podcast model instance
-		var podcastObj = new Podcast(podcast);
-
-		// Save the Podcast
-		podcastObj.save(function() {
-			// Request Podcasts
-			request(app).get('/podcasts/browse/1')
-				.end(function(req, res) {
-					// Set assertion
-					res.body.should.be.an.Array.with.lengthOf(1);
-
-					// Call the assertion callback
-					done();
-				});
-
-		});
-	});
-
 
 	it('should be able to get a single Podcast if not signed in', function(done) {
 		// Create new Podcast model instance

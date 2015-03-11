@@ -128,6 +128,116 @@
 			expect($location.path()).toBe('/podcasts/' + samplePodcastResponse._id);
 		}));
 
+		it('$scope.create() should set isBlog to false and supply a default podcast icon', inject(function(Podcasts) {
+			// Create a sample Podcast object
+			var samplePodcastPostData = new Podcasts({
+				name: 'New Podcast',
+				isBlog: false,
+				podIcon: 'http://i.imgur.com/f7oBepl.png?1'
+			});
+
+			// Create a sample Podcast response
+			var samplePodcastResponse = new Podcasts({
+				_id: '525cf20451979dea2c000001',
+				name: 'New Podcast',
+				isBlog: false,
+				podIcon: 'http://i.imgur.com/f7oBepl.png?1'
+			});
+
+			// Fixture mock form input values
+			scope.name = 'New Podcast';
+
+			// Set POST response
+			$httpBackend.expectPOST('podcasts', samplePodcastPostData).respond(samplePodcastResponse);
+
+			// Run controller functionality
+			scope.create();
+			$httpBackend.flush();
+		}));
+
+		it('$scope.create() should set ignore user-set isBlog values and supply a default podcast icon', inject(function(Podcasts) {
+			// Create a sample Podcast object
+			var samplePodcastPostData = new Podcasts({
+				name: 'New Podcast',
+				isBlog: false,
+				podIcon: 'http://i.imgur.com/f7oBepl.png?1'
+			});
+
+			// Create a sample Podcast response
+			var samplePodcastResponse = new Podcasts({
+				_id: '525cf20451979dea2c000001',
+				name: 'New Podcast',
+				isBlog: false,
+				podIcon: 'http://i.imgur.com/f7oBepl.png?1'
+			});
+
+			// Fixture mock form input values
+			scope.name = 'New Podcast';
+			scope.isBlog = true;
+
+			// Set POST response
+			$httpBackend.expectPOST('podcasts', samplePodcastPostData).respond(samplePodcastResponse);
+
+			// Run controller functionality
+			scope.create();
+			$httpBackend.flush();
+		}));
+
+		it('$scope.createBlog() should set isBlog to true and supply a default blog icon', inject(function(Podcasts) {
+			// Create a sample Podcast object
+			var samplePodcastPostData = new Podcasts({
+				name: 'New Podcast',
+				isBlog: true,
+				podIcon: 'http://i.imgur.com/rKe21My.png?1'
+			});
+
+			// Create a sample Podcast response
+			var samplePodcastResponse = new Podcasts({
+				_id: '525cf20451979dea2c000001',
+				name: 'New Podcast',
+				isBlog: true,
+				podIcon: 'http://i.imgur.com/rKe21My.png?1'
+			});
+
+			// Fixture mock form input values
+			scope.name = 'New Podcast';
+
+			// Set POST response
+			$httpBackend.expectPOST('podcasts', samplePodcastPostData).respond(samplePodcastResponse);
+
+			// Run controller functionality
+			scope.createBlog();
+			$httpBackend.flush();
+		}));
+
+		it('$scope.createBlog() should ignore user-set isBlog values and supply a default blog icon', inject(function(Podcasts) {
+			// Create a sample Podcast object
+			var samplePodcastPostData = new Podcasts({
+				name: 'New Podcast',
+				isBlog: true,
+				podIcon: 'http://i.imgur.com/rKe21My.png?1'
+			});
+
+			// Create a sample Podcast response
+			var samplePodcastResponse = new Podcasts({
+				_id: '525cf20451979dea2c000001',
+				name: 'New Podcast',
+				isBlog: true,
+				podIcon: 'http://i.imgur.com/rKe21My.png?1'
+			});
+
+			// Fixture mock form input values
+			scope.name = 'New Podcast';
+			scope.isBlog = false;
+
+			// Set POST response
+			$httpBackend.expectPOST('podcasts', samplePodcastPostData).respond(samplePodcastResponse);
+
+			// Run controller functionality
+			scope.createBlog();
+			$httpBackend.flush();
+		}));
+
 		it('$scope.getSeriesArr should have sane defaults when no podcasts exist', inject(function(Podcasts) {
 			var podcastsArray = [];
 			var series = scope.getSeriesArr(podcastsArray);
@@ -177,6 +287,34 @@
 			expect(series[2]).toBe('Second Tests');
 		}));
 
+		it('$scope.getSeriesArr should get series from podcasts when some are null', inject(function(Podcasts) {
+			// Create a sample Podcast object
+			var samplePodcast = new Podcasts({
+				name: 'New Podcast',
+				isBlog: false,
+				podIcon: 'http://i.imgur.com/f7oBepl.png?1',
+				series: 'Tests'
+			});
+			var samplePodcast2 = new Podcasts({
+				name: 'New Podcast',
+				isBlog: false,
+				podIcon: 'http://i.imgur.com/f7oBepl.png?1',
+				series: 'Second Tests'
+			});
+			var samplePodcast3 = new Podcasts({
+				name: 'New Podcast',
+				isBlog: false,
+				podIcon: 'http://i.imgur.com/f7oBepl.png?1',
+				series: ''
+			});
+			var podcastsArray = [samplePodcast, samplePodcast2];
+			var series = scope.getSeriesArr(podcastsArray);
+			expect(series.length).toBe(3);
+			expect(series[0]).toBe('');
+			expect(series[1]).toBe('Tests');
+			expect(series[2]).toBe('Second Tests');
+		}));
+
 		it('$scope.update() should update a valid Podcast', inject(function(Podcasts) {
 			// Define a sample Podcast put data
 			var samplePodcastPutData = new Podcasts({
@@ -212,6 +350,26 @@
 
 			// Run controller functionality
 			scope.remove(samplePodcast);
+			$httpBackend.flush();
+
+			// Test array after successful delete
+			expect(scope.podcasts.length).toBe(0);
+		}));
+
+		it('$scope.removeByID() should send a DELETE request with a valid podcastId and remove the Podcast from the scope', inject(function(Podcasts) {
+			// Create new Podcast object
+			var samplePodcast = new Podcasts({
+				_id: '525a8422f6d0f87f0e407a33'
+			});
+
+			// Create new Podcasts array and include the Podcast
+			scope.podcasts = [samplePodcast];
+
+			// Set expected DELETE response
+			$httpBackend.expectDELETE(/podcasts\/([0-9a-fA-F]{24})$/).respond(204);
+
+			// Run controller functionality
+			scope.removeByID(samplePodcast._id);
 			$httpBackend.flush();
 
 			// Test array after successful delete
