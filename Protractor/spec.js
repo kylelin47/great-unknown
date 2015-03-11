@@ -175,7 +175,7 @@ describe('angularjs homepage', function() {
 	expect(element(by.id('signInButton')).isDisplayed()).toBe(false);
   });
   
-  var firstName2, lastName2;
+  var firstName2, lastName2, email2;
   
   it('change name with edit profile to nothing', function() {
 	element(by.id('userNameLink')).click();
@@ -188,11 +188,36 @@ describe('angularjs homepage', function() {
 	expect(element(by.id('errorMessage')).isDisplayed()).toBe(true);
   });
   
-  it('change name back to original', function() {
-	  element(by.id('firstName')).sendKeys(firstName2);
+  it('change email address to nothing', function(){
+	  email2 = element(by.id('email')).getAttribute('value');
+	  element(by.id('email')).clear();
+	  element(by.id('submitProfileChanges')).click();
+	  expect(element(by.id('errorMessage')).isDisplayed()).toBe(true);
+  });
+  
+  it('just add first name', function(){
+	 element(by.id('firstName')).sendKeys(firstName2); 
+	 element(by.id('submitProfileChanges')).click();
+	 expect(element(by.id('errorMessage')).isDisplayed()).toBe(true);
+  });
+  
+  it('remove first name and try just last name', function() {
+	  element(by.id('firstName')).clear();
 	  element(by.id('lastName')).sendKeys(lastName2);
 	  element(by.id('submitProfileChanges')).click();
-	  expect(element(by.id('successMessage')).isDisplayed()).toBe(true);
+	  expect(element(by.id('errorMessage')).isDisplayed()).toBe(true);
+  });
+  
+  it('change name back to original with no email still', function() {
+	  element(by.id('firstName')).sendKeys(firstName2);
+	  element(by.id('submitProfileChanges')).click();
+	  expect(element(by.id('errorMessage')).isDisplayed()).toBe(true);
+  });
+  
+  it('add email address', function(){
+	 element(by.id('email')).sendKeys(email2);
+	 element(by.id('submitProfileChanges')).click();
+	 expect(element(by.id('successMessage')).isDisplayed()).toBe(true);
   });
   
   it('change password to nothing', function() {
@@ -284,6 +309,48 @@ describe('angularjs homepage', function() {
 	element(by.id('name')).sendKeys('My Blog');
 	element(by.id('createBlog')).click();
 	expect(browser.getCurrentUrl()).not.toEqual('http://localhost:3000/#!/podcasts/create/blog');
+  });
+ 
+  
+  //test podcast views as admin
+  it('test search in podcast view to pass', function(){
+	 element(by.linkText('Browse')).click();
+	 element(by.model('search.name')).sendKeys('My Blog');
+	 expect(element.all(by.repeater('podcast in podcastsf=(podcastsS=(podcastsR=(podcasts | filter:seriesRadio) | filter:search) | filter:filter)')).get(0).element(by.css(".list-group-item-heading")).getText()).toEqual('My Blog');
+  });
+  
+  it('test search in podcast view to fail', function(){
+	 element(by.model('search.name')).clear();
+	 element(by.model('search.name')).sendKeys('My Podcast');
+	 expect(element.all(by.repeater('podcast in podcastsf=(podcastsS=(podcastsR=(podcasts | filter:seriesRadio) | filter:search) | filter:filter)')).get(0).element(by.css(".list-group-item-heading")).getText()).not.toEqual('My Blog');
+  });
+  
+  it('click on podcast in view', function() {
+	 element(by.linkText('Browse')).click();
+	 element.all(by.repeater('podcast in podcastsf=(podcastsS=(podcastsR=(podcasts | filter:seriesRadio) | filter:search) | filter:filter)')).get(0).element(by.css(".list-group-item-text")).click();
+	 expect(browser.getCurrentUrl()).not.toEqual('http://localhost:3000/#!/podcasts/browse/1');
+  });
+  
+  
+  //test podcast views as guest (not logged in)  
+  it('test search in podcast view to pass', function(){
+	 element(by.id('userNameLink')).click();
+	 element(by.linkText('Signout')).click();
+	 element(by.linkText('Browse')).click();
+	 element(by.model('search.name')).sendKeys('My Blog');
+	 expect(element.all(by.repeater('podcast in podcastsf=(podcastsS=(podcastsR=(podcasts | filter:seriesRadio) | filter:search) | filter:filter)')).get(0).element(by.css(".list-group-item-heading")).getText()).toEqual('My Blog');
+  });
+  
+  it('test search in podcast view to fail', function(){
+	 element(by.model('search.name')).clear();
+	 element(by.model('search.name')).sendKeys('My Podcast');
+	 expect(element.all(by.repeater('podcast in podcastsf=(podcastsS=(podcastsR=(podcasts | filter:seriesRadio) | filter:search) | filter:filter)')).get(0).element(by.css(".list-group-item-heading")).getText()).not.toEqual('My Blog');
+  });
+  
+  it('click on podcast in view', function() {
+	 element(by.linkText('Browse')).click();
+	 element.all(by.repeater('podcast in podcastsf=(podcastsS=(podcastsR=(podcasts | filter:seriesRadio) | filter:search) | filter:filter)')).get(0).element(by.css(".list-group-item-text")).click();
+	 expect(browser.getCurrentUrl()).not.toEqual('http://localhost:3000/#!/podcasts/browse/1');
   });
   
 });
