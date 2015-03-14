@@ -5,10 +5,6 @@ angular.module('core').controller('RssController', ['$scope', 'Authentication','
         $scope.authentication = Authentication;
         //$scope.ace = ['a','b'];
 
-        //recheving data from mongo
-        $scope.find = function() {
-            $scope.podcasts = Podcasts.query();
-        };
 
 
         $scope.feedSrc = FeedService.setFeed().feedSrc;

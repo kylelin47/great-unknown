@@ -43,5 +43,16 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
             });
         };
         //***************************Modal window for Rss feed********************************//
+
+
+
+
+        //recheving data from mongo
+        $scope.find = function() {
+            $scope.podcasts = Podcasts.query();
+        };
+
+
+
 	}
 ]);

@@ -12,7 +12,8 @@
 
             <ul class="unstyled">
                 <span class="badge badge-warning" ng-show="feeds.length > 0">{{(feeds | filter:filterText).length}} Items</span>
-                <li ng-repeat="feed in feeds | filter:filterText">
+                <p class = "text-muted">First 10 items:</p>
+                <li ng-repeat="feed in feeds.slice(1,10)">
                     <h5><a href="{{feed.link}}">{{feed.title}}</a></h5>
                     <p class="text-left">{{feed.contentSnippet}}</p>
                     <span class="small">{{feed.publishedDate}}</span>
@@ -21,6 +22,8 @@
         </div>
         <div class="modal-footer">
             <button class="btn btn-warning" ng-click="cancel()">Back</button>
+
+
         </div>
 
     <!--Feed Page-->
