@@ -47,10 +47,6 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 
 
 
-        //recheving data from mongo
-        $scope.find = function() {
-            $scope.podcasts = Podcasts.query();
-        };
 
 
 
