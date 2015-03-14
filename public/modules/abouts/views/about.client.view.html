@@ -13,7 +13,7 @@
 	</div>
 	<div class="row">
 		<div class="col-sm-4">
-			<img data-ng-show="abouts[0].picture === ''" src="http://static.guim.co.uk/static/b6c135ec8e49127c7c87055af29b2d52c4011fc0/politics/images/defaultPoliticalPerson.gif" alt="My Avatar" height="100%" width="100%" />
+			<img data-ng-show="abouts[0].picture === ''" src={{defaultIcon}} alt="My Avatar" height="100%" width="100%" />
 			<img data-ng-hide="abouts[0].picture === ''" src={{abouts[0].picture}} alt="Avatar" height="100%" width="100%" />
 		</div>
 		<div class="col-sm-8 pod-blog">
@@ -21,7 +21,9 @@
 			<p><span id = "email" class="text-muted">Email: </span><b>{{abouts[0].email}}</b></p>
 			<markdown id = "about" bind-from="abouts[0].about"></markdown>
 		</div>
-		<div class="col-sm-8 col-xs-push-2">
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
 			<h2>About My Podcasts</h2>
 			<div class="pod-blog">
 				<markdown id = "aboutPodcasts" bind-from="abouts[0].aboutPodcasts"></markdown>

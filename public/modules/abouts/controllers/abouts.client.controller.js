@@ -4,6 +4,7 @@
 angular.module('abouts').controller('AboutsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Abouts', 'Podcasts', '$sce',
 	function($scope, $stateParams, $location, Authentication, Abouts, Podcasts, $sce) {
 		$scope.authentication = Authentication;
+		$scope.defaultIcon = '/modules/abouts/img/defaultPoliticalPerson.gif';
 		// Create new About
 		$scope.create = function() {
 			// Create new About object
