@@ -55,7 +55,7 @@
 				name: 'New About'
 			});
 
-			// Create a sample Podcasts array that includes the new Podcast
+			// Create a sample Abouts array that includes the new About
 			var sampleAbouts = [sampleAbout];
 
 			// Set GET response
@@ -67,6 +67,35 @@
 
 			// Test scope value
 			expect(scope.abouts).toEqualData(sampleAbouts);
+		}));
+
+		it('$scope.create() with valid form data should send a POST request with the form input values and relocate URL', inject(function(Abouts) {
+			// Create a sample object
+			var sampleAboutPostData = new Abouts({
+				picture: ''
+			});
+
+			// Create a sample response
+			var sampleAboutResponse = new Abouts({
+				_id: '525cf20451979dea2c000001',
+				picture: ''
+			});
+
+			// Fixture mock form input values
+			scope.picture = '';
+
+			// Set POST response
+			$httpBackend.expectPOST('about', sampleAboutPostData).respond(sampleAboutResponse);
+
+			// Run controller functionality
+			scope.create();
+			$httpBackend.flush();
+
+			// Test form inputs are reset
+			expect(scope.name).toEqual('');
+
+			// Test URL redirection after the Podcast was created
+			expect($location.path()).toBe('/about');
 		}));
 	});
 }());
