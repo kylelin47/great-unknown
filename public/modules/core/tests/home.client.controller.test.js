@@ -24,9 +24,9 @@
 			expect(scope.authentication).toBeTruthy();
 		});
 
-        it('should pass parameter into RSScontroller', function(){
-            scope.modalOpen('lg');
-            expect().tohaveBeenCalled();
+        it('should see the result', function(){
+            scope.feedSrc = 'http://rss.cnn.com/rss/cnn_topstories.rss';
+
         });
 	});
 })();
