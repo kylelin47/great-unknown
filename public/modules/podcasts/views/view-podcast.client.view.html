@@ -2,10 +2,10 @@
 <div data-ng-hide="podname.innerHTML === ''">
 	<div class="page-header">
 		<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == podcast.user._id))">
-			<a title="Edit Podcast" class="btn btn-primary" href="/#!/podcasts/{{podcast._id}}/edit">
+			<a id = "Edit" title="Edit Podcast" class="btn btn-primary" href="/#!/podcasts/{{podcast._id}}/edit">
 				<i class="glyphicon glyphicon-edit"></i>
 			</a>
-			<a title="Delete Podcast" class="btn btn-primary" data-ng-click="remove();">
+			<a id = 'trash' title="Delete Podcast" class="btn btn-primary" data-ng-click="remove();">
 				<i class="glyphicon glyphicon-trash"></i>
 			</a>
 		</div>

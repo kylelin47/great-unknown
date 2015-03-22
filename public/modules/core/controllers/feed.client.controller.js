@@ -13,9 +13,9 @@ angular.module('core').controller('RssController', ['$scope', 'Authentication','
 
         $scope.loadFeed=function(e){
             FeedService.parseFeed($scope.feedSrc).then(function(res){
+                $scope.feeds= res.data.responseData.feed.entries;
                 $scope.FeedTitle= res.data.responseData.feed.title;
                 $scope.FeedTitleLink = res.data.responseData.feed.link;
-                $scope.feeds= res.data.responseData.feed.entries;
             });
         };
 
