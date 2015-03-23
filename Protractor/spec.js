@@ -3,6 +3,7 @@ describe('angularjs homepage', function () {
     //still at localhost：3000
     it('should have a title', function () {
         browser.get('http://localhost:3000/#!/');
+		browser.driver.manage().window().maximize();
         expect(browser.getTitle()).toEqual('Podcast Manager - Development');
     });
     //When no feed is entering
@@ -79,7 +80,8 @@ describe('angularjs homepage', function () {
     //testing localtunnel at localhost:3000
     it('should return feed', function () {
         element(by.id('feedSrc')).clear();
-        element(by.id('feedSrc')).sendKeys('https://rgmklfaepb.localtunnel.me/feed.xml');
+        element(by.id('feedSrc')).sendKeys('https://umbqncvjso.localtunnel.me/feed.xml');
+		browser.sleep(200);
         //The localtunnel link will be changed
         element(by.xpath('//button[. = "Open Feed"]')).click();
         element(by.xpath('//button[. = "Back"]')).click();
@@ -146,13 +148,13 @@ describe('angularjs homepage', function () {
         name = element(by.id('name')).getAttribute('value');
         email = element(by.id('email')).getAttribute('value');
         aboutMe = element(by.id('aboutMe')).getAttribute('value');
-        aboutPodcasts = element(by.id('aboutPodcasts')).getAttribute('value');
+        aboutPodcasts = element(by.id('aboutPodcastsb')).getAttribute('value');
 
         //clear text fields
         element(by.id('name')).clear();
         element(by.id('email')).clear();
         element(by.id('aboutMe')).clear();
-        element(by.id('aboutPodcasts')).clear();
+        element(by.id('aboutPodcastsb')).clear();
 
         element(by.id('updateAboutMe')).click();
         expect(element(by.id('name')).getAttribute('value') === '');
@@ -165,10 +167,10 @@ describe('angularjs homepage', function () {
         element(by.id('name')).sendKeys(name);
         element(by.id('email')).sendKeys(email);
         element(by.id('aboutMe')).sendKeys(aboutMe);
-        element(by.id('aboutPodcasts')).sendKeys(aboutPodcasts);
+        element(by.id('aboutPodcastsb')).sendKeys(aboutPodcasts);
 
         element(by.id('updateAboutMe')).click();
-        expect(element(by.id('name')).getAttribute('vale') === name);
+        expect(element(by.id('name')).getAttribute('value') === name);
     });
 
     it('check about me button on home page', function () {
@@ -315,11 +317,11 @@ describe('angularjs homepage', function () {
         element(by.linkText('Create New Podcast')).click();
         //entering name and audio
         element(by.id('name')).sendKeys('My Podcast');
-        var audioUpload = 'C:/Users/qian/Documents/GitHub/podcast/great-unknown/Protractor/audio/test.mp3';
+        var audioUpload = 'C:/Users/Matthew/Documents/GitHub/project/great-unknown/Protractor/audio/test.mp3';
         var absolutePath = path.resolve(__dirname, audioUpload);
         element(by.id('audio')).sendKeys(absolutePath);
         //uploading video content
-        var videoUpload = 'C:/Users/qian/Documents/GitHub/podcast/great-unknown/Protractor/video/small.mp4';
+        var videoUpload = 'C:/Users/Matthew/Documents/GitHub/project/great-unknown/Protractor/video/small.mp4';
         var absolutePath = path.resolve(__dirname, videoUpload);
         element(by.id('video')).sendKeys(absolutePath);
         element(by.id('createPodcast')).click();
