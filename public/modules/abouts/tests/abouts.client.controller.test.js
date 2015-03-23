@@ -49,6 +49,28 @@
 				$scope: scope
 			});
 		}));
+
+		it('$scope.find() should create an array with one About object and one Podcast object fetched from XHR', inject(function(Abouts) {
+			// Create sample About using the Abouts service
+			var sampleAbout = new Abouts({
+				name: 'New About'
+			});
+
+			// Create a sample Abouts array that includes the new About
+			var sampleAbouts = [sampleAbout];
+
+			// Set GET response
+			$httpBackend.expectGET('about').respond(sampleAbouts);
+			$httpBackend.expectGET('podcasts').respond();
+
+			// Run controller functionality
+			scope.find();
+			$httpBackend.flush();
+
+			// Test scope value
+			expect(scope.abouts).toEqualData(sampleAbouts);
+		}));
+
 		it('$scope.findOne() should create an array with one About object fetched from XHR', inject(function(Abouts) {
 			// Create sample About using the Abouts service
 			var sampleAbout = new Abouts({

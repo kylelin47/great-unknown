@@ -1,8 +1,8 @@
 'use strict';
 
 // Abouts controller
-angular.module('abouts').controller('AboutsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Abouts', 'Podcasts', '$sce',
-	function($scope, $stateParams, $location, Authentication, Abouts, Podcasts, $sce) {
+angular.module('abouts').controller('AboutsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Abouts', 'Podcasts',
+	function($scope, $stateParams, $location, Authentication, Abouts, Podcasts) {
 		$scope.authentication = Authentication;
 		$scope.defaultIcon = '/modules/abouts/img/defaultPoliticalPerson.gif';
 		// Create new About
@@ -40,11 +40,6 @@ angular.module('abouts').controller('AboutsController', ['$scope', '$stateParams
 		// Get just the About Me
 		$scope.findOne = function() {
 			$scope.abouts = Abouts.query();
-		};
-
-		$scope.renderHtml = function(html_code)
-		{
-			return $sce.trustAsHtml(html_code);
 		};
 	}
 ]);

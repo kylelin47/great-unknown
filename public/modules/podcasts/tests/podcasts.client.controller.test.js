@@ -336,6 +336,24 @@
 			expect($location.path()).toBe('/podcasts/' + samplePodcastPutData._id);
 		}));
 
+		it('$scope.saveByRef() should update a valid Podcast', inject(function(Podcasts) {
+			// Define a sample Podcast put data
+			var samplePodcastPutData = new Podcasts({
+				_id: '525cf20451979dea2c000001',
+				name: 'New Podcast'
+			});
+
+			// Mock Podcast in scope
+			scope.podcast = samplePodcastPutData;
+
+			// Set PUT response
+			$httpBackend.expectPUT(/podcasts\/([0-9a-fA-F]{24})$/).respond();
+
+			// Run controller functionality
+			scope.saveByRef(samplePodcastPutData);
+			$httpBackend.flush();
+		}));
+
 		it('$scope.remove() should send a DELETE request with a valid podcastId and remove the Podcast from the scope', inject(function(Podcasts) {
 			// Create new Podcast object
 			var samplePodcast = new Podcasts({
@@ -375,5 +393,46 @@
 			// Test array after successful delete
 			expect(scope.podcasts.length).toBe(0);
 		}));
+
+		it('$scope.getAudioUrl() should return a trusted resource', inject(function(Podcasts) {
+			// Define a sample Podcast put data
+			var samplePodcastPutData = new Podcasts({
+				_id: '525cf20451979dea2c000001',
+				name: 'New Podcast',
+				audio: '12312312.mp3'
+			});
+
+			// Mock Podcast in scope
+			scope.podcast = samplePodcastPutData;
+
+			// Run controller functionality
+			scope.getAudioUrl();
+		}));
+
+		it('$scope.getVideoUrl() should return a trusted resource', inject(function(Podcasts) {
+			// Define a sample Podcast put data
+			var samplePodcastPutData = new Podcasts({
+				_id: '525cf20451979dea2c000001',
+				name: 'New Podcast',
+				video: '12312312.mp4'
+			});
+
+			// Mock Podcast in scope
+			scope.podcast = samplePodcastPutData;
+
+			// Run controller functionality
+			scope.getVideoUrl();
+		}));
+
+		it('$scope.getNumber(n) should return an array of size n', inject(function(Podcasts) {
+			var n = 10;
+			expect(scope.getNumber(n).length).toBe(n);
+		}));
+
+		it('$scope.getNumber(n) should round up', inject(function(Podcasts) {
+			var n = 9.2;
+			expect(scope.getNumber(n).length).toBe(10);
+		}));
+
 	});
 }());

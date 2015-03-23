@@ -113,6 +113,26 @@ describe('About CRUD tests', function() {
         });
     });
 
+    it('should only retrieve one About if not signed in even if multiple are saved', function(done) {
+        // Create new About model instance
+        var aboutObj = new About(about);
+        var aboutObj2 = new About(about);
+        // Save the About
+        aboutObj.save(function() {
+            aboutObj2.save(function() {
+                // Request Abouts
+                request(app).get('/about')
+                    .end(function(req, res) {
+                        // Set assertion
+                        res.body.should.be.an.Array.with.lengthOf(1);
+
+                        // Call the assertion callback
+                        done();
+                    });
+            })
+        });
+    });
+
     afterEach(function(done) {
         User.remove().exec();
         About.remove().exec();
