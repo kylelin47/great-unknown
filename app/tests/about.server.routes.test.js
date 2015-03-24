@@ -129,7 +129,7 @@ describe('About CRUD tests', function() {
                         // Call the assertion callback
                         done();
                     });
-            })
+            });
         });
     });
 
