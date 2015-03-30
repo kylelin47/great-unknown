@@ -1,6 +1,6 @@
 <section data-ng-controller="PodcastsController" data-ng-init="find()">
 	<div class="page-header">
-		<b class="browse-pod-left big-text-pod">Podcasts</b>
+		<b class="browse-pod-left big-text-pod">Episodes</b>
 		<br /><br />
 
 		<div ng-hide="currentPage != 1">
@@ -47,8 +47,8 @@
 						<span data-ng-bind="podcast.user.displayName"></span></p>
 						<strong class="col-md-6 text-right">
 							{{podcast.category}}, 
-							<span data-ng-hide="podcast.isBlog">Podcast</span>
-							<span data-ng-hide="!podcast.isBlog">Blog</span>
+							<span data-ng-hide="podcast.isBlog">Episode</span>
+							<span data-ng-hide="!podcast.isBlog">Blog Post</span>
 						</strong>
 					</div>
 				</small>

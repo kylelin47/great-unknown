@@ -1,6 +1,65 @@
-<section data-ng-controller="HomeController">
-<!--initial idea of the new lay out-->
-	<br><br>
+<section data-ng-controller="HomeController" data-ng-init="find()">
+	<br /><br />
+	<div class="row">
+		<div class="col-md-8">
+			<a data-ng-repeat="podcast in podcasts" data-ng-href="#!/podcasts/{{podcast._id}}" class="list-group-item">
+				<small class="list-group-item-text">
+					<div class="row">
+						<p class="col-md-6 text-left">
+						Posted on
+						<span data-ng-bind="podcast.created | date:'medium'"></span>
+						by
+						<span data-ng-bind="podcast.user.displayName"></span></p>
+						<strong class="col-md-6 text-right">
+							{{podcast.category}}, 
+							<span data-ng-hide="podcast.isBlog">Episode</span>
+							<span data-ng-hide="!podcast.isBlog">Blog Post</span>
+						</strong>
+					</div>
+				</small>
+				<div style="clear: both;"></div>
+				<div class="row">
+					<div class="pull-left col-md-10">
+						<h3 class="list-group-item-heading"><strong>{{podcast.name}}</strong></h3>
+						<p class="lead" data-ng-bind="podcast.blurb"></p>
+						<p data-ng-hide="podcast.series === ''" class="text-muted">Series: 
+							<b>
+								{{podcast.series}}
+								<span data-ng-hide="seriesRadio.series === ''">#{{podcastsf.length - podcastsf.indexOf(podcast)}}
+								</span>
+							</b>
+						</p>
+					</div>
+					<div class="pull-right">
+						<img data-ng-hide="podcast.podIcon === ''" src={{podcast.podIcon}} alt="Icon" class="pod-icon pod-icon-right" />
+					</div>
+				</div>
+				<div style="clear: both;"></div>
+			</a>
+		</div>
+		<div class="col-md-4">
+			<div class="row">
+				<img data-ng-show="abouts[0].picture === ''" src={{defaultIcon}} alt="My Avatar" height="100%" width="100%" />
+				<img data-ng-hide="abouts[0].picture === ''" src={{abouts[0].picture}} alt="Avatar" height="100%" width="100%" />
+			</div>
+			<div class="row">
+				<p><span id = "name" class="text-muted">Name: </span><b>{{abouts[0].name}}</b></p>
+				<p><span id = "email" class="text-muted">Email: </span><b>{{abouts[0].email}}</b></p>
+				<markdown id = "about" bind-from="abouts[0].about"></markdown>
+				<div class="col-sm-12">
+					<h2>About My Podcast</h2>
+					<div class="pod-blog">
+						<markdown id = "aboutPodcasts" bind-from="abouts[0].aboutPodcasts"></markdown>
+					</div>
+				</div>
+			</div>
+			<br />
+			<div style="clear: both;"></div>
+			<br />
+		</div>
+	</div>
+<!--initial idea of the new lay out
+	<br /><br />
 	<div class="jumbotron">
 		<div class="big-text-pod-welcome pull-left">Hello!</div><i class="big-text-pod-welcome pull-right glyphicon glyphicon-home"></i>
 		<div style="clear: both;"></div>
@@ -10,7 +69,7 @@
 		<a class="btn btn-primary btn-lg" id = "browseMyPodcastsButton" href="/#!/podcasts/browse/1" role="button">Browse my podcasts and blogs</a>
 		<a  data-ng-show="!(authentication.user)" id = "signInButton" class="btn btn-success btn-lg pull-right" href="/#!/signin" role="button">Sign In</a></p>
 	</div>
-
+-->
 
     <div>
         <!--Settring up Modal-->

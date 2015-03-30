@@ -1,8 +1,8 @@
 <section data-ng-controller="PodcastsController" data-ng-init="findOne(); showPreview= false;">
 	<div data-ng-show="((authentication.user) && (authentication.user._id == podcast.user._id))">
 	<div class="page-header">
-		<h1 data-ng-if="!podcast.isBlog">Edit Podcast</h1>
-		<h1 data-ng-if="podcast.isBlog">Edit Blog</h1>
+		<h1 data-ng-if="!podcast.isBlog">Edit Episode</h1>
+		<h1 data-ng-if="podcast.isBlog">Edit Blog Post</h1>
 	</div>
 <!-- Edit Podcast -->
 	<div data-ng-show="!podcast.isBlog">
@@ -174,7 +174,7 @@
 	
 	<div data-ng-hide="!podcast.$resolved ||((authentication.user) && (authentication.user._id == podcast.user._id))">
 		<div class="page-header">
-			<h1>Edit Podcast</h1>
+			<h1>Edit Episode</h1>
 		</div>
 		<div class="alert alert-warning text-center">
 		You're not authorized to access this page. Perhaps you need to <a href="/#!/signin" class="text-primary">sign in?</a>

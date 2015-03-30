@@ -1,13 +1,19 @@
 'use strict';
 
 
-angular.module('core').controller('HomeController', ['$scope', 'Authentication','$modal', '$log', 'FeedService',
-	function($scope, Authentication, $modal,$log, FeedService) {
+angular.module('core').controller('HomeController', ['$scope', 'Authentication','$modal', '$log', 'FeedService', 'Abouts', 'Podcasts',
+	function($scope, Authentication, $modal,$log, FeedService, Abouts, Podcasts) {
 		// This provides Authentication context.
 		$scope.authentication = Authentication;
+        $scope.defaultIcon = '/modules/abouts/img/defaultPoliticalPerson.gif';
 
         $scope.data = {
             feedSrc:''
+        };
+
+        $scope.find = function() {
+            $scope.abouts = Abouts.query();
+            $scope.podcasts = Podcasts.query();
         };
 
         //***************************Modal window for Rss feed********************************//

@@ -1,11 +1,11 @@
-<section id="myDiv" data-ng-controller="PodcastsController" data-ng-init="findOne(); defined()">
-<div data-ng-hide="podname.innerHTML === ''">
+<section id="myDiv" data-ng-controller="PodcastsController" data-ng-init="findOne()">
+<div data-ng-show="podcast._id">
 	<div class="page-header">
 		<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == podcast.user._id))">
-			<a id = "Edit" title="Edit Podcast" class="btn btn-primary" href="/#!/podcasts/{{podcast._id}}/edit">
+			<a id = "Edit" title="Edit Episode" class="btn btn-primary" href="/#!/podcasts/{{podcast._id}}/edit">
 				<i class="glyphicon glyphicon-edit"></i>
 			</a>
-			<a id = "trash" title="Delete Podcast" class="btn btn-primary" data-ng-click="remove();">
+			<a id = "trash" title="Delete Episode" class="btn btn-primary" data-ng-click="remove();">
 				<i class="glyphicon glyphicon-trash"></i>
 			</a>
 		</div>
@@ -61,13 +61,11 @@
 		  data-action="like" 
 		  data-show-faces="false" 
 		  data-share="true"></div>
-		  <!-- data-href="https://lbcqrcfwju.localtunnel.me/#!/podcasts/{{podcast._id}}" -->
-		  <!-- data-href="https://developers.facebook.com/docs/plugins/"  -->
 	</div>
 	<br />
 	<div class="fb-comments col-xs-push-3" data-href="{{tunnel}}/#!/podcasts/{{podcast._id}}" data-numposts="5" data-colorscheme="light"></div>
 </div>
-	<div class="alert alert-warning text-center errortop" data-ng-hide="!podcast.$resolved || podname.innerHTML !== ''">
+	<div class="alert alert-warning text-center errortop" data-ng-hide="!podcast.$resolved || podcast._id">
     	Not a valid podcast. Perhaps it's been deleted?
     </div>
 </section>

@@ -230,10 +230,6 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 			return new Array( Math.ceil( num ));
 		};
 
-		$scope.defined = function() {
-			$scope.podname = document.getElementById('pname');
-		};
-
 		$scope.getSeriesArr = function(podcasts) {
 			var series_arr = [];
 			series_arr.push('');
