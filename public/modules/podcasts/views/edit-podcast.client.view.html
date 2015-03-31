@@ -62,9 +62,10 @@
 				</div>
 				<div class="form-group">
 					<label class="col-sm-1 control-label" for="category">Category</label>
-					<div class="col-sm-4">
+					<div class="col-sm-4" data-ng-if="podcast.$resolved">
 						<select data-ng-model="podcast.category" id="category" name="category" class="form-control">
-					     	<option data-ng-repeat="category_name in getCategoryArr(podcasts)" data-ng-hide="category_name === ''"value="{{category_name}}">{{category_name}}</option>
+							<option data-ng-init="originalCategory = podcast.category" value="{{originalCategory}}">{{originalCategory}}</option>
+					     	<option data-ng-repeat="category_name in getCategoryArr(podcasts)" data-ng-hide="category_name === '' || category_name === originalCategory" value="{{category_name}}">{{category_name}}</option>
 					  	</select>
 					</div>
 				</div>
@@ -135,7 +136,8 @@
 					<label class="col-sm-1 control-label" for="category">Category</label>
 					<div class="col-sm-4">
 						<select data-ng-model="podcast.category" id="category" name="category" class="form-control">
-					     	<option data-ng-repeat="category_name in getCategoryArr(podcasts)" data-ng-hide="category_name === ''"value="{{category_name}}">{{category_name}}</option>
+							<option data-ng-init="originalCategory = podcast.category" value="{{originalCategory}}">{{originalCategory}}</option>
+					     	<option data-ng-repeat="category_name in getCategoryArr(podcasts)" data-ng-hide="category_name === '' || category_name === originalCategory" value="{{category_name}}">{{category_name}}</option>
 					  	</select>
 					</div>
 				</div>

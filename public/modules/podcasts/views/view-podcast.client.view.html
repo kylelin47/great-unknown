@@ -21,11 +21,12 @@
 	                <strong>Category:
 	                <span data-ng-bind="podcast.category"></span></strong>
 					<div data-ng-if="!podcast.isBlog">
+						<!-- Analytics TODO
 						Total views: <span id="totalViews">{{getListen()}}</span>
 						<br />
 						Average Listen: <span id="avgListen">{{getAvgSeconds()}}</span>
 						seconds
-						<br />
+						<br />-->
 						<a data-ng-show="podcast.audio" href="https://s3.amazonaws.com/podcast-manager/{{podcast.audio}}" download>Download Audio</a>
 					</div>
             	</div>

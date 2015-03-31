@@ -21,7 +21,7 @@ module.exports = {
 		lib: {
 			css: [
 				'public/lib/bootstrap/dist/css/bootstrap.css',
-				'public/lib/codemwnci/bootstrap-markdown.min.css',
+				'public/lib/markdown-editpreview-ng/lib/codemwnci/bootstrap-markdown.min.css',
 				'public/lib/toastr/toastr.min.css',
 			],
 			js: [
@@ -33,10 +33,10 @@ module.exports = {
 				'public/lib/angular-ui-utils/ui-utils.min.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.min.js',
 				'public/lib/angular-easyfb/angular-easyfb.min.js',
-				'public/lib/codemwnci/Markdown.Converter.js',
-				'public/lib/codemwnci/Markdown.Sanitizer.js',
-				'public/lib/codemwnci/bootstrap-markdown.js',
-				'public/lib/codemwnci/markdown-editpreview-ng.js',
+				'public/lib/markdown-editpreview-ng/lib/codemwnci/Markdown.Converter.js',
+				'public/lib/markdown-editpreview-ng/lib/codemwnci/Markdown.Sanitizer.js',
+				'public/lib/markdown-editpreview-ng/lib/codemwnci/bootstrap-markdown.js',
+				'public/lib/markdown-editpreview-ng/lib/codemwnci/markdown-editpreview-ng.js',
 				'public/lib/aws-sdk-js/dist/aws-sdk.min.js',
 				'public/lib/toastr/toastr.min.js'
 			]

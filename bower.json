@@ -13,6 +13,7 @@
     "angular-ui-router": "~0.2.11",
     "angular-easyfb": "~1.2.1",
     "aws-sdk-js": "~2.1.14",
-    "toastr": "~2.1.0"
+    "toastr": "~2.1.0",
+    "markdown-editpreview-ng": "~1.0.0-rc3"
   }
 }

@@ -9,6 +9,7 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 		$scope.defaultBlogIcon = 'http://i.imgur.com/rKe21My.png?1';
 		$scope.tunnel = 'https://npnghegnjd.localtunnel.me';
 		$scope.newCategory = '';
+		$scope.originalCategory = '';
 		if ($location.path() === '/podcasts/browse/') {
 			$scope.currentPage = 1;
 		}
