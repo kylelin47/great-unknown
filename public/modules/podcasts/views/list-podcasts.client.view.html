@@ -1,18 +1,9 @@
 <section data-ng-controller="PodcastsController" data-ng-init="find()">
 <section data-ng-if="((authentication.user) && (authentication.user.username == 'admin'))">
 	<div class="page-header">
-		<b class="browse-pod-left big-text-pod">Your Podcasts</b>
+		<b class="browse-pod-left big-text-pod">Your Episodes</b>
 		<br /><br />
-		<select data-ng-model="filter.category" name="category" id="category" class="browse-pod-dropdown" ng-init="category = 'All'" >
-			<option value="" selected>All</option>
-			<option value="Misc">Miscellaneous</option>
-			<option value="Sports">Sports</option>
-			<option value="Comedy">Comedy</option>
-			<option value="Entertainment">Entertainment</option>
-			<option value="News">News</option>
-		</select>
-		<h3 class="browse-pod-right">Filter:</h3>
-		<div class="col-xs-3 pull-right top-buffer">
+		<div class="col-xs-3 pull-right top-buffer bottom-buffer">
 			<div class="inner-addon left-addon">
 				<i class="glyphicon glyphicon-search"></i>
 				<input type="search" data-ng-model="search.name" placeholder="Search by name" class="form-control"></input>
@@ -21,10 +12,10 @@
 	</div>
 	<div style="clear: both;"></div>
 	<div class="pull-left btn-group-vertical col-md-3">
-		<!-- Series Tab -->
-		<label name="series" ng-init="$parent.seriesRadio.series = ''" class="btn btn-primary btn-md" data-ng-model="$parent.seriesRadio.series" btn-radio="'{{series_name}}'" data-ng-repeat="series_name in getSeriesArr(podcasts)">
-			<span ng-hide="series_name === ''" class="pull-left series-radio-txt">{{series_name}}</span>
-			<span ng-show="series_name === ''" class="pull-left series-radio-txt">All Series</span>
+		<!-- Categories Tab -->
+		<label name="category" ng-init="$parent.seriesRadio.category = ''" class="btn btn-primary btn-md" data-ng-model="$parent.seriesRadio.category" btn-radio="'{{category_name}}'" data-ng-repeat="category_name in getCategoryArr(podcasts)">
+			<span ng-hide="category_name === ''" class="pull-left series-radio-txt">{{category_name}}</span>
+			<span ng-show="category_name === ''" class="pull-left series-radio-txt">All Categories</span>
 			<i class="pull-right series-radio-txt glyphicon glyphicon-chevron-right"></i>
 			<div style="clear: both;"></div>
 		</label>
@@ -42,8 +33,8 @@
 					<span data-ng-bind="podcast.user.displayName"></span></p>
 					<strong class="col-md-6 text-right">
 						{{podcast.category}},
-						<span data-ng-hide="podcast.isBlog">Podcast</span>
-						<span data-ng-hide="!podcast.isBlog">Blog</span>
+						<span data-ng-hide="podcast.isBlog">Episode</span>
+						<span data-ng-hide="!podcast.isBlog">Blog Post</span>
 					</strong>
 				</div>
 			</small>

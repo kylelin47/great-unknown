@@ -8,6 +8,7 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 		$scope.defaultPodIcon = 'http://i.imgur.com/f7oBepl.png?1';
 		$scope.defaultBlogIcon = 'http://i.imgur.com/rKe21My.png?1';
 		$scope.tunnel = 'https://npnghegnjd.localtunnel.me';
+		$scope.newCategory = '';
 		if ($location.path() === '/podcasts/browse/') {
 			$scope.currentPage = 1;
 		}
@@ -240,6 +241,17 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 				}
 			}
 			return series_arr;
+		};
+
+		$scope.getCategoryArr = function(podcasts) {
+			var category_arr = [];
+			category_arr.push('');
+			for (var i = 0; i < podcasts.length; i++) {
+				if ( category_arr.indexOf(podcasts[i].category) === -1 && podcasts[i].category!== '' ) {
+					category_arr.push(podcasts[i].category);
+				}
+			}
+			return category_arr;
 		};
 	}
 ]);

@@ -1,4 +1,4 @@
-<section data-ng-controller="PodcastsController">
+<section data-ng-controller="PodcastsController" data-ng-init="find()">
 	<div class="page-header">
 		<h1>Create New Blog Post</h1>
 	</div>
@@ -37,22 +37,18 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-1 control-label" for="category">Category</label>
 					<div class="col-sm-4">
-						<select data-ng-model="category" id="category" name="category" class="form-control"
-						        data-ng-init="category='Misc'">
-							<option value="Misc">Miscellaneous</option>
-							<option value="Sports">Sports</option>
-							<option value="Comedy">Comedy</option>
-							<option value="Entertainment">Entertainment</option>
-							<option value="News">News</option>
-						</select>
+						<input class="form-control" type="text" data-ng-model="newCategory" placeholder="New Category" />
 					</div>
+					<button type="button" class="btn btn-default" data-ng-click="podcasts.push({category: newCategory});">Create New Category</button>
 				</div>
 				<div class="form-group">
-					<label for="series" class="col-sm-1 control-label">Series</label>
+					<label class="col-sm-1 control-label" for="category">Category</label>
 					<div class="col-sm-4">
-						<input type="text" id="series" data-ng-model="series" placeholder="Series this blog is a part of" class="form-control" />
+						<select data-ng-model="category" id="category" name="category" class="form-control">
+					     	<option data-ng-repeat="category_name in category_arr" data-ng-hide="category_name === ''"value="{{category_name}}">{{category_name}}</option>
+					     	<option value="Create New Category">Create New Category</option>
+				  		</select>
 					</div>
 				</div>
 				<div class="form-group">
