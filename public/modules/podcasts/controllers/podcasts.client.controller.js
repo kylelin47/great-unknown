@@ -252,7 +252,7 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 					category_arr.push(podcasts[i].category);
 				}
 			}
-			return category_arr;
+			return category_arr.sort();
 		};
 	}
 ]);

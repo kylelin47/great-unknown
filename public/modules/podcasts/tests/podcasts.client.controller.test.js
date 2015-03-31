@@ -315,6 +315,105 @@
 			expect(series[2]).toBe('Second Tests');
 		}));
 
+		it('$scope.getCategoryArr should have default when no podcasts exist', inject(function(Podcasts) {
+			var podcastsArray = [];
+			var categories = scope.getCategoryArr(podcastsArray);
+			expect(categories.length).toBe(1);
+			expect(categories[0]).toBe('');
+		}));
+
+		it('$scope.getCategoryArr should have default when no categories exist', inject(function(Podcasts) {
+			// Create a sample Podcast object
+			var samplePodcast = new Podcasts({
+				name: 'New Podcast',
+				isBlog: false,
+				podIcon: 'http://i.imgur.com/f7oBepl.png?1',
+				category: ''
+			});
+			var samplePodcast2 = new Podcasts({
+				name: 'New Podcast',
+				isBlog: false,
+				podIcon: 'http://i.imgur.com/f7oBepl.png?1',
+				category: ''
+			});
+			var podcastsArray = [samplePodcast, samplePodcast2];
+			var categories = scope.getCategoryArr(podcastsArray);
+			expect(categories.length).toBe(1);
+			expect(categories[0]).toBe('');
+		}));
+
+		it('$scope.getCategoryArr should get categories from podcasts', inject(function(Podcasts) {
+			// Create a sample Podcast object
+			var samplePodcast = new Podcasts({
+				name: 'New Podcast',
+				isBlog: false,
+				podIcon: 'http://i.imgur.com/f7oBepl.png?1',
+				category: 'Tests'
+			});
+			var samplePodcast2 = new Podcasts({
+				name: 'New Podcast',
+				isBlog: false,
+				podIcon: 'http://i.imgur.com/f7oBepl.png?1',
+				category: 'Tests Two'
+			});
+			var podcastsArray = [samplePodcast, samplePodcast2];
+			var categories = scope.getCategoryArr(podcastsArray);
+			expect(categories.length).toBe(3);
+			expect(categories[0]).toBe('');
+			expect(categories[1]).toBe('Tests');
+			expect(categories[2]).toBe('Tests Two');
+		}));
+
+		it('$scope.getCategoryArr should sort categories from podcasts', inject(function(Podcasts) {
+			// Create a sample Podcast object
+			var samplePodcast = new Podcasts({
+				name: 'New Podcast',
+				isBlog: false,
+				podIcon: 'http://i.imgur.com/f7oBepl.png?1',
+				category: 'B'
+			});
+			var samplePodcast2 = new Podcasts({
+				name: 'New Podcast',
+				isBlog: false,
+				podIcon: 'http://i.imgur.com/f7oBepl.png?1',
+				category: 'A'
+			});
+			var podcastsArray = [samplePodcast, samplePodcast2];
+			var categories = scope.getCategoryArr(podcastsArray);
+			expect(categories.length).toBe(3);
+			expect(categories[0]).toBe('');
+			expect(categories[1]).toBe('A');
+			expect(categories[2]).toBe('B');
+		}));
+
+		it('$scope.getCategoryArr should get categories from podcasts when some are null', inject(function(Podcasts) {
+			// Create a sample Podcast object
+			var samplePodcast = new Podcasts({
+				name: 'New Podcast',
+				isBlog: false,
+				podIcon: 'http://i.imgur.com/f7oBepl.png?1',
+				category: 'Tests'
+			});
+			var samplePodcast2 = new Podcasts({
+				name: 'New Podcast',
+				isBlog: false,
+				podIcon: 'http://i.imgur.com/f7oBepl.png?1',
+				category: 'Tests Two'
+			});
+			var samplePodcast3 = new Podcasts({
+				name: 'New Podcast',
+				isBlog: false,
+				podIcon: 'http://i.imgur.com/f7oBepl.png?1',
+				series: ''
+			});
+			var podcastsArray = [samplePodcast, samplePodcast2];
+			var categories = scope.getCategoryArr(podcastsArray);
+			expect(categories.length).toBe(3);
+			expect(categories[0]).toBe('');
+			expect(categories[1]).toBe('Tests');
+			expect(categories[2]).toBe('Tests Two');
+		}));
+
 		it('$scope.update() should update a valid Podcast', inject(function(Podcasts) {
 			// Define a sample Podcast put data
 			var samplePodcastPutData = new Podcasts({
