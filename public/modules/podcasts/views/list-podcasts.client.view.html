@@ -56,13 +56,6 @@
 							<input type="text" class="form-control" data-ng-model="podcast.blurb" />
 						</form>
 					</span>
-					<p data-ng-hide="podcast.series === ''" class="text-muted">Series: 
-						<b>
-							{{podcast.series}}
-							<span data-ng-hide="seriesRadio.series === ''">#{{podcastsf.length - podcastsf.indexOf(podcast)}}
-							</span>
-						</b>
-					</p>
 				</div>
 				<div class="pull-right">
 					<img data-ng-hide="podcast.podIcon === ''" src={{podcast.podIcon}} alt="Icon" class="pod-icon pod-icon-right">

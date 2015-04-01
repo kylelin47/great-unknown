@@ -55,6 +55,17 @@
 					</div>
 				</div>
 				<div class="form-group">
+					<label class="col-sm-1 control-label" for="category">Category</label>
+					<div class="col-sm-4">
+					  <select data-ng-model="podcast.category" id="category" name="category" class="form-control">
+					     <option data-ng-init="originalCategory = podcast.category" value="{{originalCategory}}">{{originalCategory}}</option>
+					     <option data-ng-repeat="category_name in getCategoryArr(podcasts)" data-ng-hide="category_name === '' || category_name === originalCategory" value="{{category_name}}">{{category_name}}</option>
+					     <option value="New Category"> --- New Category --- </option>
+					  </select>
+					  <input data-ng-show="podcast.category==='New Category'" class="form-control" type="text" data-ng-model="newCategory" placeholder="New Category" />
+					</div>
+				</div>
+				<!-- <div class="form-group">
 					<div class="col-sm-4">
 						<input class="form-control" type="text" data-ng-model="newCategory" placeholder="New Category" />
 					</div>
@@ -62,13 +73,13 @@
 				</div>
 				<div class="form-group">
 					<label class="col-sm-1 control-label" for="category">Category</label>
-					<div class="col-sm-4" data-ng-if="podcast.$resolved">
+					<div class="col-sm-4">
 						<select data-ng-model="podcast.category" id="category" name="category" class="form-control">
 							<option data-ng-init="originalCategory = podcast.category" value="{{originalCategory}}">{{originalCategory}}</option>
 					     	<option data-ng-repeat="category_name in getCategoryArr(podcasts)" data-ng-hide="category_name === '' || category_name === originalCategory" value="{{category_name}}">{{category_name}}</option>
 					  	</select>
 					</div>
-				</div>
+				</div> -->
 				<div class="form-group">
 					<label class="col-sm-1 control-label" for="icon">Icon</label>
 					<div class="col-sm-4">
@@ -127,6 +138,17 @@
 					</div>
 				</div>
 				<div class="form-group">
+					<label class="col-sm-1 control-label" for="category">Category</label>
+					<div class="col-sm-4">
+					  <select data-ng-model="category" id="category" name="category" class="form-control">
+					     <option data-ng-init="originalCategory = podcast.category" value="{{originalCategory}}">{{originalCategory}}</option>
+					     <option data-ng-repeat="category_name in getCategoryArr(podcasts)" data-ng-hide="category_name === '' || category_name === originalCategory" value="{{category_name}}">{{category_name}}</option>
+					     <option value="New Category"> --- New Category --- </option>
+					  </select>
+					  <input data-ng-show="category==='New Category'" class="form-control" type="text" data-ng-model="newCategory" placeholder="New Category" />
+					</div>
+				</div>
+				<!-- <div class="form-group">
 					<div class="col-sm-4">
 						<input class="form-control" type="text" data-ng-model="newCategory" placeholder="New Category" />
 					</div>
@@ -140,7 +162,7 @@
 					     	<option data-ng-repeat="category_name in getCategoryArr(podcasts)" data-ng-hide="category_name === '' || category_name === originalCategory" value="{{category_name}}">{{category_name}}</option>
 					  	</select>
 					</div>
-				</div>
+				</div> -->
 				<div class="form-group">
 					<label class="col-sm-1 control-label" for="icon">Icon</label>
 					<div class="col-sm-4">

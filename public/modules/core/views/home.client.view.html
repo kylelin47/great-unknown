@@ -42,10 +42,11 @@
 				<img data-ng-show="abouts[0].picture === ''" src={{defaultIcon}} alt="My Avatar" height="100%" width="100%" />
 				<img data-ng-hide="abouts[0].picture === ''" src={{abouts[0].picture}} alt="Avatar" height="100%" width="100%" />
 			</div>
+			<br></br>
 			<div class="row">
 				<p><span id = "name" class="text-muted">Name: </span><b>{{abouts[0].name}}</b></p>
 				<p><span id = "email" class="text-muted">Email: </span><b>{{abouts[0].email}}</b></p>
-				<markdown id = "about" bind-from="abouts[0].about"></markdown>
+				<markdown id = "about" class="pod-blog" bind-from="abouts[0].about"></markdown>
 			</div>
 			<div class="row">
 				<h2>About My Podcast</h2>

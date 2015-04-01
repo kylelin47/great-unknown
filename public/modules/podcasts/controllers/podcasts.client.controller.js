@@ -43,6 +43,11 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 			if ( podcast.podIcon === '' || typeof podcast.podIcon === 'undefined' ) {
 				podcast.podIcon = $scope.defaultPodIcon;
 			}
+
+			//if using new category, use that new category
+			if ( podcast.category === 'New Category' ) {
+				podcast.category = $scope.newCategory;
+			}
 			// Redirect after save
 			podcast.$save(function(response) {
 				$location.path('podcasts/' + response._id);
@@ -117,10 +122,12 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 		// Update existing Podcast
 		$scope.update = function() {
 			var podcast = $scope.podcast;
+
 			if ( podcast.podIcon === '' || typeof podcast.podIcon === 'undefined' ) {
 				if ( podcast.isBlog ) podcast.podIcon = $scope.defaultBlogIcon;
 				else podcast.podIcon =  $scope.defaultPodIcon;
 			}
+
 			if (podcast.name) {
 				var d = Date.now();
 				if ($scope.file) {
@@ -134,6 +141,11 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 					$scope.upload($scope.videoFile, d + $scope.videoFile.name);
 				}
 			}
+
+			if ( podcast.category === 'New Category' ) {
+				podcast.category = $scope.newCategory;
+			}
+
 			podcast.$update(function() {
 				$location.path('podcasts/' + podcast._id);
 			}, function(errorResponse) {
