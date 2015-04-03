@@ -1,7 +1,9 @@
 <section data-ng-controller="HomeController" data-ng-init="find()">
 	<br /><br />
 	<strong class="big-text-pod">Welcome!</strong>
-	<br></br>
+        <img src = "http://cakesandcupcakesmumbai.com/wp-content/uploads/2012/10/rss_icon.png" height="30" width="30">
+        <button  class = "btn btn-default" data-ng-click = "sendMail()">subscribe</button>
+	<br><br>
 	<div class="row">
 		<div class="col-md-8">
 			<a data-ng-repeat="podcast in podcasts" data-ng-href="#!/podcasts/{{podcast._id}}" class="list-group-item">
