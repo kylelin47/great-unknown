@@ -48,14 +48,14 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
             });
         };
         //***************************Modal window for Rss feed********************************//
-        $scope.sendMail = function(user) {
+        $scope.sendMail = function() {
             /* jshint ignore:start */
             $http.post('/core/cus_sendMail').success(function (response) {
-                toastr.success('An email has been sent to your associated address \'' + user.email + '\'');
+                toastr.success(response);
             }).error(function (response) {
                 toastr.options.closeButton = true;
                 toastr.options.progressBar = true;
-                toastr.error('No email address found. Please sign in and associate an email address to subscribe.')
+                toastr.error(response);
                 toastr.options.closeButton = false;
                 toastr.options.progressBar = false;
             });

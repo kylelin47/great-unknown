@@ -21,7 +21,7 @@ exports.cus_sendMail = function(req,res,user){
         'I hope you will have a great time \n';
 
     if(!req.user){
-        return res.status(403).send('Please log in');
+        return res.status(403).send('No email address found. Please sign in and associate an email address to subscribe.');
     }
     else{
         transporter.sendMail({
@@ -30,7 +30,7 @@ exports.cus_sendMail = function(req,res,user){
             subject: 'Welcome to my Podcast',
             text: email_text
         });
-        return res.send('Successfully subscribed');
+        return res.send('An email has been sent to your associated address \'' + req.user.email + '\'');
     }
 
 };
