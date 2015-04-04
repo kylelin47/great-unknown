@@ -1,9 +1,8 @@
 <section data-ng-controller="HomeController" data-ng-init="find()">
-	<br /><br />
-	<strong class="big-text-pod">Welcome!</strong>
-        <img src = "http://cakesandcupcakesmumbai.com/wp-content/uploads/2012/10/rss_icon.png" height="30" width="30">
-        <button  class = "btn btn-default" data-ng-click = "cus_sendMail().then(modalOpen('lg'))">subscribe</button>
-	<br><br>
+	<br />
+    <a href ="" data-ng-click="sendMail(authentication.user)"><img src = "http://cakesandcupcakesmumbai.com/wp-content/uploads/2012/10/rss_icon.png" height="30" width="30" alt="RSS Feed Icon" /></a>
+    <a  href = "" data-ng-click = "sendMail(authentication.user)">subscribe</a> <span class="text-muted">|</span>
+    <a  href = "" data-ng-click = "modalOpen('lg')">view</a>
 	<div class="row">
 		<div class="col-md-8">
 			<a data-ng-repeat="podcast in podcasts" data-ng-href="#!/podcasts/{{podcast._id}}" class="list-group-item">
@@ -39,7 +38,7 @@
 				<img data-ng-show="abouts[0].picture === ''" src={{defaultIcon}} alt="My Avatar" height="100%" width="100%" />
 				<img data-ng-hide="abouts[0].picture === ''" src={{abouts[0].picture}} alt="Avatar" height="100%" width="100%" />
 			</div>
-			<br></br>
+			<br />
 			<div class="row">
 				<p><span id = "name" class="text-muted">Name: </span><b>{{abouts[0].name}}</b></p>
 				<p><span id = "email" class="text-muted">Email: </span><b>{{abouts[0].email}}</b></p>

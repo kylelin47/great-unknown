@@ -17,7 +17,6 @@ var transporter = nodemailer.createTransport({
 
 
 exports.cus_sendMail = function(req,res,user){
-    console.log('Have I been here?');
     var email_text = 'You have successfully subscribe to my blog \n'+
         'I hope you will have a great time \n';
 
@@ -26,14 +25,13 @@ exports.cus_sendMail = function(req,res,user){
         return res.status(403).send('Please log in');
     }
     else{
-        console.log(req.user.email);
         transporter.sendMail({
             from: email.user,
             to: req.user.email,
             subject: 'Welcome to my Podcast',
             text: email_text
         });
-        transporter.sendMail();
+        return res.status(403).send('Successfully subscribed');
     }
 
 };

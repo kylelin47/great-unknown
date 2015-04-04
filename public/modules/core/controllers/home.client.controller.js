@@ -2,7 +2,7 @@
 
 
 angular.module('core').controller('HomeController', ['$scope', 'Authentication','$modal', '$log', 'FeedService', 'Abouts', 'Podcasts', '$http',
-	function($scope, Authentication, $modal,$log, FeedService, Abouts, Podcasts,$http) {
+	function($scope, Authentication, $modal,$log, FeedService, Abouts, Podcasts, $http) {
 		// This provides Authentication context.
 		$scope.authentication = Authentication;
         $scope.defaultIcon = '/modules/abouts/img/defaultPoliticalPerson.gif';
@@ -48,7 +48,11 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
             });
         };
         //***************************Modal window for Rss feed********************************//
-        $scope.cus_sendMail = function() {
+        $scope.sendMail = function(user) {
+            /* jshint ignore:start */
+            if (user.email) toastr.success('An email has been sent to your associated address \'' + user.email + '\'');
+            else toastr.error('No email address found. Please sign in and associate an email address.')
+            /* jshint ignore:end */
             $http.post('/core/cus_sendMail').success(function (response) {
                 alert('Successfully subscribe');
             }).error(function (response) {
