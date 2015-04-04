@@ -1,8 +1,8 @@
 'use strict';
 
 
-angular.module('core').controller('HomeController', ['$scope', 'Authentication','$modal', '$log', 'FeedService', 'Abouts', 'Podcasts',
-	function($scope, Authentication, $modal,$log, FeedService, Abouts, Podcasts) {
+angular.module('core').controller('HomeController', ['$scope', 'Authentication','$modal', '$log', 'FeedService', 'Abouts', 'Podcasts', '$http',
+	function($scope, Authentication, $modal,$log, FeedService, Abouts, Podcasts,$http) {
 		// This provides Authentication context.
 		$scope.authentication = Authentication;
         $scope.defaultIcon = '/modules/abouts/img/defaultPoliticalPerson.gif';
@@ -48,8 +48,13 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
             });
         };
         //***************************Modal window for Rss feed********************************//
-        $scope.cus_sendMail = function(){
-
+        $scope.cus_sendMail = function() {
+            $http.post('/core/cus_sendMail').success(function (response) {
+                alert('Successfully subscribe');
+            }).error(function (response) {
+                console.log(response);
+                $scope.error = response.message;
+            });
         };
 	}
 ]);
