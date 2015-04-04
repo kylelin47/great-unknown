@@ -21,7 +21,6 @@ exports.cus_sendMail = function(req,res,user){
         'I hope you will have a great time \n';
 
     if(!req.user){
-       console.log('invalid user');
         return res.status(403).send('Please log in');
     }
     else{

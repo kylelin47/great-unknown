@@ -54,7 +54,6 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
             else toastr.error('No email address found. Please sign in and associate an email address.')
             /* jshint ignore:end */
             $http.post('/core/cus_sendMail').success(function (response) {
-                alert('Successfully subscribe');
             }).error(function (response) {
                 console.log(response);
                 $scope.error = response.message;
