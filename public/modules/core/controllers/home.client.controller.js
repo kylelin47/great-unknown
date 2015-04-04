@@ -50,14 +50,16 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
         //***************************Modal window for Rss feed********************************//
         $scope.sendMail = function(user) {
             /* jshint ignore:start */
-            if (user.email) toastr.success('An email has been sent to your associated address \'' + user.email + '\'');
-            else toastr.error('No email address found. Please sign in and associate an email address.')
-            /* jshint ignore:end */
             $http.post('/core/cus_sendMail').success(function (response) {
+                toastr.success('An email has been sent to your associated address \'' + user.email + '\'');
             }).error(function (response) {
-                console.log(response);
-                $scope.error = response.message;
+                toastr.options.closeButton = true;
+                toastr.options.progressBar = true;
+                toastr.error('No email address found. Please sign in and associate an email address to subscribe.')
+                toastr.options.closeButton = false;
+                toastr.options.progressBar = false;
             });
+            /* jshint ignore:end */
         };
 	}
 ]);

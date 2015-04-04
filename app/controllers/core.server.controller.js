@@ -30,7 +30,7 @@ exports.cus_sendMail = function(req,res,user){
             subject: 'Welcome to my Podcast',
             text: email_text
         });
-        return res.status(403).send('Successfully subscribed');
+        return res.send('Successfully subscribed');
     }
 
 };
