@@ -3,12 +3,14 @@
 angular.module('core').factory('FeedService',['$http',function($http){
 
     var myObj = {
-        feedSrc: ''
+        feedSrc: 'http://rss.cnn.com/rss/cnn_topstories.rss'
     };
 
     return {
         getFeed: function(data){
-            myObj = data;
+            if(data.feed !== null){
+                myObj = data;
+            }
         },
         setFeed: function(){
             return myObj;

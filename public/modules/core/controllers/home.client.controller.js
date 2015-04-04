@@ -20,7 +20,6 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 
         $scope.modalOpen = function(size) {
 
-            FeedService.getFeed($scope.data);
 
             //set the feedSrc value into factory
 
@@ -49,12 +48,8 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
             });
         };
         //***************************Modal window for Rss feed********************************//
+        $scope.cus_sendMail = function(){
 
-
-
-
-
-
-
+        };
 	}
 ]);

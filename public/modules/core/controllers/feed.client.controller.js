@@ -12,6 +12,8 @@ angular.module('core').controller('RssController', ['$scope', 'Authentication','
         $scope.loadButonText= 'Rss_feed load';
 
         $scope.loadFeed=function(e){
+            var tmp = 'This is my feedSrc:' + $scope.feedSrc;
+            console.log(tmp);
             FeedService.parseFeed($scope.feedSrc).then(function(res){
                 $scope.feeds= res.data.responseData.feed.entries;
                 $scope.FeedTitle= res.data.responseData.feed.title;
