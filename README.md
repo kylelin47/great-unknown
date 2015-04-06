@@ -4,7 +4,7 @@ Podcast Manager Web App
 
 Home Page & Team Member Information
 --------------------
-![Home Page](http://i.imgur.com/npEZrVp.png?1)
+![Home Page](http://i.gyazo.com/b0e582e69897747d784a2b5dd9ead5f2.png)
 
 **Members**|**Username**
 -----------|-------------
