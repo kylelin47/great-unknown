@@ -51,8 +51,8 @@ var amazon_credentials =
 ```
 Not particularly secure, but easy to work with at the moment. If region is not provided, it will assume us-east-1, which is the default in Amazon S3 if you have not configured it.
 
-Start mongodb, then 'grunt' starts the server, view at localhost:3000
-To create episodes and do admin stuff create an account with the username 'admin' (no quotes)
+6. Start mongodb, then 'grunt' starts the server, view at localhost:3000
+7. To create episodes and do admin stuff create an account with the username 'admin' (no quotes)
 
 **Client/Server Side Testing**
 
