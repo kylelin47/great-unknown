@@ -52,6 +52,7 @@ var amazon_credentials =
 Not particularly secure, but easy to work with at the moment. If region is not provided, it will assume us-east-1, which is the default in Amazon S3 if you have not configured it.
 
 **Running the App**
+
 1. Start mongodb
 2. 'grunt' starts the server
 3. View at localhost:3000
