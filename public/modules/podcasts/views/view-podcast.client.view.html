@@ -1,3 +1,6 @@
+<head>
+<script type="text/javascript" src="../controllers/podcasts.client.controller.js"></script>
+</head>
 <section id="myDiv" data-ng-controller="PodcastsController" data-ng-init="findOne()">
 <div data-ng-show="podcast._id">
 	<div class="page-header">
@@ -21,12 +24,12 @@
 	                <strong>Category:
 	                <span data-ng-bind="podcast.category"></span></strong>
 					<div data-ng-if="!podcast.isBlog">
-						<!-- Analytics TODO
+
 						Total views: <span id="totalViews">{{getListen()}}</span>
 						<br />
 						Average Listen: <span id="avgListen">{{getAvgSeconds()}}</span>
 						seconds
-						<br />-->
+						<br />
 						<a data-ng-show="podcast.audio" href="https://s3.amazonaws.com/podcast-manager/{{podcast.audio}}" download>Download Audio</a>
 					</div>
             	</div>
@@ -35,16 +38,48 @@
 			</em>
 		</small>
 	</div>
-	<span data-ng-if="!podcast.isBlog">
-		<div class="row" data-ng-if="podcast.audio">
+	
+
+	<span data-ng-show="!podcast.isBlog">
+		<div class="row" data-ng-show="podcast.audio">
 			<audio class="col-xs-12" id="audio" controls data-ng-src="{{getAudioUrl()}}"></audio>
 		</div>
+	
+
+
+	<script>
+		var timer;
+
+		function start() {
+		angular.element($('#myDiv')).scope().incrementTotalSeconds();
+		document.getElementById("avgListen").innerHTML = angular.element($('#myDiv')).scope().getAvgSeconds();
+		}
+		
+		function play() {
+		increment();
+		timer = setInterval(start, 1000);
+		}
+		
+		function increment() {
+		angular.element($('#myDiv')).scope().updateListens();
+		document.getElementById("totalViews").innerHTML = angular.element($('#myDiv')).scope().getListen();
+		}
+
+		audio.addEventListener('play', play);
+		audio.addEventListener('pause', function() { clearInterval(timer)} );
+		audio.addEventListener('ended', function() { clearInterval(timer)} );
+		
+	</script>
+	
 		<div class="row" data-ng-if="podcast.video">
 			<video class="col-xs-12" id="video" controls>
 				<source data-ng-src="{{getVideoUrl()}}" />
 			</video>
 		</div>
 	</span>
+	
+	
+	
 	<div class="pod-blog col-xs-push-2 col-xs-8">
 		<br /><br />
 		<markdown bind-from="podcast.blog"></markdown>

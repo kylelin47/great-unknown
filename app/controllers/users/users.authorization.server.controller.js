@@ -35,6 +35,13 @@ exports.requiresLogin = function(req, res, next) {
 };
 
 /**
+ * Require login routing middleware for no admin access
+ */
+exports.requiresLogin2 = function(req, res, next) {
+	next();
+};
+
+/**
  * User authorizations routing middleware
  */
 exports.hasAuthorization = function(roles) {

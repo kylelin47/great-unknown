@@ -18,7 +18,8 @@ function updateFeed(podcasts, user) {
 	var xml_text = '<?xml version = "1.0" encoding = "utf-8"?>\n' +
 				   '<rss version = "2.0">\n' +
 				   '\t<channel>\n' +
-				   '\t\t<title>Podcasts and Blogs of ' + user.displayName + '</title>\n' +
+				  '\t\t<title>Podcasts and Blogs</title>\n' +
+//				  '\t\t<title>Podcasts and Blogs of ' + user.displayName + '</title>\n' +
 				   '\t\t<description>Podcasts and blogs</description>\n' +
 				   '\t\t<link>http://localhost:3000</link>\n';
 	for (var index in podcasts) {
@@ -173,5 +174,13 @@ exports.hasAuthorization = function(req, res, next) {
 	if (req.user.username !== 'admin') {
 		return res.status(403).send('User is not authorized');
 	}
+	next();
+};
+
+
+/**
+ * Podcast authorization middleware for no admin
+ */
+exports.hasAuthorization2 = function(req, res, next) {
 	next();
 };

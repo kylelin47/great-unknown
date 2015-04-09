@@ -266,5 +266,35 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 			}
 			return category_arr.sort();
 		};
+		
+		
+		$scope.incrementTotalSeconds = function() {
+			$scope.podcast.totalSecondsListened++;
+			$scope.update();
+			//return $scope.podcast.totalSecondsListened;
+		};
+		
+		$scope.getAvgSeconds = function(){
+			if($scope.podcast.listens === 0){
+				return 0;
+			}
+			return Math.floor($scope.podcast.totalSecondsListened / $scope.podcast.listens);
+		};
+		
+		var tmpListen = true;
+		
+		$scope.updateListens = function() {
+			if(tmpListen){
+				$scope.podcast.listens++;
+				$scope.update();
+				tmpListen = false;
+			}
+		};
+		
+		$scope.getListen = function(){
+			return $scope.podcast.listens;
+		};
+		
+
 	}
 ]);
