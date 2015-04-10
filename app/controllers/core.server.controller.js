@@ -20,10 +20,15 @@ exports.cus_sendMail = function(req,res,user){
     var email_text = 'You have successfully subscribe to my blog \n'+
         'I hope you will have a great time \n';
 
+
+
     if(!req.user){
         return res.status(403).send('No email address found. Please sign in and associate an email address to subscribe.');
     }
     else{
+        req.user.is_subscribe = true;
+        req.user.save();
+
         transporter.sendMail({
             from: email.user,
             to: req.user.email,

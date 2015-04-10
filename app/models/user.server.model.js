@@ -88,7 +88,11 @@ var UserSchema = new Schema({
 	},
 	resetPasswordExpires: {
 		type: Date
-	}
+	},
+    is_subscribe: {
+        type: Boolean,
+        default: false
+    }
 });
 
 /**
