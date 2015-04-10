@@ -18,8 +18,7 @@ function updateFeed(podcasts, user) {
 	var xml_text = '<?xml version = "1.0" encoding = "utf-8"?>\n' +
 				   '<rss version = "2.0">\n' +
 				   '\t<channel>\n' +
-				  '\t\t<title>Podcasts and Blogs</title>\n' +
-//				  '\t\t<title>Podcasts and Blogs of ' + user.displayName + '</title>\n' +
+				   '\t\t<title>Podcasts and Blogs of ' + user.displayName + '</title>\n' +
 				   '\t\t<description>Podcasts and blogs</description>\n' +
 				   '\t\t<link>http://localhost:3000</link>\n';
 	for (var index in podcasts) {
@@ -90,29 +89,42 @@ exports.read = function(req, res) {
  */
 exports.update = function(req, res) {
 	var podcast = req.podcast ;
-
-	podcast = _.extend(podcast , req.body);
-	podcast.blurb = podcast.blurb.substring(0, 120);
+	if (!req.isAuthenticated() || req.user.username !== 'admin') {
+		podcast.listens = req.body.listens;
+		podcast.totalSecondsListened = req.body.totalSecondsListened;
+		podcast.save(function(err) {
+			if (err) {
+				return res.status(400).send({
+					message: errorHandler.getErrorMessage(err)
+				});
+			} else {
+				res.jsonp(podcast);
+			}
+		});
+	}
+	else if (req.user.username === 'admin') {
+		podcast = _.extend(podcast , req.body);
+		podcast.blurb = podcast.blurb.substring(0, 120);
+		podcast.save(function(err) {
+			if (err) {
+				return res.status(400).send({
+					message: errorHandler.getErrorMessage(err)
+				});
+			} else {
+				Podcast.find().sort('-created').limit(rss_max_entries).exec(function(err, podcasts) {
+					if (err) {
+						return res.status(400).send({
+							message: errorHandler.getErrorMessage(err)
+						});
+					} else {
+						updateFeed(podcasts, req.user);
+					}
+				});
+				res.jsonp(podcast);
+			}
+		});
+	}
 	//podcast.normalized = podcast.name.toLowerCase();
-
-	podcast.save(function(err) {
-		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		} else {
-			Podcast.find().sort('-created').limit(rss_max_entries).exec(function(err, podcasts) {
-				if (err) {
-					return res.status(400).send({
-						message: errorHandler.getErrorMessage(err)
-					});
-				} else {
-					updateFeed(podcasts, req.user);
-				}
-			});
-			res.jsonp(podcast);
-		}
-	});
 };
 /**
  * Delete a Podcast
