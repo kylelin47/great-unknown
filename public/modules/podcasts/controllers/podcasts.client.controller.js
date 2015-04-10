@@ -1,8 +1,8 @@
 'use strict';
 // Podcasts controller
 
-angular.module('podcasts').controller('PodcastsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Podcasts', '$sce',
-	function($scope, $stateParams, $location, Authentication, Podcasts, $sce) {
+angular.module('podcasts').controller('PodcastsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Podcasts', '$sce', '$window',
+	function($scope, $stateParams, $location, Authentication, Podcasts, $sce, $window) {
 		$scope.authentication = Authentication;
 		$scope.currentPage = parseInt($stateParams.page, 10);
 		$scope.defaultPodIcon = 'http://i.imgur.com/f7oBepl.png?1';
@@ -58,6 +58,7 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 				$scope.blurb = '';
 				$scope.category = '';
 				$scope.series = '';
+				$window.location.reload();
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -147,7 +148,11 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 			}
 
 			podcast.$update(function() {
-				$location.path('podcasts/' + podcast._id);
+				if ($location.path() !== '/podcasts/' + podcast._id)
+				{
+					$location.path('podcasts/' + podcast._id);
+					$window.location.reload();
+				}
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});

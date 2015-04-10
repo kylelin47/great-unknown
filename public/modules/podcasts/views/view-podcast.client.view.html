@@ -24,10 +24,9 @@
 	                <strong>Category:
 	                <span data-ng-bind="podcast.category"></span></strong>
 					<div data-ng-if="!podcast.isBlog">
-
-						Total views: <span id="totalViews">{{getListen()}}</span>
+						Total plays: <span id="totalViews">{{getListen()}}</span>
 						<br />
-						Average Listen: <span id="avgListen">{{getAvgSeconds()}}</span>
+						Average time: <span id="avgListen">{{getAvgSeconds()}}</span>
 						seconds
 						<br />
 						<a data-ng-show="podcast.audio" href="https://s3.amazonaws.com/podcast-manager/{{podcast.audio}}" download>Download Audio</a>
