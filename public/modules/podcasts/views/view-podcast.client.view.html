@@ -24,11 +24,13 @@
 	                <strong>Category:
 	                <span data-ng-bind="podcast.category"></span></strong>
 					<div data-ng-if="!podcast.isBlog">
+						<!--
 						Total plays: <span id="totalViews">{{podcast.listens}}</span>
 						<br />
 						Average time: <span id="avgListen">{{getAvgSeconds()}}</span>
 						seconds
 						<br />
+						-->
 						<a data-ng-show="podcast.audio" href="https://s3.amazonaws.com/podcast-manager/{{podcast.audio}}" download>Download Audio</a>
 					</div>
             	</div>
@@ -39,16 +41,16 @@
 	</div>
 	
 
-	<span data-ng-show="!podcast.isBlog">
-		<div class="row" data-ng-show="podcast.audio">
+	<span data-ng-if="!podcast.isBlog">
+		<div class="row" data-ng-if="podcast.audio">
 			<audio class="col-xs-12" id="audio" controls data-ng-src="{{getAudioUrl()}}"></audio>
 		</div>
+	<!--
 	<script type="text/javascript-lazy">
 		var timer;
 
 		function start() {
 		angular.element($('#myDiv')).scope().incrementTotalSeconds();
-		document.getElementById("avgListen").innerHTML = angular.element($('#myDiv')).scope().getAvgSeconds();
 		}
 		
 		function play() {
@@ -58,7 +60,6 @@
 		
 		function increment() {
 		angular.element($('#myDiv')).scope().updateListens();
-		document.getElementById("totalViews").innerHTML = angular.element($('#myDiv')).scope().getListen();
 		}
 
 		audio.addEventListener('play', play);
@@ -66,6 +67,7 @@
 		audio.addEventListener('ended', function() { clearInterval(timer)} );
 		
 	</script>
+	-->
 		<div class="row" data-ng-if="podcast.video">
 			<video class="col-xs-12" id="video" controls>
 				<source data-ng-src="{{getVideoUrl()}}" />

@@ -12,7 +12,6 @@ Kyle Lin   | kylelin47
 Joachim Jones|jonesguy14
 Qian Wang|qianwang1013
 Matthew Tschiggfrie|mtschiggfrie
-Jinchi Liu|jliu8023
 
 Helpful Information
 -----------------------
@@ -74,10 +73,10 @@ $ grunt test:client
 ```
 
 **Protractor Testing**
-- start grunt
-- may need 'npm install -g protractor'
-- in new cmd prompt enter "webdriver-manager start"
-- in new cmd prompt cd to Protractor folder in great-unknown
+- may need 'npm install -g protractor' if you haven't installed protractor before
+- use grunt and mongodb to start the app
+- keeping the app running, in new cmd prompt enter "webdriver-manager start"
+- keeping both app and web driver running, in new cmd prompt cd to Protractor folder in great-unknown
 - enter "protractor conf.js"
 - protractor assumes your admin password is 'admin123' (no quotes)
 

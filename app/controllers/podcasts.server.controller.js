@@ -89,6 +89,27 @@ exports.read = function(req, res) {
  */
 exports.update = function(req, res) {
 	var podcast = req.podcast ;
+	podcast = _.extend(podcast , req.body);
+	podcast.blurb = podcast.blurb.substring(0, 120);
+	podcast.save(function(err) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			Podcast.find().sort('-created').limit(rss_max_entries).exec(function(err, podcasts) {
+				if (err) {
+					return res.status(400).send({
+						message: errorHandler.getErrorMessage(err)
+					});
+				} else {
+					updateFeed(podcasts, req.user);
+				}
+			});
+			res.jsonp(podcast);
+		}
+	});
+	/*
 	if (!req.isAuthenticated() || req.user.username !== 'admin') {
 		podcast.listens = req.body.listens;
 		podcast.totalSecondsListened = req.body.totalSecondsListened;
@@ -123,7 +144,7 @@ exports.update = function(req, res) {
 				res.jsonp(podcast);
 			}
 		});
-	}
+	}*/
 	//podcast.normalized = podcast.name.toLowerCase();
 };
 /**

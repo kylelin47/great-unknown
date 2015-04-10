@@ -10,7 +10,7 @@ module.exports = function(app) {
 
 	app.route('/podcasts/:podcastId')
 		.get(podcasts.read)
-		.put(podcasts.update)
+		.put(users.requiresLogin, podcasts.hasAuthorization, podcasts.update)
 		.delete(users.requiresLogin, podcasts.hasAuthorization, podcasts.delete);
 
 	// Finish by binding the Podcast middleware

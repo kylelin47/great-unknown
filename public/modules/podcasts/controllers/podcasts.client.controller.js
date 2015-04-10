@@ -58,7 +58,6 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 				$scope.blurb = '';
 				$scope.category = '';
 				$scope.series = '';
-				$window.location.reload();
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -78,6 +77,9 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 			//if empty icon field, use our default
 			if ( podcast.podIcon === '' || typeof podcast.podIcon === 'undefined' ) {
 				podcast.podIcon = $scope.defaultBlogIcon;
+			}
+			if ( podcast.category === 'New Category' ) {
+				podcast.category = $scope.newCategory;
 			}
 			// Redirect after save
 			podcast.$save(function(response) {
@@ -148,11 +150,7 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 			}
 
 			podcast.$update(function() {
-				if ($location.path() !== '/podcasts/' + podcast._id)
-				{
-					$location.path('podcasts/' + podcast._id);
-					$window.location.reload();
-				}
+				$location.path('podcasts/' + podcast._id);
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
