@@ -1,8 +1,8 @@
 'use strict';
 // Podcasts controller
 
-angular.module('podcasts').controller('PodcastsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Podcasts', '$sce', '$window',
-	function($scope, $stateParams, $location, Authentication, Podcasts, $sce, $window) {
+angular.module('podcasts').controller('PodcastsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Podcasts', '$sce',
+	function($scope, $stateParams, $location, Authentication, Podcasts, $sce) {
 		$scope.authentication = Authentication;
 		$scope.currentPage = parseInt($stateParams.page, 10);
 		$scope.defaultPodIcon = 'http://i.imgur.com/f7oBepl.png?1';
@@ -270,7 +270,7 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 			return category_arr.sort();
 		};
 		
-		
+		/*
 		$scope.incrementTotalSeconds = function() {
 			$scope.podcast.totalSecondsListened++;
 			$scope.update();
@@ -293,5 +293,6 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 				tmpListen = false;
 			}
 		};
+		*/
 	}
 ]);

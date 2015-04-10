@@ -34,7 +34,6 @@ describe('Core Server Routes tests', function() {
             provider: 'local'
         });
 
-        // Save a user to the test db and create new Podcast
         user.save(function() {
             done();
         });
