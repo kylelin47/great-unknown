@@ -24,7 +24,7 @@
 	                <strong>Category:
 	                <span data-ng-bind="podcast.category"></span></strong>
 					<div data-ng-if="!podcast.isBlog">
-						Total plays: <span id="totalViews">{{getListen()}}</span>
+						Total plays: <span id="totalViews">{{podcast.listens}}</span>
 						<br />
 						Average time: <span id="avgListen">{{getAvgSeconds()}}</span>
 						seconds
@@ -43,9 +43,6 @@
 		<div class="row" data-ng-show="podcast.audio">
 			<audio class="col-xs-12" id="audio" controls data-ng-src="{{getAudioUrl()}}"></audio>
 		</div>
-	
-
-
 	<script type="text/javascript-lazy">
 		var timer;
 
@@ -69,7 +66,6 @@
 		audio.addEventListener('ended', function() { clearInterval(timer)} );
 		
 	</script>
-	
 		<div class="row" data-ng-if="podcast.video">
 			<video class="col-xs-12" id="video" controls>
 				<source data-ng-src="{{getVideoUrl()}}" />
@@ -87,8 +83,7 @@
 	<div style="clear: both;"></div>
 	<div class="newline"></div>
 	<div class="product-social-links">
-		<a href="https://twitter.com/share" data-ng-if="!podcast.isBlog" class="twitter-share-button" data-text="Check out this podcast" data-via="podcast_manager">Tweet</a>
-		<a href="https://twitter.com/share" data-ng-if="podcast.isBlog" class="twitter-share-button" data-text="Check out this blog" data-via="podcast_manager">Tweet</a>
+		<a href="https://twitter.com/share" class="twitter-share-button" data-text={{podcast.name}} data-via="podcast_manager">Tweet</a>
 		<script type="text/javascript-lazy">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 		<div class="fb-like"
 		  data-href="{{tunnel}}/#!/podcasts/{{podcast._id}}"

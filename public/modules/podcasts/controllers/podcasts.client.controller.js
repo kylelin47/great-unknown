@@ -295,11 +295,5 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 				tmpListen = false;
 			}
 		};
-		
-		$scope.getListen = function(){
-			return $scope.podcast.listens;
-		};
-		
-
 	}
 ]);
