@@ -11,10 +11,10 @@
 	</div>
 	<nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
 		<ul class="nav navbar-nav">
-			<li ui-route="/about" ng-class="{active: $uiRoute}">
+			<li ui-route="/about" id = "aboutButton" ng-class=" {active: $uiRoute}">
 				<a href="/#!/about">About</a>
 			</li>
-			<li ui-route="/podcasts/browse/" ng-class="{active: isRoute('/podcasts/browse/')}">
+			<li ui-route="/podcasts/browse/" id = "browseButton" ng-class="{active: isRoute('/podcasts/browse/')}">
 				<a href="/#!/podcasts/browse/1">Browse</a>
 			</li>
 		</ul>
@@ -23,7 +23,7 @@
 				<a href="/#!/signup">Sign Up</a>
 			</li>
 			<li class="divider-vertical"></li>
-			<li ui-route="/signin" id= "signin button" ng-class="{active: $uiRoute}">
+			<li ui-route="/signin" id= "signinbutton" ng-class="{active: $uiRoute}">
 				<a href="/#!/signin">Sign In</a>
 			</li>
 		</ul>

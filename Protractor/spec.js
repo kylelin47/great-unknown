@@ -6,19 +6,15 @@ describe('angularjs homepage', function () {
 		browser.driver.manage().window().maximize();
         expect(browser.getTitle()).toEqual('Podcast Manager - Development');
     });
+
     //When no feed is entering
     it('should not return anything', function () {
-        element(by.xpath('//button[. = "Open Feed"]')).click();
-        element(by.xpath('//button[. = "Back"]')).click();
+        element(by.id('openFeed')).click();
+        element(by.id('backButton')).click();
         expect(browser.getCurrentUrl()).toEqual('http://localhost:3000/#!/');
     });
     //testing using a CNN feed
-    it('should return feed', function () {
-        element(by.id('feedSrc')).sendKeys('http://rss.cnn.com/rss/cnn_topstories.rss');
-        element(by.xpath('//button[. = "Open Feed"]')).click();
-        element(by.xpath('//button[. = "Back"]')).click();
-        expect(browser.getCurrentUrl()).toEqual('http://localhost:3000/#!/');
-    });
+
     //test logging in with wrong pass
     it('should not log in with wrong pass', function () {
         element(by.linkText('Sign In')).click();
@@ -77,16 +73,6 @@ describe('angularjs homepage', function () {
         expect(browser.getCurrentUrl()).toEqual('http://localhost:3000/#!/');
     });
 
-    //testing localtunnel at localhost:3000
-    it('should return feed', function () {
-        element(by.id('feedSrc')).clear();
-        element(by.id('feedSrc')).sendKeys('https://umbqncvjso.localtunnel.me/feed.xml');
-		browser.sleep(200);
-        //The localtunnel link will be changed
-        element(by.xpath('//button[. = "Open Feed"]')).click();
-        element(by.xpath('//button[. = "Back"]')).click();
-        expect(browser.getCurrentUrl()).toEqual('http://localhost:3000/#!/');
-    });
 
     it('log out', function () {
         element(by.id('userNameLink')).click();
@@ -102,8 +88,8 @@ describe('angularjs homepage', function () {
         expect(browser.getCurrentUrl()).toEqual('http://localhost:3000/#!/');
     });
 
-    it('check sign in button on home page is not visible to non-admins', function () {
-        expect(element(by.id('signInButton')).isDisplayed()).toBe(false);
+    it('check sign in button on home page is not visible to logged in users', function () {
+        expect(element(by.id('signinbutton')).isDisplayed()).toBe(false);
     });
 
     it('check to see if non-admins can edit about me page', function () {
@@ -139,7 +125,7 @@ describe('angularjs homepage', function () {
     var aboutMe;
     var aboutPodcasts;
 
-    it('create about page', function () {
+    it('get about me info', function () {
         //navigate to about me page and click edit
         element(by.linkText('About')).click();
         element(by.id('editbutton')).click();
@@ -149,18 +135,57 @@ describe('angularjs homepage', function () {
         email = element(by.id('email')).getAttribute('value');
         aboutMe = element(by.id('aboutMe')).getAttribute('value');
         aboutPodcasts = element(by.id('aboutPodcastsb')).getAttribute('value');
-
-        //clear text fields
+		
+		element(by.id('updateAboutMe')).click();
+		expect(browser.getCurrentUrl()).toEqual('http://localhost:3000/#!/about');
+    });
+	
+	it('make sure about page has same values', function() {
+		expect(element(by.id('name')).getAttribute('value') === name);
+		expect(element(by.id('email')).getAttribute('value') === email);
+		expect(element(by.id('about')).getAttribute('value') === aboutMe);
+		expect(element(by.id('aboutPodcasts')).getAttribute('value') === aboutPodcasts);
+	});
+	
+	it('make sure about info on home screen has same values', function() {
+		element(by.linkText('Podcast Manager')).click();
+		expect(element(by.id('name')).getAttribute('value') === name);
+		expect(element(by.id('email')).getAttribute('value') === email);
+		expect(element(by.id('about')).getAttribute('value') === aboutMe);
+		expect(element(by.id('aboutPodcasts')).getAttribute('value') === aboutPodcasts);
+	});
+	
+	it('clear about me info', function() {
+		element(by.linkText('About')).click();
+		element(by.id('editbutton')).click();
+		 
+		 //clear text fields
         element(by.id('name')).clear();
         element(by.id('email')).clear();
         element(by.id('aboutMe')).clear();
         element(by.id('aboutPodcastsb')).clear();
 
         element(by.id('updateAboutMe')).click();
-        expect(element(by.id('name')).getAttribute('value') === '');
-    });
-
+		expect(browser.getCurrentUrl()).toEqual('http://localhost:3000/#!/about');
+	});
+	
+	it('make sure about page info was cleared', function() {
+		expect(element(by.id('name')).getAttribute('value') === '');
+		expect(element(by.id('email')).getAttribute('value') === '');
+		expect(element(by.id('about')).getAttribute('value') === '');
+		expect(element(by.id('aboutPodcasts')).getAttribute('value') === '');
+	});
+	
+	it('make sure about info on home screen was cleared', function() {
+		element(by.linkText('Podcast Manager')).click();
+		expect(element(by.id('name')).getAttribute('value') === '');
+		expect(element(by.id('email')).getAttribute('value') === '');
+		expect(element(by.id('about')).getAttribute('value') === '');
+		expect(element(by.id('aboutPodcasts')).getAttribute('value') === '');
+	});
+	
     it('re-enter about me page info', function () {
+		element(by.linkText('About')).click();
         element(by.id('editbutton')).click();
 
         //re-enter page info saved previously
@@ -170,24 +195,38 @@ describe('angularjs homepage', function () {
         element(by.id('aboutPodcastsb')).sendKeys(aboutPodcasts);
 
         element(by.id('updateAboutMe')).click();
-        expect(element(by.id('name')).getAttribute('value') === name);
+		expect(browser.getCurrentUrl()).toEqual('http://localhost:3000/#!/about');
     });
+	
+	it('make sure about page has same original values', function() {
+		expect(element(by.id('name')).getAttribute('value') === name);
+		expect(element(by.id('email')).getAttribute('value') === email);
+		expect(element(by.id('about')).getAttribute('value') === aboutMe);
+		expect(element(by.id('aboutPodcasts')).getAttribute('value') === aboutPodcasts);
+	});
+	
+	it('make sure about info on home screen has same original values', function() {
+		element(by.linkText('Podcast Manager')).click();
+		expect(element(by.id('name')).getAttribute('value') === name);
+		expect(element(by.id('email')).getAttribute('value') === email);
+		expect(element(by.id('about')).getAttribute('value') === aboutMe);
+		expect(element(by.id('aboutPodcasts')).getAttribute('value') === aboutPodcasts);
+	});
 
-    it('check about me button on home page', function () {
-        element(by.linkText('Podcast Manager')).click();
-        element(by.id('learnAboutMeButton')).click();
+    it('check about me button', function () {
+        element(by.id('aboutButton')).click();
         expect(browser.getCurrentUrl()).toEqual('http://localhost:3000/#!/about');
     });
-
+//20
     it('check browse my podcasts button', function () {
         element(by.linkText('Podcast Manager')).click();
-        element(by.id('browseMyPodcastsButton')).click();
+        element(by.id('browseButton')).click();
         expect(browser.getCurrentUrl()).toEqual('http://localhost:3000/#!/podcasts/browse/1');
     });
 
     it('check sign in button on home page is not visible to admin', function () {
         element(by.linkText('Podcast Manager')).click();
-        expect(element(by.id('signInButton')).isDisplayed()).toBe(false);
+        expect(element(by.id('signinbutton')).isDisplayed()).toBe(false);
     });
 
     var firstName2, lastName2, email2;
@@ -251,7 +290,7 @@ describe('angularjs homepage', function () {
         element(by.id('submitNewPass')).click();
         expect(element(by.id('successMessage')).isDisplayed()).toBe(true);
     });
-
+//30
     it('test to see if password really changed', function () {
         //log out
         element(by.id('userNameLink')).click();
@@ -287,8 +326,8 @@ describe('angularjs homepage', function () {
     });
 
     it('create a blank new podcast', function () {
-        element(by.linkText('Manage Podcasts')).click();
-        element(by.linkText('Create New Podcast')).click();
+        element(by.linkText('Manage Podcast')).click();
+        element(by.linkText('Create New Episode')).click();
         element(by.id('createPodcast')).click();
         expect(element(by.id('errorMessage')).isDisplayed()).toBe(true);
     });
@@ -313,8 +352,8 @@ describe('angularjs homepage', function () {
     it('create a new podcast and upload audio', function(){
         var path = require('path');
         //entering the create podcast view
-        element(by.linkText('Manage Podcasts')).click();
-        element(by.linkText('Create New Podcast')).click();
+        element(by.linkText('Manage Podcast')).click();
+        element(by.linkText('Create New Episode')).click();
         //entering name and audio
         element(by.id('name')).sendKeys('My Podcast');
         var audioUpload = 'C:/Users/Matthew/Documents/GitHub/project/great-unknown/Protractor/audio/test.mp3';
@@ -343,8 +382,8 @@ describe('angularjs homepage', function () {
 
     });
     it('try making a empty blog', function () {
-        element(by.linkText('Manage Podcasts')).click();
-        element(by.linkText('Create New Blog')).click();
+        element(by.linkText('Manage Podcast')).click();
+        element(by.linkText('Create New Blog Post')).click();
         element(by.id('createBlog')).click();
         expect(element(by.id('errorMessage')).isDisplayed()).toBe(true);
     });
