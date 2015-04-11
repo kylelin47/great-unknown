@@ -12,7 +12,7 @@
 
             <ul class="unstyled">
                 <p class = "text-muted">First 10 items:</p>
-                <li ng-repeat="feed in feeds">
+                <li ng-repeat="feed in feeds.slice(1,10)">
                     <h5><a href="{{feed.link}}">{{feed.title}}</a></h5>
                     <p class="text-left">{{feed.contentSnippet}}</p>
                     <span class="small">{{feed.publishedDate}}</span>
