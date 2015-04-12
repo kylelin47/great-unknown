@@ -27,7 +27,8 @@ exports.cus_sendMail = function(req,res,user){
     else{
 
         mail.messages.send(message, function(result) {
-            console.log(result);
+            //Sending out result is a very good way to check if you mandrill is working. But for testing, so I will comment it for now.
+            //console.log(result);
             req.user.is_subscribe = true;
             req.user.save();
             return res.send('An email has been sent to your associated address \'' + req.user.email + '\'');
@@ -35,7 +36,6 @@ exports.cus_sendMail = function(req,res,user){
             if(err){
                 // Mandrill returns the error as an object with name and message keys
                 console.log('errname:' + err.name +'\n errKey:'+ err.message);
-                console.log(req.user.email);
             }
 
         });

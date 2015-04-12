@@ -63,7 +63,7 @@ var sendNotification = function(){
          console.log(subscriber_list[0].email);*/
 
         for (var i = 0; i !== subscriber_list.length; ++i) {
-            console.log(subscriber_list[i].email);
+            //console.log(subscriber_list[i].email);
             var message = {
                 message: {
                     from_email: 'qianwang1013@gmail.com',
@@ -74,7 +74,8 @@ var sendNotification = function(){
                 }
             };
             mail.messages.send(message, function (result) {
-                console.log(result);
+                //Sending out result is a very good way to check if you mandrill is working. But for testing, so I will comment it for now.
+                //console.log(result);
             }, function (err) {
                 if (err) {
                     // Mandrill returns the error as an object with name and message keys
