@@ -25,8 +25,9 @@ function updateFeed(podcasts, user) {
 		var podcast = podcasts[index];
 		xml_text +=
 			'\t\t<item>\n' +
-		        '\t\t\t<title>' + podcast.name + ', ' + podcast.category + '</title>\n' +
+		        '\t\t\t<title>' + podcast.name + '</title>\n' +
 		        '\t\t\t<description>' + podcast.blurb + '</description>\n' +
+		        '\t\t\t<category>' + podcast.category + '</category>\n' +
 		        '\t\t\t<language>en-us</language>\n' +
 		        '\t\t\t<link>' + 'http://localhost:3000/#!/podcasts/' + podcast._id + '</link>\n' +
 		        '\t\t\t<pubDate>' + podcast.created.toUTCString() + '</pubDate>\n' +
