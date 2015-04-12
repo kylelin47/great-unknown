@@ -66,6 +66,7 @@ var sendNotification = function(){
             //console.log(subscriber_list[i].email);
             var message = {
                 message: {
+                    from_email: 'qianwang1013@gmail.com',
                     from_name: 'Podcast Manager',
                     to: [{email: subscriber_list[i].email}],
                     subject: 'Check out what is new!',

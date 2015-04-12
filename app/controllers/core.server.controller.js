@@ -13,6 +13,7 @@ exports.cus_sendMail = function(req,res,user){
         'I hope you will have a great time \n';
     var message = {
         message: {
+            from_email: 'qianwang1013@gmail.com',
             from_name: 'Podcast Manager',
             to: [{email: req.user.email}],
             subject: 'Welcome to my Podcast',
