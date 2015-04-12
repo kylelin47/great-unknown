@@ -30,12 +30,7 @@ function updateFeed(podcasts, user) {
 		        '\t\t\t<language>en-us</language>\n' +
 		        '\t\t\t<link>' + 'http://localhost:3000/#!/podcasts/' + podcast._id + '</link>\n' +
 		        '\t\t\t<pubDate>' + podcast.created.toUTCString() + '</pubDate>\n' +
-		        '\t\t\t<image>\n' +
-		            '\t\t\t\t<title>My Icon</title>\n' +
-		            '\t\t\t\t<src>' + podcast.podIcon + '</src>\n' +
-		            '\t\t\t\t<width>40</width>\n' +
-		            '\t\t\t\t<height>40</height>\n' +
-		        '\t\t\t</image>\n' +
+		        '\t\t\t<enclosure url=\"' + podcast.podIcon + '\" length="0" type="image" />\n' +
 	        '\t\t</item>\n';
 	}
 	xml_text += '\t</channel>\n</rss>';
