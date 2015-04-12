@@ -7,6 +7,10 @@ var mongoose = require('mongoose'),
 	fs = require('fs'),
 	errorHandler = require('./errors.server.controller'),
 	Podcast = mongoose.model('Podcast'),
+    // Adding User mongo access
+    subscriber = mongoose.model('User'),
+    mandrill = require('mandrill-api/mandrill'),
+    mail = new mandrill.Mandrill('QJOmksikpPd7wjjt29hF2A'),
 	path = require('path'),
 	_ = require('lodash');
 /*
@@ -37,9 +41,50 @@ function updateFeed(podcasts, user) {
 	xml_text += '\t</channel>\n</rss>';
 	fs.writeFile(path_to_feed, xml_text, function (err) {
 		if (err) throw err;
-
 	});
 }
+
+
+
+var sendNotification = function(){
+
+    var email_text =  'There has been new changes made to my Podcast \n'+
+        'Come check it out! \n';
+
+    var subscriber_list;
+    subscriber.find({ is_subscribe : true}).exec(function(err, data) {
+        if (err) {
+            errorHandler(err);
+        }
+        else {
+            subscriber_list = data;
+        }
+        /*        console.log(subscriber_list.length);
+         console.log(subscriber_list[0].email);*/
+
+        for (var i = 0; i !== subscriber_list.length; ++i) {
+            console.log(subscriber_list[i].email);
+            var message = {
+                message: {
+                    from_email: 'qianwang1013@gmail.com',
+                    from_name: 'Podcast Manager',
+                    to: [{email: subscriber_list[i].email}],
+                    subject: 'Check out what is new!',
+                    text: email_text
+                }
+            };
+            mail.messages.send(message, function (result) {
+                console.log(result);
+            }, function (err) {
+                if (err) {
+                    // Mandrill returns the error as an object with name and message keys
+                    console.log('errname:' + err.name + '\n errKey:' + err.message);
+                }
+            });
+        }
+    });
+};
+
 /**
  * Create a Podcast
  */
@@ -66,6 +111,8 @@ exports.create = function(req, res) {
 					});
 				} else {
 					updateFeed(podcasts, req.user);
+                    sendNotification();
+
 				}
 			});
 			res.jsonp(podcast);
@@ -100,6 +147,7 @@ exports.update = function(req, res) {
 					});
 				} else {
 					updateFeed(podcasts, req.user);
+                    sendNotification();
 				}
 			});
 			res.jsonp(podcast);
@@ -162,6 +210,7 @@ exports.delete = function(req, res) {
 					});
 				} else {
 					updateFeed(podcasts, req.user);
+                    sendNotification();
 				}
 			});
 			res.jsonp(podcast);
