@@ -12,6 +12,30 @@ angular.module('podcasts').factory('Podcasts', ['$resource',
 	}
 ]);
 
+angular.module('podcasts').factory('progress', function() {
+  var progress = 0;
+  var progressService = {};
+  progressService.update = function(val) {
+    progress = val;
+  };
+  progressService.getProgress = function() {
+    return progress;
+  };
+  return progressService;
+});
+
+angular.module('podcasts').factory('videoProgress', function() {
+  var progress = 0;
+  var progressService = {};
+  progressService.update = function(val) {
+    progress = val;
+  };
+  progressService.getProgress = function() {
+    return progress;
+  };
+  return progressService;
+});
+
 // From endorama @ https://gist.github.com/endorama/7369006
 angular.module('podcasts').directive('script', function() {
     return {

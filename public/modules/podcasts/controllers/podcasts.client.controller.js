@@ -1,8 +1,8 @@
 'use strict';
 // Podcasts controller
 
-angular.module('podcasts').controller('PodcastsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Podcasts', '$sce',
-	function($scope, $stateParams, $location, Authentication, Podcasts, $sce) {
+angular.module('podcasts').controller('PodcastsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Podcasts', '$sce', 'progress', 'videoProgress',
+	function($scope, $stateParams, $location, Authentication, Podcasts, $sce, progress, videoProgress) {
 		$scope.authentication = Authentication;
 		$scope.currentPage = parseInt($stateParams.page, 10);
 		$scope.defaultPodIcon = 'http://i.imgur.com/f7oBepl.png?1';
@@ -14,6 +14,8 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 			$scope.currentPage = 1;
 		}
 		$scope.perPage = 6;
+		$scope.getProgress = progress.getProgress;
+		$scope.getVideoProgress = videoProgress.getProgress;
 		// Create new Podcast
 		$scope.create = function() {
 			// Create new Podcast object
@@ -31,12 +33,12 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 				if ($scope.file) {
 					podcast.audioOriginal = $scope.file.name;
 					podcast.audio = d + $scope.file.name;
-					$scope.upload($scope.file, d + $scope.file.name);
+					$scope.upload($scope.file, d + $scope.file.name, 'audio');
 				}
 				if ($scope.videoFile) {
 					podcast.videoOriginal = $scope.videoFile.name;
 					podcast.video = d + $scope.videoFile.name;
-					$scope.upload($scope.videoFile, d + $scope.videoFile.name);
+					$scope.upload($scope.videoFile, d + $scope.videoFile.name, 'video');
 				}
 			}
 			//if empty icon field, use our default
@@ -136,12 +138,12 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 				if ($scope.file) {
 					podcast.audioOriginal = $scope.file.name;
 					podcast.audio = d + $scope.file.name;
-					$scope.upload($scope.file, d + $scope.file.name);
+					$scope.upload($scope.file, d + $scope.file.name, 'audio');
 				}
 				if ($scope.videoFile) {
 					podcast.videoOriginal = $scope.videoFile.name;
 					podcast.video = d + $scope.videoFile.name;
-					$scope.upload($scope.videoFile, d + $scope.videoFile.name);
+					$scope.upload($scope.videoFile, d + $scope.videoFile.name, 'video');
 				}
 			}
 
@@ -179,9 +181,8 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 				});
 			}
 		};
-		$scope.sizeLimit      = 10585760; // 10MB in Bytes
-		$scope.uploadProgress = 0;
-		$scope.upload = function(file, filename) {
+		$scope.sizeLimit      = 105857600; // 100MB in Bytes
+		$scope.upload = function(file, filename, type) {
 			/* jshint ignore:start */
 			AWS.config.update({ accessKeyId: amazon_credentials.access_key, secretAccessKey: amazon_credentials.secret_key });
 			if (amazon_credentials.region) {
@@ -213,13 +214,15 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 
 					// Reset The Progress Bar
 					setTimeout(function() {
-					  $scope.uploadProgress = 0;
+					  if (type === 'audio') progress.update(0);
+					  else videoProgress.update(0);
 					  $scope.$digest();
 					}, 4000);
 				  }
 				})
-				.on('httpUploadProgress',function(progress) {
-				  $scope.uploadProgress = Math.round(progress.loaded / progress.total * 100);
+				.on('httpUploadProgress',function(res) {
+				  if (type === 'audio') progress.update(Math.round(res.loaded / res.total * 100));
+				  else videoProgress.update(Math.round(res.loaded / res.total * 100));
 				  $scope.$digest();
 				});
 			} else {
