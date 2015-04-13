@@ -61,7 +61,16 @@ var sendNotification = function(){
         }
         /*        console.log(subscriber_list.length);
          console.log(subscriber_list[0].email);*/
-
+        var error_callback = function (err) {
+            if (err) {
+                // Mandrill returns the error as an object with name and message keys
+                console.log('errname:' + err.name + '\n errKey:' + err.message);
+            }
+        };
+        var success_callback = function (result) {
+                //Sending out result is a very good way to check if you mandrill is working. But for testing, so I will comment it for now.
+                //console.log(result);
+        };
         for (var i = 0; i !== subscriber_list.length; ++i) {
             //console.log(subscriber_list[i].email);
             var message = {
@@ -73,15 +82,7 @@ var sendNotification = function(){
                     text: email_text
                 }
             };
-            mail.messages.send(message, function (result) {
-                //Sending out result is a very good way to check if you mandrill is working. But for testing, so I will comment it for now.
-                //console.log(result);
-            }, function (err) {
-                if (err) {
-                    // Mandrill returns the error as an object with name and message keys
-                    console.log('errname:' + err.name + '\n errKey:' + err.message);
-                }
-            });
+            mail.messages.send(message, success_callback, error_callback);
         }
     });
 };

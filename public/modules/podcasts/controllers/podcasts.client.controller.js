@@ -216,14 +216,12 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 					setTimeout(function() {
 					  if (type === 'audio') progress.update(0);
 					  else videoProgress.update(0);
-					  $scope.$digest();
 					}, 4000);
 				  }
 				})
 				.on('httpUploadProgress',function(res) {
 				  if (type === 'audio') progress.update(Math.round(res.loaded / res.total * 100));
 				  else videoProgress.update(Math.round(res.loaded / res.total * 100));
-				  $scope.$digest();
 				});
 			} else {
 				// No File Selected
