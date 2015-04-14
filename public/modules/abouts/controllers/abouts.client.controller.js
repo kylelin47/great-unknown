@@ -14,7 +14,8 @@ angular.module('abouts').controller('AboutsController', ['$scope', '$stateParams
 				picture: this.picture,
 				about: this.aboutMe,
 				aboutPodcasts: this.aboutPodcasts,
-				showLast: this.showLast
+				showLast: this.showLast,
+				title: this.title
 			});
 
 			// Redirect after save
@@ -28,6 +29,7 @@ angular.module('abouts').controller('AboutsController', ['$scope', '$stateParams
 				$scope.aboutMe = '';
 				$scope.aboutPodcasts = '';
 				$scope.showLast = false;
+				$scope.title = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});

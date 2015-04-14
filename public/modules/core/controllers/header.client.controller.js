@@ -1,9 +1,10 @@
 'use strict';
 
-angular.module('core').controller('HeaderController', ['$scope', 'Authentication', 'Menus', '$location',
-	function($scope, Authentication, Menus, $location) {
+angular.module('core').controller('HeaderController', ['$scope', 'Abouts', 'Authentication', 'Menus', '$location',
+	function($scope, Abouts, Authentication, Menus, $location) {
 		$scope.authentication = Authentication;
 		$scope.isCollapsed = false;
+		$scope.abouts = Abouts.query();
 		$scope.menu = Menus.getMenu('topbar');
 
 		$scope.toggleCollapsibleMenu = function() {

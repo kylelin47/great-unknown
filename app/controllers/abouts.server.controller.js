@@ -13,7 +13,6 @@ var mongoose = require('mongoose'),
  */
 exports.create = function(req, res) {
 	var about = new About(req.body);
-	//About.remove().exec(); //to clear abouts
 	about.save(function(err) {
 		if (err) {
 			return res.status(400).send({
@@ -28,7 +27,8 @@ exports.create = function(req, res) {
 /**
  * List of Abouts
  */
-exports.list = function(req, res) { 
+exports.list = function(req, res) {
+	//About.remove().exec(); //to clear abouts
 	About.find().sort('-created').limit(1).exec(function(err, abouts) {
 		if (err) {
 			return res.status(400).send({
