@@ -1,8 +1,8 @@
 'use strict';
 // Podcasts controller
 
-angular.module('podcasts').controller('PodcastsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Podcasts', '$sce', 'progress', 'videoProgress',
-	function($scope, $stateParams, $location, Authentication, Podcasts, $sce, progress, videoProgress) {
+angular.module('podcasts').controller('PodcastsController', ['$scope', '$stateParams', '$injector', '$location', 'Authentication', 'Podcasts', '$sce', 'progress', 'videoProgress',
+	function($scope, $stateParams, $injector, $location, Authentication, Podcasts, $sce, progress, videoProgress) {
 		$scope.authentication = Authentication;
 		$scope.currentPage = parseInt($stateParams.page, 10);
 		$scope.defaultPodIcon = 'http://i.imgur.com/f7oBepl.png?1';
@@ -210,13 +210,15 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 				  }
 				  else {
 					// Upload Successfully Finished
-					toastr.success(file.name + ' Uploaded Successfully.<br />Refresh Page To Listen.', 'Done');
-
+					toastr.success(file.name + ' Uploaded Successfully.', 'Done');
 					// Reset The Progress Bar
 					setTimeout(function() {
+					  $injector.get('$state').reload();
+					}, 1500);
+					setTimeout(function() {
 					  if (type === 'audio') progress.update(0);
-					  else videoProgress.update(0);
-					}, 4000);
+				  	  else videoProgress.update(0);
+					}, 2000);
 				  }
 				})
 				.on('httpUploadProgress',function(res) {
