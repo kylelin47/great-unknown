@@ -19,6 +19,7 @@
 				       id="audio"
 				       file />
 			</div>
+			<!--
 			<div class="form-group">
 				<label class="control-label" for="video">Video</label>
 				<input type="file"
@@ -26,6 +27,7 @@
 				       id="video"
 				       video-file />
 			</div>
+			-->
 			<div class="form-group">
 				<label class="control-label" for="blurb">Abstract (120 character limit)</label>
 				<div class="controls">
@@ -74,6 +76,11 @@
 			</div>
 			<div data-ng-show="error" id = "errorMessage" class="text-danger">
 				<strong data-ng-bind="error"></strong>
+			</div>
+			<div class="progress" data-ng-hide="!uploadProgress">
+				<div class="progress-bar" role="progressbar" aria-valuenow="{{ uploadProgress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ uploadProgress }}%;">
+					{{ uploadProgress == 0 ? '' : uploadProgress + '%' }}
+				</div>
 			</div>
 			<div class="form-group">
 				<input type="submit" id = "createPodcast" value="Create Episode" class="btn btn-default">
