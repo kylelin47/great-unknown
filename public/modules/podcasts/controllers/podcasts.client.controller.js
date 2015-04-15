@@ -181,7 +181,6 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 				});
 			}
 		};
-		$scope.sizeLimit      = 105857600; // 100MB in Bytes
 		$scope.upload = function(file, filename, type) {
 			/* jshint ignore:start */
 			AWS.config.update({ accessKeyId: amazon_credentials.access_key, secretAccessKey: amazon_credentials.secret_key });
@@ -193,12 +192,6 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 			var bucket = new AWS.S3({ params: { Bucket: amazon_credentials.bucket } });
 
 			if (file) {
-				// Perform File Size Check First
-				var fileSize = Math.round(parseInt(file.size));
-				if (fileSize > $scope.sizeLimit) {
-				  toastr.error('Sorry, your attachment is too big. <br /> Maximum 10 MB','File Too Large');
-				  return false;
-				}
 				// Prepend Unique String To Prevent Overwrites
 				var uniqueFileName = filename;
 				var params = { Key: uniqueFileName, ContentDisposition: 'attachment; filename="' + file.name + '"', ContentType: file.type, Body: file, ServerSideEncryption: 'AES256' };
