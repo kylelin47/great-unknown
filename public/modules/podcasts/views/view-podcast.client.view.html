@@ -40,6 +40,7 @@
 			</em>
 		</small>
 	</div>
+	<!--
 	<div class="progress" data-ng-hide="getProgress() == 0">
 		<div class="progress-bar" role="progressbar" aria-valuenow="{{ getProgress() }}" aria-valuemin="0" aria-valuemax="100" style="width: {{getProgress()}}%;">
 		{{ getProgress() == 0 ? '' : getProgress() + '%' }}
@@ -50,6 +51,7 @@
 		{{ getVideoProgress() == 0 ? '' : getVideoProgress() + '%' }}
 		</div>
 	</div>
+	-->
 	<span data-ng-if="!podcast.isBlog">
 		<div class="row" data-ng-if="podcast.audio">
 			<audio class="col-xs-12" id="audio" controls data-ng-src="{{getAudioUrl()}}"></audio>
@@ -82,12 +84,9 @@
 				<source data-ng-src="{{getVideoUrl()}}" />
 			</video>
 		</div>
-	</span>
-	
-	
-	
-	<div class="pod-blog col-xs-push-2 col-xs-8">
 		<br /><br />
+	</span>
+	<div class="pod-blog col-xs-push-2 col-xs-8">
 		<markdown bind-from="podcast.blog"></markdown>
 	</div>
 

@@ -81,6 +81,7 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 			}
 			// Redirect after save
 			podcast.$save(function(response) {
+				$location.path('podcasts/' + response._id);
 				// Clear form fields
 				$scope.name = '';
 				$scope.blog = '';

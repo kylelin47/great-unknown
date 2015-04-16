@@ -356,25 +356,18 @@ describe('angularjs homepage', function () {
         element(by.linkText('Create New Episode')).click();
         //entering name and audio
         element(by.id('name')).sendKeys('My Podcast');
-        var audioUpload = 'C:/Users/Matthew/Documents/GitHub/project/great-unknown/Protractor/audio/test.mp3';
+        var audioUpload = 'audio/l.mp3';
         var absolutePath = path.resolve(__dirname, audioUpload);
         element(by.id('audio')).sendKeys(absolutePath);
-        //uploading video content
-        var videoUpload = 'C:/Users/Matthew/Documents/GitHub/project/great-unknown/Protractor/video/small.mp4';
-        var absolutePath = path.resolve(__dirname, videoUpload);
-        element(by.id('video')).sendKeys(absolutePath);
         element(by.id('createPodcast')).click();
 
         browser.sleep(8000);
-
-        browser.refresh();
-
         expect(browser.getCurrentUrl()).toContain('http://localhost:3000/#!/podcasts');
     });
 
     //podcast removed
     it('should removed the podcast', function() {
-        browser.sleep(4000)
+        browser.sleep(4000);
         element(by.id('trash')).click();
         var alertDialog = browser.switchTo().alert();
         alertDialog.accept();  // Use to accept (simulate clicking ok)
