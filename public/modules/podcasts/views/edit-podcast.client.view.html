@@ -77,11 +77,21 @@
 						</span>
 					</div>
 				</div>
-				<div class="form-group">
-					<input id = "updatePodcast" type="submit" value="Update Podcast" class="btn btn-default">
-				</div>
 				<div data-ng-show="error" class="text-danger">
 					<strong data-ng-bind="error"></strong>
+				</div>
+				<div class="progress" data-ng-hide="!uploadProgress">
+					<div class="progress-bar" role="progressbar" aria-valuenow="{{ uploadProgress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ uploadProgress }}%;">
+						{{ uploadProgress == 0 ? '' : uploadProgress + '%' }}
+					</div>
+				</div>
+				<div class="progress" data-ng-hide="!videoProgress">
+					<div class="progress-bar" role="progressbar" aria-valuenow="{{ videoProgress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ videoProgress }}%;">
+						{{ videoProgress == 0 ? '' : videoProgress + '%' }}
+					</div>
+				</div>
+				<div class="form-group">
+					<input id = "updatePodcast" type="submit" value="Update Podcast" class="btn btn-default">
 				</div>
 			</fieldset>
 		</form>

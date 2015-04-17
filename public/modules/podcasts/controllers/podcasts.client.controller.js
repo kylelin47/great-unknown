@@ -1,8 +1,8 @@
 'use strict';
 // Podcasts controller
 
-angular.module('podcasts').controller('PodcastsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Podcasts', '$sce',
-	function($scope, $stateParams, $location, Authentication, Podcasts, $sce) {
+angular.module('podcasts').controller('PodcastsController', ['$scope', '$stateParams', '$injector', '$location', 'Authentication', 'Podcasts', '$sce',
+	function($scope, $stateParams, $injector, $location, Authentication, Podcasts, $sce) {
 		$scope.authentication = Authentication;
 		$scope.currentPage = parseInt($stateParams.page, 10);
 		$scope.defaultPodIcon = 'http://i.imgur.com/f7oBepl.png?1';
@@ -26,38 +26,40 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 				podIcon: this.podIcon,
 				series: this.series
 			});
-			if (podcast.name) {
-				var d = Date.now();
-				if ($scope.file) {
-					podcast.audioOriginal = $scope.file.name;
-					podcast.audio = d + $scope.file.name;
-					$scope.upload($scope.file, d + $scope.file.name);
-				}
-				if ($scope.videoFile) {
-					podcast.videoOriginal = $scope.videoFile.name;
-					podcast.video = d + $scope.videoFile.name;
-					$scope.upload($scope.videoFile, d + $scope.videoFile.name);
-				}
-			}
 			//if empty icon field, use our default
 			if ( podcast.podIcon === '' || typeof podcast.podIcon === 'undefined' ) {
 				podcast.podIcon = $scope.defaultPodIcon;
 			}
-
 			//if using new category, use that new category
 			if ( podcast.category === 'New Category' ) {
 				podcast.category = $scope.newCategory;
 			}
+			var d = Date.now();
+			$scope.audioDone = false;
+			$scope.videoDone = false;
+			if ($scope.file) {
+				podcast.audioOriginal = $scope.file.name;
+				podcast.audio = d + $scope.file.name;
+			} else {
+				$scope.audioDone = true;
+			}
+			if ($scope.videoFile) {
+				podcast.videoOriginal = $scope.videoFile.name;
+				podcast.video = d + $scope.videoFile.name;
+			} else {
+				$scope.videoDone = true;
+			}
 			// Redirect after save
 			podcast.$save(function(response) {
-				$location.path('podcasts/' + response._id);
-
-				// Clear form fields
-				$scope.name = '';
-				$scope.blog = '';
-				$scope.blurb = '';
-				$scope.category = '';
-				$scope.series = '';
+				if (!$scope.file && !$scope.videoFile) {
+					$location.path('podcasts/' + response._id);
+				}
+				if ($scope.file) {
+					$scope.upload($scope.file, d + $scope.file.name, 'audio', 'podcasts/' + response._id);
+				}
+				if ($scope.videoFile) {
+					$scope.upload($scope.videoFile, d + $scope.videoFile.name, 'video', 'podcasts/' + response._id);
+				}
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -84,7 +86,6 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 			// Redirect after save
 			podcast.$save(function(response) {
 				$location.path('podcasts/' + response._id);
-
 				// Clear form fields
 				$scope.name = '';
 				$scope.blog = '';
@@ -130,27 +131,35 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 				if ( podcast.isBlog ) podcast.podIcon = $scope.defaultBlogIcon;
 				else podcast.podIcon =  $scope.defaultPodIcon;
 			}
-
-			if (podcast.name) {
-				var d = Date.now();
-				if ($scope.file) {
-					podcast.audioOriginal = $scope.file.name;
-					podcast.audio = d + $scope.file.name;
-					$scope.upload($scope.file, d + $scope.file.name);
-				}
-				if ($scope.videoFile) {
-					podcast.videoOriginal = $scope.videoFile.name;
-					podcast.video = d + $scope.videoFile.name;
-					$scope.upload($scope.videoFile, d + $scope.videoFile.name);
-				}
+			$scope.audioDone = false;
+			$scope.videoDone = false;
+			var d = Date.now();
+			if ($scope.file) {
+				podcast.audioOriginal = $scope.file.name;
+				podcast.audio = d + $scope.file.name;
+			} else {
+				$scope.audioDone = true;
 			}
-
+			if ($scope.videoFile) {
+				podcast.videoOriginal = $scope.videoFile.name;
+				podcast.video = d + $scope.videoFile.name;
+			} else {
+				$scope.videoDone = true;
+			}
 			if ( podcast.category === 'New Category' ) {
 				podcast.category = $scope.newCategory;
 			}
 
 			podcast.$update(function() {
-				$location.path('podcasts/' + podcast._id);
+				if (!$scope.file && !$scope.videoFile) {
+					$location.path('podcasts/' + podcast._id);
+				}
+				if ($scope.file) {
+					$scope.upload($scope.file, d + $scope.file.name, 'audio', 'podcasts/' + podcast._id);
+				}
+				if ($scope.videoFile) {
+					$scope.upload($scope.videoFile, d + $scope.videoFile.name, 'video', 'podcasts/' + podcast._id);
+				}
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -179,9 +188,9 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 				});
 			}
 		};
-		$scope.sizeLimit      = 10585760; // 10MB in Bytes
 		$scope.uploadProgress = 0;
-		$scope.upload = function(file, filename) {
+		$scope.videoProgress = 0;
+		$scope.upload = function(file, filename, type, redir) {
 			/* jshint ignore:start */
 			AWS.config.update({ accessKeyId: amazon_credentials.access_key, secretAccessKey: amazon_credentials.secret_key });
 			if (amazon_credentials.region) {
@@ -192,16 +201,10 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 			var bucket = new AWS.S3({ params: { Bucket: amazon_credentials.bucket } });
 
 			if (file) {
-				// Perform File Size Check First
-				var fileSize = Math.round(parseInt(file.size));
-				if (fileSize > $scope.sizeLimit) {
-				  toastr.error('Sorry, your attachment is too big. <br /> Maximum 10 MB','File Too Large');
-				  return false;
-				}
 				// Prepend Unique String To Prevent Overwrites
 				var uniqueFileName = filename;
 				var params = { Key: uniqueFileName, ContentDisposition: 'attachment; filename="' + file.name + '"', ContentType: file.type, Body: file, ServerSideEncryption: 'AES256' };
-				toastr.info('A success message will show on completion', 'Attempting File Upload of ' + file.name);
+				//toastr.info('A success message will show on completion', 'Attempting File Upload of ' + file.name);
 				bucket.putObject(params, function(err, data) {
 				  if(err) {
 					toastr.error(err.message,err.code);
@@ -209,18 +212,36 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 				  }
 				  else {
 					// Upload Successfully Finished
-					toastr.success(file.name + ' Uploaded Successfully.<br />Refresh Page To Listen.', 'Done');
-
-					// Reset The Progress Bar
+					toastr.success(file.name + ' Uploaded Successfully.', 'Done');
+					if (type === 'audio') {
+						$scope.audioDone = true;
+					}
+					else {
+						$scope.videoDone = true;
+					}
+					if ($scope.audioDone && $scope.videoDone) {
+					 	$location.path(redir);
+					 	$scope.$apply();
+					 }
+					/*
 					setTimeout(function() {
-					  $scope.uploadProgress = 0;
-					  $scope.$digest();
-					}, 4000);
+					  $injector.get('$state').reload();
+					}, 1500);
+					setTimeout(function() {
+					  if (type === 'audio') progress.update(0);
+				  	  else videoProgress.update(0);
+					}, 2000);
+					*/
 				  }
 				})
-				.on('httpUploadProgress',function(progress) {
-				  $scope.uploadProgress = Math.round(progress.loaded / progress.total * 100);
-				  $scope.$digest();
+				.on('httpUploadProgress',function(res) {
+					if (type === 'audio') {
+						$scope.uploadProgress = Math.round(res.loaded / res.total * 100);
+					}
+					else {
+						$scope.videoProgress = Math.round(res.loaded / res.total * 100);
+					}
+					$scope.$digest();
 				});
 			} else {
 				// No File Selected

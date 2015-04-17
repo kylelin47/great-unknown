@@ -49,9 +49,18 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
         };
         //***************************Modal window for Rss feed********************************//
         $scope.subscribe = function() {
-
-                $scope.authentication.user.is_subscribe = true;
+                if ($scope.authentication.user) {
+                    $scope.authentication.user.is_subscribe = true;
+                }
                 /* jshint ignore:start */
+                else {
+                    toastr.options.closeButton = true;
+                    toastr.options.progressBar = true;
+                    toastr.error('Work in progress for non-users!');
+                    toastr.options.closeButton = false;
+                    toastr.options.progressBar = false;
+                    return;
+                }
                 $http.post('/core/cus_sendMail').success(function (response) {
                     toastr.success(response);
                 }).error(function (response) {

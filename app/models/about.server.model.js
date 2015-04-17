@@ -40,6 +40,10 @@ var AboutSchema = new Schema({
 	showLast: {
 		type: Boolean,
 		default: false
+	},
+	title: {
+		type: String,
+		default: 'Podcast Manager'
 	}
 });
 

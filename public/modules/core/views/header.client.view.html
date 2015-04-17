@@ -7,7 +7,7 @@
 			<span class="icon-bar"></span>
 		</button>
 		<!--Remove meanjs head with Podcast, serve as a link at the same time-->
-		<a href="/#!/" ui-route = "/#!/" ng-class = "{active: $uiRoute}" class="navbar-brand"><i class="glyphicon glyphicon-headphones"></i>  Podcast Manager</a>
+		<a href="/#!/" ui-route = "/#!/" ng-class = "{active: $uiRoute}" class="navbar-brand"><i class="glyphicon glyphicon-headphones"></i>  <span data-ng-bind="abouts[0].title"></span><span data-ng-if="abouts.$resolved && !abouts[0]">Podcast Manager</span></a>
 	</div>
 	<nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
 		<ul class="nav navbar-nav">

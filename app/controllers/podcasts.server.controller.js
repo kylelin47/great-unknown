@@ -7,6 +7,10 @@ var mongoose = require('mongoose'),
 	fs = require('fs'),
 	errorHandler = require('./errors.server.controller'),
 	Podcast = mongoose.model('Podcast'),
+    // Adding User mongo access
+    subscriber = mongoose.model('User'),
+    mandrill = require('mandrill-api/mandrill'),
+    mail = new mandrill.Mandrill('QJOmksikpPd7wjjt29hF2A'),
 	path = require('path'),
 	_ = require('lodash');
 /*
@@ -25,25 +29,64 @@ function updateFeed(podcasts, user) {
 		var podcast = podcasts[index];
 		xml_text +=
 			'\t\t<item>\n' +
-		        '\t\t\t<title>' + podcast.name + ', ' + podcast.category + '</title>\n' +
+		        '\t\t\t<title>' + podcast.name + '</title>\n' +
 		        '\t\t\t<description>' + podcast.blurb + '</description>\n' +
+		        '\t\t\t<category>' + podcast.category + '</category>\n' +
 		        '\t\t\t<language>en-us</language>\n' +
 		        '\t\t\t<link>' + 'http://localhost:3000/#!/podcasts/' + podcast._id + '</link>\n' +
 		        '\t\t\t<pubDate>' + podcast.created.toUTCString() + '</pubDate>\n' +
-		        '\t\t\t<image>\n' +
-		            '\t\t\t\t<title>My Icon</title>\n' +
-		            '\t\t\t\t<src>' + podcast.podIcon + '</src>\n' +
-		            '\t\t\t\t<width>40</width>\n' +
-		            '\t\t\t\t<height>40</height>\n' +
-		        '\t\t\t</image>\n' +
+		        '\t\t\t<enclosure url=\"' + podcast.podIcon + '\" length="0" type="image" />\n' +
 	        '\t\t</item>\n';
 	}
 	xml_text += '\t</channel>\n</rss>';
 	fs.writeFile(path_to_feed, xml_text, function (err) {
 		if (err) throw err;
-
 	});
 }
+
+
+
+var sendNotification = function(){
+
+    var email_text =  'There has been new changes made to my Podcast \n'+
+        'Come check it out! \n';
+
+    var subscriber_list;
+    subscriber.find({ is_subscribe : true}).exec(function(err, data) {
+        if (err) {
+            errorHandler(err);
+        }
+        else {
+            subscriber_list = data;
+        }
+        /*        console.log(subscriber_list.length);
+         console.log(subscriber_list[0].email);*/
+        var error_callback = function (err) {
+            if (err) {
+                // Mandrill returns the error as an object with name and message keys
+                console.log('errname:' + err.name + '\n errKey:' + err.message);
+            }
+        };
+        var success_callback = function (result) {
+                //Sending out result is a very good way to check if you mandrill is working. But for testing, so I will comment it for now.
+                //console.log(result);
+        };
+        for (var i = 0; i !== subscriber_list.length; ++i) {
+            //console.log(subscriber_list[i].email);
+            var message = {
+                message: {
+                    from_email: 'qianwang1013@gmail.com',
+                    from_name: 'Podcast Manager',
+                    to: [{email: subscriber_list[i].email}],
+                    subject: 'Check out what is new!',
+                    text: email_text
+                }
+            };
+            mail.messages.send(message, success_callback, error_callback);
+        }
+    });
+};
+
 /**
  * Create a Podcast
  */
@@ -70,6 +113,8 @@ exports.create = function(req, res) {
 					});
 				} else {
 					updateFeed(podcasts, req.user);
+                    sendNotification();
+
 				}
 			});
 			res.jsonp(podcast);
@@ -104,6 +149,7 @@ exports.update = function(req, res) {
 					});
 				} else {
 					updateFeed(podcasts, req.user);
+                    sendNotification();
 				}
 			});
 			res.jsonp(podcast);
@@ -166,6 +212,7 @@ exports.delete = function(req, res) {
 					});
 				} else {
 					updateFeed(podcasts, req.user);
+                    sendNotification();
 				}
 			});
 			res.jsonp(podcast);
