@@ -109,10 +109,9 @@ https://trello.com/b/zHEzMTHa/great-unknown-cen3031
 
 
 **To Upload Your App**
-go here and install Node.js
-- https://nodejs.org/download/
-then open up a command prompt (use windows search for "cmd")
+- install node.js https://nodejs.org/download/
+- then open up a command prompt (use windows search for "cmd")
 - type:  npm install -g bower
-go to: start.heroku.com
-sign up and confirm your email address
-follow the step by step instructions on how to set up your site
+- go to: start.heroku.com
+- sign up and confirm your email address
+- follow the step by step instructions on how to set up your site
