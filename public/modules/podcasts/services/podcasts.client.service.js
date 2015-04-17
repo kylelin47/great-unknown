@@ -11,7 +11,7 @@ angular.module('podcasts').factory('Podcasts', ['$resource',
 		});
 	}
 ]);
-
+/*
 angular.module('podcasts').factory('progress', function() {
   var progress = 0;
   var progressService = {};
@@ -35,7 +35,7 @@ angular.module('podcasts').factory('videoProgress', function() {
   };
   return progressService;
 });
-
+*/
 // From endorama @ https://gist.github.com/endorama/7369006
 angular.module('podcasts').directive('script', function() {
     return {
@@ -60,16 +60,18 @@ angular.module('podcasts').directive('file', function() {
     },
     link: function(scope, el, attrs){
       el.bind('change', function(event){
-        var ext = this.value.substring(this.value.lastIndexOf('.'), this.value.length);
-        switch(ext)
-        {
-         case '.mp3':
-         case '.ogg':
-         case '.wav':
-           break;
-         default:
-           alert('Invalid file extension. Accepted are .mp3, .ogg, and .wav');
-           this.value='';
+        if (this.value !== '') {
+          var ext = this.value.substring(this.value.lastIndexOf('.'), this.value.length);
+          switch(ext)
+          {
+           case '.mp3':
+           case '.ogg':
+           case '.wav':
+             break;
+           default:
+             alert('Invalid file extension. Accepted are .mp3, .ogg, and .wav');
+             this.value='';
+          }
         }
         var files = event.target.files;
         var file = files[0];
@@ -89,16 +91,18 @@ angular.module('podcasts').directive('videoFile', function() {
     },
     link: function(scope, el, attrs){
       el.bind('change', function(event){
-        var ext = this.value.substring(this.value.lastIndexOf('.'), this.value.length);
-        switch(ext)
-        {
-         case '.mp4':
-         case '.ogg':
-         case '.webm':
-           break;
-         default:
-           alert('Invalid file extension. Accepted are .mp4, .ogg, and .webm');
-           this.value='';
+        if (this.value !== '') {
+          var ext = this.value.substring(this.value.lastIndexOf('.'), this.value.length);
+          switch(ext)
+          {
+           case '.mp4':
+           case '.ogg':
+           case '.webm':
+             break;
+           default:
+             alert('Invalid file extension. Accepted are .mp4, .ogg, and .webm');
+             this.value='';
+          }
         }
         var files = event.target.files;
         var file = files[0];

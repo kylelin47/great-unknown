@@ -1,8 +1,8 @@
 'use strict';
 // Podcasts controller
 
-angular.module('podcasts').controller('PodcastsController', ['$scope', '$stateParams', '$injector', '$location', 'Authentication', 'Podcasts', '$sce', 'progress', 'videoProgress',
-	function($scope, $stateParams, $injector, $location, Authentication, Podcasts, $sce, progress, videoProgress) {
+angular.module('podcasts').controller('PodcastsController', ['$scope', '$stateParams', '$injector', '$location', 'Authentication', 'Podcasts', '$sce',
+	function($scope, $stateParams, $injector, $location, Authentication, Podcasts, $sce) {
 		$scope.authentication = Authentication;
 		$scope.currentPage = parseInt($stateParams.page, 10);
 		$scope.defaultPodIcon = 'http://i.imgur.com/f7oBepl.png?1';
@@ -14,8 +14,6 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 			$scope.currentPage = 1;
 		}
 		$scope.perPage = 6;
-		$scope.getProgress = progress.getProgress;
-		$scope.getVideoProgress = videoProgress.getProgress;
 		// Create new Podcast
 		$scope.create = function() {
 			// Create new Podcast object
@@ -37,17 +35,23 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 				podcast.category = $scope.newCategory;
 			}
 			var d = Date.now();
+			$scope.audioDone = false;
+			$scope.videoDone = false;
 			if ($scope.file) {
 				podcast.audioOriginal = $scope.file.name;
 				podcast.audio = d + $scope.file.name;
+			} else {
+				$scope.audioDone = true;
 			}
 			if ($scope.videoFile) {
 				podcast.videoOriginal = $scope.videoFile.name;
 				podcast.video = d + $scope.videoFile.name;
+			} else {
+				$scope.videoDone = true;
 			}
 			// Redirect after save
 			podcast.$save(function(response) {
-				if (!$scope.file) {
+				if (!$scope.file && !$scope.videoFile) {
 					$location.path('podcasts/' + response._id);
 				}
 				if ($scope.file) {
@@ -127,28 +131,34 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 				if ( podcast.isBlog ) podcast.podIcon = $scope.defaultBlogIcon;
 				else podcast.podIcon =  $scope.defaultPodIcon;
 			}
-
-			if (podcast.name) {
-				var d = Date.now();
-				if ($scope.file) {
-					podcast.audioOriginal = $scope.file.name;
-					podcast.audio = d + $scope.file.name;
-					$scope.upload($scope.file, d + $scope.file.name, 'audio', 'podcasts/' + podcast._id);
-				}
-				if ($scope.videoFile) {
-					podcast.videoOriginal = $scope.videoFile.name;
-					podcast.video = d + $scope.videoFile.name;
-					$scope.upload($scope.videoFile, d + $scope.videoFile.name, 'video', 'podcasts/' + podcast._id);
-				}
+			$scope.audioDone = false;
+			$scope.videoDone = false;
+			var d = Date.now();
+			if ($scope.file) {
+				podcast.audioOriginal = $scope.file.name;
+				podcast.audio = d + $scope.file.name;
+			} else {
+				$scope.audioDone = true;
 			}
-
+			if ($scope.videoFile) {
+				podcast.videoOriginal = $scope.videoFile.name;
+				podcast.video = d + $scope.videoFile.name;
+			} else {
+				$scope.videoDone = true;
+			}
 			if ( podcast.category === 'New Category' ) {
 				podcast.category = $scope.newCategory;
 			}
 
 			podcast.$update(function() {
-				if (!$scope.file) {
+				if (!$scope.file && !$scope.videoFile) {
 					$location.path('podcasts/' + podcast._id);
+				}
+				if ($scope.file) {
+					$scope.upload($scope.file, d + $scope.file.name, 'audio', 'podcasts/' + podcast._id);
+				}
+				if ($scope.videoFile) {
+					$scope.upload($scope.videoFile, d + $scope.videoFile.name, 'video', 'podcasts/' + podcast._id);
 				}
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
@@ -179,6 +189,7 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 			}
 		};
 		$scope.uploadProgress = 0;
+		$scope.videoProgress = 0;
 		$scope.upload = function(file, filename, type, redir) {
 			/* jshint ignore:start */
 			AWS.config.update({ accessKeyId: amazon_credentials.access_key, secretAccessKey: amazon_credentials.secret_key });
@@ -202,8 +213,16 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 				  else {
 					// Upload Successfully Finished
 					toastr.success(file.name + ' Uploaded Successfully.', 'Done');
-					$location.path(redir);
-					$scope.$apply();
+					if (type === 'audio') {
+						$scope.audioDone = true;
+					}
+					else {
+						$scope.videoDone = true;
+					}
+					if ($scope.audioDone && $scope.videoDone) {
+					 	$location.path(redir);
+					 	$scope.$apply();
+					 }
 					/*
 					setTimeout(function() {
 					  $injector.get('$state').reload();
@@ -216,12 +235,13 @@ angular.module('podcasts').controller('PodcastsController', ['$scope', '$statePa
 				  }
 				})
 				.on('httpUploadProgress',function(res) {
-					$scope.uploadProgress = Math.round(res.loaded / res.total * 100);
+					if (type === 'audio') {
+						$scope.uploadProgress = Math.round(res.loaded / res.total * 100);
+					}
+					else {
+						$scope.videoProgress = Math.round(res.loaded / res.total * 100);
+					}
 					$scope.$digest();
-				/*
-				  if (type === 'audio') progress.update(Math.round(res.loaded / res.total * 100));
-				  else videoProgress.update(Math.round(res.loaded / res.total * 100));
-				*/
 				});
 			} else {
 				// No File Selected
