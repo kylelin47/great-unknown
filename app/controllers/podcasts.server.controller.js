@@ -9,6 +9,7 @@ var mongoose = require('mongoose'),
 	Podcast = mongoose.model('Podcast'),
     // Adding User mongo access
     subscriber = mongoose.model('User'),
+    SubList = mongoose.model('SubList'),
     mandrill = require('mandrill-api/mandrill'),
     mail = new mandrill.Mandrill('QJOmksikpPd7wjjt29hF2A'),
 	path = require('path'),
@@ -52,15 +53,26 @@ var sendNotification = function(){
         'Come check it out! \n';
 
     var subscriber_list;
+    var nonUser_list;
+    var user_list;
+    SubList.find().exec(function(err, data) {
+        if (err) {
+            errorHandler(err);
+        }
+        else {
+            nonUser_list = data;
+        }
+    });
     subscriber.find({ is_subscribe : true}).exec(function(err, data) {
         if (err) {
             errorHandler(err);
         }
         else {
-            subscriber_list = data;
+            user_list = data;
         }
         /*        console.log(subscriber_list.length);
          console.log(subscriber_list[0].email);*/
+        subscriber_list = user_list.concat(nonUser_list);
         var error_callback = function (err) {
             if (err) {
                 // Mandrill returns the error as an object with name and message keys
@@ -72,7 +84,7 @@ var sendNotification = function(){
                 //console.log(result);
         };
         for (var i = 0; i !== subscriber_list.length; ++i) {
-            //console.log(subscriber_list[i].email);
+            console.log(subscriber_list[i].email);
             var message = {
                 message: {
                     from_email: 'qianwang1013@gmail.com',
