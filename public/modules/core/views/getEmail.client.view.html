@@ -1,0 +1,22 @@
+<section data-ng-controller = "HomeController">
+
+
+        <div class = "modal-header">
+            <p class="text-muted container">
+                If you are a user please <a href = "/#!/signin" class="btn btn-link">Sign In</a> <br/>
+                If not, you can still subscribe simply by filling out the form below
+            </p>
+        </div>
+    <div class ="modal-body">
+        <div class="form-group">
+            <div class="controls">
+                Name: <input type="text" data-ng-model="subEmailName" name="subEmailName" id="subEmailName" class="form-control" placeholder="Name" />
+                Email:<input type="text" data-ng-model="subEmail" name="subEmail" id="subEmail" class="form-control" placeholder="Email" />
+            </div>
+        </div>
+    </div>
+
+    <div class = "modal-footer">
+        <button class="btn btn-warning" id = "submit" data-ng-click= subEmail_store()>Submit</button>
+    </div>
+</section>

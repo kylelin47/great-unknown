@@ -20,3 +20,16 @@ angular.module('core').factory('FeedService',['$http',function($http){
         }
     };
 }]);
+
+
+
+angular.module('core').factory('SubLists', ['$resource',
+    function($resource) {
+        return $resource('/core/non_user', { email: ''
+        }, {
+            update: {
+                method: 'PUT'
+            }
+        });
+    }
+]);
