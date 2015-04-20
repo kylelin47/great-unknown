@@ -13,6 +13,10 @@ Joachim Jones|jonesguy14
 Qian Wang|qianwang1013
 Matthew Tschiggfrie|mtschiggfrie
 
+**User Stories**
+
+https://trello.com/b/zHEzMTHa/great-unknown-cen3031
+
 Helpful Information
 -----------------------
 **Prerequisites**
@@ -102,11 +106,6 @@ To use a new Bootstrap Theme:
 - http://bootswatch.com/flatly/bootstrap.css
 - Then delete bootstrap-theme.css from that same folder
 - Now it should look cool
-
-**User Stories**
-
-https://trello.com/b/zHEzMTHa/great-unknown-cen3031
-
 
 **To Upload Your App**
 - install node.js https://nodejs.org/download/
