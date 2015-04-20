@@ -93,6 +93,10 @@ textarea[name="comText"] {
   line-height: 1.5;
 }
 
+.pod-blog h3 {
+  font-size: 24px;
+}
+
 /* enable absolute positioning */
 .inner-addon { 
   position: relative;
